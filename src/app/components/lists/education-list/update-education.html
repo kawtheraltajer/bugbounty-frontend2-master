@@ -1,0 +1,93 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>        {{'Employee_managment.Employee-talents.Education.Update'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+            <ion-button color="warn" (click)="Delete()" *ngIf="('Employee:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+                <mat-icon class="mx-auto" color="warn" aria-label="Delete">delete</mat-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+           
+         
+            <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Employee-talents.Education.List.place'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="place" >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.place" >
+                      <div class="text-red-600 text-end"   *ngIf="updateForm.get('place').hasError(validation.type) && (updateForm.get('place').dirty || updateForm.get('place').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Employee-talents.Education.List.result'|translate}}    </mat-label>
+                        <input matInput type="text" formControlName="result" >
+                    </mat-form-field>
+                </div>
+             
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Employee-talents.Education.List.duration'|translate}}  
+
+                            
+                        </mat-label>
+                        <input matInput type="text" formControlName="duration">
+                    </mat-form-field>
+                </div>
+           
+  
+                <!-- Type -->
+                <mat-form-field>
+             
+                    <mat-label> {{'Employee_managment.Employee-talents.Education.List.type'|translate}} </mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option value="University">{{'Employee_managment.Employee-talents.Education.type.University'|translate}} </mat-option>
+                        <mat-option value="SecondarySchool">{{'Employee_managment.Employee-talents.Education.type.SecondarySchool'|translate}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.type" >
+                      <div class="text-red-600 text-end"   *ngIf="updateForm.get('type').hasError(validation.type) && (updateForm.get('type').dirty || updateForm.get('type').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+                <!-- Role -->
+   
+                <!--<mat-form-field>
+                    <ngx-mat-file-input formControlName="documentURL" placeholder="{{'Employee_managment.Employee-talents.Certificates.List.documentURL'|translate}} "
+  
+                        accept=".doc,.docx,.pdf">
+                      </ngx-mat-file-input>
+                        <mat-hint >.doc,.docx,.pdf</mat-hint>
+  
+                    <mat-icon matSuffix>  </mat-icon>
+                </mat-form-field>
+         <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.documentURL" >
+                          <div class="text-red-600 text-end"   *ngIf="updateForm.get('documentURL').hasError(validation.type) && (updateForm.get('documentURL').dirty || updateForm.get('documentURL').touched)">
+                            {{ validation.message |translate }}
+                          </div>
+                        </ng-container>
+                      </div>-->
+            </form>
+        </div>
+    </div>
+</ion-content>

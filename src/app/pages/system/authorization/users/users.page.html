@@ -1,0 +1,8 @@
+<ion-content>
+  <ng-container *ngIf="!isLoading">
+    <users-list [users]="data" [permission]="perm"></users-list>
+  </ng-container>
+  <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+    <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+  </div>
+</ion-content>

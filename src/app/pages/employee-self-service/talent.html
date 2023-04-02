@@ -1,0 +1,121 @@
+
+  <vt-header>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+    </ion-button>    </ion-buttons>
+
+    <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+    <div slot="middle">   {{'Employee_managment.Services.Talents'|translate}}     </div>
+    <ion-buttons slot="end">
+      <!-- <ion-menu-button></ion-menu-button> -->
+    </ion-buttons>
+  </vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative">
+
+<div class="flex flex-col w-full p-5">
+
+  <span class="flex items-center justify-center w-full p-5">
+      <img class="object-cover w-40 h-40 rounded-full"
+          [src]="getURL(data?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"></span>
+          <div class=" flex-col flex items-center justify-center w-full">
+              <div class="flex-6 flex items-start  h-8  justify-center w-full">
+                  <p class="text-xl font-medium	 text-primary-default	" >{{ data?.user.first_name }}{{'  '}}{{ data?.user.last_name}}              
+                  </p>
+                
+                 
+              </div>
+              <div class="flex items-start justify-center w-full h-8 flex-6">
+                <p class="font-medium text-l text-primary-default ">
+                  {{ lang.selectedLang=='en'? data?.designation.title_en:data?.designation.title_ar| titlecase}}
+                </p>
+        
+        
+        
+              </div>
+              <div class="flex items-start justify-center w-full h-8 flex-6">
+                <p class="font-medium text-l text-primary-default ">
+        
+                  {{ lang.selectedLang=='en'? data?.department.name_en:data?.department.name_ar| titlecase}}
+                </p>
+        
+        
+        
+              </div>
+              
+            </div>
+            </div>
+
+  <div 
+   >
+    <div class="flex-1  ">
+   
+    <ion-segment [(ngModel)]="segment"   class="bg-primary-default ">
+
+      <ion-segment-button class="text-white "    value="0">
+        {{'Employee_managment.Employee-talents.Education.title'|translate}}     
+    </ion-segment-button>
+    <ion-segment-button class="text-white "   value="1">
+        {{'Employee_managment.Employee-talents.Experiences.title'|translate}}   
+    </ion-segment-button>
+    <ion-segment-button class="text-white "   value="2">
+     {{'Employee_managment.Employee-talents.Certificates.title'|translate}}  
+    </ion-segment-button>
+  </ion-segment>
+   </div>
+  </div>
+  <ng-container *ngIf="segment == 0">
+    <education-list [educations]="data?.education"  [employeeID]="data?.id" [isEdit]="false">
+
+    </education-list>
+</ng-container>
+<ng-container *ngIf="segment == 1">
+    <experience-list [experiences]="data?.experiences"  [employeeID]="data?.id"  [isEdit]="false" >
+
+    </experience-list>
+</ng-container>
+<ng-container *ngIf="segment == 2">
+    <certificate-list  [certificates]="data?.certificates" [employeeID]="data?.id" [isEdit]="false" >
+
+    </certificate-list>
+
+</ng-container>
+
+
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

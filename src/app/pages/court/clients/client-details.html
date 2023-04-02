@@ -1,0 +1,224 @@
+<vt-header>
+  <div slot="start">
+    <div matRipple (click)="app.routerBack()" *ngIf="!fromClient"
+      class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+      <ion-icon class="text-2xl" name="arrow-back-outline"></ion-icon>
+    </div>
+    <ion-buttons slot="start" style="height: 45px;" *ngIf="fromClient">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </div>
+  <div slot="middle"> {{'Court.clients.Details'|translate}}
+  </div>
+</vt-header>
+<ng-container *ngIf="!isLoading">
+  <div style="display: -webkit-box;display: -webkit-inline-box;"
+    *ngIf="!fromClient && ('Client:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE,LawyerAccess:MANAGE'|permission)">
+    <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+      <div class="flex-1 items-start">
+        <mat-slide-toggle color="primary" [(ngModel)]="isEditMode">
+          {{'Operations.EditMode'|translate}}
+        </mat-slide-toggle>
+      </div>
+      <div class="flex-12 items-start">
+        <button *ngIf="isEditMode" mat-flat-button color="accent"
+          (click)="updateClient()">{{'Operations.Update'|translate}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="relative flex flex-col flex-auto w-full h-full pb-8 overflow-y-auto">
+    <div class="relative flex flex-col w-full ">
+      <form [formGroup]="addForm">
+        <div class="flex flex-col w-full lg:flex-row">
+          <div class="flex flex-col lg:flex-row lg:w-1/2 border-ie ">
+            <div class="flex flex-col flex-1 border-is">
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.name'|translate}}
+                </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.full_name}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="full_name">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.full_name">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('full_name').hasError(validation.type) && (addForm.get('full_name').dirty || addForm.get('full_name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.CPR'|translate}} </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.CPR}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="CPR">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.CPR">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('CPR').hasError(validation.type) && (addForm.get('CPR').dirty || addForm.get('CPR').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.mobile1'|translate}}</div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.mobile1}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="mobile1">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.mobile1">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('mobile1').hasError(validation.type) && (addForm.get('mobile1').dirty || addForm.get('mobile1').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.mobile2'|translate}}</div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.mobile2}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="mobile2">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.mobile2">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('mobile2').hasError(validation.type) && (addForm.get('mobile2').dirty || addForm.get('mobile2').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b" *ngIf="!fromClient">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.comments'|translate}}
+                </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-12 px-2">
+                  {{client?.comments}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="comments">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col lg:flex-row lg:w-1/2 border-ie ">
+            <div class="flex flex-col flex-1 border-is">
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.WhatsApp_contact'|translate}} </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.whatsApp_phone}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="whatsApp_phone">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.whatsApp_phone">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('whatsApp_phone').hasError(validation.type) && (addForm.get('whatsApp_phone').dirty || addForm.get('whatsApp_phone').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.email'|translate}} </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.email}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="email">
+                </mat-form-field>
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('email').hasError(validation.type) && (addForm.get('email').dirty || addForm.get('email').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.address'|translate}} </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.Address}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="Address">
+                </mat-form-field>
+              </div>
+              <div class="flex flex-row items-center h-12 border-b">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'Court.clients.Form.job_position'|translate}} </div>
+                <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+                  {{client?.job_position}}
+                </div>
+                <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <input matInput type="text" formControlName="job_position">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="flex-12 items-start p-2 text-gray-500" *ngIf="client?.Last_updated_User">
+        {{'Operations.LastUpdated'|translate}}: {{client?.Last_updated_User}} {{client?.Last_updated| date:'dd/MM/yyyy hh:mm a'}}
+      </div>
+      <div class="relative flex flex-col flex-auto w-full h-full pb-8 overflow-y-auto">
+        <div class="w-full">
+          <ion-segment class="border-b" [(ngModel)]="segment">
+            <ion-segment-button value="0">
+              {{'Court.Cases.Title'|translate}}
+            </ion-segment-button>
+            <ion-segment-button value="1">
+              {{'Court.Cases.Documents'|translate}}
+            </ion-segment-button>
+            <ion-segment-button value="2">
+              {{'Court.Cases.Appointments'|translate}}
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <ng-container *ngIf="segment == 0">
+          <case-list [IsRelated]="false" [FromClient]="true" [ClientID]="ClientID"></case-list>
+        </ng-container>
+        <ng-container *ngIf="segment == 1">
+          <document-list [FromClient]="true" [ClientID]="ClientID"></document-list>
+        </ng-container>
+        <ng-container *ngIf="segment == 2">
+          <appointment-list [FromClient]="true" [ClientID]="ClientID"></appointment-list>
+        </ng-container>
+      </div>
+      <!-- <div class="flex justify-center w-full h-12 text-3xl border-t border-b bg-step-50 item-center">
+                        <div class="flex items-center justify-center">
+                          {{'Court.Cases.Title'|translate}}
+                        </div>
+
+
+                      </div>
+-->
+    </div>
+  </div>
+</ng-container>
+<div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+  <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+</div>

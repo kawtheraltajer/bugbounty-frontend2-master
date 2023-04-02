@@ -1,0 +1,379 @@
+<vt-header>
+  <div slot="start">
+    <!--  <div matRipple (click)="app.routerBack()"
+      class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+      <ion-icon class="text-2xl" name="arrow-back-outline"></ion-icon>
+    </div>-->
+    <div matRipple (click)="dismiss()"
+      class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+      <ion-icon class="text-2xl" name="arrow-back-outline"></ion-icon>
+    </div>
+  </div>
+  <div slot="middle">
+    <ion-title> {{'Finance.Invoice.Details.Title'|translate}}</ion-title>
+
+  </div>
+  <div slot="end">
+
+  </div>
+</vt-header>
+
+
+
+
+<div class="relative flex flex-col flex-auto w-full h-full pb-8 overflow-y-auto">
+  <div class="relative flex flex-col w-full ">
+    <div style="display: -webkit-box;display: -webkit-inline-box;">
+
+
+      <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+        <div class="flex-1 items-start">
+
+        </div>
+
+
+        <div
+          class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+          (click)="printInvoice()">
+          <ion-icon name="print"></ion-icon>
+          {{'Finance.Invoice.list.print'|translate}}
+        </div>
+        <div *ngIf="('Invoice:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)"
+          class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+          (click)="update()">
+          <ion-icon name="Edit"></ion-icon>
+          {{'Finance.Invoice.Update'|translate}}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col w-full lg:flex-row">
+
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.net_amount'|translate}} <span style="color: red;" *ngIf="isEditMode">*</span>
+            </div>
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+
+              <ng-container *ngIf="Invoice">
+                {{Invoice?.net_amount | number: '1.2-2'}}
+              </ng-container>
+
+              <ng-container *ngIf="!Invoice">
+                0
+              </ng-container>
+            </div>
+            <!--   <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                <input matInput type="number" formControlName="gross_amount">
+              </mat-form-field>
+          -->
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Court.Claims.Form.total_paid'|translate}}
+            </div>
+
+
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{Invoice?.net_amount - Invoice?.pending_amount | number: '1.2-2'}}
+              </ng-container>
+
+              <ng-container *ngIf="!Invoice">
+                0
+              </ng-container>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Court.Claims.Form.balance'|translate}}
+            </div>
+
+
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{Invoice?.pending_amount | number: '1.2-2'}}
+              </ng-container>
+
+              <ng-container *ngIf="!Invoice">
+                0
+              </ng-container>
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+    <div class="flex flex-col w-full lg:flex-row">
+
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.Name'|translate}}
+            </div>
+            <div *ngIf="Invoice?.clientID" class="flex items-center flex-1 px-2">
+
+              {{Invoice?.client?.full_name }}
+            </div>
+            <div *ngIf="Invoice?.companyID" class="flex items-center flex-1 px-2">
+
+              {{Invoice?.company?.full_name }}
+            </div>
+            <div *ngIf="!Invoice?.companyID && !Invoice?.clientID " class="flex items-center flex-1 px-2">
+
+              {{Invoice?.recipient_name }}
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.invoice_date'|translate}} <span style="color: red;" *ngIf="isEditMode">*</span>
+            </div>
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              {{Invoice?.invoice_date | date:'dd-MM-yyyy' }}
+            </div>
+            <!--  <mat-form-field appearance="standard" *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+
+                  <input matInput formControlName="due_date" [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+          -->
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+      <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Court.Claims.Form.due_date'|translate}} <span style="color: red;" *ngIf="isEditMode">*</span>
+            </div>
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              {{Invoice?.due_date | date:'dd-MM-yyyy' }}
+            </div>
+            <!--  <mat-form-field appearance="standard" *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+
+                  <input matInput formControlName="due_date" [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+          -->
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <div class="flex flex-col w-full lg:flex-row">
+      <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.status'|translate}}
+            </div>
+
+            <!--     <mat-form-field *ngIf="isEditMode" class="flex items-center flex-1 px-2">
+                  <mat-select formControlName="invoice_status">
+                    <mat-option value="Pending">  {{'Finance.Invoice.Status.Pending'|translate}} </mat-option>
+                    <mat-option value="Paid">   {{'Finance.Invoice.Status.Paid'|translate}}</mat-option>
+                    <mat-option value="Approved"> {{'Finance.Invoice.Status.Approved'|translate}}</mat-option>
+                  </mat-select>
+                </mat-form-field>            
+-->
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{'Finance.Invoice.Status.' + Invoice?.invoice_status|translate}}
+
+              </ng-container>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.payment_method'|translate}}
+            </div>
+
+            <!-- <mat-form-field   *ngIf="isEditMode" appearance="standard" class="px-2 w-1/2">
+                <mat-select
+                  formControlName="payment_method"
+               
+                >
+                <mat-option value="Cash">  {{'Finance.Invoice.Payment_method.Cash'|translate}} </mat-option>
+                <mat-option value="BankTransfer"> {{'Finance.Invoice.Payment_method.BankTransfer'|translate}} </mat-option>
+                <mat-option value="Cheque"> {{'Finance.Invoice.Payment_method.Cheque'|translate}} </mat-option>
+                </mat-select>
+              </mat-form-field>            
+-->
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{'Finance.Invoice.Payment_method.' + Invoice?.payment_method|translate}}
+
+              </ng-container>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex flex-col w-full lg:flex-row">
+      <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.Item'|translate}}
+            </div>
+
+
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngFor="let item of InvoiceDetail">
+                {{item?.item?.name}}
+              </ng-container>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Court.Cases.Case-type.Form.comments'|translate}}
+            </div>
+
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{Invoice?.comments }}
+              </ng-container>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+        <div class="flex flex-col flex-1 border-is">
+
+          <div class="flex flex-row items-center h-12 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'Finance.Invoice.list.Case'|translate}}
+            </div>
+
+            <div *ngIf="!isEditMode" class="flex items-center flex-1 px-2">
+              <ng-container *ngIf="Invoice">
+                {{Invoice?.case?.caseNo }}
+              </ng-container>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="flex-12 items-start p-2 text-gray-500" *ngIf="Invoice?.Last_updated_User">
+      {{'Operations.LastUpdated'|translate}}: {{Invoice?.Last_updated_User}} {{Invoice?.Last_updated| date:'dd/MM/yyyy
+      hh:mm a'}}
+    </div>
+  </div>
+
+  <!-- <thead>
+        
+
+    <tr>
+      <td class="border-2 p-1 text-center">{{'Finance.Invoice.list.Item'|translate}}
+      </td>
+      <td class="border-2 p-1 text-center">{{'Finance.Invoice.list.gross_amount'|translate}}</td>
+      <td class="border-2 p-1 text-center"> {{'Finance.Invoice.list.tax_amount'|translate}}</td>
+      <td class="border-2 p-1 text-center"> {{'Finance.Invoice.list.net_amount'|translate}} </td>
+    </tr>
+  </thead>
+
+
+
+
+  <tbody>
+    <ng-container *ngIf="InvoiceDetail">
+      <tr *ngFor="let item of InvoiceDetail">
+        <td class="border-2 p-1 text-center">{{item.item.name}}</td>
+        <td class="border-2 p-1 text-center">{{item.gross_amount}}</td>
+        <td class="border-2 p-1 text-center">{{item.tax_amount}}</td>
+        <td class="border-2 p-1 text-center">{{item.net_amount}}</td>
+      </tr>
+    </ng-container>
+  </tbody>-->
+  <ng-container>
+
+    <receipt-list [Receipts]="Invoice?.Receipts" [FromFees]="true" [InvoiceID]="id" [CaseID]="Invoice?.CaseID"
+      [clientID]="Invoice?.clientID" (newReceiptEvent)="ngOnInit()">
+    </receipt-list>
+  </ng-container>
+</div>

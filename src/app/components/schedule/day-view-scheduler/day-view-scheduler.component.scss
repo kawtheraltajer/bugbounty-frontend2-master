@@ -1,0 +1,35 @@
+table {
+    border-collapse: separate;
+}
+// th {
+//     position: sticky;
+//     top: 0;
+//     @apply border-b;
+//     @apply bg-gray-100;
+//     z-index: 110;
+// }
+
+// td.stickCol {
+//     z-index: 99;
+//     left: 0;
+//     position: sticky;
+//     @apply bg-gray-100;
+// }
+
+// tbody th:first-child {
+//     position: -webkit-sticky;
+//     position: sticky;
+//     z-index: 999;
+//     left: 0;
+// }
+
+// td {
+//     // @apply border-r;
+// }
+
+.iconHover:hover {
+    color: red;
+    svg {
+        fill: red;
+    }
+}

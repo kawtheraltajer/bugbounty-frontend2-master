@@ -1,0 +1,36 @@
+::ng-deep .cdk-drag-preview {
+    @apply border;
+}
+::ng-deep .mat-expansion-panel-header {
+    padding: 0px !important;
+    height: unset !important;
+    border: none !important;
+}
+::ng-deep .mat-expansion-panel {
+    // padding: 0px !important;
+    // height: unset !important;
+    pointer-events: unset;
+    border: none !important;
+}
+::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+::ng-deep .mat-form-field-underline {
+    bottom: 0 !important;
+}
+::ng-deep .mat-drawer {
+    border: unset !important;
+}
+// ::ng-deep .mat-drawer-side .mat-drawer-end {
+//     @apply border-is;
+// }
+// ::ng-deep .mat-drawer-side .mat-drawer-start {
+//     @apply border-is;
+// }
+
+// ::ng-deep .mat-drawer-side .mat-drawer-end {
+//     border: unset !important;
+// }
+// ::ng-deep .mat-drawer-side .mat-drawer-start {
+//     border: unset !important;
+// }

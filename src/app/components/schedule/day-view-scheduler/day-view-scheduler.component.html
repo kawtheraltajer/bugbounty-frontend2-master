@@ -1,0 +1,144 @@
+<div class="w-full h-full overflow-auto bg-step-50">
+  <table class="relative table-fixed">
+    <thead style="z-index: 150;" class="sticky top-0">
+      <tr class="sticky top-0 flex text-sm leading-normal bg-gray-200" style="z-index: 150;">
+        <th class="sticky top-0 left-0 flex items-center justify-center py-3 text-center border-b bg-gray-50 border-ie"
+          style="z-index: 999;min-width: 85px;">Time</th>
+        <th
+          class="sticky top-0 z-50 flex justify-center p-2 text-sm font-normal text-center border-b bg-gray-50 border-ie"
+          style="min-width: 160px; max-width: 160px;" *ngFor="let emp of employees;let i =index;">
+          <div class="flex flex-row items-center justify-center">
+            <div style="min-width: 1.5rem;"
+              class='w-6 h-6 overflow-hidden transform border border-gray-100 rounded-full cursor-pointer hover:scale-150 hover:z-50'>
+              <img class="object-cover w-full h-full " [src]="userService.getProfilePicURL(emp.user?.pictureURL)" />
+            </div>
+            <span class="px-1">
+              {{emp.user.first_name+' '+emp.user.last_name }}
+            </span>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="text-sm font-light text-gray-600 ">
+      <tr *ngFor="let hour of timeLine" class="flex" style="min-height: 60px;" style="z-index: 50;">
+        <td class="sticky left-0 flex items-center justify-center text-center border-b bg-gray-50 border-ie"
+          style="min-width: 85px;z-index:100;">
+          <p>
+            {{hour.dateTime|date:'shortTime':'+3'}}
+          </p>
+        </td>
+        <td *ngFor="let emp of employees;let i =index;"
+          style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20"
+          class="flex items-center border-b border-ie">
+          <!-- ! Template Map Container -->
+          <ng-container
+            [ngTemplateOutlet]="schedule[hour.luxon.month]&&
+            schedule[hour.luxon.month][hour.luxon.day]&&
+            schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour]&&
+            schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour][hour.luxon.minute]&&
+            schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour][hour.luxon.minute][emp.id] ?slotTemplate : addTemplate"
+            [ngTemplateOutletContext]="{
+              employee:emp,
+              slot:schedule[hour.luxon.month]&&schedule[hour.luxon.month][hour.luxon.day]&&
+              schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour]&&
+              schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour][hour.luxon.minute]&&
+              schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour][hour.luxon.minute][emp.id] ?schedule[hour.luxon.month][hour.luxon.day][hour.luxon.hour][hour.luxon.minute][emp.id] : hour}">
+
+          </ng-container>
+          <!-- ! Add Slot Template -->
+          <ng-template #addTemplate let-slot="slot" let-employee="employee">
+            <div
+              (click)="addSlot(employee,slot)"
+              class="flex flex-row items-center justify-center w-full h-full cursor-pointer hover:bg-green-100">
+              <ion-icon name="add-outline"></ion-icon>
+            </div>
+          </ng-template>
+          <!-- ! Slot Template -->
+          <ng-template #slotTemplate let-slot='slot'>
+            <div class="flex flex-row w-full h-full border-l-4 bg-backeground"
+              [class]="slot.isBooked? (slot.isApproved?'border-green-500':'border-orange-500'):'border-blue-500'">
+              <div class="flex flex-col w-5/6 border-dashed border-ie" *ngIf="slot.appointment">
+                <div class="flex flex-row items-center justify-between flex-1 px-2 text-center border-b border-dashed">
+                  <span>
+                    {{slot.appointment.client_name}}
+                  </span>
+                </div>
+                <div class="flex flex-col items-center justify-between flex-1">
+                  <div class="flex flex-row items-center justify-center flex-1 w-full px-2 border-b border-dashed" dir="ltr">
+                    +{{slot.appointment.client_phone}}
+                    <!-- <ion-icon *ngIf="slot.isBooked" name="checkmark-outline"></ion-icon>
+                    <ion-icon *ngIf="!slot.isBooked" name="close-outline"></ion-icon> -->
+                  </div>
+                  <div class="flex flex-row items-center justify-between flex-1 w-full px-2 py-1"
+                    [matTooltip]="slot.appointment?.type?.title_en">
+                    <!-- Approved
+                      <ion-icon *ngIf="slot.isApproved" name="checkmark-outline"></ion-icon>
+                      <ion-icon *ngIf="!slot.isApproved" name="close-outline"></ion-icon> -->
+                    <!-- <span>{{slot.appointment?.type?.title_en}}</span> -->
+                    <span class="w-full h-2 mr-1 cursor-pointer"
+                      [style.backgroundColor]="slot.appointment?.type?.color"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col items-center justify-around w-5/6 border-dashed border-ie"
+                *ngIf="!slot.appointment">
+                {{'Schedule.Status.Available'|translate}}
+              </div>
+              <div [matMenuTriggerFor]="menu"
+                class="flex flex-row items-center justify-center w-1/6 px-1 border-dashed cursor-pointer hover:bg-gray-200">
+                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+              </div>
+              <!-- ! Operations Menu -->
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="details(slot)">
+                  <div class="flex flex-row items-center w-full h-full fill-current hover:text-green-500 ">
+                    <ion-icon src="assets/icon/details.svg" class="fill-current" style="width: 24px;height: 24px;">
+                    </ion-icon>
+                    <span class="px-4">{{'Schedule.TimeSlot.Menu.Details'|translate}}</span>
+                  </div>
+                </button>
+                <button mat-menu-item *ngIf="!slot.isBooked" (click)="book(slot)">
+                  <div class="flex flex-row items-center w-full h-full fill-current hover:text-green-500 ">
+                    <ion-icon src="assets/icon/calendar-check.svg" class="fill-current"
+                      style="width: 24px;height: 24px;"></ion-icon>
+                    <span class="px-4">{{'Schedule.TimeSlot.Menu.Book'|translate}}</span>
+                  </div>
+                </button>
+                <button mat-menu-item *ngIf="slot.isBooked "
+                  (click)="unbook(slot.appointment.id)">
+                  <div class="flex flex-row items-center w-full h-full fill-current hover:text-yellow-500">
+                    <ion-icon src="assets/icon/calendar-x.svg" class="fill-current" style="width: 24px;height: 24px;">
+                    </ion-icon>
+                    <span class="px-4">{{'Schedule.TimeSlot.Menu.Unbook'|translate}}</span>
+                  </div>
+                </button>
+                <ng-container *ngIf="slot.isBooked ">
+                  <button mat-menu-item *ngIf="!slot.isApproved" (click)="approve(slot,true)">
+                    <div class="flex flex-row items-center w-full h-full fill-current hover:text-green-500 ">
+                      <ion-icon src="assets/icon/calendar-check.svg" class="fill-current"
+                        style="width: 24px;height: 24px;"></ion-icon>
+                      <span class="px-4">{{'Schedule.TimeSlot.Menu.Approve'|translate}}</span>
+                    </div>
+                  </button>
+                  <button mat-menu-item *ngIf="slot.isApproved" (click)="unapprove(slot,false)">
+                    <div class="flex flex-row items-center w-full h-full fill-current hover:text-yellow-500">
+                      <ion-icon src="assets/icon/calendar-x.svg" class="fill-current" style="width: 24px;height: 24px;">
+                      </ion-icon>
+                      <span class="px-4">{{'Schedule.TimeSlot.Menu.UnApprove'|translate}}</span>
+                    </div>
+                  </button>
+                </ng-container>
+                <button mat-menu-item  (click)="deleteSlot(slot)" *ngIf="('TimeSlot:DELETE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE'|permission)">
+                  <div class="flex flex-row items-center w-full h-full fill-current hover:text-red-500">
+                    <ion-icon name="trash-outline" style="width: 24px;height: 24px;"></ion-icon>
+                    <span class="px-4">{{'Schedule.TimeSlot.Menu.Delete'|translate}}</span>
+                  </div>
+                </button>
+              </mat-menu>
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

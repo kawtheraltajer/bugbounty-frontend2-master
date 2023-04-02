@@ -1,0 +1,39 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  items-end justify-end w-full p-2 border-b border-step-100 bg-background">
+ 
+
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      {{'Employee_managment.address.add'|translate}}
+
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 grid-flow-row gap-2  h-64 p-6 border-t">
+ 
+    <div class="border border-gray-400   cursor-pointer hover:bg-step-100  flex flex-col items-start justify-start rounded-t-2xl rounded-b-2xl	h-20 p-5 "
+        *ngFor="let address of addresses"  (click)="update(address)" >
+
+              <span   *ngIf="address.isMain" style="font-weight: bold;font-weight: 12px;color:red"  >
+                
+            {{address.country}}- {{address.city}}-Main Address
+      </span>
+      <span   *ngIf="!address.isMain" style="font-weight: bold;font-weight: 12px;"  >
+                
+        {{address.country}}- {{address.city}}
+  </span>
+      <span style="font-weight: 10px;">
+        {{address.line1}}- {{address.line2}}
+      </span> 
+
+
+        
+ 
+      </div>
+</div>
+  </div>

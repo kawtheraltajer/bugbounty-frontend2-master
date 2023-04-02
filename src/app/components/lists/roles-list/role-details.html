@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'System.Authorization.Role.Details.Title'|translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ng-container *ngIf="!isLoading">
+        <div class="flex flex-col w-full h-full">
+            <div class="flex p-4 border-b ">
+                <div class="flex flex-col w-1/2">
+                    <span> {{'System.Authorization.Role.Details.Id'|translate}} : {{data.id}}</span>
+                    <span> {{'System.Authorization.Role.Details.Name'|translate}} : {{data.name}}</span>
+                  <!-- <span>{{'System.Authorization.Role.Details.Description'|translate}} : {{data.description}}</span>--> 
+                </div>
+              <!--<div14 class="flex flex-col items-center justify-center w-1/2 p-2">
+                    <button (click)="link()"
+                        class="w-16 h-10 bg-blue-400 rounded-md outline-none focus:outline-none hover:bg-blue-300">
+
+                        {{'System.Authorization.Role.Details.Link'|translate}}
+
+                    </button>
+                </div14>-->  
+            </div>
+            <ion-segment class="border-b" [(ngModel)]="segment">
+                <ion-segment-button value="0">
+
+                    {{'System.Authorization.Role.Details.permissions'|translate}}
+
+                </ion-segment-button>
+                <ion-segment-button value="1">
+                    {{'System.Authorization.Role.Details.Users'|translate}}
+                </ion-segment-button>
+            </ion-segment>
+
+
+            <ng-container *ngIf="segment == 0">
+                <div class="w-full h-full overflow-auto">
+                    <permissions-list class="w-full" [permissions]="data.permissions" [showSelected]="false" [FromRole]="true"  [RoleID]="data.id">
+                    </permissions-list>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="segment == 1">
+                <div class="w-full h-full overflow-auto">
+                    <users-list [users]="data.users"  [RoleID]="data.id" ></users-list>
+                </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+</ion-content>

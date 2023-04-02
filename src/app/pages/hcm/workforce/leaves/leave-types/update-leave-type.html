@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'HCM.Workforce.leaves.leave_Types.update'|translate}} 
+        </ion-title> 
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'HCM.Workforce.leaves.leave_Types.Form.Name_ar'|translate}} (*)  </mat-label>
+                        <input matInput type="text" formControlName="name_ar" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.name_en" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('name_ar').hasError(validation.type) && (addForm.get('name_ar').dirty || addForm.get('name_ar').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'HCM.Workforce.leaves.leave_Types.Form.Name_en'|translate}}    </mat-label>
+                        <input matInput type="text" formControlName="name_en" >
+                    </mat-form-field>
+                </div>
+           
+             <!--  <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'HCM.Workforce.leaves.leave_Types.Form.Allowed_per_year'|translate}} (*)   </mat-label>
+                        <input matInput type="number" formControlName="allowed_per_year" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.allowed_per_year" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('allowed_per_year').hasError(validation.type) && (addForm.get('allowed_per_year').dirty || addForm.get('allowed_per_year').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <span style="font-size: 14px;;font-family: bold;"> {{'HCM.Workforce.leaves.leave_Types.Form.Allowed_once'|translate}} :
+                        <mat-slide-toggle [(ngModel)]="allowed_once" 
+                            matTooltip="allowed_once" formControlName="allowed_once">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+                <div class="flex flex-row w-full">
+                    <span style="font-size: 14px;;font-family: bold;"> {{'HCM.Workforce.leaves.leave_Types.Form.Paid'|translate}} :
+                        <mat-slide-toggle [(ngModel)]="paid" 
+                            matTooltip="paid" formControlName="paid">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+
+             --> 
+            </form>
+        </div>
+
+
+    </div>
+</ion-content>

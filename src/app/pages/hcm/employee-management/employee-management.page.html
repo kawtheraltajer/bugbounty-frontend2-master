@@ -1,0 +1,19 @@
+
+<vt-header>
+  <ion-buttons slot="start" style="height: 45px;">
+    <ion-menu-button></ion-menu-button>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+  <div slot="middle"> {{'Employee_managment.Title'|translate}}</div>
+</vt-header>
+
+<ion-content>
+  <ng-container *ngIf="!isLoading">
+    <employee-list></employee-list>
+  </ng-container >
+
+  <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+    <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+  </div>
+</ion-content>
+

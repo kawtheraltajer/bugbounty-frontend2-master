@@ -1,0 +1,30 @@
+.detail-row {
+    height: 0;
+    border: none;
+}
+.element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.datesFormField {
+    .mat-form-field-wrapper {
+        padding: 0 !important;
+    }
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-wrapper {
+    padding: 0 !important;
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline {
+    height: 0 !important;
+}
+::ng-deep .mat-form-field-appearance-standard .mat-form-field-underline .mat-form-field-ripple {
+    height: 0 !important;
+}
+::ng-deep .mat-button-wrapper {
+    justify-content: center;
+}
+
+::ng-deep ngx-material-timepicker-content{
+    direction: ltr;
+  }

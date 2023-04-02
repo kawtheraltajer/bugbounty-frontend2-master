@@ -1,0 +1,10 @@
+{
+  "name": "LawyerERP-app",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}

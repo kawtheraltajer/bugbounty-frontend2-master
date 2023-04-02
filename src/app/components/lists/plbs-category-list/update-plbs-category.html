@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title> Update PLBS Category </ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" (click)="add()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> PLBSRPT </mat-label>
+              <input
+                matInput
+                formControlName="PLBSRPT"
+                placeholder="PLBSRPT ..."
+              />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> category </mat-label>
+              <input
+                matInput
+                formControlName="category"
+                placeholder="category ..."
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> category_order </mat-label>
+              <input
+                matInput
+                formControlName="category_order"
+                placeholder="category_order ..."
+              />
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>

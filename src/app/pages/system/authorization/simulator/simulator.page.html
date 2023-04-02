@@ -1,0 +1,34 @@
+<ion-content>
+  <div class="flex flex-col w-full h-full px-2 pt-6 overflow-auto md:px-10 lg:px-24 xl:px-48">
+    <!-- User -->
+    <mat-form-field>
+      <mat-label> {{'System.Authorization.Simulator.User'|translate}} </mat-label>
+      <mat-select [(ngModel)]="selectedUser">
+        <mat-option *ngFor="let user of authz.users|async" [value]="user.id">{{user.email}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Action -->
+    <mat-form-field>
+      <mat-label>  {{'System.Authorization.Simulator.Action'|translate}} </mat-label>
+      <mat-select [(ngModel)]="selectedAct">
+        <mat-option *ngFor="let act of actions" [value]="act">{{act|titlecase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Subject -->
+    <mat-form-field>
+      <mat-label> {{'System.Authorization.Simulator.Subject'|translate}}   </mat-label>
+      <mat-select [(ngModel)]="selectedSub">
+        <mat-option *ngFor="let sub of subjects" [value]="sub">{{sub|titlecase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="simulate()"
+      class="w-24 h-10 bg-blue-400 rounded-md outline-none focus:outline-none hover:bg-blue-300">
+       
+      {{'Operations.Simulate'|translate}} 
+
+    </button>
+  </div>
+</ion-content>

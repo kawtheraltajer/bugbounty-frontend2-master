@@ -1,0 +1,52 @@
+<ion-content style="--background:#dcedf5;" class="relative">
+
+  <div class="z-50 flex items-center justify-center w-full py-3 text-center text-white bg-primary-default">
+    <div class="text-white border-b border-secondary-default">
+      <ion-button matTooltip="Twitter" fill="clear" target="_blank" href="https://twitter.com/virtuthinko/">
+        <ion-icon color="light" slot="icon-only" name="logo-twitter"></ion-icon>
+      </ion-button>
+      <ion-button matTooltip="Instagram" fill="clear" target="_blank" href="https://www.instagram.com/virtuthinko/">
+        <ion-icon color="light" slot="icon-only" name="logo-instagram"></ion-icon>
+      </ion-button>
+      <ion-button matTooltip="Whatsapp" fill="clear" target="_blank" href="https://wa.me/0000000000000">
+        <ion-icon color="light" slot="icon-only" name="logo-whatsapp"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div class="z-50 flex items-center justify-center w-full py-3 text-center text-white bg-primary-default">
+    <ion-img src="assets/fillers/logo.svg">
+    </ion-img>
+  </div>
+
+  <div
+    class="sticky top-0 z-50 flex items-center justify-center flex-1 w-full p-4 text-2xl text-center text-white border-t border-b bg-primary-default border-secondary-default ">
+    <div class="flex-1">Available vacancies
+    </div>
+    <div class="mx-1 text-secondary-default">|</div>
+    <div class="flex-1">الشواغر المتوفرة
+    </div>
+  </div>
+
+
+  <div class="grid grid-flow-row grid-cols-1 gap-2 p-6 mx-auto border-t max-w-screen-2xl md:grid-cols-2 lg:grid-cols-4"
+    *ngIf="Vacancy_number>0;">
+    <div
+      class="flex flex-col items-center justify-center p-2 bg-white border border-b-4 rounded cursor-pointer h-36 hover:shadow-lg"
+      style="border-bottom-color:var(--ion-color-secondary)" *ngFor="let vacancy of Vacancy" (click)="(apply(vacancy))">
+      <div class="flex items-center justify-center flex-auto w-full px-2 text-2xl text-primary-default ">
+        {{vacancy.position}}
+      </div>
+      <div class="flex flex-row justify-between w-full p-2 text-base border-t">
+        <div>Openings | الشواغر</div>
+        <div>
+          #{{vacancy.number_of_openings}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="Vacancy_number==0;" class="text-2xl text-center ">
+    <div class="flex-1"> no Available vacancies |لايوجد شواغر
+    </div>
+  </div>
+
+</ion-content>

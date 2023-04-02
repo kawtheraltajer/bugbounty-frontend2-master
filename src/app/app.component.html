@@ -1,0 +1,119 @@
+<ion-app>
+  <ion-split-pane contentId="main-content"   >
+
+    <ion-menu contentId="main-content"  [side]="side" [type]="menu.menuType"  >
+      <div *ngIf="authz.userAuthzSub | async as authz"
+        class="flex flex-col flex-auto h-full text-white border-ie border-secondary-default">
+        <div class="z-50 flex items-center justify-center w-full p-2 text-center text-white h-14 bg-primary-default">
+          <img class="object-contain h-full"
+            src="assets/fillers/logo.svg" />
+        </div>
+        <div
+          class="flex flex-col flex-auto overflow-y-auto text-white border-t border-secondary-default bg-primary-default">
+          <!-- ! Menu -->
+
+          <ng-container *ngFor="let p of menu.userMenu;let menuIndex=index;">
+            <ng-container *ngIf="(p.subject|permission) && (p.users|userType)">
+              <ion-menu-toggle auto-hide="false" *ngIf="p.url">
+                <div
+               
+                  class="flex flex-row items-center flex-1 h-12 text-white cursor-pointer pis-2 bg-primary-default hover:bg-primary-tint"
+                  routerDirection="root" routerLinkActive="selected" [routerLink]="[p.url]" lines="none">
+                  <ion-icon class="w-6 h-6 p-1" [name]="p.icon"></ion-icon>
+                  <ion-label class="px-2 text-sm">{{ p.title |translate }}</ion-label>
+                </div>
+              </ion-menu-toggle>
+
+              <div class="flex flex-row items-center h-12 cursor-pointer pis-2 bg-primary-default hover:bg-primary-tint"
+                role="button" *ngIf="p.children" (click)="toggleMenuItem(menuIndex)" lines="none"
+                [class.selected-parant]="(menu.routeURL|async).toLowerCase().includes(p.module|lowercase)"
+                details="false">
+                <ion-icon class="w-6 h-6 p-1" [name]="p.icon"></ion-icon>
+                <div class="flex flex-row items-center flex-1 px-2">
+                  <div class="text-sm">{{ p.title |translate }}</div>
+                </div>
+                <ion-icon class="text-gray-400"
+                  [name]="lang.selectedLang=='en'?'caret-back-outline':'caret-forward-outline'"
+                  style="font-size: 14px; --ion-icon-stroke-width: 14px;" *ngIf="!p.open">
+                </ion-icon>
+                <ion-icon class="text-gray-400" style="font-size: 14px; --ion-icon-stroke-width: 14px;"
+                  name="caret-down-outline" *ngIf="p.open"></ion-icon>
+              </div>
+              <div class="flex flex-col transition-all duration-200 ease-in-out transform pis-2 bg-primary-default"
+                [class]="p.open?'max-h-full':'max-h-0 h-0 p-0'">
+
+                <div *ngFor="let ch of p.children">
+                  <div
+                    class="flex flex-row items-center flex-1 h-10 cursor-pointer pis-6 bg-primary-default hover:bg-primary-tint"
+                    *ngIf="((ch.subject)|permission) && (ch.users|userType) && p.open" routerDirection="root"
+                    [routerLink]="[ch.url]" routerLinkActive="selected">
+                    <ion-icon class="w-5 h-5" slot="start" [name]="ch.icon"></ion-icon>
+                    <ion-label class="px-2 text-sm">{{ ch.title |translate }}</ion-label>
+                  </div>
+                  <!-- <ion-item class="sub-item" *ngIf="((ch.subject)|permission) && (ch.users|userType)"
+                        routerDirection="root" [routerLink]="[ch.url]" routerLinkActive="selected" lines="none">
+                        <ion-icon slot="start" [name]="ch.icon"></ion-icon>
+                        <ion-label>{{ ch.title |translate }}</ion-label>
+                      </ion-item> -->
+                </div>
+
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <!-- ! Footer -->
+        </div>
+        <div class="flex flex-col border-t shadow-inner border-secondary-default bg-primary-default">
+          <div class="flex flex-row items-center h-12 cursor-pointer pis-2 bg-primary-default hover:bg-primary-tint"
+            role="button">
+            <ion-icon class="w-6 h-6 p-1" name="earth-outline"></ion-icon>
+            <div class="flex flex-row items-center flex-1 px-2">
+              <ion-select class="w-full px-0" [value]="lang.selectedLang"
+                style="    padding-inline-end: 0.8rem !important;" interface="popover"
+                (ionChange)="setlang($event)">
+                <ion-select-option value="en">English</ion-select-option>
+                <ion-select-option value="ar">عربي</ion-select-option>
+              </ion-select>
+            </div>
+          </div>
+        <!-- <div class="flex flex-row items-center h-12 cursor-pointer pis-2 bg-primary-default hover:bg-primary-tint"
+          role="button"(click)="HideMenu()">
+   
+          <ion-icon   class="w-6 h-6 p-1 " name="menu-outline"></ion-icon>
+          <div class="flex flex-row items-center flex-1 px-2"   >
+            <ion-label>{{'Auth.Hide.Title'|translate}}</ion-label>
+          </div>
+        </div>--> 
+        <div class="flex flex-row items-center h-12 cursor-pointHideMenuer pis-2 bg-primary-default hover:bg-primary-tint"
+            role="button" (click)="logout()" routerDirection="root" routerLink="/login">
+            <ion-icon class="w-6 h-6 p-1 text-red-500" name="log-out-outline"></ion-icon>
+            <div class="flex flex-row items-center flex-1 px-2">
+              <ion-label>{{'Auth.Logout.Title'|translate}}</ion-label>
+            </div>
+          </div>
+          <div class="flex flex-col w-full bg-primary-default">
+            <div class="z-50 flex items-center justify-center w-full py-3 text-center text-white bg-primary-default">
+              <div class="text-white border-t border-b border-secondary-default">
+                <ion-button matTooltip="Twitter" fill="clear" target="_blank" href="https://twitter.com/virtuthinko/">
+                  <ion-icon color="light" slot="icon-only" name="logo-twitter"></ion-icon>
+                </ion-button>
+                <ion-button matTooltip="Instagram" fill="clear" target="_blank"
+                  href="https://www.instagram.com/virtutinko/">
+                  <ion-icon color="light" slot="icon-only" name="logo-instagram"></ion-icon>
+                </ion-button>
+                <ion-button matTooltip="Whatsapp" fill="clear" target="_blank" href="https://wa.me/97339596691">
+                  <ion-icon color="light" slot="icon-only" name="logo-whatsapp"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </ion-menu>
+    
+  
+    <ion-router-outlet class="relative flex flex-auto w-full h-full min-h-full" id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

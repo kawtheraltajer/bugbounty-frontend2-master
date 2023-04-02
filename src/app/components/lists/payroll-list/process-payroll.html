@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{ "HCM.Payroll.Process" | translate }} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="hourglass-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <form class="flex flex-col w-full" [formGroup]="addForm">
+      <div class="flex flex-row w-full">
+        <mat-form-field class="w-full h-full p-1 border rounded-lg datesFormField">
+          <mat-label>{{ "HCM.Payroll.List.MonthAndYear" | translate }}</mat-label>
+          <input matInput [matDatepicker]="dp1" formControlName="selectedDate" />
+          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+          <mat-datepicker #dp1 startView="multi-year" (yearSelected)="chosenYearHandler($event)"
+            (monthSelected)="chosenMonthHandler($event, dp1)">
+          </mat-datepicker>
+        </mat-form-field>
+   
+      </div>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.selectedDate" >
+            <div class="text-red-600 text-end"   *ngIf="addForm.get('selectedDate').hasError(validation.type) && (addForm.get('selectedDate').dirty || addForm.get('selectedDate').touched)">
+            {{ validation.message |translate }}
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="flex flex-row w-full" *ngIf="ProcessforOne">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label>  {{ "HCM.Payroll.List.Name" | translate }}</mat-label>
+        <mat-select formControlName="employeeID">
+          <mat-option *ngFor="let employee of Employees" [value]="employee.id">
+            {{employee.user.first_name}}{{" "}}{{employee.user.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+          <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.employeeID" >
+            <div class="text-red-600 text-end"   *ngIf="addForm.get('employeeID').hasError(validation.type) && (addForm.get('employeeID').dirty || addForm.get('employeeID').touched)">
+            {{ validation.message |translate }}
+            </div>
+        </ng-container>
+    </div>
+      <div class="flex flex-row w-full">
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label>{{ "HCM.Payroll.List.Status" | translate }}</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="Process"> {{ "HCM.Payroll.status.Process" | translate }}</mat-option>
+            <mat-option value="Approval">{{ "HCM.Payroll.status.Approval" | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.status" >
+            <div class="text-red-600 text-end"   *ngIf="addForm.get('status').hasError(validation.type) && (addForm.get('status').dirty || addForm.get('status').touched)">
+            {{ validation.message |translate }}
+            </div>
+        </ng-container>
+    </div>
+      <div class="flex flex-row w-full">
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label> {{ "HCM.Payroll.List.payment_status" | translate }}</mat-label>
+          <mat-select formControlName="payment_status">
+            <mat-option value="UnPaid">
+              {{"HCM.Payroll.payment_status.un_paid" | translate}}</mat-option>
+            <mat-option value="Paid">{{
+              "HCM.Payroll.payment_status.paid" | translate
+              }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.payment_status" >
+            <div class="text-red-600 text-end"   *ngIf="addForm.get('payment_status').hasError(validation.type) && (addForm.get('payment_status').dirty || addForm.get('payment_status').touched)">
+            {{ validation.message |translate }}
+            </div>
+        </ng-container>
+    </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Link Role</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="link()">
+        <ion-icon name="link"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="flex flex-col w-full px-4 mt-8">
+
+      <!-- Type -->
+      <div class="flex flex-row w-full">
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select [(ngModel)]="type">
+            <mat-option value="permissionToRole">Permission</mat-option>
+            <mat-option value="roleToGroup">Group</mat-option>
+            <mat-option value="roleToUser">User</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- ToID -->
+      <div class="flex flex-row w-full">
+        <mat-form-field *ngIf="type=='roleToGroup'" class="w-full">
+          <mat-label>Group</mat-label>
+          <mat-select [(ngModel)]="toID">
+            <mat-option *ngFor="let group of authz.groups|async" [value]="group.id">
+              {{group.name +' - '+group.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="type=='permissionToRole'" class="w-full">
+          <mat-label>Permission</mat-label>
+          <mat-select [(ngModel)]="toID">
+            <mat-option *ngFor="let perm of authz.permissions|async" [value]="perm.id">
+              {{perm.action+':'+perm.subject +' - '+perm.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="type=='roleToUser'" class="w-full">
+          <mat-label>User</mat-label>
+          
+          <mat-select [(ngModel)]="toID">
+            <mat-option *ngFor="let user of authz.users|async" [value]="user.id">
+              {{user.email +' - '+user.first_name+" "+user.last_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

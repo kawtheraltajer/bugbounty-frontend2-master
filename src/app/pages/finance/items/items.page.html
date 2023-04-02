@@ -1,0 +1,13 @@
+
+
+<ion-content>
+  <ng-container *ngIf="!isLoading">
+<item-list [Items]="finance.Items|async">
+
+</item-list>
+  </ng-container>
+  
+
+  <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+  </div>
+</ion-content>

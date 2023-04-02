@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>  {{'Finance.Tax.Add'|translate}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Finance.Tax.list.Code'|translate}}<span style="color: red;">*</span> </mat-label>
+            <input
+              matInput
+              formControlName="code_en"
+            />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.code_en">
+            <div class="text-red-600 text-end"
+              *ngIf="addForm.get('code_en').hasError(validation.type) && (addForm.get('code_en').dirty || addForm.get('code_en').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+
+  
+
+
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>  {{'Finance.Tax.list.Percentage'|translate}}<span style="color: red;">*</span> </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="percentage"
+            />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.percentage">
+            <div class="text-red-600 text-end"
+              *ngIf="addForm.get('percentage').hasError(validation.type) && (addForm.get('percentage').dirty || addForm.get('percentage').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</ion-content>

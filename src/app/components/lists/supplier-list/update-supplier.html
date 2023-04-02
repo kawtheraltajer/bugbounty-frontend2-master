@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Finance.Supplier.Update'|translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+     
+            <mat-label>  {{'Finance.Supplier.list.Name'|translate}}<span style="color: red;">*</span> </mat-label>
+            <input matInput formControlName="full_name" />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.full_name" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('full_name').hasError(validation.type) && (addForm.get('full_name').dirty || addForm.get('full_name').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+
+
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+
+            <mat-label> {{'Finance.Supplier.list.mobile1'|translate}}<span style="color: red;">*</span> </mat-label>
+
+            <input matInput type="number" formControlName="mobile1" />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.mobile1">
+            <div class="text-red-600 text-end"
+              *ngIf="addForm.get('mobile1').hasError(validation.type) && (addForm.get('mobile1').dirty || addForm.get('mobile1').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Finance.Supplier.list.mobile2'|translate}}
+            </mat-label>
+            <input matInput type="number" formControlName="mobile2" />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.mobile2">
+            <div class="text-red-600 text-end"
+              *ngIf="addForm.get('mobile2').hasError(validation.type) && (addForm.get('mobile2').dirty || addForm.get('mobile2').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>
+              {{'Finance.Supplier.list.Email'|translate}}
+            </mat-label>
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('email').hasError(validation.type) && (addForm.get('email').dirty || addForm.get('email').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Finance.Supplier.list.Address'|translate}}
+
+            </mat-label>
+            <input matInput type="text" formControlName="Address" />
+          </mat-form-field>
+        </div>
+
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Finance.Supplier.list.Comments'|translate}}</mat-label>
+            <input matInput type="text" formControlName="comments" />
+          </mat-form-field>
+        </div>
+
+        
+      </form>
+
+      <div class="flex flex-row p-5" *ngIf="Supplier?.Last_updated_User">
+        {{'Operations.LastUpdated'|translate}}: {{Supplier?.Last_updated_User}} {{Supplier?.Last_updated| date:'dd/MM/yyyy
+        hh:mm a'}}
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,22 @@
+.cancelBooking {
+    .alert-input-group {
+        padding-top: 0;
+    }
+    .alert-message {
+        padding-bottom: 5px;
+    }
+}
+
+.errorAlert {
+    h2 {
+        text-align: center;
+        color: #f56565 !important;
+    }
+}
+
+.successAlert {
+    h2 {
+        text-align: center;
+        color: #06bd3a !important;
+    }
+}

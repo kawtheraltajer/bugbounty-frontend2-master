@@ -1,0 +1,215 @@
+<div style="background:#dcedf5;" class="relative flex flex-col flex-auto w-full h-full overflow-hidden">
+  <div class="flex flex-row-reverse w-full md:flex-col">
+    <div class="z-50 flex items-center justify-center w-full py-3 text-center text-white bg-primary-default">
+      <div class="text-white md:border-b border-secondary-default">
+        <ion-button matTooltip="Twitter" fill="clear" target="_blank" href="https://twitter.com/virtuthinko/">
+          <ion-icon color="light" slot="icon-only" name="logo-twitter"></ion-icon>
+        </ion-button>
+        <ion-button matTooltip="Instagram" fill="clear" target="_blank" href="https://www.instagram.com/virtuthinko/">
+          <ion-icon color="light" slot="icon-only" name="logo-instagram"></ion-icon>
+        </ion-button>
+        <ion-button matTooltip="Whatsapp" fill="clear" target="_blank" href="https://wa.me/97339596691">
+          <ion-icon color="light" slot="icon-only" name="logo-whatsapp"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <div class="z-50 flex items-center justify-center w-full py-3 text-center text-white bg-primary-default">
+      <ion-img class="transform scale-95"
+        src="/assets/fillers/logo.png">
+      </ion-img>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading"
+    class="sticky top-0 z-50 flex items-center justify-center flex-1 w-full p-2 text-2xl text-center text-white border-t border-b bg-primary-default border-secondary-default ">
+    <div class="flex-1">{{Vacancy.position}}</div>
+    <div class="mx-1 text-secondary-default">|</div>
+    <div class="flex flex-row flex-1 gap-2 lg:px-4">
+      <span class="flex flex-row items-center text-sm text-center md:text-lg">
+        <ion-icon class="text-base md:text-lg mx-0.5" name="alarm-outline"></ion-icon> : {{" "}}{{Vacancy.type}}
+      </span>
+
+      <span class="flex flex-row items-center text-sm text-center md:text-lg">
+        <ion-icon class="text-base md:text-lg mx-0.5" name="compass-outline"></ion-icon>: {{" "}}{{Vacancy.location}}
+      </span>
+      <span class="flex flex-row items-center text-sm text-center md:text-lg">
+        <ion-icon class="text-base md:text-lg mx-0.5" name="ribbon-outline"></ion-icon> : {{"
+        "}}{{Vacancy.education_level}}
+      </span>
+
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading" class="flex flex-col flex-auto w-full overflow-auto md:flex-row">
+
+    <div class="w-full md:w-1/2 md:border-r md:h-full md:overflow-y-auto border-f t border-secondary-default">
+      <div>
+        <editor #editorPreviw *ngIf="description" [(ngModel)]="description" class="border-none " [disabled]="true"
+          apiKey="wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e" [init]="previewConfig" [dir]="'ltr'">
+        </editor>
+      </div>
+    </div>
+    <div class="w-full p-2 md:w-1/2 md:h-full md:overflow-y-auto">
+      <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label>Applicant First Name | الاسم الأول لمقدم الطلب (*) </mat-label>
+
+              <input matInput type="text" formControlName="applicant_first_name">
+            </mat-form-field>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.applicant_first_name">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('applicant_first_name').hasError(validation.type) && (addForm.get('applicant_first_name').dirty || addForm.get('applicant_first_name').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label>Applicant Last Name | الاسم الأخير لمقدم الطلب (*) </mat-label>
+
+              <input matInput type="text" formControlName="applicant_last_name">
+            </mat-form-field>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.applicant_last_name">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('applicant_last_name').hasError(validation.type) && (addForm.get('applicant_last_name').dirty || addForm.get('applicant_last_name').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> Applicant email </mat-label>
+              <mat-label>Applicant Email | البريد الإلكتروني لمقدم الطلب (*) </mat-label>
+
+              <input matInput type="email" formControlName="applicant_email">
+            </mat-form-field>
+          </div>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.applicant_email">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('applicant_email').hasError(validation.type) && (addForm.get('applicant_email').dirty || addForm.get('applicant_email').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label>applicant phone | الهاتف لمقدم الطلب (*) </mat-label>
+              <input matInput type="text" formControlName="applicant_phone">
+            </mat-form-field>
+          </div>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.applicant_phone">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('applicant_phone').hasError(validation.type) && (addForm.get('applicant_phone').dirty || addForm.get('applicant_phone').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+
+
+
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>Highest Qualification</mat-label>
+            <mat-label>Highest Qualification | اعللى المؤهلات (*) </mat-label>
+
+            <mat-select formControlName="highest_qualification">
+              <mat-option value="HighSchoolDiploma">High School Diploma | شهادة الدراسة الثانوية
+              </mat-option>
+              <mat-option value="BachelorsDegree"> Bachelors Degree | درجة باكلريوس
+              </mat-option>
+              <mat-option value="PHD">PHD | دكتوراه</mat-option>
+              <mat-option value="Other">Other | اخرى</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.highest_qualification">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('highest_qualification').hasError(validation.type) && (addForm.get('highest_qualification').dirty || addForm.get('highest_qualification').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+
+
+          <div class="flex flex-row w-full">
+            <span class="text-primary-default" style="font-size: 14px;;font-family: bold;">Is Currently Employed: | موظف
+              حالي
+              <mat-slide-toggle [(ngModel)]="isCurrentlyEmployed" matTooltip="isCurrentlyEmployed"
+                formControlName="isCurrentlyEmployed">
+              </mat-slide-toggle>
+            </span>
+          </div>
+          <div class="flex flex-row w-full" *ngIf="isCurrentlyEmployed">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> Recent job role | الوظيفة الحالية
+
+
+              </mat-label>
+              <input matInput formControlName="recent_job_role">
+            </mat-form-field>
+          </div>
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> Applicant summry | نبذه عن مقدم الطلب
+
+
+              </mat-label>
+              <input matInput formControlName="applicant_summry">
+            </mat-form-field>
+          </div>
+
+
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> Comments | تعليق
+
+
+              </mat-label>
+              <input matInput formControlName="comments">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field>
+            <ngx-mat-file-input formControlName="documentURL" placeholder="Upload your document | رفع المستندات (*) "
+              accept=".doc,.docx,.pdf"></ngx-mat-file-input>
+            <mat-hint>Please,Select File Type .doc,.docx,.pdf | الرجاءإختيار ملف من نوع .doc,.docx,.pdf </mat-hint>
+
+            <mat-icon matSuffix> </mat-icon>
+          </mat-form-field>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.documentURL">
+              <div class="text-red-600 text-end"
+                *ngIf="addForm.get('documentURL').hasError(validation.type) && (addForm.get('documentURL').dirty || addForm.get('documentURL').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="mt-4">
+
+            <button
+              class="flex items-center w-full h-12 text-white rounded-md hover:text-secondary-default bg-primary-default hover:bg-primary-tint"
+              *ngIf="!isModal" (click)="add()">
+              <div class="flex-1">Apply </div>
+              <div class="mx-1 text-secondary-default">|</div>
+              <div class="flex-1">تقديم</div>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

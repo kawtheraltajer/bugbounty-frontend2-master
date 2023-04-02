@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="app.routerBack()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> logs Deatils</ion-title>
+
+   <!-- <ion-buttons slot="end">
+      <button mat-icon-button (click)="update()">
+        <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container >
+    <div class="w-full p-5">
+      <div class="border-4 m-3">
+     
+          <div class="w-1/2 p-5">
+            <div class="flex flex-row">
+              <span style="font-size: 14px; font-weight: bold" class="p-1">
+               Action:
+              </span>
+              <span style="font-size: 14px" class="p-1">
+                {{logs?.action}} -{{logs?.table_name}}
+              </span>
+            </div>
+            <div class="flex flex-row">
+              <span style="font-size: 14px; font-weight: bold" class="p-1">
+                User:
+              </span>
+              <span style="font-size: 14px" class="p-1">
+                {{logs?.user?.first_name  }}{{" "}}{{logs?.user?.last_name  }}
+              </span>
+            </div>
+            <div class="flex flex-row">
+              <span style="font-size: 14px; font-weight: bold" class="p-1">
+               Date:
+              </span>
+              <span style="font-size: 14px" class="p-1">
+          
+                {{logs?.date | date: 'YYYY/MM/dd hh:mm a'  }} 
+              </span>
+            </div>
+          <!--  <div class="flex flex-row">
+              <span style="font-size: 14px; font-weight: bold" class="p-1">
+                Massages:
+              </span>
+              <span style="font-size: 14px" class="p-1">
+                {{logs?.massages }}
+            
+              </span>
+            </div>
+          -->
+          </div>
+   <div style="color:white">
+    {{Convert_to_string()}}
+   </div>
+        </div>
+        <div class="flex flex-col w-full p-2">
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <td class="border-2 p-1 text-center">old data</td>
+                <td class="border-2 p-1 text-center">new data</td>
+        
+              </tr>
+            </thead>
+            <tbody>
+              <tr >
+                <td class="border-2 p-1 text-start">
+                  <pre id="old_data"></pre>
+                </td>
+                <td class="border-2 p-1 text-start">
+                  <pre id="new_data"></pre>
+                </td>
+
+      
+              </tr>
+            </tbody>
+    
+          </table>
+        </div>
+    
+    </div>
+  </ng-container>
+</ion-content>

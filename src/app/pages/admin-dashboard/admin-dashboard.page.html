@@ -1,0 +1,100 @@
+<vt-page>
+  <vt-header>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+
+    <ion-title slot="middle">{{'AdminDashboard.Title'|translate}}</ion-title>
+
+
+
+  </vt-header>
+
+
+
+
+  <div slot="content" class="flex flex-col flex-auto overflow-y-auto " >
+
+    <div id="wrapper">
+      <div class="sm:grid sm:grid-flow-row sm:gap-4 p-5 w-full place-items-center">
+        <div
+          class="sm:grid sm:h-32 sm:min-w-max sm:grid-flow-row sm:gap-4 sm:grid-cols-3 justify-center items-center w-full pb-3 cursor-pointer">
+          <div id="jh-stats-positive" 
+            class="flex flex-col justify-center px-4 py-4 bg-white border shadow rounded-xl min-h-full">
+            <div>
+              <p class="text-3xl font-semibold text-center text-gray-800">{{TodayDuePaymentCount}}</p>
+              <p class="text-lg text-center text-gray-500"> {{'AdminDashboard.duePayments'|translate}}
+              </p>
+            </div>
+          </div>
+          <div id="jh-stats-negative" 
+            class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border shadow rounded-xl sm:mt-0 min-h-full cursor-pointer">
+            <div class="justify-center">
+              <p class="text-3xl font-semibold text-center text-gray-800 justify-center ">{{TodayReciptsCount}}</p>
+              <p class="text-lg text-center text-gray-500">  {{'AdminDashboard.dailyTransactions'|translate}} </p>
+            </div>
+          </div>
+          <div id="jh-stats-neutral" 
+            class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border shadow rounded-xl sm:mt-0 min-h-full cursor-pointer">
+            <div>
+              <p class="text-3xl font-semibold text-center text-gray-800">{{TodayAppointmentCount}}</p>
+              <p class="text-lg text-center text-gray-500">{{'AdminDashboard.dailyAppointment'|translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+ 
+
+    <div class="flex flex-col w-full max-h-full  md:border-ie">
+      <div class="w-full">
+        <ion-segment class="border-b" [(ngModel)]="segment">
+          <ion-segment-button value="0">
+            {{'AdminDashboard.duePayments'|translate}}
+          </ion-segment-button>
+
+          <ion-segment-button value="1">
+            {{'AdminDashboard.dailyTransactions'|translate}}
+
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            {{'AdminDashboard.dailyAppointment'|translate}}
+
+          </ion-segment-button>
+
+        </ion-segment>
+      </div>
+      <ng-container *ngIf="segment == 0">
+   
+        <div class="flex flex-col flex-auto p-1 overflow-y-auto drop-shadow-md">
+          <ng-container class="absolute">
+            <invoice-list [admindashboard]="true" ></invoice-list>   
+               </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="segment == 1">
+
+        <div class="flex flex-col flex-auto p-1 overflow-y-auto drop-shadow-md">
+          <ng-container class="absolute">
+  
+            <receipt-list [admindashboard]="true" ></receipt-list>
+          </ng-container>
+        </div>
+        </ng-container>
+        <ng-container *ngIf="segment == 2">
+    
+      <div class="flex flex-col flex-auto p-1 overflow-y-auto drop-shadow-md">
+        <ng-container class="absolute">
+          <appointment-list   [admindashboard]="true"></appointment-list>
+        </ng-container>
+      </div>
+      </ng-container>
+    </div>
+
+
+
+  </div>
+</vt-page>

@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'MyAccount.Profile.UpdateRole'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="updateRole()">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="updateRoleForm">
+            <mat-form-field class = "p-2">
+                <mat-label> {{'System.Roles.Title'|translate}} <span style="color: red;">*</span></mat-label>
+                <mat-select formControlName="roleID">
+                    <mat-option *ngFor="let role of roles" [value]="role.id">
+                        {{role.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+</ion-content>

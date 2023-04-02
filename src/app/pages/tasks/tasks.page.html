@@ -1,0 +1,223 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="height: 45px;">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+      <ion-button class=" hover:text-yellow-400" (click)="drawer.toggle()">
+        <!-- <ion-icon slot="icon-only" name="build-outline"></ion-icon> -->
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div class="flex flex-row items-center justify-center w-full" *ngIf="groupService.groups|async as groupsData">
+      <!--<div class="flex-row items-center hidden h-full px-2 lg:flex">
+        <div class="text-xl mie-2">{{'Groups.Title'|translate}}</div>
+        <ion-select interface="alert" multiple="false" [cancelText]="'Operations.Cancel'|translate"
+          [interfaceOptions]="{header: 'Groups.Plural'|translate}" [okText]="'Operations.Select'|translate"
+          (ionChange)="groupChanged($event)" [(ngModel)]="selectedGroup" class="border rounded-lg pie-2 w-36"
+          placeholder="Select One">
+          <ion-select-option *ngFor="let gr of groupsData" [value]="gr">{{gr.name}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      <div class="items-center justify-center hidden lg:flex" *ngIf="selectedGroup">
+        <img
+          class="object-cover w-6 h-6 transform border border-gray-100 rounded-full cursor-pointer hover:scale-125 hover:z-50"
+          [class.-m-1]="!fi" [matTooltip]="mem.Employee?.user?.first_name + ' '+mem.Employee?.user.last_name"
+          *ngFor="let mem of selectedGroup.members;let i =index;let fi=first;"
+          [src]="userService.getProfilePicURL(mem.Employee.user.pictureURL)" />
+      </div>-->
+      <div class="flex flex-1 px-4">
+        <ion-searchbar class="w-full md:w-1/2 lg:w-1/4" mode="ios" [placeholder]="('Operations.Search'|translate)+'...'"
+          type="text" debounce="100" [(ngModel)]="searchTerm" (ionChange)="search()">
+        </ion-searchbar>
+      </div>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button class=" hover:text-yellow-400" (click)="printDiv()">
+        <!-- <ion-icon slot="icon-only" name="build-outline"></ion-icon> -->
+        <ion-icon name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="overflow-auto">
+  <!-- ! If Group Is Selected  -->
+  <ng-container *ngIf="selectedGroup?.id">
+    <mat-drawer-container class="w-full h-full" [dir]="(lang.direction|async)">
+      <mat-drawer #drawer mode="side" class="flex flex-col w-64 h-full overflow-y-auto">
+
+        <div class="flex flex-row items-center px-2">
+
+
+
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Tasks.filter.assign_by'|translate}} </mat-label>
+            <mat-select [(ngModel)]="filter.createdByID" [(value)]="filter.createdByID"
+              (selectionChange)="valueChange()">
+              <mat-option>
+                <ngx-mat-select-search (keyup)="filterEmployeelist($event)" placeholderLabel="ابحث عن  موظف"
+                  [formControl]="EmployeeFilterCtrl" noEntriesFoundLabel="لا يوجد">
+                  <mat-icon (click)="clearSelectionEmployee()" class="mx-auto" aria-label="clear"
+                    ngxMatSelectSearchClear>close</mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option [value]="0" aria-selected="true">All</mat-option>
+
+              <mat-option *ngFor="let Employee of filteredEmployee" [value]="Employee.id">
+                {{Employee.user.first_name}}{{" "}}{{Employee.user.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2">
+
+
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Employee.Title'|translate}} </mat-label>
+            <mat-select [(ngModel)]="filter.employeeID" [(value)]="filter.employeeID" (selectionChange)="valueChange()">
+              <mat-option [value]="0" aria-selected="true">All</mat-option>
+              <mat-option *ngFor="let Employee of Employees" [value]="Employee.id">{{Employee.user.first_name}}{{"
+                "}}{{Employee.user.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2">
+
+
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Tasks.Details.Status'|translate}}</mat-label>
+            <mat-select [(ngModel)]="filter.statusID" [(value)]="filter.statusID" (selectionChange)="valueChange()">
+              <mat-option [value]="0" aria-selected="true">All</mat-option>
+              <mat-option [value]="-1" >غير مكتملة</mat-option>
+              <mat-option *ngFor="let status of statuses" [value]="status.id">
+                {{status.name_ar}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row items-center px-2">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Finance.Reports.DateRange.Title' |translate }} </mat-label>
+            <mat-select (selectionChange)="SelectedReportType()" [(ngModel)]="filter.Report_Basis"
+              [(value)]="filter.Report_Basis" #Range>
+              <mat-option value="Today"> {{'Finance.Reports.DateRange.Today' |translate }} </mat-option>
+              <mat-option value="ThisMonth"> {{'Finance.Reports.DateRange.ThisMonth' |translate }} </mat-option>
+              <mat-option value="ThisYear"> {{'Finance.Reports.DateRange.ThisYear' |translate }} </mat-option>
+              <mat-option value="Custom"> {{'Finance.Reports.DateRange.Custom' |translate }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2" *ngIf="filter.Report_Basis=='Custom'">
+          <mat-form-field form-field appearance="standard" class="w-full ">
+            <mat-label> {{'Court.Cases.List.From_Date'|translate}} </mat-label>
+            <input matInput [(ngModel)]="filter.from_date" (dateChange)="changeFromdate()" [matDatepicker]="picker" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2" *ngIf="filter.Report_Basis=='Custom'">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Court.Cases.List.To_Date'|translate}}
+            </mat-label>
+            <input matInput [(ngModel)]="filter.to_date" (dateChange)="changeTodate()" [matDatepicker]="toPicker" />
+            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+            <mat-datepicker #toPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+
+
+        <div class="flex-initial ...">
+          <ion-button (click)="Reset_Filter()">
+            {{'Operations.Reset'|translate}}
+
+          </ion-button>
+        </div>
+
+      </mat-drawer>
+      <mat-drawer-content>
+        <div cdkDropListGroup #statusContainer id="statusContainer"
+          class="flex flex-col justify-start  max-h-full h-full w-full pb-0.5 overflow-auto">
+          <div cdkDropListGroup #taskContainer cdkDropList cdkDropListOrientation="horizontal"
+            [cdkDropListData]="filteredTaskStatuses" (cdkDropListDropped)="dropGroup($event)" id="taskContainer"
+            style="height: 100%;" class="flex flex-row p-2 mr-4">
+            <div *ngFor="let status of filteredTaskStatuses"
+              class="pb-3 mr-4 overflow-auto bg-gray-100 rounded-lg column-width"
+              [class.opacity-60]="status.isChangesLocked " [cdkDragData]="status" cdkDrag
+              [cdkDragDisabled]="status.isChangesLocked ">
+              <div class="h-full mx-2 text-lg border border-blue-400 border-dashed rounded-lg column-width opacity-70"
+                *cdkDragPlaceholder>
+              </div>
+              <!-- [style.backgroundColor]="app.ligthenColor(status.color)" -->
+              <div [style.backgroundColor]="status.color"
+                class="sticky top-0 z-50 flex flex-row items-center justify-between h-8 px-2 font-sans text-sm font-semibold tracking-wide text-white">
+                <span class="flex items-center cursor-move" matTooltip="Move Status" cdkDragHandle>
+                  <ion-icon name="apps-outline" class="mx-2"></ion-icon>
+                  {{ lang.selectedLang=='en'? status.name_en:status.name_ar | titlecase}}
+                </span>
+                <!--<div class="z-50 flex items-center space-x-2">
+                  <ion-icon name="create-outline" matTooltip="Edit Status" (click)="addTaskStatus(true,status)"
+                    class="text-xl cursor-pointer hover:text-orange-300">
+                  </ion-icon>
+                  <ion-icon name="trash-outline" matTooltip="Delete Status" (click)="deleteTaskStatus(status.id)"
+                    class="text-xl cursor-pointer hover:text-red-300"></ion-icon>
+                </div>-->
+              </div>
+              <div cdkDropList cdkDropListGroup class="px-3 pt-2" style="height: 70%;" [cdkDropListData]="status.tasks"
+                (cdkDropListDropped)="drop($event,status.id)">
+                <div
+                  class="flex flex-col items-center justify-center w-full h-8 mb-2 border border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-100"
+                  (click)="addTask(false,status)" matTooltip="Add New Task">
+                  <ion-icon name="add-outline" class="text-4xl"></ion-icon>
+                </div>
+
+                <div class="relative my-2 shadow-md" [cdkDragData]="task" *ngFor="let task of status.tasks" cdkDrag>
+                  <ng-container
+                    *ngIf="   (task.dueDate | date:'dd/MM/yyyy') <=  (filter.to_date | date:'dd/MM/yyyy') && (task.dueDate | date:'dd/MM/yyyy') >=  (filter.from_date | date:'dd/MM/yyyy')  && (
+                  task.employeeID ==   filter.employeeID && ((filter.createdByID ==  task.createdByID  || filter.createdByID == 0) && (filter.statusID ==  task.statusID  || filter.statusID == 0 )|| ( filter.statusID == -1 && task.statusID != 3 ))   || filter.employeeID == 0 && (filter.createdByID ==  task.createdByID  || filter.createdByID == 0) && (filter.statusID ==  task.statusID  || filter.statusID == 0 || ( filter.statusID == -1 && task.statusID != 3 )) ) ">
+
+                    <div
+                      class="relative flex flex-col items-center justify-center h-10 py-2 bg-white border-b rounded rounded-b-none cursor-move"
+                      cdkDragHandle matTooltip="Move Task">
+                      <div color="secondary" class="absolute font-mono font-normal text-step-900 left-2">ID:{{task.id}}
+
+                      </div>
+                      <!-- style="margin-bottom: 1px;" -->
+                      <div class="w-1/4 border-t border-gray-300" style="margin-bottom: 1px;"></div>
+                      <div class="w-1/4 border-t border-gray-300"></div>
+                    </div>
+                    <task-card [task]="task"></task-card>
+                    <div class="w-full text-lg border border-blue-400 border-dashed rounded opacity-70"
+                      *cdkDragPlaceholder>
+                      <task-card class="h-full" [task]="task"></task-card>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="h-full pr-6">
+              <div (click)="addTaskStatus(false)" matTooltip="Add New Status Kanban"
+                class="flex items-center w-12 h-full p-3 mr-4 border border-gray-300 border-dashed rounded-lg cursor-pointer justify-items-center hover:bg-gray-100">
+                <ion-icon name="add-outline" class="text-4xl"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </ng-container>
+  <!-- ! If Group Is Not Selected  -->
+  <ng-container *ngIf="(groupService.groups|async) as GRs">
+    <div class="flex items-center justify-center w-full h-full text-center" *ngIf="GRs?.length<=0">There Are No
+      Groups</div>
+    <div class="flex items-center justify-center w-full h-full text-center" *ngIf="GRs?.length>0 && !selectedGroup?.id">
+      Please Select A Group</div>
+  </ng-container>
+
+</ion-content>
+<print-tasks-list [filter]="filter"></print-tasks-list>

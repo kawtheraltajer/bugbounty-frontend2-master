@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="danger" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'System.Authorization.Role.AddRole.AddRoleTitle'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="success" (click)="addRole()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="roleForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'System.Authorization.Role.AddRole.Name'|translate}}</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Admin,Lawyer....">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.name">
+                        <div class="text-red-600 text-end"
+                            *ngIf="roleForm.get('name').hasError(validation.type) && (roleForm.get('name').dirty || roleForm.get('name').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- desc -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Role.AddRole.Description'|translate}}   </mat-label>
+                        <input matInput placeholder="Role For...." formControlName="description" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.description">
+                        <div class="text-red-600 text-end"
+                            *ngIf="roleForm.get('description').hasError(validation.type) && (roleForm.get('description').dirty || roleForm.get('description').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>  <div class="grid grid-cols-3 grid-flow-row gap-2 h-64 p-6 border-t">
+                <div class="border border-dashed border-gray-400  flex flex-col items-center justify-center hover:bg-gray-100 cursor-pointer rounded-3xl rounded-b-3xl			"
+                    (click)="permissionType()">
+                    <ion-icon name="add-outline"></ion-icon>
+                </div>
+                <div class="border border-dashed border-gray-400  flex flex-col items-center justify-center rounded-t-3xl rounded-b-3xl	  "
+                    *ngFor="let perm of permissions">{{perm.name}}</div>
+        
+            </div>
+            </form>
+          
+        </div>
+        <!-- <div class="pis-4">
+            <ion-button color="success" (click)="addRole()">
+                <ion-label>{{'Operations.Add'|translate}}</ion-label>
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" class="mis-2" (click)="dismiss()">
+                <ion-label>{{'Operations.Cancel'|translate}}</ion-label>
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </div> -->
+    </div>
+</ion-content>

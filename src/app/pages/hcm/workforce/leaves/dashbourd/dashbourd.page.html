@@ -1,0 +1,311 @@
+<div class="relative flex flex-col flex-auto w-full h-full overflow-y-auto">
+
+  <div class="flex flex-row items-center border-t border-b h-14">
+    <div class="flex justify-end flex-1 gap-2 px-2 item-center">
+      <div role="button" class="flex items-center gap-2 p-1 text-xl border rounded-lg bg-step-100 hover:bg-step-300"
+        (click)="drawer.toggle()">
+        {{'Operations.Filter'|translate}}
+        <ion-icon slot="end" name="funnel-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <mat-drawer-container class="overflow-auto" [dir]="(lang.direction|async)"
+    [hasBackdrop]="['sm','md','lg'].includes(app.screenSize)">
+    <mat-drawer class=" overflow-auto relative w-2/3 border-is md:w-1/2 xl:w-1/3 bg-step-200" #drawer [position]="'end'"
+      [mode]="['sm','md','lg'].includes(app.screenSize)?'over':'side'" opened="false">
+      <div class="flex-row p-12  overflow-auto">
+
+
+        <div class="flex flex-col w-full px-4 mt-4">
+          <mat-label class="mie-4"> {{'Court.Reports.Columns'|translate}} </mat-label>
+          <div class="flex flex-wrap px-4 mb-2">
+            <mat-checkbox class="mx-2" style="width: 120px;" *ngFor="let Column of Columnslist"
+              [(ngModel)]="Column.isSelected">
+              {{("HCM.Workforce.leaves.List." + Column.name)|translate}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+
+        <div class="flex-initial ...">
+
+          <mat-form-field form-field appearance="standard" class="w-full ">
+            <mat-label> {{'Court.Cases.List.From_Date'|translate}} </mat-label>
+            <input matInput [(ngModel)]="From_date" [matDatepicker]="picker" (ngModelChange)="FromDateChange($event)" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="flex-initial ...">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Court.Cases.List.To_Date'|translate}}
+            </mat-label>
+            <input matInput [(ngModel)]="to_date" [matDatepicker]="toPicker" (ngModelChange)="ToDateChange($event)" />
+            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+            <mat-datepicker #toPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <!--<div class="flex-initial ...">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'HCM.Workforce.leaves.Form.Employee'|translate}} </mat-label>
+            <mat-select [(ngModel)]="filter.filter.employeeID" [(value)]="filter.filter.employeeID">
+              <mat-option *ngFor="let employee of Employee;let i = index;" [value]="employee.id">
+                {{employee.user.first_name }}{{" "}}{{employee.user.last_name}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>-->
+
+
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label> {{'HCM.Workforce.leaves.Form.Employee'|translate}} </mat-label>
+          <mat-select [(ngModel)]="filter.filter.employeeID" [(value)]="filter.filter.employeeID">
+            <mat-option>
+              <ngx-mat-select-search (keyup)="filterEmployeelist($event)" placeholderLabel="ابحث عن  موظف"
+                [formControl]="EmployeeFilterCtrl" noEntriesFoundLabel="لا يوجد">
+                <mat-icon (click)="clearSelectionEmployee()" class="mx-auto" aria-label="clear"
+                  ngxMatSelectSearchClear>close</mat-icon>
+              </ngx-mat-select-search>
+            </mat-option>
+
+            <mat-option [value]="0" aria-selected="true">None</mat-option>
+
+            <mat-option *ngFor="let Employee of filteredEmployee" [value]="Employee.id">
+              {{Employee.user.first_name}}{{" "}}{{Employee.user.last_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex-initial ...">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'HCM.Workforce.leaves.Form.Leave_Type'|translate}} </mat-label>
+            <mat-select [(ngModel)]="filter.filter.leaveTypeID" [(value)]="filter.filter.leaveTypeID">
+              <mat-option *ngFor="let type of LeaveType" [value]="type.id">
+
+                {{ lang.selectedLang=='en'? type.name_en:type.name_ar| titlecase}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+
+        <div class="flex-initial ...">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'HCM.Workforce.leaves.Form.status'|translate}} </mat-label>
+            <mat-select [(ngModel)]="filter.filter.status" [(value)]="filter.filter.status">
+              <mat-option value="Pendding"> {{("HCM.Workforce.leaves.status.Pendding")|translate}}</mat-option>
+              <mat-option value="Approved"> {{("HCM.Workforce.leaves.status.Approved")|translate}}</mat-option>
+              <mat-option value="Reject"> {{("HCM.Workforce.leaves.status.Reject")|translate}}</mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+
+
+        <div class="flex-initial ...">
+          <ion-button (click)="getReportWithFilter()">
+            {{'Operations.Apply'|translate}}
+
+          </ion-button>
+        </div>
+      </div>
+
+
+
+
+
+
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="flex flex-col w-full h-full bg-background text-step-600">
+        <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+          <div class="flex-1 items-start">
+            <div class="relative flex flex-1 h-10 border rounded-lg  lg:flex-none lg:w-1/3 bg-toolbar-background ">
+              <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                width="512px" height="512px">
+                <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+              </svg>
+              <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none"
+                type="search" name="search" placeholder="{{'Operations.Search'|translate}}  " [(ngModel)]="searchTerm"
+                (keyup)="applyFilter()" #search>
+            </div>
+          </div>
+
+          <div
+            class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+            (click)="add()" *ngIf="('Invoice:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+            <ion-icon name="add"></ion-icon>
+            {{'HCM.Workforce.leaves.Add'|translate}}
+
+          </div>
+          <div
+            class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+            (click)="printDiv()">
+            <ion-icon name="arrow-redo-outline"></ion-icon> pdf
+          </div>
+          <div
+          (click)="excelTable.exportTable('xlsx', {fileName:'leaves_',Props: {Author: 'Al-Qanouni'}})"
+          class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 ">
+          <ion-icon name="arrow-redo-outline"></ion-icon> Excel
+        </div>
+        </div>
+
+        <ng-container>
+          <div class="relative flex flex-1 overflow-auto">
+        
+
+              <table 
+              matTableExporter mat-table   [dataSource]="LeaveList" matSort 
+          #excelTable="matTableExporter" 
+              mat-table [dataSource]="LeaveList" matSort id="table"
+                class="z-10 w-full overflow-y-auto bg-background text-step-600">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.ID'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.Name'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.employee?.user.first_name +' '+element.employee?.user.last_name}}
+
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.Leave_Type'|translate}}
+
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+
+
+
+                  {{ lang.selectedLang=='en'? element.type?.name_en:element.type.name_ar| titlecase}}
+
+                </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="from_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.From_Date'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.from_date |date }} </td>
+              </ng-container>
+              <ng-container matColumnDef="to_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.To_Date'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.to_date |date }} </td>
+              </ng-container>
+              <ng-container matColumnDef="total_days">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.Days'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.total_days}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.Action'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let row; let i=index;" class=" text-center p-4">
+                  <button *ngIf="('Invoice:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)"  mat-icon-button color="accent" (click)="update(row)">
+                    <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+                  </button>
+
+                  <button mat-icon-button color="warn" *ngIf="('Invoice:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)" (click)="delete(row)">
+                    <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'HCM.Workforce.leaves.List.Approval'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+
+
+
+                  <mat-form-field appearance="standard">
+                    <mat-select [(ngModel)]="element.status" name="status" (selectionChange)="approvals(element)">
+                      <mat-option value="Pendding"> {{("HCM.Workforce.leaves.status.Pendding")|translate}}</mat-option>
+                      <mat-option value="Approved"> {{("HCM.Workforce.leaves.status.Approved")|translate}}</mat-option>
+                      <mat-option value="Reject"> {{("HCM.Workforce.leaves.status.Reject")|translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="Decument">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <p class="w-full text-center">
+                    {{'Employee_managment.Employee-talents.Education.List.documentURL'|translate}}
+                  </p>
+                </th>
+                <td mat-cell *matCellDef="let row; let i=index;">
+                  <button mat-icon-button (click)="download(row.documentURL)">
+                    <mat-icon class="mx-auto" aria-label="get_app">get_app</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+                class="border-b cursor-pointer border-step-100 hover:bg-step-50">
+              <tr class="mat-row" *matNoDataRow>
+                <ng-template #NoRoles>
+                  <td class="text-2xl text-center mat-cell" colspan="5">There are no roles.
+                  </td>
+                </ng-template>
+
+              </tr>
+            </table>
+          </div>
+          <mat-paginator #LeaveTablePaginator [pageSizeOptions]="[5,10,20]"
+            class="sticky bottom-0 w-full border-t border-b border-step-100 mat-paginator-sticky" showFirstLastButtons>
+          </mat-paginator>
+        </ng-container>
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+
+
+
+
+
+
+</div>

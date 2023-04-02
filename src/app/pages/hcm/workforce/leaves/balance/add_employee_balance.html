@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>        {{'HCM.Workforce.leaves.balance.add'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <!-- Name -->
+
+                <mat-form-field>
+                    <mat-label>   {{'HCM.Workforce.leaves.Form.Employee'|translate}}    </mat-label>
+                    <mat-select formControlName="employeeID">
+                     
+                        <mat-option *ngFor="let employee of Employee" [value]="employee.id">{{employee.user?.first_name }}{{" "}}{{employee.user?.last_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.Employee" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('employeeID').hasError(validation.type) && (addForm.get('employeeID').dirty || addForm.get('employeeID').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <mat-form-field>
+                    <mat-label>    {{'HCM.Workforce.leaves.balance.Form.Leave_Type'|translate}}    </mat-label>
+                    <mat-select     formControlName="leaveTypeID">
+                     
+                        <mat-option *ngFor="let type of leaveTypes" [value]="type.id">
+                            
+                  {{ lang.selectedLang=='en'?type?.name_en:type?.name_ar| titlecase}}
+
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.Leave_Type" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('leaveTypeID').hasError(validation.type) && (addForm.get('leaveTypeID').dirty || addForm.get('leaveTypeID').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'HCM.Workforce.leaves.balance.Form.accual_days'|translate}}     </mat-label>
+                        <input matInput type="number" formControlName="accual_days" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.accual_days" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('accual_days').hasError(validation.type) && (addForm.get('accual_days').dirty || addForm.get('accual_days').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>       {{'HCM.Workforce.leaves.balance.Form.balance'|translate}}   </mat-label>
+                        <input matInput type="number" formControlName="balance" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.balance" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('balance').hasError(validation.type) && (addForm.get('balance').dirty || addForm.get('balance').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+             
+                <mat-form-field>
+             
+                    <mat-label>   {{'HCM.Workforce.leaves.balance.Form.frequency'|translate}}    </mat-label>
+                    <mat-select formControlName="frequency">
+                        <mat-option value="Yearly">    {{'HCM.Workforce.leaves.balance.frequency.Yearly'|translate}}  </mat-option>
+                        <mat-option value="Monthly"> {{'HCM.Workforce.leaves.balance.frequency.Monthly'|translate}}  </mat-option>
+                        <mat-option value="5year">  {{'HCM.Workforce.leaves.balance.frequency.5year'|translate}}  </mat-option>
+                        <mat-option value="Other"> {{'HCM.Workforce.leaves.balance.frequency.other'|translate}}   </mat-option>
+                    </mat-select>
+                </mat-form-field>
+          
+            </form>
+        </div>
+    </div>
+</ion-content>

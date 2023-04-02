@@ -1,0 +1,150 @@
+
+  <vt-header>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+    </ion-button>    </ion-buttons>
+    <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+    <div slot="middle">     {{'Employee_managment.Personal_information.title'|translate}}  </div>
+    <ion-buttons slot="end">
+      <!-- <ion-menu-button></ion-menu-button> -->
+    </ion-buttons>
+  </vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative">
+
+<div class="flex flex-col w-full p-5">
+
+  <span class="flex items-center justify-center w-full p-5">
+      <img class="object-cover w-40 h-40 rounded-full"
+          [src]="getURL(data?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"></span>
+          <div class=" flex-col flex items-center justify-center w-full">
+              <div class="flex-6 flex items-start  h-8  justify-center w-full">
+                  <p class="text-xl font-medium	 text-primary-default	" >{{ data?.user.first_name }}{{'  '}}{{ data?.user.last_name}}              
+                  </p>
+                
+                 
+              </div>
+              <div class="flex items-start justify-center w-full h-8 flex-6">
+                <p class="font-medium text-l text-primary-default ">
+                  {{ lang.selectedLang=='en'? data?.designation.title_en:data?.designation.title_ar| titlecase}}
+                </p>
+        
+        
+        
+              </div>
+              <div class="flex items-start justify-center w-full h-8 flex-6">
+                <p class="font-medium text-l text-primary-default ">
+        
+                  {{ lang.selectedLang=='en'? data?.department.name_en:data?.department.name_ar| titlecase}}
+                </p>
+        
+        
+        
+              </div>
+              
+            </div>
+            </div>
+
+
+
+            <div
+            class="sticky top-0 z-50 flex items-center justify-center flex-1 w-full p-4 text-2xl text-center text-white border-t border-b bg-primary-default border-secondary-default ">
+            <div class="flex-1">
+            </div>
+        
+        
+          </div>         
+    <div class="w-full p-2 overflow-y-auto">
+ 
+  
+        <div class="w-full">
+    
+          <form class="flex flex-col w-full px-4" [formGroup]="addform">
+              <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>    {{'Employee_managment.Bank_info.List.bank_name'|translate}}  </mat-label>
+                      <input matInput type="text" formControlName="bank_name" >
+                  </mat-form-field>
+              </div>
+    
+                <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>    {{'Employee_managment.Bank_info.List.holder_name'|translate}}  </mat-label>
+                      <input matInput type="text" formControlName="holder_name" >
+                  </mat-form-field>
+              </div>
+              <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>    {{'Employee_managment.Bank_info.List.IBAN'|translate}}  </mat-label>
+                    <input matInput type="text" formControlName="IBAN" >
+                </mat-form-field>
+            </div>
+
+                <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>    {{'Employee_managment.Bank_info.List.Account_number'|translate}}  </mat-label>
+                      <input matInput type="text" formControlName="account_number" >
+                  </mat-form-field>
+              </div>
+      
+          </form>
+
+
+          <div
+          class="relative flex items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer flex-12  bg-toolbar-background hover:bg-step-50 "
+          (click)="updateBank_info()">
+          <ion-icon name="update"></ion-icon>
+          {{'Employee_managment.Bank_info.Update'|translate}} 
+        </div>
+
+      </div>
+
+    </div>
+
+
+  <ng-container >
+
+
+
+
+
+
+
+</ng-container>
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-title>
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-buttons
+        class="flex items-center justify-center w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+        (click)="close(true)">
+        <ion-icon name="close-outline">
+        </ion-icon>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button
+        class="flex items-center justify-center w-8 h-8 mr-4 rounded-full cursor-pointer hover:bg-green-300 hover:text-black"
+        (click)="close(false)">
+        <ion-icon name="checkmark-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="h-full max-h-full overflow-auto">
+  <ion-searchbar class="sticky p-0 border-b border-step-50" type="text" debounce="100" (ionChange)="getItems($event)">
+  </ion-searchbar>
+  <ng-container  *ngIf="isMulti"  >
+    <ion-radio-group    [(ngModel)]="selectedPermission" >
+      <ion-item *ngFor="let perm of permissions; let itemIndex = index; " lines="none" class="border-b cursor-pointer" (click)="selectperm(perm,itemIndex)">
+        <ion-radio slot="start" [value]="perm.id"></ion-radio>
+        {{perm.name+'
+        '+perm.subject+':'+perm.action}}
+        <ion-label>
+        </ion-label>
+     
+      </ion-item>
+
+
+    </ion-radio-group>
+  </ng-container>
+
+  <ng-container  *ngIf="!isMulti"  >
+      <ion-item *ngFor="let perm of permissions ;let itemIndex = index;" lines="none" class="border-b cursor-pointer"
+      (click)="selectperm(perm,itemIndex)">
+      <ion-checkbox slot="start" [(ngModel)]="perm.selected"></ion-checkbox>
+      <ion-label>
+        {{perm.name+'
+        '+perm.subject+':'+perm.action}}
+      </ion-label>
+  
+    </ion-item>
+
+
+
+
+
+  </ng-container>
+   
+
+</ion-content>

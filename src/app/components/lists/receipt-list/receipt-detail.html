@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Finance.Receipt.Details.Title'|translate}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container *ngIf="!isLoading">
+    <div class="w-full p-5">
+      <div class="border-4 m-3">
+        <div class="w-full p-5">
+          <div class="flex flex-row"></div>
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Receipt.Title'|translate}} :
+            </span>
+            <span style="font-size: 14px" class="p-1">
+              {{Receipt?.receipt_no}}
+            </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Receipt.list.Receipt_Date'|translate}} :
+
+            </span>
+            <span style="font-size: 14px" class="p-1">
+              {{Receipt?.receipt_date|date:"dd-MM-yyyy"}}
+            </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 16px; font-weight: bold" class="p-1">
+              {{'Finance.Receipt.list.Client'|translate}} :
+
+              
+            </span>
+            <span style="font-size: 16px" class="p-1" *ngIf="Receipt?.Invoice?.clientID"> {{Receipt?.Invoice?.client?.full_name}}</span>
+
+            <span style="font-size: 16px" class="p-1" *ngIf="Receipt?.Invoice?.companyID"> {{Receipt?.Invoice?.company?.full_name}}</span>
+            <span style="font-size: 16px" class="p-1" *ngIf="!Receipt?.Invoice?.companyID  && Receipt?.Invoice?.clientID"> {{Receipt?.Invoice?.recipient_name }}</span>
+
+   
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 16px; font-weight: bold" class="p-1">
+              {{'Finance.Receipt.list.Case_no'|translate}} :
+
+            </span>
+            <span style="font-size: 16px" class="p-1">
+              {{Receipt?.Invoice?.case?.id}}
+            </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 16px; font-weight: bold" class="p-1">
+              {{'Finance.Receipt.list.description'|translate}} :
+
+            </span>
+            <span style="font-size: 16px" class="p-1">
+              {{Receipt?.description}}
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row p-5">
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <td class="border-2 p-1 text-center">{{'Finance.Invoice.list.invoice_no'|translate}} 
+                 </td>
+                <td class="border-2 p-1 text-center">  {{'Finance.Invoice.list.Amount'|translate}}  </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center pt-3">{{Receipt?.Invoice?.invoice_no}}</td>
+                <td class="text-center pt-3">{{Receipt?.amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+  
+        <div class="flex flex-row p-5" *ngIf="Receipt?.Last_updated_User">
+          {{'Operations.LastUpdated'|translate}}: {{Receipt?.Last_updated_User}} {{Receipt?.Last_updated| date:'dd/MM/yyyy
+          hh:mm a'}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

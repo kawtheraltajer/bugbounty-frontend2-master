@@ -1,0 +1,179 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'Schedule.Appointment.Title'|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [matMenuTriggerFor]="menu" color="dark" [matTooltip]="'Menu'">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="cancel()">
+          <div class="flex flex-row items-center w-full h-full fill-current hover:text-yellow-500">
+            <ion-icon src="assets/icon/calendar-x.svg" class="fill-current" style="width: 24px;height: 24px;">
+            </ion-icon>
+            <span class="px-4">UnBook</span>
+          </div>
+        </button>
+        <!-- <button mat-menu-item *ngIf="slot.isBooked && !slot.isApproved && 'TimeSlot:UPDATE'|permission:slot"
+          (click)="approve(slot,true)">
+          <div class="flex flex-row items-center w-full h-full fill-current hover:text-green-500 ">
+            <ion-icon src="assets/icon/calendar-check.svg" class="fill-current" style="width: 24px;height: 24px;">
+            </ion-icon>
+            <span class="px-4">Approve</span>
+          </div>
+        </button>
+        <button mat-menu-item *ngIf="slot.isBooked && slot.isApproved && 'TimeSlot:UPDATE'|permission:slot"
+          (click)="approve(slot,false)">
+          <div class="flex flex-row items-center w-full h-full fill-current hover:text-yellow-500">
+            <ion-icon src="assets/icon/calendar-x.svg" class="fill-current" style="width: 24px;height: 24px;">
+            </ion-icon>
+            <span class="px-4">disApprove</span>
+          </div>
+        </button>
+        <button mat-menu-item *ngIf="'TimeSlot:DELETE'|permission:slot" (click)="deleteSlot(slot)">
+          <div class="flex flex-row items-center w-full h-full fill-current hover:text-red-500">
+            <ion-icon name="trash-outline" style="width: 24px;height: 24px;"></ion-icon>
+            <span class="px-4">Delete</span>
+          </div>
+        </button> -->
+      </mat-menu>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="appointment">
+  <div class="flex flex-col w-full">
+    <!-- ! TimeSlot -->
+    <div class="flex flex-row w-full mt-4 border-t">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.Date'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{(!appointment.canceled?(appointment?.timeSlot[0]?.date):(appointment?.timeSlot_history?.timeSlot[0]?.date))|date}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Form.Status'|translate}}
+        </div>
+        <div class="flex flex-row items-center justify-center flex-1 p-1">
+          <div class="flex items-center">
+            {{(appointment.canceled?'Schedule.Status.Canceled':(appointment.timeSlot[0].isApproved?'Schedule.Status.Approved':'Schedule.Status.Pending'))|translate}}
+          </div>
+          <div
+            [class]="appointment.canceled?'bg-red-300 hover:bg-red-500':(appointment.timeSlot[0].isApproved?'bg-green-300 hover:bg-green-500':'bg-orange-300 hover:bg-orange-500')"
+            class="flex items-center w-4 h-4 mx-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.StartTime'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{(!appointment.canceled?(appointment?.timeSlot[0]?.startTime):(appointment?.timeSlot_history?.timeSlot[0]?.startTime))|date:'shortTime'}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.EndTime'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{(!appointment.canceled?(appointment?.timeSlot[0]?.endTime):(appointment?.timeSlot_history?.timeSlot[0]?.endTime))|date:'shortTime'}}
+        </div>
+      </div>
+    </div>
+    <!-- ! Name / CPR-CR -->
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{(appointment.client_type=='Company'?'Form.CompanyName':'Form.ClientName')|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center">
+          {{appointment.client_name}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{(appointment.client_type=='Company'?'Form.CR':'Form.CPR')|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{appointment.client_cpr}}
+        </div>
+      </div>
+
+    </div>
+    <!-- ! Phone / Email -->
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Form.Phone'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center " dr="ltr">
+          +{{appointment.client_phone}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Form.Email'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{appointment.client_email}}
+        </div>
+      </div>
+
+    </div>
+    <!-- ! Types  -->
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.AppointmentType.Title'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{lang.selectedLang == 'ar'? appointment.type.title_ar:appointment.type.title_en}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Enum.ClientType.Title'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{(appointment.client_type=='Company'?('Enum.ClientType.Company'):('Enum.ClientType.Individual'))|translate}}
+        </div>
+      </div>
+    </div>
+    <!-- ! Case Description -->
+    <div class="flex flex-col w-full border-b">
+      <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+        {{'Form.CaseDescription'|translate}}
+      </div>
+      <p class="flex-1 p-1 text-center ">
+        {{appointment.case_description}}
+      </p>
+    </div>
+    <!-- ! Cancelation -->
+    <div class="flex flex-row w-full mt-4 border-t">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Form.Canceled'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{(appointment.canceled?'Operations.Yes':'Operations.No')|translate}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Form.Reason'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{appointment.cancellation_reson}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

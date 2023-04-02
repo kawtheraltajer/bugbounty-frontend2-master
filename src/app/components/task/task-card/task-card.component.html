@@ -1,0 +1,53 @@
+<div class="px-3 bg-white border border-b-0 border-white cursor-pointer" (click)="taskDetails()">
+
+  <div class="flex justify-center py-2">
+    <p class="font-sans text-sm font-semibold tracking-wide text-gray-700 truncate">{{task.title}}</p>
+  </div>
+  <div class="flex justify-center py-2" *ngIf="task.case">
+    <p class="font-sans text-sm font-semibold tracking-wide text-gray-700 truncate">
+      {{task?.case?.CaseNo}}{{"-"}}{{task?.case?.client?.full_name}}
+    </p>
+  </div>
+
+  <div class="flex flex-row items-center justify-between w-full h-8 py-2 ">
+    <div class="flex flex-row items-center justify-center" *ngIf="task.employee?.user">
+      <p class="flex font-mono text-sm tracking-wide text-gray-700">
+        {{task.case?.documents?.length}}</p>
+    </div>
+  </div>
+  <div class="flex flex-row items-center justify-between w-full h-8 py-2">
+    <div class="flex flex-row items-center justify-center" *ngIf="task.employee?.user">
+      <img class="object-cover w-6 h-6 rounded-full mie-2"
+        [src]="user.getProfilePicURL(task.employee?.user?.pictureURL)">
+      <p class="flex font-mono text-sm tracking-wide text-gray-700 truncate">
+        {{task.employee?.user.first_name+' '+task.employee?.user.last_name}}</p>
+    </div>
+    <!-- <div class="flex flex-row items-center w-1/2 border border-dashed" *ngIf="!task.employee?.user">
+      <div class="object-cover w-6 h-6 mx-2 bg-gray-300 rounded-full"></div>
+      <p class="flex font-mono text-sm tracking-wide bg-gray-300"></p>
+    </div> -->
+    <div class="flex flex-row items-center justify-end flex-1">
+      <!-- !Comments -->
+      <div class="flex flex-row items-center justify-between mx-1 border rounded-lg ">
+        <span class="flex items-center h-6 px-1 border-ie">
+          <ion-icon name="chatbubble-outline" style="font-size: 15px;"></ion-icon>
+        </span>
+        <span class="flex items-center h-full px-1">{{task.comments.comments.length}}</span>
+      </div>
+      <!-- !Attachments -->
+     <!-- <div *ngIf="task.case" class="flex flex-row items-center justify-between mx-1 border rounded-lg ">
+        <span class="flex items-center h-6 px-1">
+          <ion-icon name="attach-outline" style="font-size: 15px;"></ion-icon>
+        </span>
+        <span class="flex items-center h-full px-1">{{task.case?task.case?.documents?.length:0}}</span>
+      </div>-->
+    </div>
+  </div>
+  <span class="text-xs text-gray-400 rounded-lg" *ngIf="task?.createdBy">
+    {{'Tasks.filter.assign_by'|translate}}: {{task?.createdBy?.user?.first_name}} {{task?.createdBy?.user?.last_name}}
+  </span>
+</div>
+<div class="flex items-center justify-between w-full px-2 pt-2 pb-1 bg-white border-t border-b-0 rounded-b">
+  <span class="text-xs text-gray-400 border-green-500 rounded-lg">created: {{task.createdAt |date}}</span>
+  <span class="text-xs text-gray-400 border-red-500 rounded-lg">due: {{task.dueDate |date}}</span>
+</div>

@@ -1,0 +1,113 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{isEdit?('Schedule.TimeSlot.Edit'|translate):('Schedule.TimeSlot.Add'|translate)}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()" [matTooltip]="isEdit?'Edit':'Add'">
+                <ion-icon [name]="isEdit? 'sync-outline':'add'"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="flex flex-col w-full px-4">
+
+
+            <mat-label>{{'Schedule.TimeSlot.AddTimeSlot.Employee'|translate}}</mat-label>
+            <div class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer"
+                [class.border-dashed]="!selectedEmployee">
+                <div *ngIf="selectedEmployee" matTooltip="UnAssign Employee" (click)="removeEmployee()"
+                    class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+                    <ion-icon name="close-outline"></ion-icon>
+                </div>
+                <ion-item (click)="selectEmployee($event)" class="w-full cursor-pointer" lines="none"
+                    *ngIf="selectedEmployee">
+                    <ion-label>
+                        {{ selectedEmployee.user.first_name+' '+selectedEmployee.user.last_name |titlecase}} -
+                        {{selectedEmployee.user.email}}
+                    </ion-label>
+                    <ion-avatar slot="end">
+                        <img class="w-full h-full" [src]="user.getProfilePicURL(selectedEmployee.user.pictureURL)">
+                    </ion-avatar>
+                </ion-item>
+                <div (click)="selectEmployee($event)"
+                    class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100"
+                    *ngIf="!selectedEmployee">
+                    <ion-icon name="add-outline" title=""></ion-icon>
+                </div>
+            </div>
+        </div>
+      <!--  <div class="flex flex-row items-center w-full px-4 my-4 justify-items-center">
+            <mat-label class="mie-4"> {{'Schedule.TimeSlot.AddTimeSlot.Recurrence'|translate}} </mat-label>
+            <mat-slide-toggle class="mis-2" (change)="isRecurrence=!isRecurrence">
+            </mat-slide-toggle>
+        </div>
+-->
+        <form class="flex flex-col w-full px-4 font" [formGroup]="addForm" >
+            <mat-form-field appearance="legacy" *ngIf="!isRecurrence">
+                <mat-label> {{'Schedule.TimeSlot.AddTimeSlot.Date'|translate}} </mat-label>
+                <input matInput    (click)="dp2.open()" [matDatepicker]="dp2" formControlName="date" required />
+                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                <mat-datepicker #dp2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="legacy" *ngIf="isRecurrence">
+                <mat-label> {{'Schedule.TimeSlot.AddTimeSlot.EnterADateRange'|translate}} </mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate formControlName="date" placeholder="Start date">
+                    <input matEndDate formControlName="endDate" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <ng-container *ngIf="!isRecurrence">
+                <mat-form-field appearance="legacy"  (click)="StartTime.open()"  >
+                    <!-- <mat-label>{{ 'TEndTime' | translate }}</mat-label> -->
+                    <mat-label> {{'Schedule.TimeSlot.AddTimeSlot.StartTime'|translate}} </mat-label>
+                    <input matInput [ngxTimepicker]="StartTime" [format]="12" formControlName="startTime" required  />
+                    <ion-icon matSuffix name="time-outline" class="cursor-pointer" [ngStyle]="{'color':'green'}"
+                        >
+                    </ion-icon>
+                </mat-form-field>
+                <ngx-material-timepicker [minutesGap]="30" #StartTime    style="direction: ltr!important;"></ngx-material-timepicker>
+                <mat-form-field appearance="legacy" (click)="EndTime.open()">
+                    <!-- <mat-label>{{ 'TEndTime' | translate }}</mat-label> -->
+                    <mat-label> {{'Schedule.TimeSlot.AddTimeSlot.EndTime'|translate}} </mat-label>
+                    <input matInput [ngxTimepicker]="EndTime" [format]="12" formControlName="endTime" required   />
+                    <ion-icon matSuffix name="time-outline" class="cursor-pointer" [ngStyle]="{'color':'red'}"
+                        >
+                    </ion-icon>
+                </mat-form-field>
+                <ngx-material-timepicker   [minutesGap]="30" #EndTime></ngx-material-timepicker>
+            </ng-container>
+        </form>
+        <ng-container *ngIf="isRecurrence">
+            <div class="flex flex-col w-full px-4 mt-4 items">
+                <mat-label class="mie-4"> {{'Schedule.TimeSlot.AddTimeSlot.Days'|translate}} </mat-label>
+                <div class="flex flex-wrap px-4 mb-2">
+                    <mat-checkbox class="mx-2" style="width: 85px;" *ngFor="let day of days;"
+                        [(ngModel)]="day.isSelected">
+                        {{day.name | translate}}
+                    </mat-checkbox>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isRecurrence">
+            <div class="flex flex-col w-full px-4 mt-4">
+                <mat-label class="mie-4"> {{'Schedule.TimeSlot.AddTimeSlot.Hours'|translate}} </mat-label>
+                <div class="flex flex-wrap px-4 mb-2">
+                    <mat-checkbox class="mx-2" style="width: 85px;" *ngFor="let hour of app.hours;"
+                        [(ngModel)]="hour.isSelected">
+                        {{hour.value}}
+                    </mat-checkbox>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+</ion-content>

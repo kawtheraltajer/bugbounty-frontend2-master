@@ -1,0 +1,84 @@
+<div class="relative flex flex-col items-center w-full h-full">
+  <div class="relative flex flex-row  items-center justify-center w-full p-2 border-b border-step-100 bg-background">
+    <div class="flex-full items-center">
+      <div class="relative flex flex-1 h-10 border rounded-lg  lg:flex-none lg:w-full bg-toolbar-background ">
+        <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+          viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+          width="512px" height="512px">
+          <path
+            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+        </svg>
+        <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none" type="search"
+          name="search" placeholder="        {{'Operations.Search'|translate}} 
+      " [(ngModel)]="searchTerm" (keyup)="applyFilter()" #search>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+  <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+    <div (click)="ViewAddForm()"
+      class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+      +
+    </div>
+
+    <div
+      class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+      *ngIf="isAdd">
+      <div class="relative flex flex-col text-center justify-center">
+        <div class="pb-1 text-lg border-b">{{'Court.Cases.Case-type.Add'|translate}} </div>
+        <div>
+
+          <form [formGroup]="courtform">
+            <div class="flex">
+              <div class="mie-1">
+                <mat-form-field appearance="standard" class="w-full">
+                  <mat-label> {{'Court.Cases.Case-type.Form.name'|translate}} </mat-label>
+                  <input matInput type="text" formControlName="name">
+                </mat-form-field>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.name_ar">
+                    <div class="text-red-600 text-end"
+                      *ngIf="courtform.get('name').hasError(validation.type) && (courtform.get('name').dirty || courtform.get('name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+           
+            </div>
+         
+
+          </form>
+
+
+          <div class="flex text-center justify-center ">
+            <ion-button (click)="addType()">{{'Operations.Add'|translate}}</ion-button>
+            <ion-button color="danger" (click)="clear()">{{'Operations.Cancel'|translate}}</ion-button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <ng-container *ngIf="!isAdd">
+
+
+
+      <div
+        class="flex flex-col items-center justify-center h-20 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50"
+     *ngFor="let court of courtFilter">
+
+
+        {{ court.name| titlecase}}
+      
+      </div>
+    </ng-container>
+
+
+
+  </div>

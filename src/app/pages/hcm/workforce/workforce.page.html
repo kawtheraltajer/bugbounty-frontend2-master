@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{'HCM.Workforce.Title'|translate}}   </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="grid h-64 grid-flow-row grid-cols-2 gap-2 p-6 border-t">
+    <div
+      class="flex flex-col items-center justify-center h-20 p-5 border border-gray-400 cursor-pointer hover:bg-step-100 rounded-t-2xl rounded-b-2xl "
+      *ngFor="let tab of tabs ;let i = index; " (click)="selectTab(tab.link)">
+      <div class="flex flex-col w-full p-2">
+        <div class="flex flex-col items-center justify-center p-5">
+          <span class="flex items-center justify-start p-2 ">
+            <ion-icon class="text-2xl font-medium text-primary-default " [name]="tab.icon"></ion-icon>
+          </span>
+          <span class="flex flex-col items-center justify-start p-2">
+            <span class="text-xl font-medium text-primary-default ">
+              {{tab.title |translate}}
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

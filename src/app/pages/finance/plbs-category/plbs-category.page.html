@@ -1,0 +1,13 @@
+<vt-header>
+  <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+  <div slot="middle">PLBS category</div>
+</vt-header>
+
+<ion-content>
+  <ng-container *ngIf="!isLoading">
+    <plbs-category-list [PLBSCategories]="PLBSCategories">
+    </plbs-category-list>
+  </ng-container>
+
+  <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading"></div>
+</ion-content>

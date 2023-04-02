@@ -1,0 +1,436 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Finance.Invoice.Add'|translate}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container *ngIf="!isLoading">
+    <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+      <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+          <div class="flex flex-row w-full" >
+            <mat-form-field appearance="standard" class="px-2 w-1/2"  disabeld >
+              <mat-label> {{'Finance.Invoice.list.Type.Type'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <mat-select value="Client" formControlName="type" #type (selectionChange)="typechanged($event); valueChanged($event)" >
+                <mat-option value="Client"> {{'Finance.Invoice.list.Type.Client'|translate}} </mat-option>
+                <mat-option value="Company"> {{'Finance.Invoice.list.Type.Company'|translate}}</mat-option>
+                <mat-option value="Consultation"> {{'Finance.Invoice.list.Type.Consultation'|translate}}</mat-option>
+                <mat-option value="Other"> {{'Finance.Invoice.list.Type.Other'|translate}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" class="px-2 w-1/2" *ngIf="type?.value=='Client'">
+              <mat-label> {{'Finance.Invoice.list.Client'|translate}} <span style="color: red;">*</span> </mat-label>
+              <mat-select formControlName="clientID" (selectionChange)="getCasesForClient($event)">
+                <mat-option>
+                  <ngx-mat-select-search (keyup)="filterClientlist($event)" placeholderLabel="ابحث عن  عميل"
+                    [formControl]="ClientFilterCtrl" noEntriesFoundLabel="لا يوجد">
+                    <mat-icon (click)="clearSelectionClient()" class="mx-auto" aria-label="clear"
+                      ngxMatSelectSearchClear>close</mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let client of filteredClients;let i = index;" [value]="client.id">{{client.full_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" class="px-2 w-1/2" *ngIf="type.value=='Company' ">
+              <mat-label> {{'Finance.Invoice.list.Company'|translate}} <span style="color: red;">*</span> </mat-label>
+              <mat-select formControlName="companyID" (selectionChange)="getCasesForCompany($event)">
+                <mat-option>
+                  <ngx-mat-select-search (keyup)="filterCompanylist($event)" placeholderLabel="ابحث عن  شركة"
+                    [formControl]="ClientFilterCtrl" noEntriesFoundLabel="لا يوجد">
+                    <mat-icon (click)="clearSelectionCompany()" class="mx-auto" aria-label="clear"
+                      ngxMatSelectSearchClear>close</mat-icon>
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let company of filteredCompanies" [value]="company.id">{{company.full_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!--<mat-form-field appearance="standard" class="px-2 w-1/2" *ngIf="type.value=='Company'">
+              <mat-label> {{'Finance.Invoice.list.Company'|translate}} <span style="color: red;">*</span> </mat-label>
+              <mat-select formControlName="clientID" (selectionChange)="getCasesForCompany($event)">
+                <mat-option *ngFor="let company of companies;" [value]="company.id">{{company.full_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>-->
+
+         
+            <mat-form-field appearance="standard" class="px-2 w-1/2" *ngIf="type.value=='Consultation' || type.value=='Other' " >
+              <mat-label> {{'Finance.Invoice.list.Name'|translate}} <span style="color: red;">*</span> </mat-label>
+              <input matInput formControlName="recipient_name"/>
+            </mat-form-field>
+            <div class="flex flex-row w-full">
+              <mat-form-field appearance="standard" class="px-2 w-full">
+                <mat-label>{{'Finance.Invoice.list.invoice_date'|translate}} <span style="color: red;">*</span> </mat-label>
+                <input matInput formControlName="invoice_date" [matDatepicker]="pickerinvoice_date" />
+                <mat-datepicker-toggle matSuffix [for]="pickerinvoice_date"></mat-datepicker-toggle>
+                <mat-datepicker #pickerinvoice_date></mat-datepicker>
+                <div appearance="standard" class="px-2 w-1/2">
+                  <ng-container *ngFor="let validation of validation_messages.invoice_date">
+                    <div class="text-red-600 text-end"
+                      *ngIf="addForm.get('invoice_date').hasError(validation.type) && (addForm.get('invoice_date').dirty || addForm.get('invoice_date').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+              </mat-form-field>
+ 
+  
+           
+            </div>
+          </div>
+
+          <div class="flex flex-row w-full">
+            <div appearance="standard" class="px-2 w-1/2"></div>
+            <div appearance="standard" class="px-2 w-1/2" >
+              <div class="validation-errors" *ngIf="type.value=='Client'">
+                <ng-container *ngFor="let validation of validation_messages.clientID">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('clientID').hasError(validation.type) && (addForm.get('clientID').dirty || addForm.get('clientID').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="validation-errors" *ngIf="type.value=='Company'">
+                <ng-container *ngFor="let validation of validation_messages.clientID">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('companyID').hasError(validation.type) && (addForm.get('companyID').dirty || addForm.get('companyID').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="validation-errors" *ngIf="type.value=='Consultation' || type.value=='Other'">
+                <ng-container *ngFor="let validation of validation_messages.recipient_name">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('recipient_name').hasError(validation.type) && (addForm.get('recipient_name').dirty || addForm.get('recipient_name').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-row w-full" *ngIf="!FromCase">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Invoice.list.Case'|translate}} </mat-label>
+              <mat-select formControlName="caseID">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let case of cases;let i = index;" [value]="case.id">{{case?.CaseNo}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          <!--  <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Invoice.list.invoice_status'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <mat-select formControlName="invoice_status">
+                <mat-option value="Pending"> {{'Finance.Invoice.Status.Pending'|translate}} </mat-option>
+                <mat-option value="Paid"> {{'Finance.Invoice.Status.Paid'|translate}}</mat-option>
+                <mat-option value="Approved"> {{'Finance.Invoice.Status.Approved'|translate}}</mat-option>
+              </mat-select>
+            </mat-form-field>-->
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label>                 {{'Court.Claims.Form.total_paid'|translate}}<span style="color: red;">*</span>
+              </mat-label>
+              <input matInput type="number" formControlName="paid_amount" (keyup)="change_pennding_amount()">
+
+            </mat-form-field>
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+
+            <mat-label>                   {{'Court.Claims.Form.balance'|translate}}
+
+            </mat-label>
+            <input matInput type="number" formControlName="pending_amount">
+
+          </mat-form-field>
+          </div>
+
+          <div class="flex flex-row w-full">
+            <div appearance="standard" class="px-2 w-1/2"></div>
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.paid_amount">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('paid_amount').hasError(validation.type) && (addForm.get('paid_amount').dirty || addForm.get('paid_amount').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label>{{'Finance.Invoice.list.due_date'|translate}} <span style="color: red;">*</span> </mat-label>
+              <input matInput formControlName="due_date" [matDatepicker]="pickerDueDate" />
+              <mat-datepicker-toggle matSuffix [for]="pickerDueDate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerDueDate></mat-datepicker>
+              <div appearance="standard" class="px-2 w-1/2">
+                <ng-container *ngFor="let validation of validation_messages.due_date">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('due_date').hasError(validation.type) && (addForm.get('due_date').dirty || addForm.get('due_date').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </mat-form-field>
+            <!--<div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.invoice_status">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('invoice_status').hasError(validation.type) && (addForm.get('invoice_status').dirty || addForm.get('invoice_status').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>-->
+
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label>  {{'Court.Cases.Case-type.Form.comments'|translate}}  </mat-label>
+                <input matInput type="text" formControlName="comments">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> {{'Finance.Invoice.list.payment_method'|translate}} <span style="color: red;">*</span></mat-label>
+            <mat-select formControlName="payment_method" (selectionChange)="checkCheque($event)">
+              <mat-option value="Cash"> {{'Finance.Invoice.Payment_method.Cash'|translate}} </mat-option>
+              <mat-option value="BankTransfer"> {{'Finance.Invoice.Payment_method.BankTransfer'|translate}}
+              </mat-option>
+              <mat-option value="Cheque"> {{'Finance.Invoice.Payment_method.Cheque'|translate}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <ng-container *ngIf="isCheque">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label>{{'Finance.Invoice.list.cheque_date'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <input matInput formControlName="cheque_date" [matDatepicker]="pickerChequeDate" />
+              <mat-datepicker-toggle matSuffix [for]="pickerChequeDate"></mat-datepicker-toggle>
+              <mat-datepicker #pickerChequeDate></mat-datepicker>
+            </mat-form-field>
+
+          </ng-container>
+        </div>
+        <div class="flex flex-row w-full">
+          <div appearance="standard" class="px-2 w-1/2">
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.payment_method">
+                <div class="text-red-600 text-end"
+                  *ngIf="addForm.get('payment_method').hasError(validation.type) && (addForm.get('payment_method').dirty || addForm.get('payment_method').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div appearance="standard" class="px-2 w-1/2">
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.cheque_date">
+                <div class="text-red-600 text-end"
+                  *ngIf="addForm.get('cheque_date').hasError(validation.type) && (addForm.get('cheque_date').dirty || addForm.get('cheque_date').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex flex-row w-full">
+          <ng-container *ngIf="isCheque">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Invoice.list.drawn_on'|translate}} <span style="color: red;">*</span> </mat-label>
+              <input matInput s formControlName="drawn_on" />
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngIf="isCheque">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Invoice.list.cheque_number'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <input matInput s formControlName="cheque_number" />
+            </mat-form-field>
+          </ng-container>
+        </div>
+        <div class="flex flex-row w-full">
+          <div appearance="standard" class="px-2 w-1/2">
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.drawn_on">
+                <div class="text-red-600 text-end"
+                  *ngIf="addForm.get('drawn_on').hasError(validation.type) && (addForm.get('drawn_on').dirty || addForm.get('drawn_on').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div appearance="standard" class="px-2 w-1/2">
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.cheque_number">
+                <div class="text-red-600 text-end"
+                  *ngIf="addForm.get('cheque_number').hasError(validation.type) && (addForm.get('cheque_number').dirty || addForm.get('cheque_number').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <!--  <div class="flex flex-row w-full">
+            <div class="px-2 w-1/2">
+              <span class="mat-form-field"
+                >Is Instalment:
+                <mat-slide-toggle
+                  matTooltip="isMain"
+                  (change)="instalmentChange($event)"
+                  formControlName="is_instalment"
+                >
+                </mat-slide-toggle>
+              </span>
+            </div>
+            <ng-container *ngIf="isInstallment">
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label> No. of Months </mat-label>
+                <input
+                  matInput
+                  type="number"
+                  s
+                  formControlName="no_of_month"
+                  placeholder="No of month ..."
+                />
+              </mat-form-field>
+            </ng-container>
+          </div>
+          <div class="flex flex-row w-full">
+            <ng-container *ngIf="isInstallment">
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label> Start Date </mat-label>
+                <input
+                  matInput
+                  formControlName="start_date"
+                  [matDatepicker]="pickerStartData"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="pickerStartData"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartData></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label>Next Payment Date </mat-label>
+                <input
+                  matInput
+                  formControlName="next_payment_date"
+                  [matDatepicker]="picker"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+          </div>
+-->
+        <div class="flex flex-row w-full mt-8">
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <th class="border-2 p-1"> {{'Finance.Invoice.list.Item'|translate}}</th>
+                <th class="border-2 p-1"> {{'Finance.Invoice.list.gross_amount'|translate}}</th>
+                <th class="border-2 p-1">{{'Finance.Invoice.list.tax_amount'|translate}} </th>
+                <th class="border-2 p-1"> {{'Finance.Invoice.list.net_amount'|translate}} </th>
+                <th class="border-2 p-1"> {{'Finance.Invoice.list.Description'|translate}}</th>
+                <th class="border-2 p-1">
+                  <ion-buttons slot="end">
+                    <ion-button color="dark" (click)="addOrEditDetails(null,0)">
+                      <ion-icon name="add"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="invoiceDetails.length==0">
+                <td colspan="6" class="border-2 p-1 text-center">
+                  {{'Finance.Invoice.Errors.No_Details'|translate}}
+                </td>
+              </tr>
+              <tr class="border-2" *ngFor="let detail of invoiceDetails ;let i = index">
+                <td class="border-2 p-1 text-center">{{detail.item_name}}</td>
+                <td class="border-2 p-1 text-center">
+                  {{detail.gross_amount}}
+                </td>
+                <td class="border-2 p-1 text-center">
+                  {{detail.tax_amount}}
+                </td>
+                <td class="border-2 p-1 text-center">
+                  {{detail.net_amount}}
+                </td>
+                <td class="border-2 p-1 text-center">
+                  {{detail.description}}
+                </td>
+                <td class="border-2 p-1 text-center">
+                  <div class="flex flex-row text-center">
+                    <!--    <button
+                      
+                        mat-icon-button
+                        color="accent"
+                        (click)="edit(detail,i)"
+                        [matTooltip]="'Operations.Edit' | translate"
+                      >
+                        <mat-icon class="mx-auto" aria-label="Edit"
+                          >edit</mat-icon
+                        >
+                      </button>-->
+                    <button mat-icon-button color="warn" (click)="delete(detail)"
+                      [matTooltip]="'Operations.Delete'|translate">
+                      <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="border-2 p-1 text-right">
+                  {{'Finance.Invoice.list.gross_amount'|translate}}
+                </td>
+                <td class="border-2 p-1 text-right">
+                  <input matInput type="number" formControlName="gross_amount" />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="border-2 p-1 text-right">
+                  {{'Finance.Invoice.list.tax_amount'|translate}}
+                </td>
+                <td class="border-2 p-1 text-right">
+                  <input matInput type="number" formControlName="tax_amount" />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" class="border-2 p-1 text-right">
+                  {{'Finance.Invoice.list.net_amount'|translate}}
+                </td>
+                <td class="border-2 p-1 text-right">
+                  <input matInput type="number" formControlName="net_amount" />
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,108 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'System.Authorization.Groups.Title'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'System.Authorization.Groups.AddGroup.Name'|translate}}   </mat-label>
+                        <input matInput type="text" formControlName="name" >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.name">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('name').hasError(validation.type) && (addForm.get('name').dirty || addForm.get('name').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Desc -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Groups.AddGroup.Description'|translate}}    </mat-label>
+                        <input matInput type="text" formControlName="description">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.description">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('description').hasError(validation.type) && (addForm.get('description').dirty || addForm.get('description').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Leader -->
+                <div class="flex flex-col w-full">
+                    <mat-label>  {{'System.Authorization.Groups.AddGroup.Leader'|translate}}  </mat-label>
+                    <div class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer"
+                        [class.border-dashed]="!leader">
+                        <div *ngIf="leader" matTooltip="UnAssign Employee" (click)="removeLeader()"
+                            class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                        <ion-item (click)="selectLeader($event)" class="cursor-pointer" lines="none" *ngIf="leader">
+                            <ion-label>
+                                {{ leader.user.first_name+' '+leader.user.last_name |titlecase}} -
+                                {{leader.user.email}}
+                            </ion-label>
+                            <ion-avatar slot="end">
+                                <img class="w-full h-full"
+                                    [src]="user.getProfilePicURL(leader.user.pictureURL)">
+                            </ion-avatar>
+                        </ion-item>
+                        <div (click)="selectLeader($event)" matTooltip="Group Leader Employee"
+                            class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100"
+                            *ngIf="!leader">
+                            <ion-icon name="add-outline" title=""></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                <!-- Members -->
+                <div class="flex flex-col w-full">
+                    <mat-label> {{'System.Authorization.Groups.AddGroup.Members'|translate}}   </mat-label>
+                    <div (click)="selectMembers($event)"
+                        class="relative border-dashed flex flex-col items-center justify-center w-full h-16 border-2 my-2 cursor-pointer">
+                        <div matTooltip="Add Group Members"
+                            class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100">
+                            <ion-icon name="add-outline" title=""></ion-icon>
+                        </div>
+                    </div>
+                    <div class="relative border-dashed border-b-none flex flex-col items-center justify-center w-full h-16 border-2 "
+                        *ngFor="let mem of members;let i = index;let last = last" [class.border-b-2]="last">
+                        <div matTooltip="remove Member" (click)="removeMember(i)"
+                            class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                        <ion-item lines="none">
+                            <ion-label>
+                                {{ mem.user.first_name+' '+mem.user.last_name |titlecase}} -
+                                {{mem.user.email}}
+                            </ion-label>
+                            <ion-avatar slot="end">
+                                <img class="w-full h-full" [src]="user.getProfilePicURL(mem.user.pictureURL)">
+                            </ion-avatar>
+                        </ion-item>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>

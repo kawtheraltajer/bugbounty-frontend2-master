@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Add Transection Detail </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <mat-form-field>
+          <mat-label> Account Code </mat-label>
+          <mat-select
+            formControlName="account_codeID"
+            (selectionChange)="updatePrice($event)"
+          >
+            <mat-option *ngFor="let code of account_codes" [value]="code.id"
+              >{{code.acc_code_en}} - {{code.acc_code_ar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Dr/Cr </mat-label>
+            <mat-select formControlName="dr_cr">
+              <mat-option value="Dr">Dr</mat-option>
+              <mat-option value="Cr">Cr</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Debit Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="debit_amount"
+              placeholder="Debit Amount ..."
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Credit Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="credit_amount"
+              placeholder="Credit Amount ..."
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Balance Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="balance_amount"
+              placeholder="Balance Amount ..."
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,473 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{'Employee_managment.add'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <ion-segment class="border-b" [(ngModel)]="segment">
+                <ion-segment-button value="0">
+                  
+                    {{'Employee_managment.Personal_information.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="1">
+                  
+                    {{'Employee_managment.Bank_info.Title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="2">
+                    
+                  {{'Employee_managment.Emergency_Contact.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="3">
+               
+                    {{'Employee_managment.contact_infroamtion.title'|translate}}
+
+                </ion-segment-button>
+                <ion-segment-button value="4">
+                    {{'Employee_managment.address.title'|translate}}
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+        <ng-container *ngIf="segment == 0">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addform">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'Employee_managment.Personal_information.Form.First_Name'|translate}}   </mat-label>
+                        <input matInput type="text" formControlName="first_name" >
+                    </mat-form-field>
+                </div>
+
+                <ng-container *ngFor="let validation of validation_messages.first_name" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('first_name').hasError(validation.type) && (addform.get('first_name').dirty || addform.get('first_name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Personal_information.Form.Last_Name'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="last_name">
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.last_name" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('last_name').hasError(validation.type) && (addform.get('last_name').dirty || addform.get('last_name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <mat-form-field>
+                    <mat-label>   {{'Employee_managment.Personal_information.Form.Role'|translate}} </mat-label>
+                    <mat-select formControlName="roleID">
+                        <mat-option *ngFor="let rol of roles" [value]="rol.id">{{rol.name +' - '+rol.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                <mat-label> {{"Vacancy.Department"|translate}} (*) </mat-label>
+                <mat-select formControlName="departmentID">
+                    <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name_en
+                        +' - '+department.name_ar}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+                
+                <ng-container *ngFor="let validation of validation_messages.roleID" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('roleID').hasError(validation.type) && (addform.get('roleID').dirty || addform.get('roleID').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                    <mat-form-field>
+                        <mat-label> {{'Employee_managment.Personal_information.Form.Designations'|translate}}  </mat-label>
+                        <mat-select formControlName="designationID">
+                            <mat-option *ngFor="let designation of designations" [value]="designation.id">{{designation.title_en +' - '+designation.title_ar}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <ng-container *ngFor="let validation of validation_messages.designationID" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('designationID').hasError(validation.type) && (addform.get('designationID').dirty || addform.get('designationID').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+               <!-- <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Personal_information.Form.Password'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="password" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.password" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('password').hasError(validation.type) && (addform.get('password').dirty || addform.get('password').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>-->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>{{'Employee_managment.Personal_information.Form.Gender'|translate}}  </mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value="Male"> {{'Employee_managment.Personal_information.Gender.Male'|translate}} </mat-option>
+                            <mat-option value="Female"> {{'Employee_managment.Personal_information.Gender.Female'|translate}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.gender" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('gender').hasError(validation.type) && (addform.get('gender').dirty || addform.get('gender').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Employee_managment.Personal_information.Form.marital_status'|translate}}</mat-label>
+                        <mat-select formControlName="marital_status">
+                            <mat-option value="Single">{{'Employee_managment.Personal_information.marital_status.Single'|translate}}</mat-option>
+                            <mat-option value="Married">{{'Employee_managment.Personal_information.marital_status.Married'|translate}}</mat-option>
+                            <mat-option value="Divorced">{{'Employee_managment.Personal_information.marital_status.Divorced'|translate}}</mat-option>
+                            <mat-option value="Widowed">{{'Employee_managment.Personal_information.marital_status.Widowed'|translate}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.marital_status" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('marital_status').hasError(validation.type) && (addform.get('marital_status').dirty || addform.get('marital_status').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Employee_managment.Personal_information.Form.Nationality'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="nationality" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.nationality" >
+                    <div class="text-red-600 text-end"   *ngIf="addform.get('nationality').hasError(validation.type) && (addform.get('nationality').dirty || addform.get('nationality').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Employee_managment.Personal_information.Form.national_identity'|translate}} </mat-label>
+                        <input matInput type="number" formControlName="national_identity"
+                          >
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Employee_managment.Personal_information.Form.Religion'|translate}} </mat-label>
+                        <input matInput type="text" formControlName="religion" >
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Personal_information.Form.passport'|translate}}   </mat-label>
+                        <input matInput type="number" formControlName="passport" >
+                    </mat-form-field>
+                </div>
+
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Personal_information.Form.birth_date'|translate}}  </mat-label>
+                        <input matInput formControlName="birth_date" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+
+
+                <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+                    <div class="flex-1 items-start">
+
+                    </div>
+
+
+                    <div class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                        (click)="step1()">
+                        {{'Operations.Next'|translate}}     <ion-icon name="caret-forward-outline"></ion-icon>
+
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </ng-container>
+
+        <ng-container *ngIf="segment == 1">
+            <div class="w-full">
+
+                <form class="flex flex-col w-full px-4" [formGroup]="addform">
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Employee_managment.Bank_info.List.bank_name'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="bank_name" >
+                        </mat-form-field>
+                    </div>
+          
+                      <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Employee_managment.Bank_info.List.holder_name'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="holder_name" >
+                        </mat-form-field>
+                    </div>
+           
+                      <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Employee_managment.Bank_info.List.IBAN'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="IBAN" >
+                        </mat-form-field>
+                    </div>
+            
+                </form>
+
+
+
+                <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+                    <div class="flex-1 items-start">
+
+                    </div>
+
+                    <div class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                        (click)="step0()">
+                        <ion-icon name="caret-back-outline"></ion-icon>  {{'Operations.Back'|translate}}  
+                    </div>
+                    <div class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                        (click)="step2()">
+                        {{'Operations.Next'|translate}}  
+                         <ion-icon name="caret-forward-outline"></ion-icon>
+                    </div>
+                </div>
+
+            </div>
+        </ng-container>
+        <ng-container *ngIf="segment == 2">
+            <div class="w-full">
+
+                <form class="flex flex-col w-full px-4" [formGroup]="addform">
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Employee_managment.Emergency_Contact.Form.name'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="emergency_contacts_name" >
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.name" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('emergency_contacts_name').hasError(validation.type) && (addform.get('emergency_contacts_name').dirty || addform.get('emergency_contacts_name').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    <div class="flex flex-row w-full">
+    
+                        <mat-form-field appearance="standard" class="w-full">
+    
+                            <mat-label> {{'Employee_managment.Emergency_Contact.Form.Relation'|translate}} </mat-label>
+                            <mat-select formControlName="emergency_contacts_relation">
+                                <mat-option value="Husband"> {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Husband'|translate}}  </mat-option>
+                                <mat-option value="Wife">  {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Wife'|translate}}</mat-option>
+                                <mat-option value="Father">  {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Father'|translate}} </mat-option>
+                                <mat-option value="Mother"> {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Mother'|translate}} </mat-option>
+                                <mat-option value="Brother"> {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Brother'|translate}}</mat-option>
+                                <mat-option value="Son">  {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Son'|translate}} </mat-option>
+                                <mat-option value="Uncle"> {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Uncle'|translate}} </mat-option>
+                                <mat-option value="Other"> {{'Employee_managment.Emergency_Contact.emergency_contacts_relation.Other'|translate}} </mat-option>
+    
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+    
+                    <ng-container *ngFor="let validation of validation_messages.relation" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('emergency_contacts_relation').hasError(validation.type) && (addform.get('emergency_contacts_relation').dirty || addform.get('emergency_contacts_relation').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>  {{'Employee_managment.Emergency_Contact.Form.phone'|translate}}   </mat-label>
+                            <input matInput type="number" formControlName="emergency_contacts_phone" >
+                        </mat-form-field>
+                        
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.phone" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('emergency_contacts_phone').hasError(validation.type) && (addform.get('emergency_contacts_phone').dirty || addform.get('emergency_contacts_phone').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+           
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Employee_managment.Emergency_Contact.Form.Email'|translate}}  </mat-label>
+                            <input matInput type="email" formControlName="emergency_contacts_email" >
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.email" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('emergency_contacts_email').hasError(validation.type) && (addform.get('emergency_contacts_email').dirty || addform.get('emergency_contacts_email').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                </form>
+
+
+
+                <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+                    <div class="flex-1 items-start">
+
+                    </div>
+
+                    <div class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                        (click)="step1()">
+                        <ion-icon name="caret-back-outline"></ion-icon>  {{'Operations.Back'|translate}}  
+                    </div>
+                    <div class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                        (click)="step3()">
+                        {{'Operations.Next'|translate}}  
+                         <ion-icon name="caret-forward-outline"></ion-icon>
+                    </div>
+                </div>
+
+            </div>
+        </ng-container>
+        <ng-container *ngIf="segment == 3">
+            <div class="w-full">
+
+        
+                <form class="flex flex-col w-full px-4" [formGroup]="addform">
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>   {{'Employee_managment.contact_infroamtion.Form.phone'|translate}}   </mat-label>
+                            <input matInput type="number" formControlName="phone" >
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.phone" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('phone').hasError(validation.type) && (addform.get('phone').dirty || addform.get('phone').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>   {{'Employee_managment.contact_infroamtion.Form.Email'|translate}}   </mat-label>
+                            <input matInput type="text" formControlName="email">
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.email" >
+                      <div class="text-red-600 text-end"   *ngIf="addform.get('email').hasError(validation.type) && (addform.get('email').dirty || addform.get('email').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>  {{'Employee_managment.contact_infroamtion.Form.Mobile'|translate}}  </mat-label>
+                            <input matInput type="number" formControlName="mobile">
+                        </mat-form-field>
+                    </div>
+          
+                </form>
+        
+    
+
+
+                <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+                    <div class="flex-1 items-start">
+               
+                    </div>
+              
+              
+
+                    <div
+                    class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                    (click)="step2()">
+                    <ion-icon name="caret-back-outline"></ion-icon> {{'Operations.Back'|translate}}                     
+            
+                  </div>
+                    <div
+                      class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                      (click)="step4()">
+                      {{'Operations.Next'|translate}}   <ion-icon name="caret-forward-outline"></ion-icon>                     
+              
+                    </div>
+                  </div>
+
+
+            </div>
+
+        </ng-container>
+        <ng-container *ngIf="segment == 4">
+            <div class="w-full">
+
+            
+                <form class="flex flex-col w-full px-4" [formGroup]="addform">
+            
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Employee_managment.address.Form.line1'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="line1" >
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.line1" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('line1').hasError(validation.type) && (addform.get('line1').dirty || addform.get('line1').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>  {{'Employee_managment.address.Form.line2'|translate}}  </mat-label>
+                            <input matInput type="text" formControlName="line2">
+                        </mat-form-field>
+                    </div>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label> {{'Employee_managment.address.Form.city'|translate}} </mat-label>
+                            <input matInput type="text" formControlName="city">
+                        </mat-form-field>
+                    </div>
+                    <ng-container *ngFor="let validation of validation_messages.city" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('city').hasError(validation.type) && (addform.get('city').dirty || addform.get('city').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>   {{'Employee_managment.address.Form.Country'|translate}} </mat-label>
+                            <input matInput type="text" formControlName="country">
+                        </mat-form-field>
+                    </div>
+    
+                    <ng-container *ngFor="let validation of validation_messages.country" >
+                        <div class="text-red-600 text-end"   *ngIf="addform.get('country').hasError(validation.type) && (addform.get('country').dirty || addform.get('country').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                </form>
+  
+
+                
+                <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+                    <div class="flex-1 items-start">
+               
+                    </div>
+              
+              
+
+                    <div
+                    class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                    (click)="step3()">
+                    <ion-icon name="caret-back-outline"></ion-icon> {{'Operations.Back'|translate}}                    
+            
+                  </div>
+                    <div
+                      class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+                      (click)="add()">
+                       {{'Operations.add'|translate}}      <ion-icon name="add"></ion-icon>                    
+              
+                    </div>
+                  </div>
+            </div>
+        </ng-container>
+    </div>
+</ion-content>

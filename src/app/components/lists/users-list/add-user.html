@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'System.Authorization.Users.Add'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Users.AddUser.FisrtName'|translate}} <span
+                                style="color: red;">*</span> </mat-label>
+                        <input matInput type="text" formControlName="first_name">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.first_name">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('first_name').hasError(validation.type) && (addForm.get('first_name').dirty || addForm.get('first_name').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!--last Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Users.AddUser.LastName'|translate}} <span
+                                style="color: red;">*</span> </mat-label>
+                        <input matInput type="text" formControlName="last_name">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.last_name">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('last_name').hasError(validation.type) && (addForm.get('last_name').dirty || addForm.get('last_name').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- email -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Users.AddUser.Email'|translate}} <span
+                                style="color: red;">*</span></mat-label>
+                        <input matInput formControlName="email" type="email">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.email">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('email').hasError(validation.type) && (addForm.get('email').dirty || addForm.get('email').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Bio -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Users.AddUser.Bio'|translate}} </mat-label>
+                        <input matInput formControlName="bio" type="text">
+                    </mat-form-field>
+                </div>
+                <!-- Image -->
+                <mat-form-field>
+                    <mat-label> {{'System.Authorization.Users.AddUser.Image'|translate}} </mat-label>
+                    <ngx-mat-file-input formControlName="pictureURL" accept=".png,.svg,.jpg,.jpeg"></ngx-mat-file-input>
+                    <mat-icon matSuffix> {{'System.Authorization.Users.AddUser.insert_photo'|translate}} </mat-icon>
+                </mat-form-field>
+                <!-- Type -->
+                <mat-form-field>
+                    <mat-label>{{'System.Authorization.Users.AddUser.Type'|translate}}</mat-label>
+                    <mat-select formControlName="type" #type>
+                        <mat-option value="none">{{'System.Authorization.Users.Type.none'|translate}}</mat-option>
+                        <mat-option value="emp">{{'System.Authorization.Users.Type.emp'|translate}}</mat-option>
+                        <mat-option value="cli">{{'System.Authorization.Users.Type.cli'|translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- Designation -->
+                <mat-form-field *ngIf="type.value == 'emp'">
+                    <mat-label> {{'Employee_managment.Personal_information.Form.Designations'|translate}} </mat-label>
+                    <mat-select formControlName="designationID">
+                        <mat-option *ngFor="let designation of designations" [value]="designation.id">
+                            {{designation.title_en +' - '+designation.title_ar}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- Role -->
+                <mat-form-field *ngIf="showRole">
+                    <mat-label> {{'System.Authorization.Users.AddUser.Role'|translate}} <span
+                            style="color: red;">*</span></mat-label>
+                    <mat-select formControlName="roleID">
+                        <mat-option *ngFor="let rol of roles" [value]="rol.id">{{rol.name +' - '+rol.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.roleID">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('roleID').hasError(validation.type) && (addForm.get('roleID').dirty || addForm.get('roleID').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>

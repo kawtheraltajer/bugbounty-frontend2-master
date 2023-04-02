@@ -1,0 +1,19 @@
+<vt-page class="flex flex-col flex-auto">
+  <vt-header>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div slot="middle">{{'HCM.Recruitment.Title'|translate}} </div>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </vt-header>
+  <div slot="content" class="flex flex-col flex-auto w-full overflow-auto">
+    <ng-container *ngIf="!isLoading">
+      <vacancy-list>
+
+      </vacancy-list>
+    </ng-container>
+    <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+    </div>
+  </div>
+</vt-page>

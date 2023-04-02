@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title> Account Code Deatils</ion-title>
+  
+      <ion-buttons slot="end">
+        <button mat-icon-button (click)="update()">
+          <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <div class="flex flex-row w-full items-start justify-start p-5">
+      <div class="flex flex-col items-start justify-start w-1/2 p-2">
+      
+        <span style="font-size: 16px; font-weight: bold" class="py-2">
+          Account Type Information
+        </span>
+  
+        <span style="font-size: 14px"> Account Code EN: {{AccountCode?.acc_code_en}} </span>
+  
+        <span style="font-size: 14px"> Account Code Ar: {{AccountCode?.acc_code_ar}} </span>
+
+        <span style="font-size: 14px"> Account Type En: {{AccountCode?.acc_type.acc_type_en}} </span>
+
+        <span style="font-size: 14px"> Account Type Ar: {{AccountCode?.acc_type.acc_type_ar}} </span>
+
+        <span style="font-size: 14px"> Percentage: {{AccountCode?.percentage}} </span>
+
+        <span style="font-size: 14px"> Description En: {{AccountCode?.description_en}} </span>
+
+        <span style="font-size: 14px"> Description Ar: {{AccountCode?.description_ar}} </span>
+       
+      </div>
+      
+    </div>
+  </ion-content>

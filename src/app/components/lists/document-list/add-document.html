@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>  {{'Court.Cases.document.add'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+            
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Court.Cases.document.Form.name'|translate}} <span style="color: red;">*</span>  </mat-label>
+                        <input matInput type="text" formControlName="name" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.name" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('name').hasError(validation.type) && (addForm.get('name').dirty || addForm.get('name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Court.Cases.document.Form.document_type'|translate}} </mat-label>
+                        <mat-select formControlName="document_type">
+                            <mat-option value="CPR" *ngIf="AppointmentID">{{'Court.Cases.document.document_type.CPR'|translate}}</mat-option>
+                            <mat-option value="Advice_form" *ngIf="AppointmentID">{{'Court.Cases.document.document_type.Advice_form'|translate}}</mat-option>
+                            <mat-option value="Know_your_client_form" *ngIf="AppointmentID">{{'Court.Cases.document.document_type.Know_your_client_form'|translate}}</mat-option>
+                            <mat-option value="memoir" *ngIf="!AppointmentID">{{'Court.Cases.document.document_type.memoir'|translate}}</mat-option>
+                            <mat-option value="Documents" *ngIf="!AppointmentID">{{'Court.Cases.document.document_type.Documents'|translate}}</mat-option>
+                            <mat-option value="Adjudge_attachment" *ngIf="!AppointmentID">{{'Court.Cases.document.document_type.Adjudge_attachment'|translate}}</mat-option>
+                            <mat-option value="Lawsuit_attachment" *ngIf="!AppointmentID">{{'Court.Cases.document.document_type.Lawsuit_attachment'|translate}}</mat-option>
+                            <mat-option value="Consultations" *ngIf="AppointmentID">{{'Court.Cases.document.document_type.Consultations'|translate}}</mat-option>
+                            <!--<mat-option value="CPR">{{'Court.clients.List.CPR'|translate}} </mat-option>-->
+                            <mat-option value="Other">{{'Court.Cases.document.document_type.Other'|translate}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                       
+                <mat-form-field class="flex flex-row w-full">
+                    <ngx-mat-file-input formControlName="url" placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} "
+    
+                        accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+                      </ngx-mat-file-input>
+                        <mat-hint >.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+    
+                    <mat-icon matSuffix>  </mat-icon>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.url" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('url').hasError(validation.type) && (addForm.get('url').dirty || addForm.get('url').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+             
+            </form>
+        </div>
+    </div>
+</ion-content>

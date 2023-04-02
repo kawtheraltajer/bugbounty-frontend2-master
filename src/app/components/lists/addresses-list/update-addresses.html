@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'Employee_managment.address.update'|translate}}
+        </ion-title>
+        <ion-buttons slot="end" *ngIf="('Employee:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+            <ion-button color="warn" (click)="Delete()">
+                <mat-icon class="mx-auto" color="warn" aria-label="Delete">delete</mat-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+        <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label>{{'Employee_managment.address.Form.line1'|translate}} </mat-label>
+                <input matInput type="text" formControlName="line1">
+            </mat-form-field>
+        </div>
+        <ng-container *ngFor="let validation of validation_messages.line1">
+            <div class="text-red-600 text-end"
+                *ngIf="addForm.get('line1').hasError(validation.type) && (addForm.get('line1').dirty || addForm.get('line1').touched)">
+                {{ validation.message |translate }}
+            </div>
+        </ng-container>
+        <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Employee_managment.address.Form.line2'|translate}} </mat-label>
+                <input matInput type="text" formControlName="line2">
+            </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Employee_managment.address.Form.city'|translate}} </mat-label>
+                <input matInput type="text" formControlName="city">
+            </mat-form-field>
+        </div>
+        <ng-container *ngFor="let validation of validation_messages.city">
+            <div class="text-red-600 text-end"
+                *ngIf="addForm.get('city').hasError(validation.type) && (addForm.get('city').dirty || addForm.get('city').touched)">
+                {{ validation.message |translate }}
+            </div>
+        </ng-container>
+        <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Employee_managment.address.Form.Country'|translate}} </mat-label>
+                <input matInput type="text" formControlName="country">
+            </mat-form-field>
+        </div>
+
+        <ng-container *ngFor="let validation of validation_messages.country">
+            <div class="text-red-600 text-end"
+                *ngIf="addForm.get('country').hasError(validation.type) && (addForm.get('country').dirty || addForm.get('country').touched)">
+                {{ validation.message |translate }}
+            </div>
+        </ng-container>
+
+        <div class="flex flex-row w-full">
+            <mat-label> {{'Employee_managment.address.Form.isMain'|translate}}: &nbsp;</mat-label>
+            <mat-slide-toggle matTooltip="isMain" formControlName="isMain">
+            </mat-slide-toggle>
+        </div>
+    </form>
+    <div class="relative flex items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer flex-12  bg-toolbar-background hover:bg-step-50 "
+        (click)="update()">
+        <ion-icon name="update"></ion-icon>
+        {{'Employee_managment.address.update'|translate}}
+    </div>
+</ion-content>

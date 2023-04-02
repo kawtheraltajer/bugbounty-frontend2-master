@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'MyAccount.Profile.UpdateRole'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="updateRole()">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="updateDesignationForm">
+            <!-- Designation -->
+            <mat-form-field class="p-2">
+                <mat-label> {{'Employee_managment.Personal_information.Form.Designations'|translate}} </mat-label>
+                <mat-select formControlName="designationID">
+                    <mat-option *ngFor="let designation of designations" [value]="designation.id">
+                        {{designation.title_en +' - '+designation.title_ar}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>   {{'Employee_managment.Personal_information.Form.Role'|translate}} </mat-label>
+                <mat-select formControlName="roleID">
+                    <mat-option *ngFor="let rol of roles" [value]="rol.id">{{rol.name +' - '+rol.description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+            <mat-label> {{"Vacancy.Department"|translate}}  </mat-label>
+            <mat-select formControlName="departmentID">
+                <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name_en
+                    +' - '+department.name_ar}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        </form>
+    </div>
+</ion-content>

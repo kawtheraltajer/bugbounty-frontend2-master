@@ -1,0 +1,167 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'Vacancy.Add'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.List.position"|translate}} (*)
+
+
+                        </mat-label>
+                        <input matInput formControlName="position" id="position">
+                    </mat-form-field>
+
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.position">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('position').hasError(validation.type) && (addForm.get('position').dirty || addForm.get('position').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.location"|translate}} (*) </mat-label>
+                        <input matInput formControlName="location">
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.location">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('location').hasError(validation.type) && (addForm.get('location').dirty || addForm.get('location').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.Number_of_openings"|translate}} (*) </mat-label>
+                        <input matInput type="number" formControlName="number_of_openings">
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.number_of_openings">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('number_of_openings').hasError(validation.type) && (addForm.get('number_of_openings').dirty || addForm.get('number_of_openings').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <mat-form-field>
+                    <mat-label> {{"Vacancy.Department"|translate}} (*) </mat-label>
+                    <mat-select formControlName="departmentID">
+                        <mat-option *ngFor="let department of departments" [value]="department.id">{{department.name_en
+                            +' - '+department.name_ar}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>{{"Vacancy.List.Type"|translate}} (*) </mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option value="FullTime">{{"Vacancy.Vacancy_Type.FullTime"|translate}}</mat-option>
+                        <mat-option value="PartTime">{{"Vacancy.Vacancy_Type.PartTime"|translate}}</mat-option>
+                        <mat-option value="Intern">{{"Vacancy.Vacancy_Type.Intern"|translate}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.type">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('type').hasError(validation.type) && (addForm.get('type').dirty || addForm.get('type').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.Education_level"|translate}}</mat-label>
+                        <input matInput formControlName="education_level">
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.education_level">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('education_level').hasError(validation.type) && (addForm.get('education_level').dirty || addForm.get('education_level').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{"Vacancy.List.Status"|translate}} (*) </mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="Pending"> {{'Vacancy.Vacancy_Status.Pending'|translate}} </mat-option>
+                        <mat-option value="Open"> {{'Vacancy.Vacancy_Status.Open'|translate}}</mat-option>
+                        <mat-option value="Closed">{{'Vacancy.Vacancy_Status.Closed'|translate}}</mat-option>
+                        <mat-option value="Cancelled">{{'Vacancy.Vacancy_Status.Cancelled'|translate}}</mat-option>
+
+
+
+
+                    </mat-select>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.status">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('status').hasError(validation.type) && (addForm.get('status').dirty || addForm.get('status').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.List.Code"|translate}} </mat-label>
+                        <input matInput type="text" formControlName="code">
+                    </mat-form-field>
+                </div>
+          
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.start_date"|translate}} (*) </mat-label>
+                        <input matInput formControlName="openingAt" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.openingAt">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('openingAt').hasError(validation.type) && (addForm.get('openingAt').dirty || addForm.get('openingAt').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{"Vacancy.end_date"|translate}} (*) </mat-label>
+                        <input matInput formControlName="closingAt" [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.closingAt">
+                    <div class="text-red-600 text-end"
+                        *ngIf="addForm.get('closingAt').hasError(validation.type) && (addForm.get('closingAt').dirty || addForm.get('closingAt').touched)">
+                        {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+            </form>
+            <div class="flex flex-row w-full px-4 mt-2">
+                <div appearance="standard" class="w-full">
+                    <ion-label> {{"Vacancy.description"|translate}} </ion-label>
+                </div>
+            </div>
+            <div class="w-full h-96 ">
+                <editor #editorPreviw [(ngModel)]="description" class="w-full h-full bg-transparent border-none"
+                    [disabled]="false" apiKey="wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e" [init]="editorPreviw "
+                    [dir]="dir">
+                </editor>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{'Schedule.AppointmentsTable.update'|translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content scrollBar class="p-3">
+    <ng-container class="p-3">
+        <form *ngIf="!noTimeSlots" [formGroup]="bookForm">
+            <!-- Type -->
+            <mat-form-field appearance="fill" class="w-full mb-2">
+                <mat-label>Appointment Type | نوع الموعد</mat-label>
+                <mat-hint *ngIf="noNotary">Sorry, There is no
+                    time available to book | لا يوجد وقت متاح</mat-hint>
+                <mat-select formControlName="typeID" (selectionChange)="typeChanged($event)">
+                    <mat-option *ngFor="let value of appointmentTypes" [value]="value">
+                        {{value.title_en+" | "+value.title_ar}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="bookForm.get('typeID').hasError('required')"> Appointment Type is required | نوع
+                    الموعد
+                    مطلوب </mat-error>
+            </mat-form-field>
+
+            <!-- Lawyer -->
+            <mat-form-field *ngIf="!selectedType?.isNotary" appearance="fill" class="w-full">
+                <mat-label>Lawyer | المحامي</mat-label>
+                <mat-select formControlName="lawyer">
+                    <mat-option *ngFor="let value of employeesTimeSlots" [value]="value">
+                        {{value.user.first_name+' '+value.user.last_name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="bookForm.get('lawyer').hasError('required')"> lawyer is required |المحامي مطلوب
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Time -->
+            <mat-form-field appearance="fill" class="w-full" [ngStyle]="{'display': noNotary ? 'none' : 'block' }">
+                <mat-label>Appointment Time | وقت الموعد</mat-label>
+                <mat-hint *ngIf="!(bookForm.value.lawyer || noNotary)">Please,Select a lawyer | الرجاءإختيار المحامي
+                </mat-hint>
+                <mat-select formControlName="timeSlot">
+                    <mat-option *ngFor="let ts of bookForm.get('lawyer').value.timeSlots" [value]="ts">
+                        {{(ts.date|date) + ' - '+ (ts.startTime|date:'shortTime':'+3')}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="bookForm.get('timeSlot').hasError('required')"> timeSlot is required |الوقت مطلوب
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mt-4">
+                <button
+                    class="flex items-center w-full h-12 text-white rounded-md hover:text-secondary-default bg-primary-default hover:bg-primary-tint"
+                    (click)="updateAppointment()">
+                    <div class="flex-1">Update Time time Slot</div>
+                    <div class="mx-1 text-secondary-default">|</div>
+                    <div class="flex-1">تعديل الفترة الزمنية</div>
+                </button>
+            </div>
+        </form>
+        <div *ngIf="noTimeSlots" class=" flex-col h-full items-center w-full text-gray-500"
+            style="text-align: center; margin: auto;">
+            <h3>عذراً. لا توجد فترات متاحة</h3>
+            <h3>Sorry. There are no available time slots</h3>
+        </div>
+    </ng-container>
+</ion-content>

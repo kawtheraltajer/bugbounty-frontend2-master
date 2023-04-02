@@ -1,0 +1,259 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>                {{'Court.Cases.Add'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+
+            <div class="w-full">
+                <ion-segment class="border-b"  [(ngModel)]="segment" >
+                    <ion-segment-button value="0">
+                        {{'Court.Cases.Case'|translate}} 
+                    </ion-segment-button>
+                    <ion-segment-button value="1"> 
+                             {{'Court.Cases.Oponent'|translate}} 
+
+                    </ion-segment-button>
+                
+                </ion-segment>
+            </div>
+        <div class="w-full">
+            <ng-container *ngIf="segment == 0">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <div class="flex flex-row w-full">
+                  
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Court.Cases.Form.File_no'|translate}} 
+                        </mat-label>
+                        <input matInput type="text" formControlName="internalFile_no" placeholder="">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.internalFile_no" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('internalFile_no').hasError(validation.type) && (addForm.get('internalFile_no').dirty || addForm.get('internalFile_no').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>   {{'Court.Cases.Form.Client'|translate}}  </mat-label>
+                    <mat-select formControlName="clientID">
+                        <mat-option *ngFor="let client of clients" [value]="client.id">{{client?.full_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.clientID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('clientID').hasError(validation.type) && (addForm.get('clientID').dirty || addForm.get('clientID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+         
+                <mat-form-field>
+                    <mat-label>  {{'Court.Cases.Form.Type'|translate}} </mat-label>
+                    <mat-select formControlName="typeID">
+                        <mat-option *ngFor="let type of types" [value]="type.id">{{type.name_en}}{{" "}}{{type.name_ar}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.typeID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('typeID').hasError(validation.type) && (addForm.get('typeID').dirty || addForm.get('typeID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+   
+                <mat-form-field>
+                    <mat-label>{{'Court.Cases.Form.Court'|translate}}   </mat-label>
+                    <mat-select formControlName="courtID">
+                        <mat-option *ngFor="let court of Courts" [value]="court.id">{{court.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>  
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.courtID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('courtID').hasError(validation.type) && (addForm.get('courtID').dirty || addForm.get('courtID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>{{'Court.Cases.Form.Court_Room'|translate}}   </mat-label>
+                    <mat-select formControlName="courtRoomID">
+                        <mat-option *ngFor="let courtRoom of courtRooms" [value]="courtRoom.id">{{courtRoom.title}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.courtRoomID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('courtRoomID').hasError(validation.type) && (addForm.get('courtRoomID').dirty || addForm.get('courtRoomID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>{{'Court.Cases.Form.Representative'|translate}}    </mat-label>
+                    <mat-select formControlName="representativeID">
+                        <mat-option *ngFor="let representative of representatives" [value]="representative.id">{{representative.id}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.representativeID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('representativeID').hasError(validation.type) && (addForm.get('representativeID').dirty || addForm.get('representativeID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+       
+            <mat-form-field>
+                <mat-label> {{'Court.Cases.Form.Case_status.Case_status'|translate}}   </mat-label>
+                <mat-select  formControlName="status" >
+        
+                    <mat-option  value="InProgress">
+                        {{'Court.Cases.Form.Case_status.InProgress'|translate}}
+                    </mat-option>
+                    <mat-option  value="Judged">
+                        {{'Court.Cases.Form.Case_status.Judged'|translate}} 
+                    </mat-option>
+                    <mat-option  value="Closed">
+                        {{'Court.Cases.Form.Case_status.Closed'|translate}} 
+                    </mat-option>
+              
+                </mat-select>
+                
+            </mat-form-field>
+                
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'Court.Cases.Form.Comment'|translate}}  
+
+                        
+                    </mat-label>
+                    <input matInput type="text" formControlName="comment" placeholder="">
+                </mat-form-field>
+            </div>
+   
+       
+            </form>
+            </ng-container>
+            <ng-container *ngIf="segment == 1">
+
+                <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+    
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.full_name'|translate}} 
+                            </mat-label>
+                            <input matInput type="text" formControlName="Opponent_name" >
+                        </mat-form-field>
+                    </div>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.Opponent_name" >
+                            <div class="text-red-600 text-end"   *ngIf="addForm.get('Opponent_name').hasError(validation.type) && (addForm.get('Opponent_name').dirty || addForm.get('Opponent_name').touched)">
+                            {{ validation.message |translate }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.mobile1'|translate}} </mat-label>
+                            <input matInput type="text" formControlName="Opponent_Mobile1" >
+                        </mat-form-field>
+                    </div>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.Opponent_Mobile1" >
+                            <div class="text-red-600 text-end"   *ngIf="addForm.get('Opponent_Mobile1').hasError(validation.type) && (addForm.get('Opponent_Mobile1').dirty || addForm.get('Opponent_Mobile1').touched)">
+                            {{ validation.message |translate }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.mobile2'|translate}} </mat-label>
+                            <input matInput type="text" formControlName="Opponent_Mobile2" >
+                        </mat-form-field>
+                    </div>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.Opponent_Mobile2" >
+                            <div class="text-red-600 text-end"   *ngIf="addForm.get('Opponent_Mobile2').hasError(validation.type) && (addForm.get('Opponent_Mobile2').dirty || addForm.get('Opponent_Mobile2').touched)">
+                            {{ validation.message |translate }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label> {{'Court.Cases.Form.CPR'|translate}}   </mat-label>
+                            <input matInput type="number" formControlName="Opponent_CPR" >
+                        </mat-form-field>
+                    </div>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.Opponent_CPR" >
+                            <div class="text-red-600 text-end"   *ngIf="addForm.get('Opponent_CPR').hasError(validation.type) && (addForm.get('Opponent_CPR').dirty || addForm.get('Opponent_CPR').touched)">
+                            {{ validation.message |translate }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.nationality'|translate}}      </mat-label>
+                            <input matInput type="text" formControlName="Opponent_Nationality" >
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.email'|translate}}      </mat-label>
+                            <input matInput type="email" formControlName="Opponent_Email" >
+                        </mat-form-field>
+                    </div>
+                    <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.Opponent_Email" >
+                            <div class="text-red-600 text-end"   *ngIf="addForm.get('Opponent_Email').hasError(validation.type) && (addForm.get('Opponent_Email').dirty || addForm.get('Opponent_Email').touched)">
+                            {{ validation.message |translate }}
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.Organization'|translate}}   </mat-label>
+                            <input matInput type="text" formControlName="Opponent_Organization" >
+                        </mat-form-field>
+                    </div>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>{{'Court.Cases.Form.address'|translate}}    </mat-label>
+                            <input matInput type="text" formControlName="Opponent_Address" >
+                        </mat-form-field>
+                    </div>
+                </form>
+                </ng-container>
+        </div>
+    </div>
+</ion-content>

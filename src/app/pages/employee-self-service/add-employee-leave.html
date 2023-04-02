@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+          <ion-button color="dark" (click)="dismiss()">
+              <ion-icon name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>    {{'HCM.Workforce.leaves.Add'|translate}} 
+      </ion-title>
+      <ion-buttons slot="end">
+          <ion-button color="dark" (click)="add()">
+              <ion-icon name="add"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+
+          <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+              <mat-form-field>
+                  <mat-label>  {{'HCM.Workforce.leaves.Form.Leave_Type'|translate}}    </mat-label>
+                  <mat-select formControlName="leaveTypeID">
+                   
+                      <mat-option *ngFor="let type of LeaveType" [value]="type.id">
+
+                        {{ lang.selectedLang=='en'? type.name_en:type.name_ar| titlecase}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <ng-container *ngFor="let validation of validation_messages.Leave_Type" >
+                  <div class="text-red-600 text-end"   *ngIf="addForm.get('leaveTypeID').hasError(validation.type) && (addForm.get('leaveTypeID').dirty || addForm.get('leaveTypeID').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+
+        
+              
+
+
+              <div class="flex flex-row w-full mt-2">
+                  <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>    {{'HCM.Workforce.leaves.Form.From_Date'|translate}}  </mat-label>
+                    <input matInput  formControlName="from_date" (keyup)="set_to_date()"
+                    [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.From_Date" >
+                  <div class="text-red-600 text-end"   *ngIf="addForm.get('from_date').hasError(validation.type) && (addForm.get('from_date').dirty || addForm.get('from_date').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+
+                <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>  {{'HCM.Workforce.leaves.Form.Days'|translate}}  </mat-label>
+                      <input matInput type="number" formControlName="total_days"   (keyup)="set_to_date()" >
+                  </mat-form-field>
+              </div>
+
+              <ng-container *ngFor="let validation of validation_messages.days" >
+                <div class="text-red-600 text-end"   *ngIf="addForm.get('total_days').hasError(validation.type) && (addForm.get('total_days').dirty || addForm.get('total_days').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            <div class="flex flex-row w-full mt-2">
+                    <ion-label class="flex flex-row w-full" > {{'HCM.Workforce.leaves.Form.To_Date'|translate}}   </ion-label>
+
+          
+                </div>
+                <div class="flex flex-row w-full mt-2">
+                  <ion-label class="flex flex-row w-full" >{{to_date|date}}   </ion-label>
+
+        
+              </div>
+              <mat-form-field>
+                <ngx-mat-file-input formControlName="documentURL" placeholder="{{'Employee_managment.Employee-talents.Certificates.List.documentURL'|translate}} "
+
+                    accept=".doc,.docx,.pdf">
+                  </ngx-mat-file-input>
+                    <mat-hint >.doc,.docx,.pdf</mat-hint>
+
+                <mat-icon matSuffix>  </mat-icon>
+            </mat-form-field>
+      
+           
+          </form>
+      </div>
+  </div>
+</ion-content>

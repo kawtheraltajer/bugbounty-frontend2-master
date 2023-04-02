@@ -1,0 +1,225 @@
+
+<div class="flex flex-row items-center border-t border-b h-14">
+  <div class="flex justify-end flex-1 gap-2 px-2 item-center">
+    <div role="button" class="flex items-center gap-2 p-1 text-xl border rounded-lg bg-step-100 hover:bg-step-300"
+      (click)="drawer.toggle()">
+      {{'Operations.Filter'|translate}}
+      <ion-icon slot="end" name="funnel-outline"></ion-icon>
+    </div>
+  </div>
+</div>
+
+<mat-drawer-container [dir]="(lang.direction|async)" [hasBackdrop]="['sm','md','lg'].includes(app.screenSize)" class="h-full">
+<mat-drawer class="relative w-2/3 border-is md:w-1/2 xl:w-1/3 bg-step-200" #drawer [position]="'end'"
+    [mode]="['sm','md','lg'].includes(app.screenSize)?'over':'side'" opened="false">
+    <div class="flex-row p-12 overflow-auto">
+
+      <div class="flex-initial ...">
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label> {{'Finance.Reports.DateRange.Title' |translate }} </mat-label>
+          <mat-select (selectionChange)="SelectedRange()" [(ngModel)]="range" [(value)]="range" #Range>
+            <mat-option value="Today"> {{'Finance.Reports.DateRange.Today' |translate }} </mat-option>
+            <mat-option value="ThisMonth"> {{'Finance.Reports.DateRange.ThisMonth' |translate }} </mat-option>
+            <mat-option value="ThisYear"> {{'Finance.Reports.DateRange.ThisYear' |translate }} </mat-option>
+            <mat-option value="Custom"> {{'Finance.Reports.DateRange.Custom' |translate }} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="flex-initial ..." *ngIf="range=='Custom'">
+        <mat-form-field form-field appearance="standard" class="w-full ">
+          <mat-label> {{'Court.Cases.List.From_Date'|translate}} </mat-label>
+          <input matInput [(ngModel)]="filter.date.gte" [matDatepicker]="picker"
+            (ngModelChange)="FromDateChange($event)" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="flex-initial ..." *ngIf="range=='Custom'">
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label> {{'Court.Cases.List.To_Date'|translate}}
+          </mat-label>
+          <input matInput [min]="filter.date.gte" [(ngModel)]="filter.date.lte" [matDatepicker]="toPicker"
+            (ngModelChange)="ToDateChange($event)" />
+          <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+          <mat-datepicker #toPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label> {{'System.Logs.Table_name'|translate}} </mat-label>
+        <mat-select (selectionChange)="tableChanged($event)">
+          <mat-option [value]="null" aria-selected="true">None</mat-option>
+          <mat-option *ngFor="let value of app.enums['Subject']" [value]="value">
+            {{value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label> {{'System.Logs.Action'|translate}} </mat-label>
+        <mat-select (selectionChange)="actionChanged($event)">
+          <mat-option [value]="null" aria-selected="true">None</mat-option>
+          <mat-option value="Create"> Create </mat-option>
+          <mat-option value="Update"> Update </mat-option>
+          <mat-option value="Delete"> Delete </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="flex-initial ...">
+        <ion-button (click)="getLogsWithFilter()">
+          {{'Operations.Apply'|translate}}
+        </ion-button>
+  <ion-button style="width:45%;" (click)="ResetFilter()">
+          {{'Operations.Reset'|translate}}
+        </ion-button>
+</div>
+    </div>
+  </mat-drawer>
+
+
+ <mat-drawer-content class="h-full">
+    <div style="display: -webkit-box;display: -webkit-inline-box;">
+      <div class="relative flex flex-row justify-center w-full p-2 border-b border-step-100 bg-background">
+        <div class="items-start flex-1">
+          <div class="relative flex flex-1 h-10 border rounded-lg lg:flex-none lg:w-1/3 bg-toolbar-background ">
+            <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+              viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+              width="512px" height="512px">
+              <path
+                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+            <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none"
+              type="search" name="search" placeholder="{{'Operations.Search'|translate}}" [(ngModel)]="searchTerm"
+              #search (keyup)="applyFilter()">
+          </div>
+        </div>
+        <div
+        (click)="excelTable.exportTable('xlsx', {fileName:'Logs_',Props: {Author: 'Al-Qanouni'}})"
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 ">
+        <ion-icon name="arrow-redo-outline"></ion-icon> Excel
+      </div> 
+      </div>
+    </div>
+
+    <ng-container>
+
+      <div class="relative flex flex-1 overflow-auto h-full">
+  
+          <table matTableExporter mat-table id="tableData"   [dataSource]="LogsList" matSort 
+          #excelTable="matTableExporter" class="z-10 w-full overflow-y-auto bg-background text-step-600">
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                 
+                {{'System.Logs.list.Id'|translate}}
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.id}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="table_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                {{'System.Logs.list.table_name'|translate}}
+
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.table_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                الإجراء
+
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.action}} </td>
+          </ng-container>
+          <ng-container matColumnDef="User">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                 
+                {{'System.Logs.list.User'|translate}}
+
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.user?.first_name }}{{" "}}{{element?.user?.last_name }} </td>
+          </ng-container>
+
+
+
+          
+          <ng-container matColumnDef="old">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+           Old Data
+
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.old_data }} </td>
+          </ng-container>
+          <ng-container matColumnDef="new">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                New Data
+
+
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+          
+              <pre id="old_data"> </pre>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                 
+                {{'System.Logs.list.Date'|translate}}
+
+              
+              </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.date | date: 'YYYY/MM/dd hh:mm a' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <p class="w-full text-center">
+                message </p>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.message}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true" class="border-b"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+            class="border-b cursor-pointer border-step-100 hover:bg-step-50" (click)="details(row)">
+          <tr class="mat-row" *matNoDataRow>
+            <ng-template #NoRoles>
+              <td class="text-2xl text-center mat-cell" colspan="5">
+                {{'Employee_managment.Employee-contracts.List.empty'|translate}}
+              </td>
+            </ng-template>
+
+          </tr>
+        </table>
+      </div>
+      <mat-paginator #LogsTablePaginator [pageSizeOptions]="[10,20,30]"
+        class="relative bottom-0 w-full bg-gray-100 border-t border-b border-step-100 mat-paginator-sticky"
+        showFirstLastButtons>
+      </mat-paginator>
+    </ng-container>
+
+  </mat-drawer-content>
+</mat-drawer-container>

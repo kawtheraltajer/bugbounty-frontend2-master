@@ -1,0 +1,189 @@
+<vt-page>
+  <vt-header>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-title slot="end">{{ time | date: 'hh:mm:ss a' }}</ion-title>
+      <ion-button (click)="goToCalendar()">
+        {{'Dashboard.MyCalendar'|translate}}
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title slot="middle">{{'Dashboard.Title'|translate}}</ion-title>
+
+    <ion-buttons slot="start" class="p-1">
+      <button ion-button icon-only (click)="showNotifications($event)">
+        <ion-badge color="danger" style="left: -2px; top: -4px; z-index: 3; position: absolute; font-size: 10px;"
+          *ngIf="notifications_count > 0">
+          {{notifications_count}}
+        </ion-badge>
+        <span style="font-size: 20px;">
+          <ion-icon name="notifications"></ion-icon>
+        </span>
+      </button>
+    </ion-buttons>
+    <ion-buttons slot="start" class="p-1">
+      <button ion-button icon-only (click)="goToRequest()">
+        <ion-badge color="danger" style="left: -2px; top: -4px; z-index: 3; position: absolute; font-size: 10px;"
+          *ngIf="requests_count > 0">
+          {{requests_count}}
+        </ion-badge>
+        <span style="font-size: 20px;">
+          <ion-icon name="mail"></ion-icon>
+        </span>
+      </button>
+    </ion-buttons>
+  </vt-header>
+
+
+  <div slot="content" class="flex flex-col flex-auto overflow-y-auto md:flex-row " *ngIf="auth?.userData |async as Me">
+    <div class="flex flex-col w-full max-h-full md:w-3/4 md:border-ie">
+
+      <div>
+        <!-- documents & advertisment -->
+        <announcement></announcement>
+      </div>
+
+      <div class="p-3">
+        <div id="wrapper">
+          <div class="sm:grid sm:grid-flow-row sm:gap-4 sm:grid-cols-2 w-full place-items-start">
+            <div class="w-full">
+              <!-- p-2 md:pb-0 -->
+              <div class="flex flex-row w-full gap-2 p-2 bg-white border shadow rounded-xl">
+                <div class="w-24 h-24 max-w-sm rounded-lg ">
+                  <img [src]="getProfilePic(Me?.pictureURL)" class="object-cover object-top w-full h-full rounded-lg" />
+                </div>
+                <div class="flex items-center justify-center flex-1 w-full p-3 text-xl bg-white">
+                  {{lang.selectedLang == 'en' ?'Welcome Back,':'أهلاً وسهلاً'}} {{Me?.first_name + ' '+ Me?.last_name}}
+                </div>
+              </div>
+            </div>
+            <div
+              class="sm:grid sm:h-32 sm:min-w-max sm:grid-flow-row sm:gap-4 sm:grid-cols-3 justify-center items-start w-full pb-3 cursor-pointer">
+              <div id="jh-stats-positive" (click)="moreSessions()"
+                class="flex flex-col justify-center px-4 py-4 bg-white border shadow rounded-xl min-h-full">
+                <div>
+                  <p class="text-3xl font-semibold text-center text-gray-800">{{ActiveSessionsCount}}</p>
+                  <p class="text-lg text-center text-gray-500"> {{'Dashboard.Sessions'|translate}}
+                  </p>
+                </div>
+              </div>
+              <div id="jh-stats-negative" (click)="Cases()"
+                class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border shadow rounded-xl sm:mt-0 min-h-full cursor-pointer">
+                <div class="justify-center">
+                  <p class="text-3xl font-semibold text-center text-gray-800 justify-center ">{{ActiveCasesCount}}</p>
+                  <p class="text-lg text-center text-gray-500"> {{'Dashboard.Cases'|translate}} </p>
+                </div>
+              </div>
+              <div id="jh-stats-neutral" (click)="Tasks()"
+                class="flex flex-col justify-center px-4 py-4 mt-4 bg-white border shadow rounded-xl sm:mt-0 min-h-full cursor-pointer">
+                <div>
+                  <p class="text-3xl font-semibold text-center text-gray-800">{{ActiveTasksCount}}</p>
+                  <p class="text-lg text-center text-gray-500"> {{'Dashboard.Tasks'|translate}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="flex flex-row items-center border-t border-b h-12 relative" style="min-height: 3rem;">
+          <div class="flex justify-start flex-1 px-2 item-center">
+            <ion-title>{{ 'Dashboard.MySessions.Title' |translate }}</ion-title>
+          </div>
+          <span *ngIf="TodaysSessionsCount > 0" slot="start">
+            <ion-icon name="notifications" slot="start" color="danger" style="font-size: 16px;"></ion-icon>
+            <ion-badge color="danger" slot="end">
+              {{ 'Dashboard.TodaysSessions' |translate }} {{TodaysSessionsCount}}
+            </ion-badge>
+          </span>
+          <div class="p-1 cursor-pointer" (click)="moreSessions()"> {{ 'Dashboard.More' |translate }} </div>
+        </div>
+      </div>
+      <div class="flex flex-col flex-auto p-1 overflow-y-auto drop-shadow-md">
+        <ng-container class="absolute">
+          <my-sessions-list></my-sessions-list>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="flex flex-col w-full gap-4 p-2 md:w-1/4">
+      <div class="relative flex flex-col flex-auto overflow-hidden border shadow rounded-xl" style="min-height: 30%;">
+        <div class="flex items-center justify-center flex-shrink-0 w-full h-10 p-2 border-b bg-step-50">
+          <b>{{ 'Dashboard.TodaysAppointments' |translate }}</b>
+        </div>
+        <div class="flex-auto w-full h-full p-3 overflow-y-auto">
+          <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="TodaysAppointmentsLoading">
+            <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+          </div>
+          <span *ngIf="!TodaysAppointmentsLoading">
+            <div class="flex flex-col w-full h-10 mb-1 cursor-pointer hover:bg-step-200 border-is-4 p-1 min-w-0"
+              *ngFor="let appointment of MyAppointments" [ngStyle]="{'border-color': appointment.type.color}"
+              (click)="goToAppointment(appointment)">
+              <div class="flex items-center justify-center font-bold overflow-hidden whitespace-nowrap overflow-ellipsis"> {{appointment.client_name}}</div>
+              <div class="flex items-center justify-center mx-1 overflow-hidden whitespace-nowrap overflow-ellipsis"> {{appointment?.timeSlot[0]?.date | date:'dd/MM/yyyy'}} -
+                {{appointment?.timeSlot[0]?.startTime | date:'shortTime':'+3'}}</div>
+            </div>
+            <div class="text-center w-full" *ngIf="MyAppointmentsLength < 1">
+              {{ 'Dashboard.NoAppointments' |translate }}
+            </div>
+          </span>
+        </div>
+      </div>
+      <!--end my appointments-->
+
+      <!--my tasks-->
+      <div class="relative flex flex-col flex-auto overflow-hidden border shadow rounded-xl" style="min-height: 30%;">
+        <div class="flex items-center justify-center flex-shrink-0 w-full h-10 p-2 border-b bg-step-50">
+          <b>{{ 'Dashboard.MyTasks' |translate }}</b>
+        </div>
+        <div class="flex-auto w-full h-full p-3 overflow-y-auto">
+          <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="MyTasksLoading">
+            <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+          </div>
+          <span *ngIf="!MyTasksLoading">
+            <div class="flex flex-col w-full h-10 mb-1 cursor-pointer hover:bg-step-200 border-is-4 p-1"
+              *ngFor="let task of MyTasks" [ngStyle]="{'border-color': task.status.color}" (click)="goToTask(task.id)">
+              <div class="flex items-center justify-center font-bold overflow-hidden whitespace-nowrap overflow-ellipsis min-w-0"> {{task.title}}</div>
+              <div class="flex items-center justify-center mx-1 overflow-hidden whitespace-nowrap overflow-ellipsis"> {{task.dueDate | date:'dd/MM/yyyy'}}</div>
+            </div>
+            <div class="text-center w-full" *ngIf="MyTasksLength < 1">
+              {{ 'Dashboard.NoTasks' |translate }}
+            </div>
+          </span>
+        </div>
+      </div>
+      <!--end my tasks-->
+
+      <!--assigned tasks-->
+      <div class="relative flex flex-col flex-auto overflow-hidden border shadow rounded-xl" style="min-height: 30%;">
+        <div class="flex items-center justify-center flex-shrink-0 w-full h-10 p-2 border-b bg-step-50">
+          <b class="p-1 cursor-pointer" (click)="TasksisAssigned()">{{ 'Dashboard.TasksIAssigned' |translate }}</b>
+        </div>
+        <div class="flex-auto w-full p-3 overflow-y-auto">
+          <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="TasksIAssignedLoading">
+            <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+          </div>
+          <span *ngIf="!TasksIAssignedLoading">
+            <div class="flex flex-col w-full h-14 mb-1 cursor-pointer hover:bg-step-200 border-is-4 p-1 min-w-0"
+              *ngFor="let task of TasksIAssigned" [ngStyle]="{'border-color': task.status.color}"
+              (click)="goToTask(task.id)">
+              <div class="flex items-center justify-center font-bold overflow-hidden whitespace-nowrap overflow-ellipsis"> {{task.title}}</div>
+              <div class="flex items-center justify-center font-bold overflow-hidden whitespace-nowrap overflow-ellipsis"> {{task?.employee?.user?.first_name}}{{"
+                "}}{{task?.employee?.user?.last_name}}</div>
+              <div class="flex items-center justify-center mx-1"> {{task.dueDate | date:'dd/MM/yyyy'}}</div>
+            </div>
+            <div class="text-center w-full" *ngIf="AssignedTasksLength < 1">
+              {{ 'Dashboard.NoAssignedtasks' |translate }}
+            </div>
+          </span>
+        </div>
+      </div>
+      <!--end assigned tasks-->
+    </div>
+
+  </div>
+</vt-page>

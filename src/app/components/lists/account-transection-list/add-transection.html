@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Add Account Transection </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+    <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> Document no </mat-label>
+            <input
+              matInput
+              formControlName="document_no"
+              placeholder="Document no ..."
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> Date </mat-label>
+            <input matInput formControlName="date" [matDatepicker]="picker" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> Type </mat-label>
+            <mat-select formControlName="document_type">
+              <mat-option value="Income">Income</mat-option>
+              <mat-option value="Expense">Expense</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="amount"
+              placeholder="Amount ..."
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="Approved">Approved</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> Invoice </mat-label>
+            <mat-select formControlName="invoiceID"
+            (selectionChange)="updateAmount($event,'I')"
+            >
+              <mat-option [value]="0"
+              >Select
+            </mat-option>
+              <mat-option *ngFor="let invoice of invoices" [value]="invoice.id"
+                >{{invoice.invoice_no}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label> expense </mat-label>
+            <mat-select formControlName="expenseID"
+            (selectionChange)="updateAmount($event,'E')"
+            >
+              <mat-option [value]="0"
+              >Select
+            </mat-option>
+              <mat-option *ngFor="let expense of expenses" [value]="expense.id"
+                >{{expense.expense_no}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="px-2 w-1/2">
+            <mat-label>Matching Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Matched">Matched</mat-option>
+              <mat-option value="Un Matched">Un Matched</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div class="flex flex-row w-full mt-8">
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <th class="pb-3">Account Code</th>
+                <th class="pb-3">dr/cr</th>
+                <th class="pb-3">Debit Amount</th>
+                <th class="pb-3">Credit Amount</th>
+                <th class="pb-3">Balance Amount</th>
+                <th class="pb-3">
+                  <ion-buttons slot="end">
+                    <ion-button color="dark" (click)="addOrEditDetails(null,0)">
+                      <ion-icon name="add"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="accTransectionDetails.length==0">
+                <td colspan="6" class="text-center border-2 py-3">
+                  No Details
+                </td>
+              </tr>
+              <tr
+                *ngFor="let detail of accTransectionDetails ;let i = index"
+                class="border-2"
+              >
+                <td class="text-center py-3">{{detail.account_code_name}}</td>
+                <td class="text-center py-3">{{detail.dr_cr}}</td>
+                <td class="text-center py-3">{{detail.debit_amount}}</td>
+                <td class="text-center py-3">{{detail.credit_amount}}</td>
+                <td class="text-center py-3">{{detail.balance_amount}}</td>
+                <td class="text-center py-3">
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="delete(i)"
+                    [matTooltip]="'Operations.Delete'|translate"
+                  >
+                    <mat-icon class="mx-auto" aria-label="Delete"
+                      >delete</mat-icon
+                    >
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</ion-content>

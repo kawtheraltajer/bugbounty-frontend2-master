@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>        {{'HCM.Workforce.leaves.balance.update'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <!-- Name -->
+                <mat-form-field>
+                    <mat-label>    {{'HCM.Workforce.leaves.balance.Form.Leave_Type'|translate}}    </mat-label>
+                    <mat-select formControlName="leaveTypeID">
+                     
+                        <mat-option *ngFor="let type of leaveTypes" [value]="type.id">
+
+                            {{ lang.selectedLang=='en'?type.name_en:type.name_ar| titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'HCM.Workforce.leaves.balance.Form.accual_days'|translate}}     </mat-label>
+                        <input matInput type="number" formControlName="accual_days" >
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>       {{'HCM.Workforce.leaves.balance.Form.balance'|translate}}   </mat-label>
+                        <input matInput type="number" formControlName="balance" >
+                    </mat-form-field>
+                </div>
+             
+                <mat-form-field>
+             
+                    <mat-label>   {{'HCM.Workforce.leaves.balance.Form.frequency'|translate}}    </mat-label>
+                    <mat-select formControlName="frequency">
+                        <mat-option value="Yearly">    {{'HCM.Workforce.leaves.balance.frequency.Yearly'|translate}}  </mat-option>
+                        <mat-option value="Monthly"> {{'HCM.Workforce.leaves.balance.frequency.Monthly'|translate}}  </mat-option>
+                        <mat-option value="5year">  {{'HCM.Workforce.leaves.balance.frequency.5year'|translate}}  </mat-option>
+                        <mat-option value="Other"> {{'HCM.Workforce.leaves.balance.frequency.other'|translate}}   </mat-option>
+                    </mat-select>
+                </mat-form-field>
+          
+            </form>
+        </div>
+    </div>
+</ion-content>

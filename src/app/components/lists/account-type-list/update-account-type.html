@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Finance.Account.Update'|translate}}  </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>   {{'Finance.Account.list.name_en'|translate}} <span style="color: red;">*</span> </mat-label>
+            <input
+              matInput
+              formControlName="name_en"
+            />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.name_en" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('name_en').hasError(validation.type) && (addForm.get('name_en').dirty || addForm.get('name_en').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>  {{'Finance.Account.list.name_ar'|translate}}<span style="color: red;">*</span> </mat-label>
+            <input
+              matInput
+              formControlName="name_ar"
+            />
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.name_ar" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('name_ar').hasError(validation.type) && (addForm.get('name_ar').dirty || addForm.get('name_ar').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>{{'Finance.Account.list.account_code'|translate}} </mat-label>
+            <input
+              matInput
+              formControlName="account_code"
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="standard" class="w-full">
+          <mat-label>   {{'Finance.Account.list.type'|translate}} <span style="color: red;">*</span> </mat-label>
+          <mat-select formControlName="type"
+          (selectionChange)="getTypeAccount($event)"
+          >
+            <mat-option value="Assets">  {{'Finance.Account.type.Assets'|translate}}</mat-option>
+            <mat-option value="Liability">  {{'Finance.Account.type.Liability'|translate}}</mat-option>
+            <mat-option value="Equity"> {{'Finance.Account.type.Equity'|translate}}</mat-option>
+            <mat-option value="Income"> {{'Finance.Account.type.Income'|translate}}</mat-option>
+            <mat-option value="Expenes"> {{'Finance.Account.type.Expenes'|translate}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.type" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('type').hasError(validation.type) && (addForm.get('type').dirty || addForm.get('type').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+        <div class="flex flex-row w-full" *ngIf="showAccountTypeList">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>  {{'Finance.Account.list.account_Type'|translate}} <span style="color: red;">*</span></mat-label>
+            <mat-select formControlName="account_type">
+                   
+              <mat-option *ngFor="let AccountType of AccountTypeList" [value]="AccountType.label">
+                {{("Finance.Account.AccountType."+AccountType.label)|translate}}
+
+           
+              </mat-option>
+          </mat-select>
+    
+          </mat-form-field>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.account_type" >
+                <div class="text-red-600 text-end"   *ngIf="addForm.get('account_type').hasError(validation.type) && (addForm.get('account_type').dirty || addForm.get('account_type').touched)">
+                {{ validation.message |translate }}
+                </div>
+            </ng-container>
+        </div>
+
+   
+        </div>
+     <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>{{'Finance.Account.list.description_en'|translate}} </mat-label>
+            <input
+              matInput
+              formControlName="description_en"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>{{'Finance.Account.list.description_ar'|translate}} </mat-label>
+            <input
+              matInput
+              formControlName="description_ar"
+            />
+          </mat-form-field>
+        </div>
+
+      </form>
+
+      <div class="flex flex-row p-5" *ngIf="AccountType?.Last_updated_User">
+        {{'Operations.LastUpdated'|translate}}: {{AccountType?.Last_updated_User}} {{AccountType?.Last_updated| date:'dd/MM/yyyy
+        hh:mm a'}}
+      </div>
+    </div>
+  </div>
+</ion-content>

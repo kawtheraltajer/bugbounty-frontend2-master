@@ -1,0 +1,52 @@
+<ion-content>
+  <div class="flex flex-col w-full h-full px-2 pt-6 overflow-auto md:px-10 lg:px-24 xl:px-48">
+    <!-- Type -->
+    <mat-form-field>
+      <mat-label>    {{'System.Authorization.Link.Type'|translate}}   </mat-label>
+      <mat-select [(ngModel)]="selectedType">
+        <mat-option value="permissionToRole">link permisson to Role</mat-option>
+        <mat-option value="roleToGroup">link Role to Group</mat-option>
+        <mat-option value="roleToUser">link Role to User</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- permissons -->
+    <mat-form-field *ngIf="selectedType=='permissionToRole'">
+      <mat-label>  {{'System.Authorization.Link.Permisson'|translate}} </mat-label>
+      <mat-select [(ngModel)]="selectedPermissionID">
+        <mat-option *ngFor="let mth of authz.permissions |async" [value]="mth.id">{{mth.subject+':'+mth.action}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Roles -->
+    <mat-form-field>
+      <mat-label>   {{'System.Authorization.Link.Role'|translate}} </mat-label>
+      <mat-select [(ngModel)]="selectedRoleID">
+        <mat-option *ngFor="let role of authz.roles |async" [value]="role.id">{{role.name|titlecase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Users -->
+    <mat-form-field *ngIf="selectedType=='roleToUser'">
+      <mat-label>User</mat-label>
+      <mat-select [(ngModel)]="selectedUserID">
+        <mat-option *ngFor="let usr of authz.users |async" [value]="usr.id">
+          {{usr.first_name+' '+usr.last_name+' - '+usr.email}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- Groups -->
+    <mat-form-field *ngIf="selectedType=='roleToGroup'">
+      <mat-label>Group</mat-label>
+      <mat-select [(ngModel)]="selectedGroupID">
+        <mat-option *ngFor="let grp of authz.groups  |async" [value]="grp.id">
+          {{grp.name +' - '+grp.description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button (click)="link()"
+      class="w-24 h-10 bg-green-400 rounded-md outline-none focus:outline-none hover:bg-green-300">
+      
+      {{'Operations.link'|translate}} 
+    </button>
+  </div>
+</ion-content>

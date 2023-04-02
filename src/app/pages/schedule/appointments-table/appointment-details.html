@@ -1,0 +1,226 @@
+<!--<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{'Schedule.AppointmentsTable.details'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>-->
+
+<vt-header>
+    <div slot="start">
+        <div matRipple (click)="app.routerBack()"
+            class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+            <ion-icon class="text-2xl" name="arrow-back-outline"></ion-icon>
+        </div>
+    </div>
+    <div slot="middle">
+        {{'Schedule.AppointmentsTable.details'|translate}}
+    </div>
+</vt-header>
+<ion-content scrollBar>
+    <div class="flex flex-col w-full">
+        <ion-grid *ngIf="!appointment?.completed && ('Appointment:CREATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE,LawyerAccess:MANAGE'|permission)">
+            <ion-row>
+                <ion-col>
+                    <ion-button (click)="complete()"
+                        *ngIf="appointment?.timeSlot[0]?.isApproved && !appointment.completed">
+                        <ion-icon src="assets/icon/calendar-check.svg" class="fill-current"
+                            style="width: 24px;height: 24px;"></ion-icon>
+                        {{'Schedule.AppointmentsTable.complete'|translate}}
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button *ngIf="!appointment?.timeSlot[0]?.isApproved"
+                        (click)="approve(appointment?.timeSlot[0],true)">
+                        <ion-icon name="checkmark"></ion-icon>
+                        {{'Schedule.TimeSlot.Menu.Approve'|translate}}
+                    </ion-button>
+                    <ion-button color="danger" *ngIf="appointment?.timeSlot[0]?.isApproved"
+                        (click)="unapprove(appointment?.timeSlot[0],false)">
+                        <ion-icon name="close"></ion-icon>
+                        {{'Schedule.TimeSlot.Menu.UnApprove'|translate}}
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button (click)="updateTimeSlot()" *ngIf="!appointment?.timeSlot[0]?.isApproved">
+                        <ion-icon name="time"></ion-icon>
+                        {{'Schedule.AppointmentsTable.update'|translate}}
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button color="danger" (click)="unbook()">
+                        <ion-icon name="trash"></ion-icon>
+                        {{'Schedule.TimeSlot.Menu.Unbook'|translate}}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <div class="flex flex-row w-full">
+            <div class="flex flex-col w-full border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.status'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center w-full">
+                    <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+                        <div class="flex flex-row w-full">
+                            <div class="flex flex-row items-center justify-center flex-1 p-1">
+                                <div class="flex items-center" *ngIf="appointment?.completed">
+                                    {{'Schedule.AppointmentsTable.List.completed'|translate}}
+                                </div>
+                                <div class="flex items-center" *ngIf="!appointment?.completed && !appointment?.timeSlot[0]?.isApproved">
+                                    {{'Schedule.AppointmentsTable.List.waitingApproval'|translate}}
+                                </div>
+                                <div class="flex items-center" *ngIf="appointment?.timeSlot[0]?.isApproved && !appointment?.completed">
+                                    {{'Schedule.TimeSlot.Fields.IsApproved'|translate}}
+                                </div>
+                                <div [class]="!appointment?.completed && !appointment?.timeSlot[0]?.isApproved?'bg-orange-300 hover:bg-orange-500':(appointment?.timeSlot[0]?.isApproved && !appointment?.completed?'bg-green-300 hover:bg-green-500':(appointment?.completed?'bg-blue-300 hover:bg-blue-500':'bg-orange-300 hover:bg-orange-500'))"
+                                    class="flex items-center w-4 h-4 mx-2">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full mt-4 border-t">
+            <div class="flex flex-col w-1/2 border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.type'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{ lang.selectedLang=='en'? appointment?.type?.title_en:appointment?.type?.title_ar| titlecase}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 text-center border-b">
+                <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.client_name'|translate}}
+                </div>
+                <div class="flex flex-row items-center justify-center flex-1 p-1">
+                    <div class="flex items-center">
+                        {{appointment?.client_name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full">
+            <div class="flex flex-col w-1/2 border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.client_email'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{appointment?.client_email}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 text-center border-b">
+                <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.client_phone'|translate}}
+                </div>
+                <div class="flex-1 p-1" style="direction: ltr;">
+                    +{{appointment?.client_phone}}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full">
+            <div class="flex flex-col w-1/2 border-b border-ie" *ngIf="appointment?.client_cpr">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.client_cpr'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{appointment?.client_cpr}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 border-b border-ie" *ngIf="appointment?.client_cr">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.client_cr'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{appointment?.client_cr}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 text-center border-b">
+                <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.case_description'|translate}}
+                </div>
+                <div class="flex-1 p-1" style="direction: ltr;">
+                    {{appointment?.case_description}}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full">
+            <div class="flex flex-col w-1/2 border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.employee'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{appointment?.timeSlot[0]?.employee?.user?.first_name}}
+                    {{appointment?.timeSlot[0]?.employee?.user?.last_name}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 text-center border-b">
+                <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.date'|translate}}
+                </div>
+                <div class="flex-1 p-1">
+                    {{appointment?.timeSlot[0]?.date | date:'dd/MM/yyyy'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full">
+            <div class="flex flex-col w-1/2 border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.startTime'|translate}}
+                </div>
+                <div class="flex-1 p-1 text-center ">
+                    {{appointment?.timeSlot[0]?.startTime | date:'shortTime':'+3'}}
+                </div>
+            </div>
+            <div class="flex flex-col w-1/2 text-center border-b">
+                <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.endTime'|translate}}
+                </div>
+                <div class="flex-1 p-1">
+                    {{appointment?.timeSlot[0]?.endTime | date:'shortTime':'+3'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-row w-full" *ngIf="('Appointment:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE,LawyerAccess:MANAGE'|permission)">
+            <div class="flex flex-col w-full border-b border-ie">
+                <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+                    {{'Schedule.AppointmentsTable.List.notes'|translate}}
+                    <ion-buttons slot="end" style="float: inline-end;">
+                        <ion-button color="success" (click)="update()">
+                            <ion-icon name="checkmark"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </div>
+                <div class="flex-1 p-1 text-center w-full">
+                    <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+                        <div class="flex flex-row w-full">
+                            <mat-form-field appearance="standard" class="w-full">
+                                <textarea matInput formControlName="notes"
+                                    [placeholder]="'Schedule.AppointmentsTable.List.enter_notes' | translate">
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <document-list [FromAppointment]="true" [AppointmentID]="appointmentID"></document-list>
+    </div>
+</ion-content>

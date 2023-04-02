@@ -1,0 +1,11 @@
+  <div class="flex items-center justify-center mt-2">
+    <swatches-picker [(color)]="currentColor" (valueChanges)="close(false)"></swatches-picker>
+  </div>
+  <div class="flex items-center justify-center my-2 ">
+    <ion-icon name="checkmark-outline"
+      class="w-8 h-8 mr-4 rounded-full cursor-pointer hover:bg-green-300 hover:text-black" (click)="close(true)">
+    </ion-icon>
+    <ion-icon name="close-outline" class="w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+      (click)="close(false)">
+    </ion-icon>
+  </div>

@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Tasks.AddNewTask.AddNewTaskTitle'|translate}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()" [matTooltip]="isEdit?'Edit':'Add'">
+        <ion-icon [name]="isEdit? 'sync-outline':'add'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Tasks.AddNewTask.Title'|translate}} </mat-label>
+            <input matInput type="text" formControlName="title" placeholder="Internet Bill Payment">
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col w-full">
+          <mat-label> {{'Tasks.AddNewTask.AssignEmployee'|translate}}</mat-label>
+          <div class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer"
+            [class.border-dashed]="!selectedEmployee">
+            <div *ngIf="selectedEmployee" matTooltip="UnAssign Employee" (click)="removeEmp()"
+              class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <ion-item (click)="selectEmp($event)" class="cursor-pointer" lines="none" *ngIf="selectedEmployee">
+              <ion-label>
+                {{ selectedEmployee.user.first_name+' '+selectedEmployee.user.last_name |titlecase}} -
+                {{selectedEmployee.user.email}}
+              </ion-label>
+              <ion-avatar slot="end">
+                <img class="w-full h-full" [src]="user.getProfilePicURL(selectedEmployee.user.pictureURL)">
+              </ion-avatar>
+            </ion-item>
+            <div (click)="selectEmp($event)" matTooltip="Assign Employee"
+              class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100"
+              *ngIf="!selectedEmployee">
+              <ion-icon name="add-outline" title=""></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- !Link Case -->
+        <!-- <div class="flex flex-row w-full">
+          <mat-label>Link to Case</mat-label>
+          <div class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer"
+            [class.border-dashed]="!selectedEmployee">
+            <div *ngIf="selectedEmployee" matTooltip="UnAssign Employee" (click)="removeEmp()"
+              class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <ion-item (click)="selectEmp($event)" class="cursor-pointer" lines="none" *ngIf="selectedEmployee">
+              <ion-label>
+                {{ selectedEmployee.user.first_name+' '+selectedEmployee.user.last_name |titlecase}} -
+                {{selectedEmployee.user.email}}
+              </ion-label>
+              <ion-avatar slot="end">
+                <img class="w-full h-full" [src]="user.getProfilePicURL(selectedEmployee.user.pictureURL)">
+              </ion-avatar>
+            </ion-item>
+            <div (click)="selectEmp($event)" matTooltip="Assign Employee"
+              class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100"
+              *ngIf="!selectedEmployee">
+              <ion-icon name="add-outline" title=""></ion-icon>
+            </div>
+          </div>
+        </div> -->
+        <div class="flex flex-row w-full ">
+
+          <mat-form-field appearance="standard" class="w-full" *ngIf="!CaseID">
+            <mat-label> {{'Court.Session.Form.Case'|translate}} </mat-label>
+            <mat-select formControlName="caseID">
+
+
+              <mat-option>
+                <ngx-mat-select-search (keyup)="filterEmployeelist($event)" placeholderLabel="ابحث عن قضية  "
+                  [formControl]="CasesFilterCtrl" noEntriesFoundLabel="لا يوجد">
+                  <mat-icon (click)="clearSelectionCases()" class="mx-auto" aria-label="clear" ngxMatSelectSearchClear>
+                    close</mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+              <mat-option [value]="null"> لا قضية
+              </mat-option>
+
+              <mat-option *ngFor="let case of filteredCases" [value]="case.id">
+
+                {{case?.CaseNo}}{{"-"}}{{case.client?.full_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </div>
+        <div class="flex flex-row w-full mt-2">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Tasks.AddNewTask.DueDate'|translate}} </mat-label>
+            <input matInput [min]="today" formControlName="dueDate" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Tasks.Task_Details'|translate}}
+            </mat-label>
+            <textarea matInput rows="5" formControlName="details"></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

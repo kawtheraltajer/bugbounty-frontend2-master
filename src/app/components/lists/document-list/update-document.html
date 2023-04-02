@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>  {{'Court.case.document.update'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+            
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Court.case.document.Form.name'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="name" >
+                    </mat-form-field>
+                </div>
+                <ng-container *ngFor="let validation of validation_messages.name" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('name').hasError(validation.type) && (addForm.get('name').dirty || addForm.get('name').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Court.case.document.Form.document_type'|translate}} </mat-label>
+                        <mat-select formControlName="document_type">
+                            <mat-option value="memoir">{{'Court.case.document.document_type.memoir'|translate}}</mat-option>
+                            <mat-option value="Documents">{{'Court.case.document.document_type.Documents'|translate}}</mat-option>
+                            <mat-option value="Adjudge_attachment">{{'Court.case.document.document_type.Adjudge_attachment'|translate}}</mat-option>
+                            <mat-option value="Lawsuit_attachment">{{'Court.case.document.document_type.Lawsuit_attachment'|translate}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+        
+                       
+                <mat-form-field class="flex flex-row w-full">
+                    <ngx-mat-file-input formControlName="url" placeholder="{{'Court.case.document.Form.documenturl'|translate}} "
+    
+                        accept=".doc,.docx,.pdf">
+                      </ngx-mat-file-input>
+                        <mat-hint >.doc,.docx,.pdf</mat-hint>
+    
+                    <mat-icon matSuffix>  </mat-icon>
+                </mat-form-field>
+                <ng-container *ngFor="let validation of validation_messages.url" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('url').hasError(validation.type) && (addForm.get('url').dirty || addForm.get('url').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+             
+            </form>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,207 @@
+// ion-tab-bar {
+//     border-radius: 16px;
+//     width: 90%;
+//     margin: 0 auto;
+// }
+
+// ion-tab-button {
+//     --color: var(--ion-color-medium);
+//     --color-selected: var(--ion-color-secondary);
+//     &::before {
+//         background-color: transparent;
+//         display: block;
+//         content: "";
+//         margin: 0 auto;
+//         width: 20px;
+//         height: 2px;
+//     }
+
+//     &.tab-selected::before {
+//         background-color: var(--ion-color-secondary);
+//     }
+// }
+
+::ng-deep .mat-tab-nav-bar {
+    // height: 100%;
+    // width: 100%;
+    border-radius: 16px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @apply p-1;
+    @apply border;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    box-shadow: none !important;
+    .selectedTab {
+        @apply text-secondary-default;
+    }
+
+    .mat-tab-header-pagination {
+        box-shadow: none !important;
+    }
+    .mat-tab-header-pagination-before::before {
+        height: 15px;
+        @apply ml-1;
+        @apply border-ie;
+        content: "";
+        width: 15px;
+        position: absolute;
+    }
+    .mat-tab-header-pagination-after::before {
+        height: 15px;
+        @apply mr-1;
+        @apply border-is;
+        content: "";
+        width: 15px;
+        position: absolute;
+    }
+
+    .mat-ink-bar {
+        top: 0px !important;
+        height: 2px;
+        @apply text-secondary-default;
+        background-color: var(--ion-color-secondary) !important;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    // .mat-tab-header-pagination {
+    //     display: none !important; // <== disable pagination
+    // }
+    .mat-tab-link-container {
+        left: 0px;
+        width: 100%;
+        .mat-tab-list {
+            overflow-x: auto !important;
+            transform: none !important;
+            .mat-tab-label:hover {
+                @apply text-secondary-default;
+            }
+            .mat-tab-links {
+                // some tweaks for tabs - up to you
+                // @include media-query-for-mobile {
+                //     justify-content: unset !important;
+                // }
+                min-width: 0 !important;
+
+                @apply text-medium-default;
+                @apply gap-2;
+                width: 100%;
+                justify-content: unset;
+                @apply md#{':'}justify-center;
+                .mat-tab-link {
+                    padding: 0px !important;
+                    padding-top: 0.5rem !important;
+                    min-width: min-content !important;
+                    @apply h-full;
+                    @apply flex;
+                    @apply flex-col;
+                    @apply items-center;
+                    @apply justify-center;
+                }
+            }
+        }
+    }
+
+    .mat-tab-body-wrapper {
+        height: 100%;
+        width: 100%;
+        @apply pt-1;
+    }
+}
+
+::ng-deep mat-tab-group {
+    height: 100%;
+    width: 100%;
+    .selectedTab {
+        @apply text-secondary-default;
+    }
+    .mat-tab-header {
+        .mat-tab-header-pagination {
+            box-shadow: none !important;
+        }
+        .mat-tab-header-pagination-before::before {
+            height: 15px;
+            @apply ml-1;
+            @apply border-ie;
+            content: "";
+            width: 15px;
+            position: absolute;
+        }
+        .mat-tab-header-pagination-after::before {
+            height: 15px;
+            @apply mr-1;
+            @apply border-is;
+            content: "";
+            width: 15px;
+            position: absolute;
+        }
+        .mat-ink-bar {
+            top: 0px !important;
+            height: 2px;
+            @apply text-secondary-default;
+            background-color: var(--ion-color-secondary) !important;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        border-radius: 16px;
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 10px;
+        @apply p-1;
+        @apply border;
+        // .mat-tab-header-pagination {
+        //     display: none !important; // <== disable pagination
+        // }
+        .mat-tab-label-container {
+            left: 0px; // if you need to use it on mobile - set left position to 0
+            width: 100%;
+            .mat-tab-list {
+                overflow-x: auto !important; // <== set horisontal scroll bar imperatively
+                // below rule prevents sliding of buttons' container - because it not sliding properly - to left it not slide as well
+                transform: none !important;
+                .mat-tab-label:hover {
+                    @apply text-secondary-default;
+                }
+                .mat-tab-labels {
+                    // some tweaks for tabs - up to you
+                    // @include media-query-for-mobile {
+                    //     justify-content: unset !important;
+                    // }
+                    min-width: 0 !important;
+
+                    @apply text-medium-default;
+                    width: 100%;
+                    justify-content: unset;
+                    @apply md#{':'}justify-center;
+                    .mat-tab-label {
+                        padding: 5px !important;
+                        // min-width: 20% !important;
+                        // padding: 1.25% !important;
+                        // margin: 0px !important;
+                        // text-transform: uppercase;
+                        // color: $black;
+                        // font-weight: 600;
+                        min-width: min-content !important;
+                    }
+                }
+            }
+        }
+    }
+    .mat-tab-body-wrapper {
+        height: 100%;
+        width: 100%;
+        @apply pt-1;
+    }
+}
+
+::ng-deep .mat-ink-bar {
+    top: 0px !important;
+}

@@ -1,0 +1,164 @@
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container *ngIf="!isLoading">
+    <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+        <mat-card>
+          <div class="flex flex-row w-full text-center">
+            <h4 class="text-center">
+              Please select the filters to get the data
+            </h4>
+          </div>
+          <div class="flex flex-row w-full text-center">
+            <div class="flex flex-row w-1/3 p-3 text-center">
+              <mat-form-field appearance="standard" class="w-full">
+                <mat-label> From Date </mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="dateFrom"
+                  [matDatepicker]="picker"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="flex flex-row w-1/3 p-3 text-center">
+              <mat-form-field appearance="standard" class="w-full">
+                <mat-label> From To </mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="dateTo"
+                  [matDatepicker]="toPicker"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="toPicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #toPicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="flex flex-row w-1/3 p-3 text-center">
+              <ion-button
+                class="text-center"
+                color="dark"
+                (click)="getReportData()"
+              >
+                <ion-icon name="search-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </mat-card>
+        <mat-card class="mt-4">
+          <div class="flex flex-row w-full text-center mt-4">
+            <div class="flex flex-row w-1/2 text-center">
+              <table class="w-full overflow-y-auto bg-background border-2 m-px">
+                <thead>
+                  <tr>
+                    <th
+                      colspan="5"
+                      class="border-2 p-1 text-center"
+                      style="background-color: #92daa84d"
+                    >
+                      Income
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="border-2 p-1">S. No.</th>
+                    <th class="border-2 p-1">Reciept No.</th>
+                    <th class="border-2 p-1">Date</th>
+                    <th class="border-2 p-1">Description</th>
+                    <th class="border-2 p-1">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="receipts.length==0">
+                    <td colspan="5" class="border-2 text-center">No Details</td>
+                  </tr>
+                  <tr
+                    class="border-2"
+                    *ngFor="let data of receipts;let i = index"
+                  >
+                    <td class="border-2 p-1 text-center">{{i+1}}</td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.receipt_no}}
+                    </td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.receipt_date|date:"short"}}
+                    </td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.description}}
+                    </td>
+                    <td class="border-2 p-1 text-center">{{data.amount}}</td>
+                  </tr>
+                  <tr>
+                    <td
+                      colspan="4"
+                      class="border-2 p-1 text-right"
+                      style="background-color: #92daa84d"
+                    >
+                      Total Income
+                    </td>
+                    <td class="border-2 p-1 text-right">{{totalIncome}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex flex-row w-1/2 text-center">
+              <table class="w-full overflow-y-auto bg-background border-2 m-px">
+                <thead>
+                  <tr>
+                    <th
+                      colspan="4"
+                      class="border-2 p-1 text-center"
+                      style="background-color: #da92924d"
+                    >
+                      Expense
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="border-2 p-1">S. No.</th>
+                    <th class="border-2 p-1">Expense No.</th>
+                    <th class="border-2 p-1">Date</th>
+                    <th class="border-2 p-1">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="expenses.length==0">
+                    <td colspan="4" class="text-center border-2">No Details</td>
+                  </tr>
+                  <tr
+                    class="border-2"
+                    *ngFor="let data of expenses;let i = index"
+                  >
+                    <td class="border-2 p-1 text-center">{{i+1}}</td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.expense_no}}
+                    </td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.expense_date|date:"short"}}
+                    </td>
+                    <td class="border-2 p-1 text-center">
+                      {{data.tax_amount}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      colspan="3"
+                      class="border-2 p-1 text-right"
+                      style="background-color: #da92924d"
+                    >
+                      Total Expense
+                    </td>
+                    <td class="border-2 p-1 text-right">{{totalExpense}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

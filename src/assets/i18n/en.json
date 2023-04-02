@@ -1,0 +1,2828 @@
+{
+  "Role": {
+    "name": "ٌRole"
+  },
+  "ID": "ID",
+  "Description": "Description",
+  "Login": {
+    "text": "Log In",
+    "forget": "forgot password?",
+    "email": "Email",
+    "pass": "Password"
+  },
+  "ForgetPassword": {
+    "forgetNote": "Welcome Back",
+    "Email": "ُEmail",
+    "Forget": "Request Reset",
+    "Cancel": "Cancel"
+  },
+  "Dashboard": {
+    "Title": "Dashboard",
+    "NotMain": "Dashboard",
+    "Sessions": "Sessions",
+    "Cases": "Cases",
+    "Tasks": "Tasks",
+    "Time": "Time",
+    "MyTasks": "My Tasks",
+    "TasksIAssigned": "Tasks I Assigned",
+    "TodaysAppointments": "Today's Appointments",
+    "More": " View more... ",
+    "NoSessions": "You don't have any sessions",
+    "NoTasks": "You don't have any tasks",
+    "NoAssignedtasks": "You didn't assign any tasks",
+    "NoAppointments": "You dont have any appointments today",
+    "TodaysSessions": "Today's Sessions: ",
+    "MyCalendar": "My Calendar",
+    "MySessions": {
+      "Title": "My Sessions"
+    }
+  },
+  "AdminDashboard": {
+    "Title": "Admin Dashboard",
+    "duePayments": "الفواتير مستحقة الدفع",
+    "dailyAppointment": "مواعيد اليوم",
+    "dailyTransactions": "معاملات اليوم",
+    "duepayment": "القضايا",
+    "Tasks": "المهام",
+    "Time": "الوقت",
+    "MyTasks": "مهامي",
+    "TasksIAssigned": "مهام قمتُ بتعيينها",
+    "TodaysAppointments": "مواعيد اليوم",
+    "NoAppointments": "ليست لديك أي مواعيد اليوم",
+    "More": "عرض المزيد ... ",
+    "NoSessions": "ليست لديك أي جلسات",
+    "NoTasks": "ليست لديك أي مهام",
+    "NoAssignedtasks": "لم تقم بتعيين أي مهام",
+    "TodaysSessions": "جلسات اليوم: ",
+    "MyCalendar": "التقويم",
+    "MySessions": {
+      "Title": "جلساتي"
+    }
+  },
+  
+
+  "Announcement": {
+    "Title": "Announcements",
+    "Add": "Add Announcement",
+    "Update": "Update Announcement",
+    "Download": "Download Document",
+    "NoAnnouncement": "There are no announcements",
+    "Form": {
+      "Title": "Title",
+      "Description": "Description",
+      "FromDate": "From Date",
+      "ToDate": "To Date",
+      "Image": "Image",
+      "Document": "Document",
+      "Update": "Update"
+    },
+    "messages": {
+      "title": {
+        "required": "Title is required"
+      },
+      "fromDate": {
+        "required": "From date is required"
+      },
+      "toDate": {
+        "required": "To date is required"
+      }
+    },
+    "Errors": {
+      "confirm_delete": "Are you sure you want to delete this announcement?"
+    }
+  },
+  "MyAccount": {
+    "Title": "My Account",
+    "Profile": {
+      "Profile": "Profile",
+      "ChangeImage": "ChangeImage",
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Email": "Email",
+      "Bio": "Bio",
+      "UpdateProfile": "Update Profile",
+      "Password": "Password",
+      "CurrantPassword": "Current Password",
+      "NewPassword": "New Password ",
+      "ConfirmNewPassword": "Confirm New Password",
+      "ChangePassword": "Change Password",
+      "UpdateRole": "Update Role",
+      "messages": {
+        "ChangeSuccess": "Password has been changed successfully",
+        "DoesntMatch": "New password and confirm password don't match",
+        "Fill": "Please fill the required fields"
+      }
+    }
+  },
+  "Cases": {
+    "Title": "Cases"
+  },
+  "Claims": {
+    "Title": "Claims"
+  },
+  "Reports": {
+    "Title": "Reports"
+  },
+  "Clients": {
+    "Title": "Clients"
+  },
+  "Settings": {
+    "Title": "Settings"
+  },
+  "Tasks": {
+    "Title": "Task",
+    "Plural": "Tasks",
+    "Body": "Task Body",
+    "Employee": "Employee",
+    "Task_Details": "Task Details",
+    "Update": "Update Task",
+    "Delete_Message": "Are you sure you want to delete this task?",
+    "NoOfTasks": "No. of tasks",
+    "filter": {
+      "assign_by": "Assigned By"
+    },
+    "Comment": {
+      "Title": "Comment",
+      "Plural": "Comments"
+    },
+    "Details": {
+      "Updated": "Update",
+      "Created": "Created",
+      "Due": "Due",
+      "Status": "Status"
+    },
+    "AddNewTask": {
+      "AddNewTaskTitle": "Add New Task",
+      "Title": "Title",
+      "AssignEmployee": "Assign Employee",
+      "DueDate": "Due Date"
+    },
+    "AddNewTaskStatus": {
+      "AddNewTaskStatusTitle": "Add New Task Status ",
+      "ArabicTitle": "Arabic Title",
+      "EnglishTitle": "English Title",
+      "Color": "Color",
+      "Hidden": "Hidden",
+      "isChanges": "isChangesLocated"
+    }
+  },
+  "System": {
+    "Title": "System",
+    "Users": {
+      "Title": "User",
+      "Plural": "Users"
+    },
+    "Groups": {
+      "Title": "Group",
+      "Plural": "Groups"
+    },
+    "Roles": {
+      "Title": "Role",
+      "Plural": "Roles"
+    },
+    "Permissions": {
+      "Title": "Permission",
+      "Plural": "Permissions",
+      "Add": "Add Permissions"
+    },
+    "Authorization": {
+      "Title": "Authorization",
+      "Plural": "Authorizations",
+      "Users": {
+        "Add": "Add User",
+        "Fields": {
+          "Name": "Name",
+          "Email": "Email",
+          "Active": "Active",
+          "Locked": "Locted",
+          "CreatedAt": "Created At",
+          "bio": "Bio",
+          "Role": "Role"
+        },
+        "AddUser": {
+          "FisrtName": "Fisrt Name",
+          "LastName": "Last Name",
+          "Email": "Email",
+          "Bio": "Bio",
+          "Profile Image": "Profile Image",
+          "ProfileImage": "Profile Image",
+          "insert_photo": "insert photo",
+          "Type": "Type",
+          "Role": "Role",
+          "Image": "Image"
+        },
+        "messages": {
+          "first_name": {
+            "required": "First name is required"
+          },
+          "last_name": {
+            "required": "Last name is required"
+          },
+          "Email": {
+            "required": "Email is required",
+            "pattern": "Email is Invalid"
+          },
+          "roleID": {
+            "required": "Role is required"
+          }
+        },
+        "Type": {
+          "none": "None",
+          "emp": "Employee",
+          "cli": "Client"
+        },
+        "Details": {
+          "Title": "User  Details",
+          "FirstName": "First Name",
+          "LastName": "Last Name",
+          "ID": "Role Id ",
+          "Role": "Role",
+          "Bio": "Bio",
+          "Active": "Active",
+          "Locked": "Locted"
+        }
+      },
+      "Groups": {
+        "Title": "Group",
+        "Plural": "Groups",
+        "Add": "Add Group",
+        "Fields": {
+          "Name": "Name",
+          "Description": "Description"
+        },
+        "AddGroup": {
+          "Title": "Add New Group",
+          "Name": "Name",
+          "Description": "Description",
+          "Leader": "Leader",
+          "Members": "Members"
+        },
+        "Details": {
+          "Title": "Group Details",
+          "Name": "Group",
+          "Description": " Group Description",
+          "Leader": " Group Leader",
+          "Members": " Group Members",
+          "Cancel": "Cancel",
+          "Update": "Update"
+        }
+      },
+      "Permissions": {
+        "Title": "Permission",
+        "Plural": "Permissions",
+        "Add": "Add Permissions",
+        "Fields": {
+          "Name": "Name",
+          "Subject": "Subject",
+          "Action": "Action",
+          "Description": "Description"
+        },
+        "messages": {
+          "name": {
+            "required": "Name is required"
+          },
+          "description": {
+            "required": "Description is required"
+          },
+          "action": {
+            "required": "Action is required"
+          }
+        },
+        "AddPermissions": {
+          "Title": "Add New Permissions",
+          "Name": "Name",
+          "Subject": "Subject",
+          "Description": "Description",
+          "Auth_Field": "Auth field",
+          "Action": "Action",
+          "View_Field": "View field"
+        }
+      },
+      "Role": {
+        "AddRoleTitle": "Add Role Title",
+        "AddRolewizerd": "Add Role wizerd",
+        "Add": "Add",
+        "Fields": {
+          "Title": "Title",
+          "Description": "Description"
+        },
+        "AddRole": {
+          "AddRoleTitle": "Add new Role",
+          "Name": "Name",
+          "Description": "Description"
+        },
+        "Details": {
+          "Title": "Role Details",
+          "Id": "Role ID",
+          "Name": "Name",
+          "Description": "Description",
+          "permissions": "permissions",
+          "Users": "Users",
+          "Link": "Link"
+        }
+      },
+      "Link": {
+        "Title": "Link",
+        "Type": "Type",
+        "Permisson": "Permisson",
+        "Role": "Role"
+      },
+      "Simulator": {
+        "Title": "Simulator",
+        "User": "User",
+        "Action": "Action",
+        "Subject": "Subject"
+      }
+    },
+    "Logs": {
+      "Title": "System Logs",
+      "Table_name": "Table Name",
+      "Action": "Action",
+      "list":{
+        "Id":"Id",
+        "table_name":"Table name",
+        "action":"Action",
+        "User":"User",
+        "Date":"Date",
+        "action_name":"Action name",
+        "Module":"Module"
+      }
+    },
+    "Simulator": "Simulator",
+    "Link": "Link",
+    "Announcements": "Announcements"
+  },
+  "Schedule": {
+    "Title": "Schedule",
+    "Plural": "Schedule",
+    "Calendar": "Calendar",
+    "Appointment": {
+      "Title": "Appointment",
+      "Plural": "Appointments",
+      "Add": "Book Appointment",
+      "My": "My Appointments"
+    },
+    "Booking": {
+      "Title": "Booking",
+      "Plural": "Booking's",
+      "Add": "Book An Appointment",
+      "Edit": "Edit The Appointment",
+      "Cancel": "Cancel The Appointment",
+      "Errors": {
+        "failed": "Something wrong happend. Please check your inputs."
+      }
+    },
+    "TimeSlot": {
+      "Title": "Time Slot",
+      "add": "Add Time Slot",
+      "Add": "Add Time Slot",
+      "Plural": "Time Slots",
+      "MonthAndYear": "Month And Year",
+      "Edit": "Edit Time Slot ",
+      "EnterReason": "Enter the reason:",
+      "ٌReason": "Reason",
+      "Example": "Ex: Not Answering Calls",
+      "Menu": {
+        "Details": "Details",
+        "Book": "Book",
+        "Unbook": "Unbook",
+        "Approve": "Approve",
+        "UnApprove": "UnApprove",
+        "Delete": "Delete"
+      },
+      "Errors": {
+        "Add": " you cant add this TimeSlot",
+        "confirm_delete": "Deleting this slot will delete any appointment related to it. Are you sure you want to delete Time Slot?",
+        "Sure": "Are you sure?",
+        "SendCompletionEmail": "An email with a survey link would be sent to the client. Are you sure this appointment had been completed?"
+      },
+      "Fields": {
+        "Employee": "Employee",
+        "EmployeeEmail": "Employee Email",
+        "StartTime": "Start Time",
+        "EndTime": "End Time",
+        "Date": "Date",
+        "IsApproved": "IsApproved",
+        "IsBooked": "IsBooked",
+        "CreatedAt": "CreatedAt ",
+        "Actions": "Actions"
+      },
+      "AddTimeSlot": {
+        "Employee": "Employee",
+        "Recurrence": "Recurrence",
+        "Date": "Date",
+        "StartTime": "StartTime",
+        "EndTime": "EndTime",
+        "EnterADateRange": "EnterADateRange",
+        "Days": "Days",
+        "Hours": "Hours",
+        "massages": {
+          "startTime": {
+            "required": "Start Time is required "
+          },
+          "endTime": {
+            "required": "End Time is required "
+          },
+          "date": {
+            "required": "Date is required, Please enter date only"
+          }
+        }
+      }
+    },
+    "AppointmentType": {
+      "Title": "Appointment Type",
+      "Plural": "Appointment Types",
+      "Add": "Add New Type",
+      "Update": "Update New Type",
+      "Fields": {
+        "TitleEnglish": "Title Engilsh",
+        "TitleArabic": "Title Arabic",
+        "Color": "Color",
+        "Actions": "Actions"
+      },
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete Type?"
+      },
+      "AddType": {
+        "ArabicTitle": "Arabic Title",
+        "EnglishTitle": "English Title",
+        "Color": "Color",
+        "massages": {
+          "title_ar": {
+            "required": "Arabic title is required"
+          },
+          "title_en": {
+            "required": "English title is required"
+          }
+        },
+        "Errors": {
+          "something_wrong": "Somthing Went Wrong, Please try again.",
+          "please_fill": "Please Fill the required fields with valid values."
+        }
+      }
+    },
+    "Status": {
+      "Pending": "Pending",
+      "Available": "Available",
+      "Canceled": "Canceled",
+      "Approved": "Approved"
+    },
+    "AppointmentsTable": {
+      "Title": "Appointment",
+      "Plural": "Appointments",
+      "details": "Appointment Details",
+      "Add": "Book Appointment",
+      "List": {
+        "id": "ID",
+        "type": "Appointment Type",
+        "client_name": "Client Name",
+        "client_type": {
+          "client_type": "Client Type",
+          "Individual": "Individual",
+          "Company": "Company"
+        },
+        "client_email": "Client Email",
+        "client_phone": "Client Phone",
+        "date": "Date",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "employee": "Lawyer",
+        "notes": "Notes",
+        "enter_notes": "Enter your notes...",
+        "client_cpr": "CPR",
+        "client_cr": "CR",
+        "cprcr": "CPR/CR",
+        "case_description": "Appointment Description",
+        "isApproved": "Is Approved",
+        "yes": "Yes",
+        "no": "No",
+        "status": "Status",
+        "completed": "Completed",
+        "waitingApproval": "Waiting Approval"
+      },
+      "update": "Update Time Slot",
+      "delete": "Are you sure you want to delete this Appointment?",
+      "complete": "Appointment Completed"
+    }
+  },
+  "Type": {
+    "Title": "Type",
+    "Plural": "Types"
+  },
+  "Language": {
+    "Title": "Language"
+  },
+  "Groups": {
+    "Title": "Group",
+    "Plural": "Groups"
+  },
+  "Auth": {
+    "Login": {
+      "Title": "Login"
+    },
+    "Hide": {
+      "Title": "Hide Sidemenu"
+    },
+    "Logout": {
+      "Title": "Logout"
+    }
+  },
+  "Employee": {
+    "Title": "Employee",
+    "Plural": "Employee's"
+  },
+  "Users": {
+    "Title": "User",
+    "Plural": "Users"
+  },
+  "Date": {
+    "Year": {
+      "Title": "Year",
+      "Plural": "Year's"
+    },
+    "Month": {
+      "Title": "Month"
+    },
+    "Week": {
+      "Title": "Week"
+    },
+    "Day": {
+      "Title": "Day"
+    }
+  },
+  "Months": {
+    "Title": "Month",
+    "Plural": "Month's",
+    "0": "All Months",
+    "1": "January",
+    "2": "February ",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "Days": {
+    "Title": "Day",
+    "Plural": "Day's",
+    "Sunday": "Sunday",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday"
+  },
+  "Enum": {
+    "ClientType": {
+      "Title": "Client Type",
+      "Company": "Company",
+      "Individual": "Individual"
+    }
+  },
+  "Form": {
+    "CPR": "CPR",
+    "CR": "CR",
+    "Name": "Name",
+    "ClientName": "Client Name",
+    "CompanyName": "Company Name",
+    "Phone": "Phone",
+    "Email": "Email",
+    "CaseDescription": "Case Description",
+    "Lawyer": "Lawyer",
+    "Time": "Time",
+    "Status": "Status",
+    "Reason": "Cancelation Reason",
+    "Canceled": "Canceled"
+  },
+  "Operations": {
+    "Cancel": "Cancel",
+    "Ok": "OK",
+    "Actions": "Actions",
+    "Add": "Add",
+    "Move": "Move",
+    "Delete": "Delete",
+    "Update": "Update",
+    "Edit": "Edit",
+    "Open": "Open",
+    "List": "List",
+    "Select": "Select",
+    "New": "New",
+    "All": "All",
+    "Details": "Details",
+    "Save": "Save",
+    "Search": "Search",
+    "Next": "Next",
+    "Back": "Back",
+    "Current": "Current",
+    "Previous": "Previous",
+    "Help": "Help",
+    "Settings": "Settings",
+    "Sorry": "Sorry",
+    "Yes": "Yes",
+    "No": "No",
+    "Book": "Book",
+    "link": "Link",
+    "Simulate": "Simulate",
+    "Confirm": "Confirm",
+    "Mandatory": "Mandatory",
+    "EditMode": "Edit Mode",
+    "SelectEmployee": "Select An Employee",
+    "Submit": "Submit",
+    "Choose": "Choose a",
+    "ProceedTo": "Proceed To",
+    "None": "None",
+    "Warning": "Warning",
+    "main": "Main address",
+    "add": "Add",
+    "Filter": "Filter",
+    "Apply": "Apply",
+    "Errors": "A problem occured. Please try again",
+    "Print": "Print",
+    "Attention": "Attention",
+    "Proceed": "Proceed",
+    "Reset": "Reset",
+    "Success": "Success",
+    "LastUpdated": "Last updated",
+    "ClickToUpdate": "Click to apply changes"
+  },
+  "HCM": {
+    "Title": "Human Capital",
+    "Requests": {
+      "Title": "Employee Requests List",
+      "NoRequests": "No Requests",
+      "NoMyRequests": "You did not send any requests",
+      "Sent": "Sent Requests",
+      "Inbox": "Inbox",
+      "New": "New"
+    },
+    "Department": {
+      "Title": "Department",
+      "Plural": "Department's"
+    },
+    "Designation": {
+      "Title": "Designation",
+      "Plural": "Designation's"
+    },
+    "Appraisal": {
+
+      "type": {
+        "Add": "Add apprisal type",
+        "Update": "Update apprisal type",
+        "list": {
+          "arabic_name": "Title arabic  ",
+          "english_name": "Title english"
+        },
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this type?",
+          "Update": "you cant update this type",
+          "cant_delete": "You cannot delete this type because it is linked to other data."
+        },
+        "messages": {
+          "title_ar": {
+            "required": "Title arabic is required"
+          },
+          "title_en": {
+            "required": "Title english is required"
+          }
+      
+        }
+      },
+
+
+      "templete": {
+        "Add": "Add apprisal template",
+        "Update": "Update apprisal template",
+        "list": {
+          "arabic_name": "Title arabic  ",
+          "english_name": "Title english",
+          "type":"Type"
+        },
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this type?",
+          "Update": "you cant update this type",
+          "cant_delete": "You cannot delete this type because it is linked to other data."
+        },
+        "messages": {
+          "title_ar": {
+            "required": "Title arabic is required"
+          },
+          "title_en": {
+            "required": "Title english is required"
+          }
+      
+        }
+      },
+      "Title": "Appraisal",
+      "Plural": "Appraisal's",
+      "Details": "Appraisal Details",
+      "AddTemplate":"Add Template",
+      "Add": "Add New Appraisal",
+      
+
+      "Appraiser": "Appraiser",
+      "Appraisee": "Appraisee",
+      "SelectAppraiser": "Select Appraiser",
+      "SelectAppraisee": "Select Appraisee",
+      "Template": "Template",
+      "Status": {
+        "Title": "Status",
+        "CreationPhase": "Creation Phase",
+        "EvaluationPhase": "Evaluation Phase",
+        "ApprovalPhase": "Approval Phase",
+        "FeedbackPhase": "Feedback Phase",
+        "Completed": "Completed",
+        "Archived": "Archived"
+      },
+      "Type": "Type",
+      "Section": {
+        "Title": "Section",
+        "Plural": "Section's",
+        "sectionTitle": "Section Title",
+        "sectionDescription": "Section Description",
+        "Empty": "There are no sections.",
+        "Add": "Add New Section",
+        "Rating": {
+          "Title": "Rating",
+          "Plural": "Rating's"
+        },
+        "Type": {
+          "fieldTitle": "Section Type",
+          "Title": "Type",
+          "OutOF100": "Out Of 100",
+          "OutOF5": "Out Of 5",
+          "PassFail": "Pass / Fail",
+          "Feedback": "Feedback",
+          "Objective": "Objective"
+        },
+        "Weightage": "Weightage",
+        "Score": "Score",
+        "TotalScore": "Total Score",
+        "TotalWeightage": "Total Weightage",
+        "Block": {
+          "Title": "Block",
+          "Plural": "Block's",
+          "Add": "Add New Block",
+          "TopicDescription": "Topic / Description",
+          "Topic": "Topic",
+          "Description": "Topic Description",
+          "Question": "Question",
+          "Answer": "Answer",
+          "Objective": {
+            "Title": "Objective Title",
+            "Description": "Objective Description or Performance Indicator",
+            "Comment": "Employee Comment",
+            "Target": "Target Date",
+            "ComplitionDate": "Complition Date",
+            "ComplitionPercentage": "Level of Achievement",
+            "Score": "Score"
+          }
+        }
+      },
+      "Approval": {
+        "Title": "Approval",
+        "Add": "Add New Approval",
+        "Plural": "Approval's",
+        "Mandatory": "Mandatory",
+        "NotMandatory": "Not Mandatory",
+        "Approved": "Approved",
+        "NotApproved": "Not Approved",
+        "Empty": "There are no approvals."
+      }
+    },
+    "EC": {
+      "Title": "Employee Central"
+    },
+    "Workforce": {
+      "Title": "Workforce",
+      "leaves": {
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this leave?"
+        },
+        "Dashbourd": "Dashbourd",
+        "Title": "Leaves",
+        "Add": " Add Leave",
+        "Update": " Update Leave",
+        "List": {
+          "ID": "ID",
+          "Name": "Name",
+          "Leave_Type": "Leave Type",
+          "From_Date": "From Date",
+          "To_Date": "To Date",
+          "Days": "Days",
+          "Action": "Action",
+          "Approval": "Approval",
+          "documentURL": "Document"
+
+        },
+        "Form": {
+          "Employee": "Employee",
+          "Leave_Type": "Leave Type",
+          "Days": "Days",
+          "From_Date": "From Date",
+          "To_Date": "To Date",
+          "Approval": "Status",
+          "status": "status"
+        },
+        "status": {
+          "Pendding": "Pending",
+          "Approved": "Approved",
+          "Reject": "Reject"
+        },
+        "massages": {
+          "days": {
+            "required": "Days  is required",
+            "pattern": "Contain number only"
+          },
+          "Leave_Type": {
+            "required": "Leave Type is required"
+          },
+          "Employee": {
+            "required": "Employee is required"
+          },
+          "documentURL": {
+            "required": "Document is required"
+          },
+          "From_Date": {
+            "required": "From Date is required ,Please enter  date only",
+            "date": "Please enter  date only !"
+          },
+          "To_Date": {
+            "required": "To Date is required ,Please enter  date only",
+            "date": "Please enter  date only !"
+          }
+        },
+        "leave_Types": {
+          "Errors": {
+            "confirm_delete": "Are you sure you want to delete  leave type?"
+          },
+          "Title": "leave Types",
+          "update": "Update leave Type",
+          "add": "Add leave Type",
+          "List": {
+            "Action": "Action",
+            "Allowed_per_year": "Allowed per year",
+            "Name": "Leave Name",
+            "ID": "ID"
+          },
+          "Form": {
+            "Name_ar": "Arabic Leave name ",
+            "Name_en": "English Leave name ",
+            "Allowed_per_year": "Allowed per year",
+            "Allowed_once": "Allowed once",
+            "Approval": "Approval",
+            "Paid": "paid"
+          },
+          "massages": {
+            "name_ar": {
+              "required": "Name arabic  is required"
+            },
+            "name_en": {
+              "required": "Name arabic  is required"
+            },
+            "allowed_per_year": {
+              "required": "Allowed per year  is required",
+              "pattern": "Contain number only"
+            }
+          }
+        },
+        "holiday": {
+          "Errors": {
+            "confirm_delete": "Are you sure you want to delete this holiday?"
+          },
+          "update": "Update holiday",
+          "add": " Add holiday",
+          "Title": "Holidays",
+          "List": {
+            "Action": "Action",
+            "name": "Holiday name",
+            "ID": "ID",
+            "from_date": "Date",
+            "year": "year  "
+          },
+          "Form": {
+            "Name_ar": " Arabic name ",
+            "Name_en": "English name ",
+            "from_date": "Date",
+            "year": "Year  "
+          },
+          "massages": {
+            "name_ar": {
+              "required": "Name arabic  is required"
+            },
+            "name_en": {
+              "required": "Name english is required"
+            },
+            "from_date": {
+              "required": "Date is required ,Please enter  date only"
+            }
+          }
+        },
+        "balance": {
+          "frequency": {
+            "Yearly": "Yearly",
+            "Monthly": "Monthly",
+            "5year": "5 year",
+            "other": "other"
+          },
+          "Errors": {
+            "confirm_delete": "Are you sure you want to delete this balance?"
+          },
+          "update": "Update Leave Balance",
+          "add": "Add leave Balance",
+          "Title": "Leave Balance",
+          "List": {
+            "Action": "Action",
+            "ID": "ID",
+            "Leave_Type": "Leave Type",
+            "accual_days": "Accual days",
+            "balance": "Balance",
+            "frequency": "Frequency"
+          },
+          "Form": {
+            "Leave_Type": "Leave Type",
+            "accual_days": "Accual days",
+            "balance": "Balance",
+            "frequency": "Frequency"
+          },
+          "massages": {
+            "Leave_Type": {
+              "required": "Leave Type is required"
+            },
+            "Employee": {
+              "required": "Employee is required"
+            },
+            "accual_days": {
+              "required": "Accual days  is required",
+              "pattern": "Contain number only"
+            },
+            "frequency": {
+              "required": "Frequency  is required"
+            },
+            "balance": {
+              "required": "Balance  is required",
+              "pattern": "Contain number only"
+            }
+          }
+        }
+      }
+    },
+    "Payroll": {
+      "ProcessforOne":"Payroll for one employee",
+      "Title": "Payroll",
+      "Process":"Add",
+      "add":"Add",
+      "Details":"Payroll details ",
+      "Errors": {
+        "already_add": "Payroll have been set to the chosen month and year. Would you like to update the information?"
+      },
+      "List":{
+        "MonthAndYear":"Month And Year",
+        "Name":"Employee name",
+        "Month":"Month",
+        "Year":"Year",
+        "AllowedLeaves":"Paid leaves",
+        "TakenLeaves":"Taken leaves",
+        "WorkingDays":"Working Days",
+        "NetAmount":"Net salary",
+        "Status":"Status",
+        "Action":"Action",
+        "payment_status":"Payment status",
+        "total_allowences":"Allowences",
+        "total_deductions":"Deductions",
+        "total_allowences_fixed": "Fixed Allowences",
+        "total_deductions_fixed": "Fixed Deductions",
+        "total_bonuses_fixed": " علاوة",
+        "total_bonuses":"Bonuses",
+        "total_gross":"Total gross",
+        "payment_type":"Payment type"
+        
+      },
+      "payment_type":{
+        "Cash":"Cash",
+        "BankTransfer":"BankTransfer",
+        "Cheque":"Cheque"
+
+
+      },
+      "massages":{
+        "payment_status": {
+          "required": "Payment status is required"
+        },
+        "MonthAndYear": {
+          "required": "Month And Year is required"
+        },
+        "status": {
+          "required": "status is required"
+        }
+
+      },
+      "payment_status":{
+        "un_paid":"Un paid ",
+        "paid":"Paid"
+      },"status":{
+        "Process":"Process",
+        "Approval":"Approval"     
+      }
+    },
+    "Recruitment": {
+      "Title": "Recruitment"
+    },
+    "ESS": {
+      "Title": "Employee Self Service"
+    },
+    "Employee-managment": {
+      "Title": "Employee Managment"
+    }
+  },
+  "Vacancy": {
+    "Add": "Add Vacancy",
+    "Errors": {
+      "Update": "لا تستطيع تعديل هذه القضية",
+      "confirm_delete": "Are you sure you want to delete this vecancy?"
+    },
+    "head_title": {
+      "Infromation": "Infromation",
+      "Timing": "Timing"
+    },
+    "Vacancy_Status": {
+      "Open": "Open",
+      "Pending": "Pending",
+      "Closed": "Closed",
+      "Cancelled": "Cancelled"
+    },
+    "Vacancy_Type": {
+      "FullTime": "Full Time",
+      "PartTime": "Part Time",
+      "Intern": "Intern"
+    },
+    "List": {
+      "ID": "ID",
+      "position": "Position",
+      "description": "Description",
+      "Department": "Department",
+      "Education_level": "Education level",
+      "Number_of_openings": "Number of openings",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "location": "Location",
+      "Details": "Vacancy Details",
+      "openingAt": "opening At",
+      "closingAt": "closing At",
+      "Type": "Type",
+      "Status": "Status",
+      "Code": "Code",
+      "Upload": "Upload Vacancy cover ",
+      "Action": "Action"
+    },
+    "title": "Vacancy Application",
+    "position": "Position",
+    "description": "Description",
+    "Department": "Department",
+    "Education_level": "Education level",
+    "Number_of_openings": "Number of openings",
+    "start_date": "Start date",
+    "end_date": "End date",
+    "location": "Location",
+    "Details": "Vacancy Details",
+    "openingAt": "opening At",
+    "closingAt": "closing At",
+    "Type": "Type",
+    "Status": "Status",
+    "Application": {
+      "download": "Click to download document ",
+      "Details": "Application Details ",
+      "head_title": {
+        "Summary": "Summary",
+        "Education_and_Experinces": "Education and Experinces",
+        "Contact": "Contact"
+      },
+      "qualification": {
+        "HighSchoolDiploma": "High School Diploma",
+        "BachelorsDegree": "Bachelors Degree",
+        "PHD": "PHD",
+        "Other": "Other"
+      },
+      "Add": "Add new application",
+      "Application_status": {
+        "Applied": "Applied",
+        "Shortlisted": "Shortlisted",
+        "Interviewed": "Interviewed",
+        "Offered": "Offered"
+      }
+    },
+    "Form": {
+      "ID": "ID",
+      "applicant_name": "Applicant name",
+      "Status": "Status",
+      "Action": "Action",
+      "applicant_first_name": "Applicant first name",
+      "applicant_last_name": "Applicant last name",
+      "applicant_email": "Applicant email",
+      "applicant_phone": "Applicant phone",
+      "Highest_qualification": "Highest Qualification",
+      "applicant_summry": "Applicant summry",
+      "is_currently_Employed": "Is currently Employed",
+      "Recent_job_role": "Recent job role",
+      "Comments": "Comments",
+      "Upload_your_document": "Upload your document",
+      "apply": "Apply"
+    },
+    "massages": {
+      "number_of_openings": {
+        "required": "Number of openings  is required",
+        "pattern": "Contain number only"
+      },
+      "position": {
+        "required": "Position is required",
+        "min": "Position must be at least 3 characters long.",
+        "max": "Position  cannot be more than 25 characters long."
+      },
+      "location": {
+        "required": "Location is required",
+        "min": "Location must be at least 3 characters long.",
+        "max": "Location  cannot be more than 25 characters long."
+      },
+      "type": {
+        "required": "Type is required"
+      },
+      "status": {
+        "required": "Status is required"
+      },
+      "openingAt": {
+        "required": "opening At is required ,Please enter  date only",
+        "date": "Please enter  date only !"
+      },
+      "closingAt": {
+        "required": "closing At is required ,Please enter  date only",
+        "date": "Please enter  date only !"
+      },
+      "education_level": {
+        "required": "Education level is required",
+        "min": "Education level must be at least 3 characters long.",
+        "max": "Education level cannot be more than 25 characters long."
+      },
+      "applicant_first_name": {
+        "required": "Fisrt name is required",
+        "min": "Fisrt name must be at least 3 characters long.",
+        "max": "Fisrt name cannot be more than 25 characters long."
+      },
+      "applicant_last_name": {
+        "required": "Last name is required",
+        "min": "Last name must be at least 3 characters long.",
+        "max": "Last name cannot be more than 25 characters long."
+      },
+      "applicant_email": {
+        "required": "Email is required",
+        "pattern": "Invalid Email"
+      },
+      "applicant_phone": {
+        "required": "Phone is required",
+        "min": "Phone must be at least 8 number. ",
+        "max": "Phone cannot be more than 11 number.",
+        "pattern": "Phone contain number only"
+      },
+      "highest_qualification": {
+        "required": " Highest qualification is required"
+      },
+      "documentURL": {
+        "required": "Document is required"
+      }
+    }
+  },
+  "Template": {
+    "Title": "Template",
+    "Plural": "Templates"
+  },
+  "EmployeeSelfServices": {
+    "Title": "Employee Self Services",
+    "Services": {
+      "Talents": "Talents",
+      "Personal_information": "Personal Information",
+      "Contracts": "Contracts",
+      "Leaves": "Leaves",
+      "Reports": "Reports"
+
+    },
+    "Employee-talents": {
+      "Title": "Employee Talents",
+      "Certificates": "Certificates",
+      "Experiences": "Experiences",
+      "Education": "Education",
+      "List": {
+        "Result": "Result",
+        "Duration": "Duration",
+        "Address": "Address",
+        "issure": "issure",
+        "issure_date": "issure_date"
+      }
+    },
+    "Employee-contracts": {
+      "Title": "Employee Contracts",
+      "allowances": {
+        "Title": "Allowances",
+        "add": "Add allowance"
+      },
+      "deductions": {
+        "Title": "Deductions",
+        "add": "Add deduction"
+      },
+      "bonuses": {
+        "Title": "Bonuses",
+        "add": "Add bonuse"
+      },
+      "List": {
+        "job_type": "Job Type",
+        "payroll_group": "Payroll Group",
+        "start_date": "Start Date",
+        "end_date": "End Date",
+        "Basic_salary": "Basic Salary",
+        "salary": "Salary"
+      }
+    },
+    "Employee-leaves": {
+      "Title": "Employee Leaves",
+      "Add": "Add Leaves",
+      "List": {
+        "from_date": "From date",
+        "to_date": "To date",
+        "total_days": "Total days",
+        "leave-type": "leave-type"
+      }
+    }
+  },
+  "Employee_managment": {
+    "Title": "Employee managment",
+    "add": " Add employee",
+    "details": "Employee Details",
+    "list": {
+      "id": "ID",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "designation": "Designation",
+      "Action": "Action",
+      "Reports": "Reports",
+      "ReportForm":{
+        "reportType":"Report Type",
+        "MonthAndYear":"Month And Year",
+        "employeeCertificate":"Employee Certificate",
+        "payslip":"Payslip",
+        "generate":"Generate"
+
+      }
+    },
+    "Services": {
+      "Talents": "Talents",
+      "Personal_information": "Personal Information",
+      "Contracts": "Contracts",
+      "Leaves": "Leaves",
+      "General_Requests": "General Requests"
+    },
+    "General_Requests": {
+      "Send_request": "Send General Request",
+      "Send": "Send Request",
+      "From": "From",
+      "To": "To",
+      "Subject": "Subject",
+      "Message": "Message",
+      "Attachment": "Attachment",
+      "Reply": "Reply",
+      "Messages": {
+        "Success": "Your Request had been sent successfully.",
+        "Errors": {
+          "Subject": {
+            "required": "Subject is required"
+          },
+          "Message": {
+            "required": "Message is required"
+          }
+        }
+      }
+    },
+    "Personal_information": {
+      "Update": "Update Personal information",
+      "Gender": {
+        "Male": "Male",
+        "Female": "Female"
+      },
+      "marital_status": {
+        "Single": "Single",
+        "Married": "Married",
+        "Divorced": "Divorced",
+        "Widowed": "Widowed"
+      },
+      "massages": {
+        "first_name": {
+          "required": "First name is required"
+        },
+        "last_name": {
+          "required": "Last name is required"
+        },
+        "name": {
+          "required": "name is required"
+        },
+        "relation": {
+          "required": "relation is required"
+        },
+        "phone": {
+          "required": "Phone is required",
+          "min": "Phone must be at least 8 number. ",
+          "max": "Phone cannot be more than 11 number.",
+          "pattern": "Phone contain number only"
+        },
+        "email": {
+          "required": "Email is required",
+          "pattern": "Invalid Email"
+        }
+      },
+      "title": "Personal Information",
+      "Form": {
+        "First_Name": "First Name",
+        "Last_Name": "Last Name",
+        "Role": "Role",
+        "Designations": "Designations",
+        "Password": "Password",
+        "Gender": "Gender",
+        "marital_status": "Marital status",
+        "Nationality": "Nationality",
+        "national_identity": "National identity",
+        "Religion": "Religion",
+        "passport": "Passport",
+        "birth_date": "Birth date"
+      }
+    },
+    "Emergency_Contact": {
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete this Emergency Contact?"
+      },
+      "massages": {
+        "first_name": {
+          "required": "First name is required"
+        },
+        "last_name": {
+          "required": "Last name is required"
+        },
+        "name": {
+          "required": "name is required"
+        },
+        "relation": {
+          "required": "relation is required"
+        },
+        "phone": {
+          "required": "Phone is required",
+          "min": "Phone must be at least 8 number. ",
+          "max": "Phone cannot be more than 11 number.",
+          "pattern": "Phone contain number only"
+        },
+        "email": {
+          "required": "Email is required",
+          "pattern": "Invalid Email"
+        }
+      },
+      "add": "   Add  Emergency Contact ",
+      "update": " update  Emergency Contact",
+      "title": "Emergency Contact",
+      "emergency_contacts_relation": {
+        "Husband": "Husband",
+        "Wife": "Wife",
+        "Father": "Father",
+        "Mother": "Mother",
+        "Brother": "Brother",
+        "Son": "Son",
+        "Uncle": "Uncle",
+        "Other": "Other"
+      },
+      "Form": {
+        "name": "Name",
+        "Relation": "Relation",
+        "phone": "Phone",
+        "mobile": "Mobile",
+        "Email": "Email"
+      }
+    },
+    "contact_infroamtion": {
+      "update": " Update contact infroamtion ",
+      "title": "Contact infroamtion",
+      "Form": {
+        "phone": "Phone",
+        "Mobile": "Mobile",
+        "Email": "Email"
+      }
+    },
+    "address": {
+      "title": "Address",
+      "add": "Add Address",
+      "update": "Update Address",
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete this address?"
+      },
+      "massages": {
+        "line1": {
+          "required": "Line 1  is required"
+        },
+        "city": {
+          "required": "City is required"
+        },
+        "country": {
+          "required": "Country is required"
+        }
+      },
+      "Form": {
+        "line1": "line1",
+        "line2": "line2",
+        "city": "City",
+        "Country": "country",
+        "isMain": "Main Address"
+      }
+    },
+    "Employee-talents": {
+      "Title": "Employee Talents",
+      "Certificates": {
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this Certificate?"
+        },
+        "title": "Certificates",
+        "Add": "Add Certificates",
+        "Update": " Update Certificate",
+        "List": {
+          "ID": "ID",
+          "title": "Title",
+          "issure": "Issure",
+          "issure_date": "Issure date",
+          "documentURL": "Document",
+          "Action": "Action"
+        },
+        "massages": {
+          "title": {
+            "required": "Title is required "
+          },
+          "issure": {
+            "required": "Issure is required "
+          },
+          "issure_date": {
+            "required": "Issure Date is required ,Please enter  date only"
+          },
+          "documentURL": {
+            "required": "Document is required "
+          }
+        }
+      },
+      "Experiences": {
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this Experience?"
+        },
+        "title": "Experiences",
+        "Add": "Add Experience",
+        "Update": " Update Experience",
+        "List": {
+          "ID": "ID",
+          "company": "Company",
+          "position": "Position",
+          "address": "Address",
+          "duration": "Duration",
+          "documentURL": "DocumentURL",
+          "Action": "Action"
+        },
+        "massages": {
+          "company": {
+            "required": "Company is required "
+          },
+          "position": {
+            "required": "Position is required "
+          },
+          "address": {
+            "required": "Address is required "
+          },
+          "duration": {
+            "required": "Duration is required "
+          },
+          "documentURL": {
+            "required": "Document is required "
+          }
+        }
+      },
+      "Education": {
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this Education?"
+        },
+        "title": "Education",
+        "Add": "Add Education",
+        "Update": " Update Education",
+        "type": {
+          "University": "University",
+          "SecondarySchool": "SecondarySchool"
+        },
+        "List": {
+          "ID": "ID ",
+          "place": "Place",
+          "result": "Result",
+          "duration": "Duration",
+          "type": "Type",
+          "documentURL": "Document",
+          "Action": "Action"
+        },
+        "massages": {
+          "place": {
+            "required": "Place is required "
+          },
+          "result": {
+            "required": "Result is required "
+          },
+          "duration": {
+            "required": "Duration is required "
+          },
+          "type": {
+            "required": "Type is required "
+          },
+          "documentURL": {
+            "required": "Document is required "
+          }
+        }
+      },
+      "List": {
+        "Result": "النتيجة",
+        "Duration": "المدة",
+        "Address": "العنوان",
+        "issure": "اصداء",
+        "issure_date": "تاريخ الإصداار"
+      }
+    },
+    "Employee-contracts": {
+      "title": " Employee contracts",
+      "massages": {
+        "title_ar": {
+          "required": "Arabic Title is required "
+        },
+        "title_en": {
+          "required": " English Title  is required"
+        },
+        "basic_salary": {
+          "required": "Basic salary is required"
+        },
+        "jobType": {
+          "required": "Job Type is required"
+        },
+        "payroll_group": {
+          "required": "Payroll group is required"
+        },
+        "startDate": {
+          "required": "Start Date is required"
+        },
+        "endDate": {
+          "required": "End Date is required"
+        },
+        "amount": {
+          "required": "Amount is required"
+        },
+        "calculationType": {
+          "required": "Calculation Type is required"
+        }
+      },
+      "allowances": {
+        "Title": "Allowances",
+        "add": "Add allowance"
+      },
+      "deductions": {
+        "Title": "Deductions",
+        "add": "Add deduction"
+      },
+      "bonuses": {
+        "Title": "Bonuses",
+        "add": "Add bonuse"
+      },
+      "Errors": {
+        "Create": "لا تستطيع إضافة هذا العقد ",
+        "Add": "لا تستطيع إضافة هذا العقد",
+        "Update": "لا تستطيع تعديل هذا العقد",
+        "confirm_delete": "are you sure you want to delete this contract",
+        "main": "You cannot delete the Currant contract, choose another contract before deleting the Currant",
+        "required_filed": "Please fill in the required fields with the correct information"
+      },
+      "Title": "Employee Contract",
+      "details": "Contract details",
+      "empty": "تفاصيل العقد",
+      "payroll_group": {
+        "Yearly": "Yearly",
+        "Monthly": "Monthly",
+        "Quarterly": "Quarterly",
+        "Daily": "Daily"
+      },
+      "Add": "Add contract",
+      "form": {
+        "title_ar": "Title arabic",
+        "title_en": "Title english",
+        "job_type": "Job Type",
+        "payroll_group": "Payroll Group",
+        "start_date": "start date",
+        "end_date": "End Date",
+        "Basic_salary": "Basic Salary",
+        "salary": "Salary",
+        "main": "Main",
+        "Flat": "Flat",
+        "Percentage": "Percentage"
+      },
+      "List": {
+        "ID": "ID",
+        "title": "Title",
+        "job_type": "Job Type",
+        "payroll_group": "Payroll Group",
+        "start_date": "start date",
+        "end_date": "End Date",
+        "Basic_salary": "Basic Salary",
+        "salary": "salary",
+        "action": "Action"
+      }
+    },
+    "Employee-leaves": {
+      "Title": "إجازات الموظف",
+      "Add": "إضافة إجازة",
+      "List": {
+        "leave_type": "نوع الإ‘جازة",
+        "from_date": "إبتداء من ",
+        "to_date": "إنتهاء في ",
+        "total_days": "مجموع الأيام"
+      }
+    },
+    "Bank_info": {
+      "Title": "Bank Information",
+      "Add": "Add ",
+      "Update": "Update Bank Information ",
+      "List": {
+        "bank_name": "Bank name",
+        "holder_name": "Holder name",
+        "IBAN": " IBAN ",
+        "Account_number": "Account Number"
+
+       
+      }
+    }
+  },
+  "Court": {
+    "agenda": {
+      "Title": "Agenda"
+    },
+    "Title": "Court",
+    "Fees": {
+      "title": "Fees",
+      "discount": "discount",
+      "Add": "Add payment ",
+      "Method": "payment method",
+      "Form": {
+        "balance": "Balance",
+        "total": "Total",
+        "total_paid": "Total Paid",
+        "ID": "ID",
+        "received_from": "Received From",
+        "Amount": "Amount",
+        "Method": "Payment method",
+        "comment": "Comment",
+        "due_date": "due date",
+        "Action": "Action"
+      }
+    },
+    "Claims": {
+      "title": "Claims",
+      "discount": "discount",
+      "Add": "Add payment ",
+      "details": "Details",
+      "PrintReceipt": "Print Receipt",
+      "Method": {
+        "Cash": "Cash",
+        "Cheque": "Cheque"
+      },
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete Payment?",
+        "Add": "You cannot add this claim",
+        "Update": "You cannot update this claim",
+        "AddPayment": "You cannot add this payment"
+
+      },
+      "messages": {
+        "total": {
+          "required": "Claims amount is required "
+        },
+        "due_date": {
+          "required": "Due Date is required "
+        },
+        "received_from": {
+          "required": "Received From is required "
+        },
+        "amount": {
+          "required": "Amount is required "
+        },
+        "method": {
+          "required": "Payment Method is required "
+        }
+      },
+      "Form": {
+        "balance": "Balance",
+        "total": "Total",
+        "total_paid": "Total Paid",
+        "ID": "ID",
+        "received_from": "Received From",
+        "Amount": "Amount",
+        "Method": "Payment method",
+        "comment": "Comment",
+        "due_date": "due date",
+        "Action": "Action"
+      }
+    },
+    "Charge": {
+      "title": "Charge",
+      "Add": "Add Charge ",
+      "Details": "Charge Details",
+      "massages": {
+        "Charge_name": {
+          "required": "Charge name is required "
+        },
+        "Amounts": {
+          "required": "Amounts is required "
+        },
+        "Status": {
+          "required": "Status is required "
+        },
+        "CPR": {
+          "pattern": "CPR must be 9 digits",
+          "required": "CPR is required "
+        },
+        "Name": {
+          "required": "Payer Name is required"
+        },
+        "date": {
+          "required": "Date is required"
+        }
+      },
+      "Form": {
+        "reference_no": "Ref No.",
+        "Charge_name": "Charge name",
+        "Amounts": "Amounts",
+        "ID": "ID",
+        "Comments": "Comment",
+        "Action": "Action",
+        "Case": "Case",
+        "Status": {
+          "Status": "Status",
+          "Pending": "Pending",
+          "Paid": "Paid"
+        },
+        "Name": "Payer Name",
+        "CPR": "Payer CPR",
+        "date": "Payment Date",
+        "Update": "Update Charge"
+      }
+    },
+    "Cases": {
+      "document": {
+        "add": "Add document",
+        "document_type": {
+          "memoir": "Memoir",
+          "Documents": "Documents",
+          "Adjudge_attachment": "Adjudge attachment",
+          "Lawsuit_attachment": "Lawsuit attachment",
+          "Client": "Client",
+          "Other": "Other",
+          "CPR": "CPR",
+          "Advice_form": "Advice Form",
+          "Know_your_client_form": "Know your client Form",
+          "Consultations": "Consultaions"
+        },
+        "delete": "Are you sure you want to delete this Document?",
+        "Form": {
+          "name": "name",
+          "document_type": "Document type",
+          "DocumentUrl": "Document Url"
+        }
+      },
+      "Appeal": "Appeal",
+      "Discrimination": "Discrimination",
+      "Details": "Case Details",
+      "RelationType": {
+        "Appeal": "Appeal",
+        "Discrimination": "Discrimination",
+        "Execuation": "Execution",
+        "Similar": "Similar",
+        "level 1": "Level 1",
+        "Discriminationـcivil":"Discrimination Civil",
+        "Discriminationـcommercial":"Discrimination Commercial"
+      },
+      "List": {
+        "From_Date": "From Date",
+        "To_Date": "To Date",
+        "ID": "ID",
+        "Case_no": "Case No",
+        "File_no": "File No ",
+        "Client": "Client",
+        "Opponent": "Opponent",
+        "Court_no": "Court No",
+        "Case_status": "Case Status",
+        "Case_type": "Case Type",
+        "Action": "Action",
+        "Related_Company": "Related Company",
+        "Remming_days": "Remming days"
+      },
+      "Errors": {
+        "Create": "You can't add this case ",
+        "Add": "You can't add this case ",
+        "Update": "You can't update this case",
+        "confirm_delete": "Are you sure you want delete this case ?",
+        "required_filed": "Please Fill the required fields with valid values",
+        "opponent_required": "Please enter opponent information"
+      },
+      "Form": {
+        "Level": "Level",
+        "JudgedAt": "Judged Date",
+        "Adjudge": "Adjudge",
+        "caseRepresentative": {
+          "caseRepresentative": "Case Representative",
+          "Challenged": "Challenged",
+          "Plague": "Plague",
+          "AppealAgainst": "Appeal Against him/her",
+          "Appeallant": "Appeallant",
+          "Respondent": "Respondent",
+          "Prosecutor": "Prosecutor",
+          "Victim": "Victim",
+          "Accused": "Accused",
+          "OutletAgainst": "Outlet Against him",
+          "Outlet": "Outlet"
+        },
+        "RelationType": "Relation Type",
+        "Ref_no": "Ref No",
+        "File_no": "Internal File No",
+        "Type": "Type",
+        "Case_type": "Case Type",
+        "Client": "Client",
+        "Related_Company": "Related Company",
+        "Representative": "Representative",
+        "Court": "Court",
+        "Court_Room": "Court_Room",
+        "Case_status": {
+          "Case_status": "Case Status",
+          "InProgress": "In Progress",
+          "Judged": "Judged",
+          "Closed": "Cancelled"
+        },
+        "Comment": "Comment",
+        "CaseNo": "Case No.",
+        "Action": "Action",
+        "full_name": "Full Name",
+        "name": "Full Name",
+        "CPR": "CPR",
+        "mobile1": "Mobile 1",
+        "mobile2": "Mobile 2",
+        "address": "Address",
+        "email": "Email",
+        "nationality": "Nationality",
+        "job_position": "Job Position",
+        "Organization": "Organization",
+        "leaveEmpty": "Leave empty to auto-generate",
+        "prevFileNo": "Use previous file number",
+        "messages": {
+          "internalFile_no": {
+            "required": "Internal File No is required "
+          },
+          "clientID": {
+            "required": "Client is required "
+          },
+          "companyID": {
+            "required": "Related Company is required"
+          },
+          "typeID": {
+            "required": "Type is required"
+          },
+          "courtID": {
+            "required": "Court is required "
+          },
+          "courtRoomID": {
+            "required": "Court Room is required "
+          },
+          "representativeID": {
+            "required": "Representative is required"
+          },
+          "Opponent_name": {
+            "required": "Full Name is required"
+          },
+          "Opponent_Mobile1": {
+            "required": "Mobile 1 is required",
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "Opponent_Mobile2": {
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "Opponent_CPR": {
+            "pattern": "CPR must be 9 digits"
+          },
+          "Opponent_Email": {
+            "pattern": "Email is invalid"
+          },
+          "Adjudge": {
+            "required": "Adjudge is required"
+          },
+          "JudgedAt": {
+            "required": "Judged Date is required"
+          }
+        }
+      },
+      "Case": "Case",
+      "Oponent": "Oponent",
+      "Fees": "Fees",
+      "Documents": "Documents",
+      "Appointments": "Appointments",
+      "Sessions": "Sessions",
+      "Calims": "Calims",
+      "Related_cases": "Related cases",
+      "Claims_collection": "Claims collection",
+      "Task": "Tasks",
+      "Charges": "Charges",
+      "Title": "Cases",
+      "Add": "Add New Case",
+      "Empty": "There are no Cases",
+      "Case-requests": "Requests",
+      "ChargeType": {
+        "Title": "Charge Type",
+        "Add": "Add New Charge Type",
+        "Update": "Update Charge type",
+        "Form": {
+          "arabic_name": "Arabic Name",
+          "english_name": "English Name",
+          "Update": "Update",
+          "messages": {
+            "name_ar": {
+              "required": "Arabic Name is required "
+            },
+            "name_en": {
+              "required": "English Name is required "
+            }
+          }
+        },
+        "Errors": {
+          "Add": "You can't Add this Charge Type",
+          "Update": "You can't update this Charge Type",
+          "confirm_delete": "Are you sure you want to delete this Charge Type?"
+        },
+        "Case_Types_Type": {
+          "Lowful": "Lowful",
+          "Civilian": "Civilian",
+          "Criminal": "Criminal",
+          "Excution": "Excution",
+          "Other": "Other Courts"
+        }
+      },
+      "Case-type": {
+        "Title": "Case Type",
+        "Add": "Add New Case Type",
+        "Update": "Update Case type",
+        "Form": {
+          "arabic_name": "Arabic Name",
+          "english_name": "English Name",
+          "appeal_period": "Appeal Period",
+          "discrimination_period": "Discimination Period",
+          "comments": "Comments",
+          "type": "Type",
+          "Update": "Update",
+          "messages": {
+            "name_ar": {
+              "required": "Arabic Name is required "
+            },
+            "name_en": {
+              "required": "English Name is required "
+            },
+            "appeal_period": {
+              "required": "Appeal Period is required "
+            },
+            "discrimination_period": {
+              "required": "Descrimination Period is required "
+            },
+            "type": {
+              "required": "Type is required"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "You can't Add this Case Type",
+          "Update": "You can't update this Case Type",
+          "confirm_delete": "Are you sure you want to delete this Case Type?"
+        },
+        "Case_Types_Type": {
+          "Lowful": "Lowful",
+          "Civilian": "Civilian",
+          "Criminal": "Criminal",
+          "Excution": "Excution",
+          "Other": "Other Courts"
+        }
+      },
+      "delay-reson": {
+        "Title": "Delay Reson",
+        "Add": "Add Delay Reson",
+        "Update": "Update Delay Reason",
+        "Form": {
+          "arabic_name": "Arabic Name",
+          "english_name": "English Name",
+          "type": "Type",
+          "Update": "Update",
+          "messages": {
+            "name_ar": {
+              "required": "Arabic Name is required "
+            },
+            "name_en": {
+              "required": "English Name required "
+            },
+            "type": {
+              "required": "Type is required"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "You can't Add this Delay Reason",
+          "Update": "You can't update this Delay Reason",
+          "confirm_delete": "Are you sure you want to delete this Delay Reason?"
+        },
+        "Delay_Reason_Type": {
+          "Lowful": "Lowful",
+          "Civilian": "Civilian",
+          "Criminal": "Criminal",
+          "Excution": "Excution"
+        }
+      },
+      "requests": {
+        "Title": "Requests",
+        "Add": "Add Request",
+        "Update": "Update Request",
+        "Form": {
+          "arabic_name": "Arabic Name",
+          "english_name": "English Name",
+          "type": "Type",
+          "Update": "Update",
+          "messages": {
+            "name_ar": {
+              "required": "Arabic Name is required "
+            },
+            "name_en": {
+              "required": "English Name required "
+            },
+            "type": {
+              "required": "Type is required"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "You can't Add this Request",
+          "Update": "You can't update this Request",
+          "confirm_delete": "Are you sure you want to delete this Request?"
+        },
+        "Request_Type": {
+          "Lowful": "Lowful",
+          "Civilian": "Civilian",
+          "Criminal": "Criminal",
+          "Excution": "Excution"
+        }
+      },
+      "Case-request": {
+        "Title": "Requests",
+        "Add": "Add Request",
+        "Form": {
+          "type": "Type"
+        },
+        "Errors": {
+          "confirm_delete": "Are you sure you want to delete this request?"
+        }
+      }
+    },
+    "clients": {
+      "Details": "Client Details",
+      "Title": "clients",
+      "Add": "Add client",
+      "Errors": {
+        "Add": "You can't add this Client",
+        "confirm_delete": "Are your sure your want to delete this client ?"
+      },
+      "List": {
+        "ID": "ID",
+        "CPR": "CPR",
+        "name": "Full Name",
+        "WhatsApp_number": "whatsApp Number",
+        "Mobile": "Mobile",
+        "action": "Action"
+      },
+      "Form": {
+        "name": "Full Name",
+        "WhatsApp_contact": "WhatsApp contact",
+        "CPR": "CPR",
+        "mobile1": "Mobile 1",
+        "mobile2": "Mobile 2",
+        "address": "Address",
+        "email": "Email",
+        "nationality": "Nationality",
+        "job_position": "Job Position",
+        "comments": "Comments",
+        "type": "type",
+        "messages": {
+          "got_appointment": "This client has a previous appointment.",
+          "use_appointment_data": "Use appointment data?",
+          "got_opponent": "This Client is registered as a opponent.",
+          "use_opponent_data": "Use previous data?",
+          "full_name": {
+            "required": "Full Name is required "
+          },
+          "CPR": {
+            "required": "CPR is required ",
+            "pattern": "CPR must be 9 digits"
+          },
+          "mobile1": {
+            "required": "Mobile 1 is required ",
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "mobile2": {
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "whatsApp_phone": {
+            "pattern": "ًWhatsapp Contact must contain 8 to 13 digits"
+          },
+          "email": {
+            "required": "Email is required",
+            "pattern": "Email is Invalid"
+          }
+        }
+      }
+    },
+    "Companies": {
+      "Title": "Companies",
+      "Details": " Company Details ",
+      "Add": "Add company",
+      "Errors": {
+        "Add": "You can't Add this company",
+        "Update": "You can't update this company",
+        "confirm_delete": "Are you sure you want to delete this company?"
+      },
+      "List": {
+        "ID": "ID",
+        "WhatsApp_number": "WhatsApp Number",
+        "Mobile": "Mobile",
+        "CR": "CR",
+        "name": "company Name",
+        "type": "Type",
+        "Action": "action"
+      },
+      "Form": {
+        "name": "company Name",
+        "WhatsApp_contact": "WhatsApp contact",
+        "CR": "CR",
+        "mobile1": "Mobile 1",
+        "mobile2": "Mobile 2",
+        "email": "Email",
+        "comments": "Comments",
+        "type": "type",
+        "messages": {
+          "full_name": {
+            "required": "Company Name is required "
+          },
+          "CR": {
+            "required": "CR is required "
+          },
+          "mobile1": {
+            "required": "Mobile 1 is required ",
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "mobile2": {
+            "pattern": "Mobile Number must contain 8 to 13 digits"
+          },
+          "whatsApp_phone": {
+            "pattern": "ًWhatsapp Contact must contain 8 to 13 digits"
+          },
+          "email": {
+            "required": "Email is required ",
+            "pattern": "Email is Invalid"
+          }
+        }
+      }
+    },
+    "Reports": {
+      "Title": "Reports",
+      "TableName": "Table Name",
+      "Columns": "Selected Fields",
+      "ColumnNames": {
+        "Case_no": "Case No",
+        "File_no": "File No",
+        "Client": "Client",
+        "Opponent": "Opponent",
+        "Related_Company": "Related Company",
+        "Court_no": "Court No",
+        "Case_status": "Case Status",
+        "Case_type": "Case Type",
+        "CPR": "CPR",
+        "Name": "Name",
+        "Mobile": "Mobile",
+        "whatsApp_phone": "Whatsapp Phone",
+        "CR": "CR",
+        "Ref_No": "Ref No",
+        "Status": "Status",
+        "Session_Date": "Session Date",
+        "Lawyer_Name": "Lawyer Name",
+        "Delay_Reason": "Delay Reason",
+        "Upcoming_Session": "Upcoming Session",
+        "id": "ID",
+        "client": "Client",
+        "CaseNo": "Case No.",
+        "total": "Total",
+        "total_paid": "Total Paid",
+        "balance": "Balance",
+        "due_date": "due date"
+      },
+      "Claims": {
+        "status": {
+          "status": "Status",
+          "none": "None",
+          "pastdue": "Past Due",
+          "duetoday": "Due Today",
+          "paid": "Paid"
+        }
+      }
+    },
+    "Session": {
+      "Title": "Sessions",
+      "Details": " Session Details ",
+      "GoToCase": "Go to Case",
+      "Add": "Add Session",
+      "Filter":{
+        "ID": "ID",
+        "Ref_No": "Ref No",
+        "Case": "Case",
+        "Status": "Status",
+        "Session_Date": "Session Date",
+        "next_session_date": "Session Date",
+        "Lawyer_Name": "Lawyer Name",
+        "Previous_delay_Reason": "Previous delay Reason",
+        "Previous_delay_Reason_Details": "Previous delay Reason Details",
+        "Delay_Reason": "Delay Reason",
+        "Upcoming_Session": "Upcoming Session",
+        "Action": "Action",
+        "Note":"Note",
+        "decision":"decision",
+        "Client":"Client",
+        "FileNo":"FileNo",
+        "Court_no":"CourtNo",
+        "caseRepresentative":"Representative",
+        "Opponent":"Opponent"
+
+
+
+
+      },
+      "confirm_delete": "Are you sure you want to delete this session?",
+      "List": {
+        "ID": "ID",
+        "Ref_No": "Ref No",
+        "Case": "Case",
+        "Status": "Status",
+        "Session_Date": "Session Date",
+        "Lawyer_Name": "Lawyer Name",
+        "Previous_delay_Reason": "Previous Delay Reason",
+        "Previous_delay_Reason_Details": "Previous Delay Reason Details",
+        "Delay_Reason": "Delay Reason",
+        "Upcoming_Session": "Upcoming Session",
+        "Action": "Action"
+      },
+      "Form": {
+        "Update": "Update Session",
+        "Ref_No": "Ref No",
+        "Previous_Session_Date": "Previous Session Date",
+        "Comments": "Comments",
+        "Case": "Case",
+        "status": {
+          "status": "Status",
+          "UPCOMING": "Pending",
+          "DELAYED": "Delayed",
+          "Closed": "Cancelled",
+
+          "FINISHED": "Judged"
+        },
+        "Session_Date": "Session Date",
+        "next_session_date": "Next Session Date",
+        "Lawyer_Name": "Lawyer Name",
+        "delay_reason": "Delay Reason",
+        "delay_details": "Delay Details",
+        "Upcoming_Session": "Upcoming Session",
+        "messages": {
+          "caseID": {
+            "required": "Case is required "
+          },
+          "status": {
+            "required": "Status is required "
+          },
+          "date": {
+            "required": "Date is required "
+          },
+          "delayrResonID": {
+            "required": "Delay Reason is required "
+          },
+          "next_session_date": {
+            "required": "Next Session Date is required "
+          }
+        }
+      }
+    }
+  },
+  "Finance": {
+    "Title": "Finance and Account",
+    "ShowAll": "Show All",
+    "Reports": {
+      "Title": "Reports",
+      "Type": {
+        "Title": "Report Type",
+        "BalanceSheet": "Balance Sheet",
+        "CashFlowStatement": "Cash Flow Statement",
+        "ProfitAndLoss": "Profit And Loss",
+        "VatReport": "Vat Report"
+
+      },
+      "list":{
+        "Income":"Income",
+        "vat_Income":"Vat Income",
+        "vat_Expence":"Vat Expense",
+        "Expence":"Expense",
+        "Total":"Total",
+        "Total_vat":"Total Vat",
+        "vat_Expence_total":" Vat Expense Total",
+        "vat_Income_total":"Vat Income Total",
+        "Expence_total":"Expense Total",
+        "Income_total":"Income Total",
+        "BHD":"BHD",
+        "no_vat_income":"No Vat Income",
+        "no_vat_expence":"No Vat Expense",
+        "no_income":"No Income",
+        "no_expence":"No Expense"
+
+
+
+      },
+      
+      "DateRange": {
+        "Title": "Date Range",
+        "Today": "Today",
+        "ThisWeek": "This Week",
+        "ThisMonth": "This Month",
+        "ThisYear": "This Year",
+        "YearToDate": "Year To Date",
+        "Custom": "Custom"
+      }
+    },
+    "NormalReports":{
+      "Title":"Normal Reports"
+    },
+    "Invoice": {
+      "Title": "Invoice",
+      "Plural": "Invoice's",
+      "Add": "Add Invoice",
+      "Add_detail": "Add Invoice items",
+      "Update": "Update Invoice",
+
+      "list": {
+        "ID": "ID",
+        "print":"Print Invoice",
+
+        "invoice_no": "Invoice no",
+        "invoice_date": "Invoice Date",
+        "gross_amount": "Gross Amount",
+        "tax_amount": "Tax Amount",
+        "net_amount": "Net Amount with vat",
+        "is_instalment": "Instalment",
+        "Action": "Action",
+        "Pending_Amount": "Pending Amount",
+        "payment_method": "Payment method",
+        "status": "Status",
+        "Case_no": "Case no",
+        "Client": "Client",
+        "invoice_status": "Invoice Status",
+        "over_due_date":"Over due date",
+        "Description": "Description",
+        "Item": "Item",
+        "cheque_date":"Cheque date",
+        "cheque_number":"Cheque number",
+        "drawn_on":"Drawn on",
+        "due_date":"Due date",
+        "Case":"Case",
+        "Total": "Total",
+        "BHD": "BHD",
+        "Type": {
+          "Type": "Type",
+          "Client": "Client",
+          "Company": "Company",
+          "Consultation": "Consultation",
+          "Other": "Other"
+        },
+        "Name": "Recipient Name",
+        "Company": "Company"
+      },
+      "Status": {
+        "Status": "Status",
+        "Pending": "Pending",
+        "Approved":"Approved",
+        "Paid": "Paid"
+      },
+      "Payment_method":{
+ 
+          "Cash": "Cash",
+          "Cheque": "Cheque",
+          "BankTransfer":"Bank Transfer"
+    
+      },
+      "messages": {
+        "Client": {
+          "required": "This Field is required"
+        },
+        "Company": {
+          "required": "Company is required"
+        },
+        "Recepient": {
+          "required": "Recepient is required"
+        },
+        "invoice_status": {
+          "required": "Invoice status is required"
+        },
+        "payment_method": {
+          "required": "Payment method is required. "
+        },
+        "cheque_date": {
+          "required": "Cheque Date is required, Date only. "
+        },
+        "due_date": {
+          "required": "Due date is required, Date only. "
+
+        },
+        "cheque_number": {
+          "required": " Cheque number status is required"
+        },
+        "drawn_on": {
+          "required": "Drawn on is required, Date only. "
+        },
+        "Item":{
+          "required": "Item status is required"
+        },
+        "gross_amount":{
+          "required": " Amount status is required"
+
+        }
+        
+      },
+      "Details": {
+        "Title": "Details",
+        "no-details": "No Details"
+      },
+      "Errors": {
+        "Add_or_link": "هل تود ربط القضية بفاتورة مسبقة او إضافة فاتورة جديدة",
+
+        "Add_item": "Please add item.",
+        "No_Details":"There are no items",
+        "Update": "لا تستطيع تعديل الفاتورة ",
+        "confirm_delete": "Are you sure you want to delete this invoice?"
+      }
+    },
+    "Receipt": {
+      "Title": "Receipt",
+      "Plural": "Receipt's",
+      "Add": "Add Receipt",
+      "list": {
+        "ID": "ID",
+        "Client": "Client",
+        "status": "status",
+        "Receipt_no": "Receipt no",
+        "Receipt_Date": "Receipt Date",
+        "Payment_Method": "Payment Method",
+        "Pending_Amount": "Pending Amount",
+        "Amount": "Amount",
+        "description": "Description",
+        "Action": "Action",
+        "Case_no": "Case_no",
+        "cheque_date":"Cheque date",
+        "cheque_number":"Cheque number",
+        "drawn_on":"Drawn on",
+        "Name": "Recipient Name",
+        "tax_amount": "Tax Amount"
+      },
+      "Payment_method":{
+ 
+        "Cash": "Cash",
+        "Cheque": "Cheque",
+        "BankTransfer":"Bank Transfer"
+  
+    },
+    "messages": {
+      "Client": {
+        "required": "Client is required"
+      },
+      "payment_method": {
+        "required": "Payment method is required. "
+      },
+      "cheque_date": {
+        "required": "Cheque Date is required, Date only. "
+      },
+      "due_date": {
+        "required": "Due date is required, Date only. "
+
+      },
+      "cheque_number": {
+        "required": " Cheque number status is required"
+      },
+      "drawn_on": {
+        "required": "Drawn on is required, Date only. "
+      },
+      "Item":{
+        "required": "Item status is required"
+      },
+      "amount":{
+        "required": " Amount status is required"
+
+      }
+      
+    },
+      "Details": {
+        "Title": " Receipt details",
+        "no-details": "No Details"
+      },
+      "Errors": {
+        "Update": "لا تستطيع تعديل الرصيد ",
+        "confirm_delete": "Are you sure you want to delete this receipt?",
+        "paid": "Total amont of this invoice is completed ",
+        "over":"The enterd amount is over pennding amount "
+
+
+      }
+
+
+    },
+    "VatReport": {
+      "Title": "Vat Report",
+      "Plural": "Vat Report's"
+    },
+    "IncomeExpense": {
+      "Title": "Income Expense Report",
+      "Plural": "Income Expense Report's"
+    },
+    "BalalceSheet": {
+      "Title": "Balalce Sheet",
+      "Plural": "Balalce Sheet's"
+    },
+    "Expense": {
+      "Title": "Expense",
+      "Add": "Add Expense",
+      "Add_detail": "Add Expense items",
+      "Details": "Expense details",
+      "Update": " update Expense",
+      "Errors": {
+        "Update": "You can't update expense ",
+        "confirm_delete": "Are you sure you want to delete expense? ",
+        "Add_item": "Add expense items",
+        "No_Details":"No items"
+
+      },
+      "Status": {
+        "Status": "Status",
+        "Pending": "Pending",
+        "Approved":"Approved",
+        "Paid": "Paid"
+      },
+      "Payment_method":{
+ 
+          "Cash": "Cash",
+          "Cheque": "Cheque",
+          "BankTransfer":"Bank Transfer"
+    
+      },
+      "list": {
+        "ID": "ID",
+        "expense_no": "Expense no",
+        "expense_date": "Expense date",
+        "Supplier": "Supplier",
+        "expense_status": "Expense status",
+        "gross_amount": "Gross amount",
+        "tax_amount": "Tax amount ",
+        "net_amount": "Net amount",
+        "payment_method": "Payment method",
+        "Description": "Description",
+        "Item": "Item",
+        "cheque_date":"Cheque date",
+        "cheque_number":"Cheque number",
+        "drawn_on":"Drawn on",
+
+
+        "Action": "Action"
+      },
+        "messages": {
+          "Supplier": {
+            "required": "Supplier is required."
+          },
+          "expense_status": {
+            "required": "Status is required. "
+          },
+          "payment_method": {
+            "required": "payment_method is required. "
+          },
+          "cheque_date": {
+            "required": "Cheque date is required, Date only."
+          },
+          "cheque_number": {
+            "required": "Cheque number is required."
+          },
+          "drawn_on": {
+            "required": "Drawn on is required, Date only."
+          },
+          "Item":{
+            "required": "Item is required."
+          },
+          "gross_amount":{
+            "required": "Gross amount is required."
+
+          }
+        
+      }
+    },
+    "Report": {
+      "Title": "Report",
+      "Plural": "Report's"
+    },
+    "AccountTransection": {
+      "Title": "Account Transection",
+      "Plural": "Account Transection's"
+    },
+    "Account": {
+      "Title": "Account",
+      "Plural": "Account's",
+      "Add": " Add Account",
+      "Update": " Add Account",
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete  this Account?"
+      },
+      "type": {
+        "Assets": "Assets",
+        "Liability": "Liability",
+        "Equity": "Equity",
+        "Income": "Income",
+        "Expenes": "Expenes"
+      },
+      "AccountType": {
+        "Cash": "Cash",
+        "Bank": "Bank",
+        "Fixed_Assets": "Fixed Assets",
+        "Stock": "Stock",
+        "Payment_Clearing": "Payment Clearing",
+        "Other_Assets": "Other Assets",
+        "Long_Term_Liabililty": "Long Term Liabililty",
+        "Credit_Card": "Credit_Card",
+        "Other_Liabililty": "Other_Liabililty:",
+        "Equity": "Equity",
+        "Income": "Income",
+        "Other_Income": "Other_Income",
+        "Expenes": "Expenes",
+        "Other_Expenes": "Other_Expenes"
+      },
+      "messages": {
+        "name_en": {
+          "required": "English name  is required "
+        },
+        "name_ar": {
+          "required": "Arabic name  is required "
+        },
+        "account_code": {
+          "required": "Account code is required "
+        },
+        "type": {
+          "required": " Type is required "
+        },
+        "account_type": {
+          "required": " Account Type is required "
+        }
+      },
+      "list": {
+        "ID": "ID",
+        "name": "Name",
+        "name_ar": "Name English",
+        "name_en": "Name Arabic",
+        "type": "Type",
+        "account_Type": "Account Type",
+        "account_code": "Account Code",
+        "description": "description",
+        "description_en": "Description English",
+        "description_ar": "Description Arabic",
+        "Action": "Action",
+        "taxcode": "Tax Code"
+      }
+    },
+    "Item": {
+      "Title": "Item",
+      "Plural": "Item's",
+      "Add": " Add Item",
+      "Update": " Add Item",
+      "Errors": {
+        "confirm_delete": "Are you sure you want to delete  this Item?"
+      },
+      "messages": {
+        "name": {
+          "required": "Name is required "
+        },
+        "taxcodeID": {
+          "required": "Tax code is required "
+        },
+        "account_TypeID": {
+          "required": "Account Type is required "
+        }
+      },
+      "list": {
+        "ID": "ID",
+        "name": "Name",
+        "type": "Type",
+        "account_Type": "Account Type",
+        "rate": "Rate",
+        "Action": "Action",
+        "taxcode": "Tax Code"
+      }
+    },
+    "AType": {
+      "Title": "Account Type",
+      "Plural": "Account Type's"
+    },
+    "ACode": {
+      "Title": "Account Code",
+      "Plural": "Account Code's"
+    },
+    "TX": {
+      "Title": "Tax Code",
+      "Plural": "Tax Code's"
+    },
+    "Supplier": {
+      "Title": " Supplier",
+      "add": "Add Supplier",
+      "Update": "Update Supplier",
+      "Errors": {
+        "Update": "you can't delete this supplier",
+        "confirm_delete": "Are you sure you want to delete this supplier?"
+      },
+      "list": {
+        "ID": "ID",
+        "Name": "Name",
+        "mobile1": "Mobile",
+        "mobile2": "Other mobile",
+        "Email": "Email",
+        "Address": "Address",
+        "Comments": "Comments",
+        "Action": "Action"
+      },
+      "Form": {
+        "messages": {
+          "full_name": {
+            "required": "Name is required"
+          },
+          "mobile1": {
+            "required": "Mobile is required",
+            "pattern": "Contain number only"
+          },
+          "mobile2": {
+            "pattern": "Contain number only"
+          },
+          "email": {
+            "pattern": "Email is Invalid"
+          }
+        }
+      }
+    },
+    "Tax": {
+      "Title": " Tax ",
+      "Add": "Add Tax",
+      "Update": "Update Tax",
+      "Errors": {
+        "Update": "You can't update tax",
+        "confirm_delete": "You cant "
+      },
+      "list": {
+        "ID": "ID",
+        "Percentage": "Percentage",
+        "Code": "Code",
+        "Action": "Action"
+      },
+      "Form": {
+        "messages": {
+          "code_en": {
+            "required": "Code is required."
+          },
+          "percentage": {
+            "required": "Percentage is required.",
+            "pattern": "Contain number only.From 1 to 100 only"
+
+
+          }
+        }
+      }
+    },
+    "PLBSCategory": {
+      "Title": "PLBS Category",
+      "Plural": "PLBS Categories"
+    },
+    "PLBSSubCategory": {
+      "Title": "PLBS Sub Category",
+      "Plural": "PLBS Sub Categories"
+    }
+  }
+}

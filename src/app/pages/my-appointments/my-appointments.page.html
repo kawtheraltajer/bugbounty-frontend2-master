@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">{{'Schedule.Appointment.My'|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="">
+  <div class="relative flex flex-col w-full">
+    <!-- ! Filter Header -->
+    <div class="flex flex-row justify-center w-full p-1 overflow-x-auto border-b h-14">
+      <div class="flex flex-row mx-1 border rounded-md cursor-pointer hover:bg-gray-50" (click)="dp.open()">
+        <div class="flex flex-col flex-1 border-ie">
+          <!-- Month and Year -->
+          <mat-label class="flex items-center justify-center flex-1 border-b">Month and Year</mat-label>
+          <div
+            class="flex items-center justify-center flex-1 text-center cursor-pointer pointer-events-auto text-step-900 bg-background">
+            {{selectedDateFormated}}</div>
+          <input class="h-0" matInput [matDatepicker]="dp">
+        </div>
+        <div class="flex items-center justify-center p-1">
+          <ion-icon class="w-6 h-6" name="calendar-outline"></ion-icon>
+        </div>
+        <mat-datepicker #dp startView="multi-year" (monthSelected)="closeDatePicker($event, dp)">
+        </mat-datepicker>
+      </div>
+      <div class="flex flex-row items-center justify-center p-1 mx-1 border rounded-md hover:bg-gray-50">
+        <mat-checkbox class="mx-0.5" (change)="filter()" [(ngModel)]="isPending">Pending</mat-checkbox>
+        <mat-checkbox class="mx-0.5" (change)="filter()" [(ngModel)]="isApproved">Approved</mat-checkbox>
+        <mat-checkbox class="mx-0.5" (change)="filter()" [(ngModel)]="isCanceled">Canceled</mat-checkbox>
+      </div>
+    </div>
+    <!-- ! Appointments Content -->
+    <div class="grid grid-cols-1 gap-2 p-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-4 ">
+      <div (click)="book()"
+        class="flex items-center justify-center h-24 border-2 border-dashed rounded-md cursor-pointer hover:bg-gray-50">
+        <ion-icon name="add-outline"></ion-icon>
+      </div>
+      <div *ngFor="let appo of viewAppointments" (click)="details(appo)"
+        [class]="appo.canceled?'border-red-300 hover:border-red-500':(appo.timeSlot[0].isApproved?'border-green-300 hover:border-green-500':'border-orange-300 hover:border-orange-500')"
+        class="flex flex-row h-24 transition-all duration-300 border-2 rounded-md cursor-pointer transform-gpu hover:scale-105">
+        <div class="flex flex-col flex-1 border-dashed border-ie" *ngIf="!appo.canceled">
+          <div class="flex flex-row items-center justify-center flex-1 border-b">
+            <div class="flex pie-2">
+              Date:
+            </div>
+            <div>
+              {{appo.timeSlot[0].date|date}}
+            </div>
+          </div>
+          <div class="flex flex-row items-center justify-center flex-1 border-b">
+            <div class="flex flex-row justify-center w-1/2 px-1 border-ie">
+              <div class="flex pie-2">
+                Start:
+              </div>
+              <div class="flex">
+                {{appo.timeSlot[0].startTime|date:'shortTime'}}
+              </div>
+            </div>
+            <div class="flex justify-center w-1/2">
+              <div class="flex pie-2">
+                End:
+              </div>
+              <div class="flex">
+                {{appo.timeSlot[0].endTime|date:'shortTime'}}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-center flex-1 ">{{appo.type.title_en}}</div>
+        </div>
+        <div class="flex flex-col flex-1 border-dashed border-ie" *ngIf="appo.canceled">
+          <div class="flex items-center justify-center flex-1 border-b">
+            {{appo.timeSlot_history?.timeSlot[0]?(appo.timeSlot_history?.timeSlot[0]?.date|date):'-'}}</div>
+          <div class="flex items-center justify-center flex-1 border-b">
+            {{appo.timeSlot_history?.timeSlot[0]?(appo.timeSlot_history?.timeSlot[0]?.startTime|date:'shortTime'):'-'}}
+          </div>
+          <div class="flex items-center justify-center flex-1 border-b">{{appo.type.title_en}}</div>
+          <div class="flex items-center justify-center flex-1">{{appo.cancellation_reson}}</div>
+        </div>
+        <div class="flex items-center justify-center p-1 border-l">{{appo.id}}</div>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

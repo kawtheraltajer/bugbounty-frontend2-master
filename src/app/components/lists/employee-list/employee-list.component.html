@@ -1,0 +1,202 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+      <div class="flex-1 items-start">
+        <div class="relative flex flex-1 h-10 border rounded-lg  lg:flex-none lg:w-1/3 bg-toolbar-background ">
+          <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+            viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+            width="512px" height="512px">
+            <path
+              d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+          </svg>
+          <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none" type="search"
+            name="search" placeholder="{{'Operations.Search'|translate}}" [(ngModel)]="searchTerm"
+            (keyup)="applyFilter()" #search>
+        </div>
+      </div>
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="add()">
+        <ion-icon name="add"></ion-icon>
+        {{'Employee_managment.add'|translate}}
+      </div>
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="printDiv()">
+        <ion-icon name="arrow-redo-outline"></ion-icon> pdf
+      </div>
+    </div>
+  </div>
+
+  <ng-container>
+    <div class="relative flex flex-1 overflow-auto">
+      <table mat-table id="table" [dataSource]="employeeList" matSort
+        class="z-10 w-full overflow-y-auto bg-background text-step-600">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Employee_managment.list.id'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.id}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="first_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Court.clients.Form.name'|translate}} 
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.user?.first_name}}{{" "}} {{element?.user?.last_name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Employee_managment.list.last_name'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Employee_managment.list.designation'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{lang.selectedLang=='en'? element?.designation.title_en:element?.designation.title_ar| titlecase}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Employee_managment.list.Action'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="details(row)" [matTooltip]="'Operations.Edit'|translate">
+              <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true" class="border-b"></tr>
+        <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+          class="border-b cursor-pointer border-step-100 hover:bg-step-50">
+        <tr class="mat-row" *matNoDataRow>
+          <ng-template #NoRoles>
+            <td class="text-2xl text-center mat-cell" colspan="5">There are no employees.</td>
+          </ng-template>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator #EmployeeTablePaginator [pageSizeOptions]="[30,40,50]"
+      class="sticky bottom-0 w-full bg-gray-100 border-t border-b border-step-100 mat-paginator-sticky"
+      showFirstLastButtons>
+    </mat-paginator>
+  </ng-container>
+</div>
+
+
+
+
+<!-- ! Groups Table -->
+<!--<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+      <div class="flex-1 items-start">
+        <div
+          class="relative flex flex-1 h-10 border rounded-lg  lg:flex-none lg:w-1/3 bg-toolbar-background ">
+          <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+          viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+          width="512px" height="512px">
+          <path
+            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+        </svg>
+          <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none" type="search"
+          name="search" placeholder="        {{'Operations.Search'|translate}} 
+        " [(ngModel)]="searchTerm" (keyup)="applyFilter()" #search>
+        </div>
+      </div>
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="add()">
+        <ion-icon name="add"></ion-icon>
+       {{'Employee_managment.add'|translate}}
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<div class="grid grid-cols-2 grid-flow-row gap-2 h-64 p-6 border-t  flex-grow  overflow-y-auto">
+ 
+  <div class="border border-gray-400  flex flex-col items-center cursor-pointer hover:bg-step-200 justify-center rounded-t-2xl rounded-b-2xl	h-30 p-5 "
+      *ngFor="let emp of pageData "  (click)="details(emp)" >
+
+
+
+<div class="flex flex-col w-full p-2">
+  <div class="flex flex-col items-center justify-center" >
+    <span class="flex items-center justify-start">
+      <div class="object-cover  w-20 h-20 border rounded-full shadow cursor-pointer profile-pic"
+        >
+         <ion-img  [src]="getURL(emp?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'" #img
+                (ionError)="img.src = 'assets/fillers/profile-temp.png'"
+                class=" z-0 object-cover w-20 h-20 overflow-hidden rounded-full">
+              </ion-img>
+ 
+      </div>
+    </span>
+    <span class="flex flex-col items-center justify-start p-2">
+      <span   class="text-xl font-semibold	"  >
+              
+        {{emp.user.first_name + ' ' + emp.user.last_name | titlecase}}
+        </span>
+      <span class="text-base	">
+
+
+     {{ lang.selectedLang=='en'? emp?.designation.title_en:emp?.designation.title_ar| titlecase}}
+
+      </span> 
+ 
+ 
+        
+     
+    </span>
+
+  </div>
+
+</div>
+
+
+
+
+
+      
+
+    </div>
+</div>
+
+<div class="flex items-center px-4 bg-white border-t border-gray-400 sm:px-6">
+  <mat-paginator [showFirstLastButtons]="true" class="w-full" [length]="dataCount" [pageSize]="itemsPerPage"
+    (page)="pageEvent($event)">
+  </mat-paginator>
+</div>
+</div>-->

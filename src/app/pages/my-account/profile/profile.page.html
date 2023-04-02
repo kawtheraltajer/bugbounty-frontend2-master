@@ -1,0 +1,111 @@
+<ion-content *ngIf="auth.userData|async as data">
+
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="flex flex-col justify-center w-full">
+      <div class="flex items-center justify-center w-full p-1 mx-auto text-2xl border-b lg:w-1/2">
+        {{'MyAccount.Profile.Profile'|translate}} </div>
+      <div class="flex flex-col w-full p-2">
+        <div class="flex flex-col items-center justify-center">
+          <span class="flex items-center justify-start">
+            <div class="object-cover w-32 h-32 border rounded-full shadow cursor-pointer profile-pic"
+              (click)="imageInput.open()">
+              <ion-img [src]="picURL? picURL:getURL(data?.pictureURL)" #img
+                (ionError)="img.src = 'assets/fillers/profile-temp.png'"
+                class="absolute z-0 object-cover w-32 h-32 overflow-hidden rounded-full">
+              </ion-img>
+              <span class="z-10 flex items-center justify-center">
+                <ion-icon class="mx-1" name="camera-outline"></ion-icon>
+                {{'MyAccount.Profile.ChangeImage'|translate}}
+              </span>
+            </div>
+          </span>
+        </div>
+
+      </div>
+      <form class="flex flex-col w-full px-2 mx-auto mt-8 md:w-2/3 lg:w-1/2" [formGroup]="addForm">
+        <div class="hidden">
+          <!-- image -->
+          <mat-form-field class="hidden" appearance="standard" class="w-full">
+            <mat-label> {{'MyAccount.Profile.Image'|translate}}
+            </mat-label>
+            <ngx-mat-file-input hidden #imageInput formControlName="image" type="hidden" class="hidden"
+              placeholder="Basic fill placeholder" accept=".png,.svg,.jpg,.jpeg">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </div>
+        <!-- Name -->
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-1/2 pie-2">
+            <mat-label> {{'MyAccount.Profile.FirstName'|translate}} </mat-label>
+            <input matInput type="text" formControlName="first_name" placeholder="Ahmed">
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="w-1/2 pis-2">
+            <mat-label> {{'MyAccount.Profile.LastName'|translate}} </mat-label>
+            <input matInput type="text" formControlName="last_name" placeholder="Ahmed">
+          </mat-form-field>
+        </div>
+        <!-- email -->
+        <div class="flex flex-row w-1/2">
+          <mat-form-field appearance="standard" class="w-full mat-input-disabled">
+            <mat-label>{{'MyAccount.Profile.Email'|translate}}</mat-label>
+            <input matInput formControlName="email" readonly="true" type="email">
+          </mat-form-field>
+        </div>
+        <!-- Bio -->
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>{{'MyAccount.Profile.Bio'|translate}}</mat-label>
+            <textarea matInput formControlName="bio" placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </div>
+        <div class="flex items-center justify-end w-full ">
+          <button mat-flat-button color="primary" (click)="update()" class="text-white outline-none bg-primary-default">
+            {{'MyAccount.Profile.UpdateProfile'|translate}} </button>
+        </div>
+      </form>
+    </div>
+    <div class="flex flex-col justify-center w-full">
+      <div class="flex items-center justify-center w-full p-1 mx-auto text-2xl border-b lg:w-1/2">
+        {{'MyAccount.Profile.Password'|translate}} </div>
+      <form class="flex flex-col w-full px-2 mx-auto mt-8 md:w-2/3 lg:w-1/2" [formGroup]="changePassForm">
+        <!-- Old Pass -->
+        <mat-form-field appearance="standard" class="w-full ">
+          <mat-label> {{'MyAccount.Profile.CurrantPassword'|translate}} </mat-label>
+          <input matInput type="password" formControlName="oldPassword">
+        </mat-form-field>
+        <!-- New Pass -->
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-1/2 pie-2">
+            <mat-label> {{'MyAccount.Profile.NewPassword'|translate}} </mat-label>
+            <input matInput type="password" formControlName="newPassword">
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="w-1/2 pis-2">
+            <mat-label> {{'MyAccount.Profile.ConfirmNewPassword'|translate}} </mat-label>
+            <input matInput type="password" formControlName="newPasswordCon">
+          </mat-form-field>
+        </div>
+        <div class="flex items-center justify-end w-full ">
+          <button mat-flat-button color="warn" (click)="changePassword()"
+            class="text-white outline-none bg-danger-default"> {{'MyAccount.Profile.ChangePassword'|translate}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+
+<!-- <div class="flex w-full pt-4">
+  <div class="w-1/2 h-40 p-2 ">
+    <div class="w-full h-full border rounded-md">
+      <span class="flex items-center justify-center w-full h-16 text-2xl"> Role </span>
+      <span>Bio: {{data?.bio}}</span>
+    </div>
+  </div>
+  <div class="w-1/2 h-40 p-2 ">
+    <div class="flex flex-col w-full h-full border rounded-md hover:bg-step-50">
+      <span class="flex items-center justify-center w-full h-16 text-2xl"> Role </span>
+      <span
+        class="flex items-center justify-center w-full">{{data.role? data.role.name +' - '+ data.role.description:'-'}}</span>
+    </div>
+  </div>
+</div> -->

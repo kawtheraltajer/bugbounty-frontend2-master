@@ -1,0 +1,91 @@
+<vt-header>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+  <div slot="middle"> {{'EmployeeSelfServices.Title'|translate}} </div>
+  <ion-buttons slot="end">
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+</vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative">
+
+  <div class="flex flex-col w-full p-5">
+
+    <span class="flex items-center justify-center w-full p-5">
+      <img class="object-cover w-40 h-40 rounded-full"
+        [src]="getURL(data?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"></span>
+    <div class="flex flex-col items-center justify-center w-full ">
+      <div class="flex items-start justify-center w-full h-8 flex-6">
+        <p class="text-xl font-medium text-primary-default ">{{ data?.user.first_name }}{{' '}}{{
+          data?.user.last_name}}
+        </p>
+
+
+      </div>
+      <div class="flex items-start justify-center w-full h-8 flex-6">
+        <p class="font-medium text-l text-primary-default ">
+          {{ lang.selectedLang=='en'? data?.designation.title_en:data?.designation.title_ar| titlecase}}
+        </p>
+
+
+
+      </div>
+      <div class="flex items-start justify-center w-full h-8 flex-6">
+        <p class="font-medium text-l text-primary-default ">
+
+          {{ lang.selectedLang=='en'? data?.department?.name_en:data?.department?.name_ar| titlecase}}
+        </p>
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div
+    class="sticky top-0 z-50 flex items-center justify-center flex-1 w-full p-4 text-2xl text-center text-white border-t border-b bg-primary-default border-secondary-default ">
+    <div class="flex-1">
+    </div>
+
+
+  </div>
+
+
+
+  <div class="grid h-64 grid-flow-row grid-cols-2 gap-2 p-6 border-t">
+
+    <div
+      class="flex flex-col items-center justify-center h-20 p-5 border border-gray-400 cursor-pointer hover:bg-step-100 rounded-t-2xl rounded-b-2xl "
+      *ngFor="let service of Services ;let i = index; " (click)="openPage(service.link)">
+
+
+      <div class="flex flex-col w-full p-2">
+        <div class="flex flex-col items-center justify-center p-5">
+          <span class="flex items-center justify-start p-2 ">
+            <ion-icon class="text-2xl font-medium text-primary-default " [name]="service.icon"></ion-icon>
+          </span>
+          <span class="flex flex-col items-center justify-start p-2">
+            <span class="text-xl font-medium text-primary-default ">
+
+              {{service.title  |translate }}
+
+            </span>
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+</ion-content>

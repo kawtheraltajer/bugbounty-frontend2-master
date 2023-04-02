@@ -1,0 +1,95 @@
+<vt-header>
+    <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <div slot="middle"> {{'Employee_managment.Services.General_Requests'|translate}} </div>
+</vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative">
+
+    <!--<div
+        class="sticky top-0 z-50 flex items-center justify-center flex-1 w-full p-4 text-2xl text-center text-white border-t border-b bg-primary-default border-secondary-default ">
+        {{'Employee_managment.General_Requests.Send_request'|translate}}
+    </div>-->
+
+    <div class="flex flex-col items-center justify-center w-full p-2 overflow-auto ">
+        <form class="flex flex-col w-full h-full px-4" [formGroup]="addForm">
+
+            <!-- To start -->
+            <mat-label *ngIf="!SelectedRequest">{{'Employee_managment.General_Requests.To'|translate}}</mat-label>
+            <div *ngIf="!SelectedRequest" class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer border-gray-300" [class.border-dashed]="!selectedEmployee">
+                <div class="relative flex flex-col items-center justify-center w-full h-16 border-2 cursor-pointer border-gray-300"
+                    [class.border-dashed]="!selectedEmployee">
+                    <div *ngIf="selectedEmployee" matTooltip="UnAssign Employee" (click)="removeEmployee()"
+                        class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </div>
+                    <ion-item (click)="selectEmployee($event)" class="w-full cursor-pointer" lines="none"
+                        *ngIf="selectedEmployee">
+                        <ion-label>
+                            {{ selectedEmployee.user.first_name+' '+selectedEmployee.user.last_name |titlecase}} -
+                            {{selectedEmployee.user.email}}
+                        </ion-label>
+                        <ion-avatar slot="end">
+                            <img class="w-full h-full" [src]="user.getProfilePicURL(selectedEmployee.user.pictureURL)">
+                        </ion-avatar>
+                    </ion-item>
+                    <div (click)="selectEmployee($event)"
+                        class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100"
+                        *ngIf="!selectedEmployee">
+                        <ion-icon name="add-outline" title=""></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <!-- To end -->
+
+            <!-- Subject start-->
+            <mat-form-field appearance="fill" class="w-full mb-2">
+                <mat-label>{{'Employee_managment.General_Requests.Subject'|translate}}</mat-label>
+                <input matInput formControlName="subject">
+                <mat-error *ngIf="addForm.get('subject').hasError('required')">
+                    {{'Employee_managment.General_Requests.Messages.Errors.Subject.required'|translate}}
+                </mat-error>
+            </mat-form-field>
+            <!-- Subject end-->
+
+            <!-- Message start -->
+            <mat-form-field appearance="fill" class="w-full mb-2">
+                <mat-label>{{'Employee_managment.General_Requests.Message'|translate}}</mat-label>
+                <textarea matInput type="text" formControlName="body" rows="10"></textarea>
+                <mat-error *ngIf="addForm.get('body').hasError('required')">
+                    {{'Employee_managment.General_Requests.Messages.Errors.Message.required'|translate}}
+                </mat-error>
+            </mat-form-field>
+            <!-- Message end -->
+
+            <!-- Document start-->
+            <mat-form-field appearance="fill" class="w-full mb-2">
+                <mat-label>Attach Document | إرفاق ملف </mat-label>
+
+                <ngx-mat-file-input formControlName="OtherUrl"
+                    placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} "
+                    accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+                </ngx-mat-file-input>
+                <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+
+                <mat-icon matSuffix> </mat-icon>
+            </mat-form-field>
+            <!-- Document end-->
+
+            <!-- Send button start-->
+            <div class="mt-4">
+                <button
+                    class="flex items-center w-full h-12 text-white rounded-md hover:text-secondary-default bg-primary-default hover:bg-primary-tint"
+                    (click)="sendRequest()">
+                    <div class="flex-1">{{'Employee_managment.General_Requests.Send'|translate}}</div>
+                </button>
+            </div>
+            <!-- Send button end-->
+
+        </form>
+    </div>
+</ion-content>

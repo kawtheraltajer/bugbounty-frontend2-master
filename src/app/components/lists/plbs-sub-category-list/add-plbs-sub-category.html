@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Add PLBS Category </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <mat-form-field>
+          <mat-label> PLBS Category </mat-label>
+          <mat-select formControlName="PLBSID">
+            <mat-option
+              *ngFor="let pLBSCategory of pLBSCategories;let i = index;"
+              [value]="pLBSCategory.id"
+            >
+              {{pLBSCategory.category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> sub_category </mat-label>
+            <input
+              matInput
+              formControlName="sub_category"
+              placeholder="sub category ..."
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> sub_cat_order </mat-label>
+            <input
+              matInput
+              formControlName="sub_cat_order"
+              placeholder="sub cat order ..."
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>Account Code</mat-label>
+            <mat-select formControlName="account_code" multiple>
+              <mat-option
+                *ngFor="let accountcode of accountCodes"
+                [value]="accountcode.id"
+                >{{accountcode.acc_code_en}} {{accountcode.description_en}}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="flex flex-col w-full">
+          <mat-label>
+            Account Code
+          </mat-label>
+          <div
+            (click)="selectAccountCode($event)"
+            class="
+              relative
+              border-dashed
+              flex flex-col
+              items-center
+              justify-center
+              w-full
+              h-16
+              border-2
+              my-2
+              cursor-pointer
+            "
+          >
+            <div
+              matTooltip="Add Group Members"
+              class="
+                flex
+                items-center
+                justify-center
+                w-full
+                h-full
+                text-3xl
+                hover:bg-gray-100
+              "
+            >
+              <ion-icon name="add-outline" title=""></ion-icon>
+            </div>
+          </div>
+          <div
+            class="
+              relative
+              border-dashed border-b-none
+              flex flex-col
+              items-center
+              justify-center
+              w-full
+              h-16
+              border-2
+            "
+            *ngFor="let ac of accountCOde;let i = index;let last = last"
+            [class.border-b-2]="last"
+          >
+            <div
+              matTooltip="remove Member"
+              (click)="removeAccountCode(i)"
+              class="
+                absolute
+                z-50
+                bg-white
+                border
+                text-black
+                font-black
+                hover:bg-red-200
+                cursor-pointer
+                flex
+                items-center
+                rounded-full
+                justify-center
+                -top-2
+                -right-2
+                h-6
+                w-6
+                ...
+              "
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <ion-item lines="none">
+              <ion-label>
+                {{ mem.user.first_name+' '+mem.user.last_name |titlecase}} -
+                {{mem.user.email}}
+              </ion-label>
+            </ion-item>
+          </div>
+        </div> -->
+      </form>
+    </div>
+  </div>
+</ion-content>

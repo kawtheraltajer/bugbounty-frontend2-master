@@ -1,0 +1,12 @@
+<div class="z-50 flex items-center justify-between w-full px-2 border-b h-14 bg-step-300 text-step-900">
+  <!-- bg-primary-default text-secondary-default -->
+  <div class="flex flex-row items-center justify-start flex-1 h-full">
+    <ng-content select="[slot='start']"></ng-content>
+  </div>
+  <div class="flex flex-row items-center justify-center h-full text-2xl">
+    <ng-content select="[slot='middle']"></ng-content>
+  </div>
+  <div class="flex flex-row items-center justify-end flex-1 h-full">
+    <ng-content select="[slot='end']"></ng-content>
+  </div>
+</div>

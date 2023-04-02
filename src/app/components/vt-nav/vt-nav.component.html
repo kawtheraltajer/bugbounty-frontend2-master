@@ -1,0 +1,11 @@
+<div class="flex flex-row items-center justify-center w-full p-2 bg-backeground">
+  <div mat-tab-nav-bar scrollToCenter disableRipple="true">
+    <ng-container *ngFor="let tab of tabs;let i = index;">
+      <div mat-tab-link *ngIf="tab.permission|permission" [active]="tab.selected" [class.selectedTab]="tab.selected"
+        matRipple [matRippleCentered]="true" (click)="selectTab(i)" [matRippleRadius]="40">
+        <ion-icon class="w-6 h-6" [name]="tab.icon"></ion-icon>
+        <div class="p-1" style="min-width: 45px;">{{applyTranslate? (tab.title|translate):(tab.title)}}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

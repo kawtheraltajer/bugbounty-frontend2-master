@@ -1,0 +1,299 @@
+<div class="flex flex-row items-center border-t border-b h-14">
+  <div class="flex justify-start flex-1 px-2 item-center">
+    <div role="button" (click)="isAddBlock = !isAddBlock"
+      class="flex flex-row items-center justify-center p-2 border-2 border-dashed rounded-lg hover:bg-step-300 hover:text-secondary-default ">
+      {{'HCM.Appraisal.Add'|translate}}<ion-icon class="mx-2" name="add-outline"></ion-icon>
+    </div>
+  </div>
+  <!-- <div>Appraisals</div> -->
+  <div class="flex justify-end flex-1 gap-2 px-2 item-center">
+    <div role="button" class="flex items-center gap-2 p-1 text-xl border rounded-lg bg-step-100 hover:bg-step-300"
+      (click)="drawer.toggle()">
+      {{'Operations.Filter'|translate}}
+      <ion-icon slot="end" name="funnel-outline"></ion-icon>
+    </div>
+  </div>
+</div>
+<mat-drawer-container [dir]="(lang.direction|async)" class="relative w-full h-full overflow-auto font-sans rounded-b"
+  [hasBackdrop]="['sm','md','lg'].includes(app.screenSize)">
+  <mat-drawer class="relative w-2/3 border-is md:w-1/2 xl:w-1/3 bg-step-200" #drawer [position]="'end'"
+    [mode]="['sm','md','lg'].includes(app.screenSize)?'over':'side'" opened="false">
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label>{{"Date.Year.Title"|translate}}</mat-label>
+        <mat-select [(ngModel)]="filter.filter.year" [(value)]="filter.filter.year">
+          <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label>{{'Date.Month.Title'|translate}}</mat-label>
+        <mat-select [(ngModel)]="filter.filter.month" [(value)]="filter.filter.month">
+          <mat-option *ngFor="let month of months" [value]="month">{{('Months.'+month)|translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label> {{'HCM.Appraisal.Status.Title'|translate}}</mat-label>
+
+        <mat-select name="status" [(ngModel)]="filter.filter.status" [(value)]="filter.filter.status">
+          <mat-option value="CreationPhase">
+            
+            {{'HCM.Appraisal.Status.CreationPhase'|translate}}
+          
+          </mat-option>
+          <mat-option value="EvaluationPhase">
+            {{'HCM.Appraisal.Status.EvaluationPhase'|translate}}
+          </mat-option>
+          <mat-option value="ApprovalPhase">
+            {{'HCM.Appraisal.Status.ApprovalPhase'|translate}}
+
+          </mat-option>
+          <mat-option value="FeedbackPhase">
+            {{'HCM.Appraisal.Status.FeedbackPhase'|translate}}
+
+          </mat-option>
+          <mat-option value="Completed">
+            {{'HCM.Appraisal.Status.Completed'|translate}}
+
+            
+          </mat-option>
+          <mat-option value="Archived">
+            {{'HCM.Appraisal.Status.Archived'|translate}}
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label> {{'HCM.Appraisal.SelectAppraisee'|translate}}
+        </mat-label>
+        <mat-select [(ngModel)]="filter.filter.employeeID" [(value)]="filter.filter.employeeID">
+          <mat-option [value]="null" aria-selected="true">None</mat-option>
+
+          <mat-option *ngFor="let Employee of employeeList" [value]="Employee.id">
+            {{Employee.user.first_name}}{{"-"}}{{Employee.user.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label> {{'HCM.Appraisal.SelectAppraiser'|translate}}
+        </mat-label>
+        <mat-select [(ngModel)]="filter.filter.appraiserID" [(value)]="filter.filter.appraiserID">
+          <mat-option [value]="null" aria-selected="true">None</mat-option>
+
+          <mat-option *ngFor="let Employee of employeeList" [value]="Employee.id">
+            {{Employee.user.first_name}}{{"-"}}{{Employee.user.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex-initial ... px-8">
+      <mat-form-field appearance="standard" class="w-full">
+        <mat-label>{{'HCM.Appraisal.Type'|translate}}</mat-label>
+        <mat-select [(ngModel)]="filter.filter.typeID" [(value)]="filter.filter.typeID">
+          <mat-option *ngFor="let type of types" [value]="type.id">{{type['title_'+lang.selectedLang]}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="flex-initial ...">
+      <ion-button (click)="getAllAppraisal()">
+        {{'Operations.Apply'|translate}}
+      </ion-button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="pb-0.5">
+    <div class="grid grid-cols-12 gap-1 p-4 overflow-y-auto">
+      <!-- ! New Appraisal -->
+      <div *ngIf="isAddBlock"
+        class="flex flex-col col-span-12 p-2 border-2 border-dashed rounded-lg text-step-500 md:col-span-6 xl:col-span-4 2xl:col-span-3 hover:bg-step-100 hover:text-step-900 ">
+        <div class="flex flex-row items-center justify-center p-1 border-b">
+          <div class="flex flex-1 text-xl">{{'HCM.Appraisal.Add'|translate}}</div>
+          <div>
+            <ion-icon name="checkmark-outline" [matTooltip]="'Operations.Add'|translate"
+              class="w-8 h-8 mx-2 rounded-full cursor-pointer hover:bg-green-300 hover:text-black"
+              (click)="createAppraisal()">
+            </ion-icon>
+            <ion-icon name="close-outline" [matTooltip]="'Operations.Cancel'|translate"
+              class="w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+              (click)="isAddBlock = false">
+            </ion-icon>
+          </div>
+        </div>
+        <div class="flex flex-row w-full gap-2 px-1 pt-2">
+          <mat-form-field class="w-1/2">
+            <mat-label>{{"Date.Year.Title"|translate}}</mat-label>
+            <mat-select [(value)]="newAppraisal.year">
+              <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-1/2">
+            <mat-label>{{'Date.Month.Title'|translate}}</mat-label>
+            <mat-select [(value)]="newAppraisal.month">
+              <mat-option *ngFor="let month of months" [value]="month">{{('Months.'+month)|translate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full gap-2 px-1">
+          <mat-form-field class="w-1/2">
+            <mat-label>{{'HCM.Appraisal.Type'|translate}}</mat-label>
+            <mat-select [(value)]="newAppraisal.type">
+              <mat-option *ngFor="let type of types" [value]="type">{{type['title_'+lang.selectedLang]}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-1/2">
+            <mat-label>{{'HCM.Appraisal.Template'|translate}}</mat-label>
+            <mat-select [(value)]="newAppraisal.templateID">
+              <mat-option [value]="null">{{"Operations.None"|translate}}</mat-option>
+              <mat-option *ngFor="let temp of templates" [value]="temp.id">{{temp['title_'+lang.selectedLang]}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="flex flex-col w-full gap-2">
+          <!-- ! Appraisee -->
+          <div class="flex flex-row items-center justify-center w-full">
+            <div (click)="selectAppraisee($event)" [matTooltip]="'HCM.Appraisal.SelectAppraisee'|translate"
+              class="flex items-center justify-start w-full h-full text-xl border border-dashed cursor-pointer "
+              *ngIf="!newAppraisal.employee">
+              <ion-icon name="add-outline" title=""></ion-icon>
+              <div class="p-2">
+                {{'HCM.Appraisal.SelectAppraisee'|translate}}
+              </div>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full border" *ngIf="newAppraisal.employee">
+              <div class="flex flex-row items-center justify-start w-full gap-2 ">
+                <div class="flex items-center justify-center h-full p-1">
+                  <img class="object-cover w-12 h-12 rounded-full"
+                    [src]="app.getProfilePicURL(newAppraisal.employee?.user?.pictureURL)">
+                </div>
+                <div class="flex flex-col">
+                  <div> {{'HCM.Appraisal.Appraisee'|translate}}:</div>
+                  <div class="flex items-center justify-center flex-1 h-12 p-1 text-xl ">
+                    {{newAppraisal.employee?.user?.first_name + ' ' +newAppraisal.employee?.user?.last_name}}
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center h-full px-1">
+                <ion-icon name="close-outline" [matTooltip]="'Operations.Delete'|translate"
+                  class="w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+                  (click)="newAppraisal.employee = null">
+                </ion-icon>
+              </div>
+            </div>
+          </div>
+          <!-- ! Appraiser -->
+          <div class="flex flex-row items-center justify-center w-full">
+            <div (click)="selectAppraiser($event)" [matTooltip]="'HCM.Appraisal.SelectAppraiser'|translate"
+              class="flex items-center justify-start w-full h-full text-xl border border-dashed cursor-pointer "
+              *ngIf="!newAppraisal.appraiser">
+              <ion-icon name="add-outline" title=""></ion-icon>
+              <div class="p-2">
+                {{'HCM.Appraisal.SelectAppraiser'|translate}}
+              </div>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full border" *ngIf="newAppraisal.appraiser">
+              <div class="flex flex-row items-center justify-start w-full gap-2 ">
+                <div class="flex items-center justify-center h-full p-1">
+                  <img class="object-cover w-12 h-12 rounded-full"
+                    [src]="app.getProfilePicURL(newAppraisal.appraiser.user?.pictureURL)">
+                </div>
+                <div class="flex flex-col">
+                  <div> {{'HCM.Appraisal.SelectAppraiser'|translate}} :</div>
+                  <div class="flex items-center justify-center flex-1 h-12 p-1 text-xl ">
+                    {{newAppraisal.appraiser.user?.first_name + ' ' +newAppraisal.appraiser.user?.last_name}}
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center h-full px-1">
+                <ion-icon name="close-outline" [matTooltip]="'Operations.Delete'|translate"
+                  class="w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+                  (click)="newAppraisal.appraiser = null">
+                </ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ! List -->
+      <div *ngFor="let appraisal of pageData;let i=index;trackBy:trackByIdx;"
+        class="flex flex-col col-span-12 border rounded-lg md:col-span-6 xl:col-span-4 2xl:col-span-3">
+        <div class="flex items-center justify-center w-full p-1 border-b">
+          <div class="w-24 h-24">
+            <img class="object-cover object-top w-full h-full rounded-full shadow"
+              [src]="app.getProfilePicURL(appraisal.employee?.user?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'">
+          </div>
+          <div class="flex flex-col items-center justify-center px-2">
+            <div class="pb-0.5 text-lg text-center border-b">
+              {{appraisal?.employee?.user?.first_name + ' ' +appraisal?.employee?.user?.last_name }}
+            </div>
+            <div class="pb-0.5 text-center border-b text-md">
+              {{appraisal?.employee?.designation|scape:('title_'+lang.selectedLang)}}
+            </div>
+            <div class="pb-0.5 text-center border-b text-md">
+              {{appraisal?.employee?.department|scape:('name_'+lang.selectedLang)}}
+            </div>
+          </div>
+        </div>
+
+        <!-- !Info -->
+        <div class="flex flex-col w-full">
+          <div class="flex flex-row items-center h-8 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">{{'Date.Year.Title'|translate}}
+            </div>
+            <div class="flex items-center flex-1 px-2">
+              {{appraisal.year}}</div>
+          </div>
+          <div class="flex flex-row items-center h-8 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">{{'Date.Month.Title'|translate}}
+            </div>
+            <div class="flex items-center flex-1 px-2">
+              {{appraisal.month==0?'-':appraisal.month}}</div>
+          </div>
+          <div class="flex flex-row items-center h-8 border-b">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'HCM.Appraisal.Status.Title'|translate}}</div>
+            <div class="flex items-center flex-1 px-2">
+              {{('HCM.Appraisal.Status.'+appraisal.status)|translate}}
+            </div>
+          </div>
+          <div class="flex flex-row items-center flex-1 ">
+            <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+              {{'HCM.Appraisal.Type'|translate}}</div>
+            <div class="flex items-center flex-1 px-2">
+              {{appraisal.type['title_'+lang.selectedLang]}}
+            </div>
+          </div>
+        </div>
+
+        <div role="button" [routerLink]="'/hcm/appraisal/details/'+appraisal.id"
+          class="flex items-center justify-center flex-auto w-full h-8 p-2 border-t hover:bg-step-300">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <div class="px-2"> {{('HCM.Appraisal.Details')|translate}}
+          </div>
+        </div>
+
+        <ng-container *ngIf="appraisal">
+        </ng-container>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<!-- ! Paginator -->
+<div class="flex items-center px-4 bg-white border-t border-gray-400 sm:px-6">
+  <mat-paginator [showFirstLastButtons]="true" class="w-full" [length]="dataCount" [pageSize]="itemsPerPage"
+    (page)="pageEvent($event)">
+  </mat-paginator>
+</div>

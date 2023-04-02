@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>         {{'Finance.Tax.Update'|translate}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" (click)="add()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label>   {{'Finance.Tax.list.Code'|translate}} </mat-label>
+              <input
+                matInput
+                formControlName="code_en"
+              />
+            </mat-form-field>
+          </div>
+  
+    
+  
+  
+  
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> {{'Finance.Tax.list.Percentage'|translate}} </mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="percentage"
+              />
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+  

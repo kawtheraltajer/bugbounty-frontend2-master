@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>          {{'Court.Companies.Add'|translate}}  </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Court.Companies.Form.name'|translate}} <span style="color: red;">*</span>   </mat-label>
+                        <input matInput type="text" formControlName="full_name">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.full_name" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('full_name').hasError(validation.type) && (addForm.get('full_name').dirty || addForm.get('full_name').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'Court.Companies.Form.CR'|translate}}     </mat-label>
+                        <input matInput type="text" formControlName="CR">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.CR" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('CR').hasError(validation.type) && (addForm.get('CR').dirty || addForm.get('CR').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'Court.Companies.Form.mobile1'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="mobile1">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.mobile1" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('mobile1').hasError(validation.type) && (addForm.get('mobile1').dirty || addForm.get('mobile1').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'Court.Companies.Form.mobile2'|translate}} </mat-label>
+                        <input matInput type="text" formControlName="mobile2">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.mobile2" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('mobile2').hasError(validation.type) && (addForm.get('mobile2').dirty || addForm.get('mobile2').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   {{'Court.Companies.Form.WhatsApp_contact'|translate}}</mat-label>
+                        <input matInput type="text" formControlName="whatsApp_phone">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.whatsApp_phone" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('whatsApp_phone').hasError(validation.type) && (addForm.get('whatsApp_phone').dirty || addForm.get('whatsApp_phone').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Court.Companies.Form.email'|translate}} <span style="color: red;">*</span> </mat-label>
+                        <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.email" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('email').hasError(validation.type) && (addForm.get('email').dirty || addForm.get('email').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>{{'Court.Companies.Form.comments'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="comments">
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,443 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Employee_managment.Employee-contracts.Add'|translate}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+            <mat-label> {{'Employee_managment.Employee-contracts.form.title_ar'|translate}} </mat-label>
+            <input matInput type="text" formControlName="title_ar">
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+            <mat-label> {{'Employee_managment.Employee-contracts.form.title_en'|translate}} </mat-label>
+            <input matInput type="text" formControlName="title_en">
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.title_ar">
+              <div class="text-red-600 text-start"
+                *ngIf="addForm.get('title_ar').hasError(validation.type) && (addForm.get('title_ar').dirty || addForm.get('title_ar').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.title_en">
+              <div class="text-red-600 text-start"
+                *ngIf="addForm.get('title_en').hasError(validation.type) && (addForm.get('title_en').dirty || addForm.get('title_en').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+
+            <mat-label> {{'Employee_managment.Employee-contracts.form.Basic_salary'|translate}} </mat-label>
+            <input matInput type="number" formControlName="basic_salary">
+          </mat-form-field>
+
+        </div>
+        <div class="flex flex-row w-full">
+          <ng-container *ngFor="let validation of validation_messages.basic_salary">
+            <div class="text-red-600 text-start"
+              *ngIf="addForm.get('basic_salary').hasError(validation.type) && (addForm.get('basic_salary').dirty || addForm.get('basic_salary').touched)">
+              {{ validation.message |translate }}
+            </div>
+
+          </ng-container>
+        </div>
+        <div class="flex flex-row w-full">
+
+
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+
+            <mat-label> {{'Employee_managment.Employee-contracts.form.job_type'|translate}} </mat-label>
+            <mat-select formControlName="jobType">
+              <mat-option value="FullTime">{{'Vacancy.Vacancy_Type.FullTime'|translate}} </mat-option>
+              <mat-option value="PartTime"> {{'Vacancy.Vacancy_Type.PartTime'|translate}} </mat-option>
+              <mat-option value="Intern"> {{'Vacancy.Vacancy_Type.Intern'|translate}} </mat-option>
+
+
+
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+
+            <mat-label> {{'Employee_managment.Employee-contracts.form.payroll_group'|translate}} </mat-label>
+            <mat-select formControlName="payroll_group">
+              <mat-option value="Yearly"> {{'Employee_managment.Employee-contracts.payroll_group.Yearly'|translate}}
+              </mat-option>
+              <mat-option value="Monthly"> {{'Employee_managment.Employee-contracts.payroll_group.Monthly'|translate}}
+              </mat-option>
+              <mat-option value="Quarterly">
+                {{'Employee_managment.Employee-contracts.payroll_group.Quarterly'|translate}} </mat-option>
+              <mat-option value="Daily"> {{'Employee_managment.Employee-contracts.payroll_group.Daily'|translate}}
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div class="flex flex-row w-full">
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.jobType">
+              <div class="text-red-600 text-start "
+                *ngIf="addForm.get('jobType').hasError(validation.type) && (addForm.get('jobType').dirty || addForm.get('jobType').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.payroll_group">
+              <div class="text-red-600 text-start"
+                *ngIf="addForm.get('payroll_group').hasError(validation.type) && (addForm.get('payroll_group').dirty || addForm.get('payroll_group').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+
+        <div class="flex flex-row w-full mt-2">
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+            <mat-label> {{'Employee_managment.Employee-contracts.form.start_date'|translate}} </mat-label>
+            <input matInput formControlName="startDate" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard" class="w-1/2 m-1">
+            <mat-label> {{'Employee_managment.Employee-contracts.form.end_date'|translate}} </mat-label>
+            <input matInput formControlName="endDate" [matDatepicker]="picker2">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+
+
+        <div class="flex flex-row w-full">
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.startDate">
+              <div class="text-red-600 text-start"
+                *ngIf="addForm.get('startDate').hasError(validation.type) && (addForm.get('startDate').dirty || addForm.get('startDate').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="w-1/2 m-1">
+            <ng-container *ngFor="let validation of validation_messages.endDate">
+              <div class="text-red-600 text-start"
+                *ngIf="addForm.get('endDate').hasError(validation.type) && (addForm.get('endDate').dirty || addForm.get('endDate').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+
+
+
+        <div class="flex flex-row w-full">
+          <span style="font-size: 14px;;font-family: bold;">
+            {{'Employee_managment.Employee-contracts.form.main'|translate}}:
+            <mat-slide-toggle [(ngModel)]="isCurrent" matTooltip="isMain" formControlName="isCurrent">
+            </mat-slide-toggle>
+          </span>
+        </div>
+      </form>
+      <!--Segment Buttons start-->
+      <div class="w-full sticky top-0">
+        <ion-segment class="border-b" [(ngModel)]="segment">
+          <ion-segment-button value="0">
+            {{'Employee_managment.Employee-contracts.deductions.Title'|translate}}
+          </ion-segment-button>
+          <ion-segment-button value="1">
+            {{'Employee_managment.Employee-contracts.bonuses.Title'|translate}}
+          </ion-segment-button>
+          <ion-segment-button value="2">
+            {{'Employee_managment.Employee-contracts.allowances.Title'|translate}}
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <!--Segment Buttons end-->
+
+      <!--Add Deduction start-->
+      <div *ngIf="segment == 0">
+        <div class="flex flex-col w-full h-full bg-background m-1 text-step-600">
+          <div class="relative flex flex-col items-center w-full h-full">
+            <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+              <div (click)="IsAddDeductions()"
+                class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+                + {{'Employee_managment.Employee-contracts.deductions.add'|translate}}
+              </div>
+              <div
+                class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+                *ngIf="isAddDeductions">
+                <div class="relative flex flex-col items-center justify-center">
+                  <div class="pb-1 text-lg border-b">
+                    {{'Employee_managment.Employee-contracts.deductions.add'|translate}} </div>
+                  <form [formGroup]="deductionForm" class="items-center justify-center">
+                    <div>
+                      <mat-form-field class="w-full items-center justify-center">
+                        <mat-label> {{'Employee_managment.Employee-contracts.deductions.form.title_ar'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_ar">
+                      </mat-form-field>
+
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.deductions.form.title_en'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_en">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.title_en">
+                        <div class="text-red-600 text-start"
+                          *ngIf="deductionForm.get('title_en').hasError(validation.type) && (deductionForm.get('title_en').dirty || deductionForm.get('title_en').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label>
+                          {{'Employee_managment.Employee-contracts.deductions.form.calculationType'|translate}}
+                        </mat-label>
+                        <mat-select matInput formControlName="calculationType">
+                          <mat-option value="Flat">
+                            {{'Employee_managment.Employee-contracts.form.Flat'|translate}}
+                          </mat-option>
+                          <mat-option value="Percentage">
+                            {{'Employee_managment.Employee-contracts.form.Percentage'|translate}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.calculationType">
+                        <div class="text-red-600 text-start"
+                          *ngIf="deductionForm.get('calculationType').hasError(validation.type) && (deductionForm.get('calculationType').dirty || deductionForm.get('calculationType').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.deductions.form.amount'|translate}}
+                        </mat-label>
+                        <input matInput type="number" formControlName="amount">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.amount">
+                        <div class="text-red-600 text-start"
+                          *ngIf="deductionForm.get('amount').hasError(validation.type) && (deductionForm.get('amount').dirty || deductionForm.get('amount').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="flex text-center justify-center ">
+                      <ion-button (click)="addDeduction()">{{'Operations.Add'|translate}}</ion-button>
+                      <ion-button color="danger" (click)="clearDeduction()">{{'Operations.Cancel'|translate}}
+                      </ion-button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="relative flex flex-col items-center w-full h-full">
+              <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-full ">
+                <div
+                  class="flex flex-col items-center justify-center h-24 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50"
+                  *ngFor="let deduction of deduction_data; let i = index">
+                  <div class="text-center white-space: initial;">{{deduction.title_en}}</div>
+                  <div><span *ngIf="deduction.calculationType == 'Flat'">BD </span>{{deduction.amount}}<span *ngIf="deduction.calculationType == 'Percentage'">%</span></div>
+                  <ion-button fill="clear" color="danger" (click)="deleteDeduction(i)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Add Deduction end-->
+
+      <!--Add Bounus start-->
+      <div *ngIf="segment == 1">
+        <div class="flex flex-col w-full h-full bg-background m-1 text-step-600">
+          <div class="relative flex flex-col items-center w-full h-full">
+            <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+              <div (click)="IsAddbonuses()"
+                class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+                + {{'Employee_managment.Employee-contracts.bonuses.add'|translate}}
+              </div>
+              <div
+                class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+                *ngIf="isAddbouncess">
+                <div class="relative flex flex-col">
+                  <div class="pb-1 text-lg border-b">
+                    {{'Employee_managment.Employee-contracts.bonuses.add'|translate}}
+                  </div>
+                  <form [formGroup]="bouncesForm">
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.bonuses.form.title_ar'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_ar">
+                      </mat-form-field>
+
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.bonuses.form.title_en'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_en">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.title_en">
+                        <div class="text-red-600 text-start"
+                          *ngIf="bouncesForm.get('title_en').hasError(validation.type) && (bouncesForm.get('title_en').dirty || bouncesForm.get('title_en').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.bonuses.form.amount'|translate}}
+                        </mat-label>
+                        <input matInput type="number" formControlName="amount">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.amount">
+                        <div class="text-red-600 text-start"
+                          *ngIf="bouncesForm.get('amount').hasError(validation.type) && (bouncesForm.get('amount').dirty || bouncesForm.get('amount').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="flex text-center justify-center ">
+                      <ion-button (click)="addbounce()">{{'Operations.Add'|translate}}</ion-button>
+                      <ion-button color="danger" (click)="clearbounce()">{{'Operations.Cancel'|translate}}
+                      </ion-button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="relative flex flex-col items-center w-full h-full">
+              <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-full ">
+                <div
+                  class="flex flex-col items-center justify-center h-24 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50"
+                  *ngFor="let bounce of bounces_data; let i = index">
+                  <div class="text-center white-space: initial;">{{bounce.title_en}}</div>
+                  <div>BD {{bounce.amount}}</div>
+                  <ion-button fill="clear" color="danger" (click)="deleteBonus(i)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Add Bounus end-->
+
+      <!--Add Allowance start-->
+      <div *ngIf="segment == 2">
+        <div class="flex flex-col w-full h-full bg-background m-1 text-step-600">
+          <div class="relative flex flex-col items-center w-full h-full">
+            <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+              <div (click)="IsAddallowances()"
+                class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+                + {{'Employee_managment.Employee-contracts.allowances.add'|translate}}
+              </div>
+              <div
+                class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+                *ngIf="isallowances">
+                <div class="relative flex flex-col">
+                  <div class="pb-1 text-lg border-b">
+                    {{'Employee_managment.Employee-contracts.allowances.add'|translate}}</div>
+                  <form [formGroup]="allowancesForm">
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.allowances.form.title_ar'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_ar">
+                      </mat-form-field>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.allowances.form.title_en'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="title_en">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.title_en">
+                        <div class="text-red-600 text-start"
+                          *ngIf="allowancesForm.get('title_en').hasError(validation.type) && (allowancesForm.get('title_en').dirty || allowancesForm.get('title_en').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div>
+                      <mat-form-field class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-contracts.allowances.form.amount'|translate}}
+                        </mat-label>
+                        <input matInput type="number" formControlName="amount">
+                      </mat-form-field>
+                      <ng-container *ngFor="let validation of validation_messages.amount">
+                        <div class="text-red-600 text-start"
+                          *ngIf="allowancesForm.get('amount').hasError(validation.type) && (allowancesForm.get('amount').dirty || allowancesForm.get('amount').touched)">
+                          {{ validation.message |translate }}
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="relative flex flex-col items-center w-full h-full">
+                      <div
+                        class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+                        <ion-button (click)="addallowance()">{{'Operations.Add'|translate}}</ion-button>
+                        <ion-button color="danger" (click)="clearallowance()">{{'Operations.Cancel'|translate}}
+                        </ion-button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="relative flex flex-col items-center w-full h-full">
+              <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-full ">
+                <div
+                  class="flex flex-col items-center justify-center h-24 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50"
+                  *ngFor="let allowance of allowances_data; let i = index">
+                  <div class="text-center white-space: initial;">{{allowance.title_en}}</div>
+                  <div>BD {{allowance.amount}}</div>
+                  <ion-button fill="clear" color="danger" (click)="deleteAllowance(i)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Add Allowance end-->
+    </div>
+  </div>
+</ion-content>

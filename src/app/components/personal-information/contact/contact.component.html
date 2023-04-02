@@ -1,0 +1,56 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  items-end justify-end w-full p-2 border-b border-step-100 bg-background">
+ 
+
+
+ 
+    </div>
+  </div>
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+
+        <form class="flex flex-col w-full px-4" [formGroup]="contactForm">
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>   {{'Employee_managment.contact_infroamtion.Form.phone'|translate}}   </mat-label>
+                    <input matInput type="number" formControlName="phone" >
+                </mat-form-field>
+            </div>
+            <ng-container *ngFor="let validation of validation_messages.phone" >
+                <div class="text-red-600 text-end"   *ngIf="contactForm.get('phone').hasError(validation.type) && (contactForm.get('phone').dirty || contactForm.get('phone').touched)">
+                  {{ validation.message |translate }}
+                </div>
+              </ng-container>
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>   {{'Employee_managment.contact_infroamtion.Form.Email'|translate}}   </mat-label>
+                    <input matInput type="text" formControlName="email">
+                </mat-form-field>
+            </div>
+            <ng-container *ngFor="let validation of validation_messages.email" >
+              <div class="text-red-600 text-end"   *ngIf="contactForm.get('email').hasError(validation.type) && (contactForm.get('email').dirty || contactForm.get('email').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>  {{'Employee_managment.contact_infroamtion.Form.Mobile'|translate}}  </mat-label>
+                    <input matInput type="number" formControlName="mobile">
+                </mat-form-field>
+            </div>
+  
+        </form>
+
+   
+        <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="update()">
+        <ion-icon name="update"></ion-icon>
+    
+        {{'Employee_managment.contact_infroamtion.update'|translate}}
+      </div>
+    </div>
+</div>
+  </div>

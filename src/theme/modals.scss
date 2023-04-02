@@ -1,0 +1,107 @@
+.modal-wrapper {
+    overflow: auto !important;
+    color: var(--ion-color-step-900);
+}
+.responsiveModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        height: 50 !important ;
+        width: 50% !important ;
+    }
+}
+.responsiveModalfull {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        height: 100% !important ;
+        width: 100% !important ;
+    }
+}
+.passwordModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        width: 24rem !important;
+        height: 24rem;
+    }
+}
+.taskStatusModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        width: 24rem !important;
+        height: 32rem;
+    }
+}
+.AddAppointmentTypeModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        width: 24rem !important;
+        height: 26rem;
+    }
+}
+.AddTimeSlotModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        width: 32rem !important;
+        height: 42rem;
+    }
+}
+.InvoiceDetailsModal {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        width: 60rem !important;
+        height: 26rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .responsiveModal {
+        .modal-wrapper {
+            height: 100% !important ;
+            width: 100% !important ;
+            max-height: 100vh !important;
+        }
+    }
+    .mat-paginator-range-label {
+        display: none !important;
+    }
+    .taskStatusModal {
+        .modal-wrapper {
+            height: 100% !important ;
+            width: 100% !important ;
+            max-height: 100vh !important;
+        }
+    }
+
+    .AddTimeSlotModal {
+        --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+        .modal-wrapper {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+}
+
+.modal50 .modal-wrapper {
+    height: 50% !important;
+    width: 50% !important;
+    max-width: 650px;
+}
+.modal100 {
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+    .modal-wrapper {
+        height: 100% !important;
+        width: 100% !important;
+    }
+}
+.modal80 .modal-wrapper {
+    height: 80% !important;
+    width: 80% !important;
+}
+.modal30 .modal-wrapper {
+    height: 30% !important;
+    width: 30% !important;
+}
+
+.modal-wrapper {
+    max-height: 100vh !important;
+    max-width: 100vh !important;
+}

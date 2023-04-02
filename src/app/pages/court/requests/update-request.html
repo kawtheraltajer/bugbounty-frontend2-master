@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> {{'Court.Cases.requests.Update'|translate}}
+    </ion-title>
+    <ion-buttons slot="end"
+      *ngIf="('Case_Request:DELETE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE'|permission)">
+      <ion-button mat-icon-button color="warn" (click)="delete()">
+        <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Court.Cases.requests.Form.arabic_name'|translate}} </mat-label>
+            <input matInput type="text" formControlName="name_ar">
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.name_ar">
+            <div class="text-red-600 text-end"
+              *ngIf="updateForm.get('name_ar').hasError(validation.type) && (updateForm.get('name_ar').dirty || updateForm.get('name_ar').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{'Court.Cases.requests.Form.english_name'|translate}} </mat-label>
+            <input matInput type="text" formControlName="name_en">
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.name_en">
+            <div class="text-red-600 text-end"
+              *ngIf="updateForm.get('name_en').hasError(validation.type) && (updateForm.get('name_en').dirty || updateForm.get('name_en').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+        <mat-form-field class="w-full">
+          <mat-label> {{'Court.Cases.requests.Form.type'|translate}} </mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="Lowful">
+              Lowful-شرعي
+            </mat-option>
+            <mat-option value="Civilian">
+              Civilian-مدني
+            </mat-option>
+            <mat-option value="Criminal">
+              Criminal-جنائي
+            </mat-option>
+            <mat-option value="Excution">
+              Excution-تنفيذ
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.type">
+            <div class="text-red-600 text-end"
+              *ngIf="updateForm.get('type').hasError(validation.type) && (updateForm.get('type').dirty || updateForm.get('type').touched)">
+              {{ validation.message |translate }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-button (click)="update()">
+          {{'Court.Cases.requests.Form.Update'|translate}}
+        </ion-button>
+      </form>
+      <div class="flex-12 items-start p-2 text-gray-500" *ngIf="type?.Last_updated_User">
+        {{'Operations.LastUpdated'|translate}}: {{type?.Last_updated_User}} {{type?.Last_updated| date:'dd/MM/yyyy hh:mm a'}}
+      </div>
+    </div>
+  </div>
+</ion-content>

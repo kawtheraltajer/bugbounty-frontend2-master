@@ -1,0 +1,109 @@
+<vt-header class="absolute top-0 right-0">
+    <ion-buttons slot="start" style="height: 45px;">
+        <ion-menu-button></ion-menu-button>
+        <ion-back-button></ion-back-button>
+        <ion-button class=" hover:text-yellow-400" (click)="drawer.toggle()">
+            <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+
+    <ion-title slot="middle">{{'Announcement.Title'|translate}}</ion-title>
+
+    <div slot="end"
+        *ngIf="('Announcement:ADD:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE'|permission)"
+        class="relative flex items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer flex-12 bg-toolbar-background hover:bg-step-50 "
+        (click)="add()">
+        <ion-icon name="add"></ion-icon>
+        {{'Announcement.Add'|translate}}
+    </div>
+</vt-header>
+<mat-drawer-container class="w-full overflow-y-auto h-full relative pt-14" [dir]="(lang.direction|async)">
+    <mat-drawer #drawer mode="side" class="flex flex-col w-64 overflow-y-auto pt-14">
+        <div class="flex flex-row items-center px-2">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Finance.Reports.DateRange.Title' |translate }} </mat-label>
+                <mat-select (selectionChange)="SelectedReportType()" [(ngModel)]="period" [(value)]="period" #Range>
+                    <mat-option value="ThisMonth"> {{'Finance.Reports.DateRange.ThisMonth' |translate }} </mat-option>
+                    <mat-option value="ThisYear"> {{'Finance.Reports.DateRange.ThisYear' |translate }} </mat-option>
+                    <mat-option value="Custom"> {{'Finance.Reports.DateRange.Custom' |translate }} </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2" *ngIf="period=='Custom'">
+            <mat-form-field form-field appearance="standard" class="w-full ">
+                <mat-label> {{'Court.Cases.List.From_Date'|translate}} </mat-label>
+                <input matInput [(ngModel)]="filter.From_Date" [matDatepicker]="picker" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-row items-center px-2" *ngIf="period=='Custom'">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Court.Cases.List.To_Date'|translate}}
+                </mat-label>
+                <input matInput [(ngModel)]="filter.To_Date" [matDatepicker]="toPicker" />
+                <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                <mat-datepicker #toPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="flex-initial ...">
+            <ion-button (click)="Apply()">
+              {{'Operations.Apply'|translate}}
+            </ion-button>
+          </div>
+    </mat-drawer>
+
+    <mat-drawer-content class="w-full text-center overflow-y-auto">
+        <ion-content>
+                <div class="p-5 text-gray-500" *ngIf="length == 0">
+                    {{'Announcement.NoAnnouncement'|translate}}
+                </div>
+
+                <div class="relative inline-block" style="width: 75%; text-align: start;"
+                    *ngIf="('Announcement:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE'|permission); else lawyer">
+                    <ion-card *ngFor="let announcement of announcement_list" class="cursor-pointer"
+                        (click)="update(announcement.id)">
+                        <div class="relative w-full h-28" *ngIf="announcement.image">
+                            <ion-img [src]="getImgURL(announcement.image)" #img
+                                class="object-cover overflow-hidden w-full h-28">
+                            </ion-img>
+                        </div>
+
+                        <ion-card-content>
+                            <ion-card-title class="p-1">{{announcement.title}}</ion-card-title>
+                            <div class="p-0.5">{{announcement.description}}</div>
+                            <ion-card-subtitle class="p-0.5" *ngIf="announcement.document != null">
+                                <span class="cursor-pointer" style="color: #0645AD"
+                                    (click)="download($event, announcement.document)">
+                                    <ion-icon name="download"></ion-icon><a>{{'Announcement.Download'|translate}}</a>
+                                </span>
+                            </ion-card-subtitle>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+
+                <ng-template #lawyer>
+                    <div class="relative inline-block" style="width: 75%; text-align: start;">
+                        <ion-card *ngFor="let announcement of announcement_list">
+                            <div class="relative w-full h-28" *ngIf="announcement.image">
+                                <ion-img [src]="getImgURL(announcement.image)" #img
+                                    class="object-cover overflow-hidden w-full h-28">
+                                </ion-img>
+                            </div>
+
+                            <ion-card-content>
+                                <ion-card-title class="p-1">{{announcement.title}}</ion-card-title>
+                                <div class="p-0.5">{{announcement.description}}</div>
+                                <ion-card-subtitle class="p-0.5" *ngIf="announcement.document != null">
+                                    <span class="cursor-pointer" style="color: #0645AD"
+                                        (click)="download($event, announcement.document)">
+                                        <ion-icon name="download"></ion-icon><a>{{'Announcement.Download'|translate}}</a>
+                                    </span>
+                                </ion-card-subtitle>
+                            </ion-card-content>
+                        </ion-card>
+                    </div>
+                </ng-template>
+        </ion-content>
+    </mat-drawer-content>
+</mat-drawer-container>

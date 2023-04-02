@@ -1,0 +1,138 @@
+
+<div class="relative flex flex-col items-center w-full h-full">
+  <div class="grid w-full grid-cols-3 gap-1 p-2 pt-0 overflow-y-auto md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+    <div (click)="ViewAddForm()"
+      class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+      +
+    </div>
+    <div
+      class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+      *ngIf="isAdd">
+      <div class="relative flex flex-col text-center justify-center">
+        <div class="pb-1 text-lg border-b">{{'HCM.Appraisal.type.Add'|translate}} </div>
+        <div>
+     
+          <form  [formGroup]="typeform">
+            <div class="flex">
+            <div  class="mie-1">
+              <mat-form-field appearance="standard" class="w-full">
+                  <mat-label>  {{'HCM.Appraisal.type.list.arabic_name'|translate}} </mat-label>
+                  <input matInput type="text" formControlName="title_ar"    >
+              </mat-form-field>
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.title_ar" >
+                    <div class="text-red-600 text-end"   *ngIf="typeform.get('title_ar').hasError(validation.type) && (typeform.get('title_ar').dirty || typeform.get('title_ar').touched)">
+                    {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+              </div>
+          </div>
+          <div  class="mie-1">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label>  {{'HCM.Appraisal.type.list.english_name'|translate}} </mat-label>
+                <input matInput type="text" formControlName="title_en"    >
+            </mat-form-field>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.title_en" >
+                  <div class="text-red-600 text-end"   *ngIf="typeform.get('title_en').hasError(validation.type) && (typeform.get('title_en').dirty || typeform.get('title_en').touched)">
+                  {{ validation.message |translate }}
+                  </div>
+              </ng-container>
+            </div>
+        </div>
+        </div>
+
+        </form>
+  
+  
+          <div class="flex text-center justify-center ">
+          <ion-button (click)="addType()">{{'Operations.Add'|translate}}</ion-button>
+          <ion-button color="danger" (click)="clear()">{{'Operations.Cancel'|translate}}</ion-button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <ng-container  *ngIf="!isAdd" >
+      <div class="flex flex-col items-center justify-center h-20 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50" 
+      (click)="update(type)"
+      *ngFor="let type of (appraisalServices.types | async)">
+
+  <div   >         {{ lang.selectedLang=='en'? type.title_en:type.title_ar| titlecase}}
+  </div>
+</div>    
+  </ng-container>
+
+
+
+</div>
+
+
+<!--<div class="relative flex flex-col items-center w-full h-full">
+  <div class="grid w-full grid-cols-2 gap-1 p-2 pt-0 overflow-y-auto sm:grid-cols-3 md:grid-cols-4 xl:w-1/2 md:w-3/4 ">
+    <div (click)="isAdd = true"
+      class="sticky top-0 z-50 flex items-center justify-center w-full h-10 col-span-4 p-1 border border-dashed rounded-lg cursor-pointer bg-backeground hover:bg-step-50">
+      +
+    </div>
+    <div
+      class="sticky top-0 z-50 flex flex-row items-center justify-center w-full col-span-4 p-2 border border-dashed rounded-lg bg-backeground"
+      *ngIf="isAdd">
+      <div class="relative flex flex-col">
+        <div class="pb-1 text-lg border-b">Add New Type</div>
+        <form [formGroup]="typeform">
+          <div class="flex">
+            <div class="mie-1">
+              <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Court.Cases.Case-type.Form.arabic_name'|translate}} </mat-label>
+                <input matInput type="text" formControlName="title_ar">
+              </mat-form-field>
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.title_ar">
+                  <div class="text-red-600 text-end"
+                    *ngIf="typeform.get('title_ar').hasError(validation.type) && (typeform.get('title_ar').dirty || typeform.get('title_ar').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mie-1">
+              <mat-form-field appearance="standard" class="w-full">
+                <mat-label> {{'Court.Cases.Case-type.Form.english_name'|translate}} </mat-label>
+                <input matInput type="text" formControlName="title_en">
+              </mat-form-field>
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.name_en">
+                  <div class="text-red-600 text-end"
+                    *ngIf="typeform.get('title_en').hasError(validation.type) && (typeform.get('title_en').dirty || typeform.get('title_en').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+        <div class="flex text-center justify-center ">
+          <ion-button (click)="addType()">{{'Operations.Add'|translate}}</ion-button>
+          <ion-button color="danger" (click)="clear()">{{'Operations.Cancel'|translate}}</ion-button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <ng-container *ngIf="!isAdd">
+      <div
+        class="flex flex-col items-center justify-center h-20 p-2 border rounded-lg cursor-pointer bg-backeground hover:bg-step-50"
+        *ngFor="let type of (appraisalServices.types | async)">
+        <div> {{ lang.selectedLang=='en'? type.title_en:type.title_ar| titlecase}}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>-->

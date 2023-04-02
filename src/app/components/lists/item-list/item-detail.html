@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Item Deatils</ion-title>
+
+    <ion-buttons slot="end">
+      <button mat-icon-button (click)="update()">
+        <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="flex flex-row w-full items-start justify-start p-5">
+    <div class="flex flex-col items-start justify-start w-1/2 p-2">
+      <span style="font-size: 16px; font-weight: bold" class="py-2">
+        Item Information
+      </span>
+
+      <span style="font-size: 14px"> Code: {{Item?.name}} </span>
+
+      <span style="font-size: 14px"> Percentage: {{Item?.type}} </span>
+      <span style="font-size: 14px">
+        Tax Code: {{Item?.taxcode.code_en}} - {{Item?.taxcode.code_ar}}
+      </span>
+      <span style="font-size: 14px"> Rate: {{Item?.rate}} </span>
+
+      <span style="font-size: 14px">
+        Account Code: {{Item?.account_code.acc_code_en}}
+        - {{Item?.account_code.acc_code_ar}}
+      </span>
+    </div>
+  </div>
+</ion-content>

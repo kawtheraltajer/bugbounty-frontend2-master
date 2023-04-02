@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title> Account Transection Deatils</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <ng-container *ngIf="!isLoading">
+      <div class="flex flex-row w-full items-start justify-start p-5">
+        <div class="flex flex-col items-start justify-start w-1/2 p-2">
+          <span style="font-size: 16px; font-weight: bold" class="py-2">
+            Account Transection Information
+          </span>
+  
+          <span style="font-size: 14px">
+            Document No {{AccTransectionHeader?.document_no}}
+          </span>
+  
+          <span style="font-size: 14px">
+            Date: {{AccTransectionHeader?.date|date:"short"}}
+          </span>
+
+          <span style="font-size: 14px">
+            Type: {{AccTransectionHeader?.document_type}}
+          </span>
+          <span style="font-size: 14px">
+            Amount: {{AccTransectionHeader?.amount}}
+          </span>
+        </div>
+  
+        <div class="flex flex-col items-start justify-start w-1/2 p-2">
+          <span style="font-size: 16px; font-weight: bold" class="py-2">
+            Details
+          </span>
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <td class="text-center pb-3">Account Code</td>
+                <td class="text-center pb-3">dr/cr</td>
+                <td class="text-center pb-3">debit_amount</td>
+                <td class="text-center pb-3">credit_amount</td>
+                <td class="text-center pb-3">credit_amount</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of AccTransectionDeatils">
+                <td class="text-center pt-3">{{item.account_code}}</td>
+                <td class="text-center pt-3">{{item.dr_cr}}</td>
+                <td class="text-center pt-3">{{item.debit_amount}}</td>
+                <td class="text-center pt-3">{{item.credit_amount}}</td>
+                <td class="text-center pt-3">{{item.credit_amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+  </ion-content>
+  

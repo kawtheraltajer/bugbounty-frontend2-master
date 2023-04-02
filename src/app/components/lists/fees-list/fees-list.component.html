@@ -1,0 +1,203 @@
+<div class="relative flex flex-col flex-auto w-full h-full pb-8 overflow-y-auto">
+  <div class="relative flex flex-col w-full ">
+    <div style="display: -webkit-box;display: -webkit-inline-box;">
+      <div *ngIf="Invoice"
+        class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+        <div class="flex-1 items-start">
+        </div>
+        <div
+          class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+          (click)="printInvoice()">
+          <ion-icon name="print"></ion-icon>
+          {{'Finance.Invoice.list.print'|translate}}
+        </div>
+      </div>
+      <div style="display: -webkit-box;display: -webkit-inline-box;">
+        <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+          <!-- <div class="flex-1 items-start" *ngIf="!Invoice">
+            <mat-slide-toggle color="primary" [(ngModel)]="isEditMode">
+              {{'Operations.EditMode'|translate}}
+            </mat-slide-toggle>
+          </div>-->
+          <div
+            class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+            (click)="choose_one()" *ngIf="!Invoice">
+            <ion-icon name="add"></ion-icon>
+            {{'Finance.Invoice.Add'|translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="flex flex-col w-full lg:flex-row">
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Finance.Invoice.list.net_amount'|translate}} <span style="color: red;">*</span>
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngIf="Invoice">
+                  {{Invoice?.net_amount | number: '1.2-2'}}
+                </ng-container>
+                <ng-container *ngIf="!Invoice">
+                  0
+                </ng-container>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Court.Claims.Form.total_paid'|translate}}
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngIf="Invoice">
+                  {{Invoice?.net_amount - Invoice?.pending_amount | number: '1.2-2'}}
+                </ng-container>
+                <ng-container *ngIf="!Invoice">
+                  0
+                </ng-container>
+              </div>
+       
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Court.Claims.Form.balance'|translate}}
+              </div>
+              <div class="flex items-center flex-1 px-2" >
+                <div class="flex items-center flex-1 px-2">
+                  <ng-container *ngIf="Invoice">
+                    {{Invoice?.pending_amount | number: '1.2-2'}}
+                  </ng-container>
+                  <ng-container *ngIf="!Invoice">
+                    0
+                  </ng-container>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col w-full lg:flex-row">
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie " >
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Finance.Invoice.list.Name'|translate}}
+              </div>
+              <div *ngIf="Invoice?.clientID" class="flex items-center flex-1 px-2">
+                {{Invoice?.client?.full_name }}
+              </div>
+              <div *ngIf="Invoice?.companyID" class="flex items-center flex-1 px-2">
+                {{Invoice?.company?.full_name }}
+              </div>
+              <div *ngIf="!Invoice?.companyID && !Invoice?.clientID " class="flex items-center flex-1 px-2">
+                {{Invoice?.recipient_name }}
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+         
+              <div class="flex items-center flex-1 px-2">
+                {{Invoice?.invoice_date | date }}
+              </div>
+         
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-2/3 border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+        
+              <div  class="flex items-center flex-1 px-2">
+                {{Invoice?.due_date | date }}
+              </div>
+       
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col w-full lg:flex-row" >
+        <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Finance.Invoice.list.status'|translate}}
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngIf="Invoice">
+                  {{'Finance.Invoice.Status.' + Invoice?.invoice_status|translate}}
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Finance.Invoice.list.payment_method'|translate}}
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngIf="Invoice">
+                  {{'Finance.Invoice.Payment_method.' + Invoice?.payment_method|translate}}
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col w-full lg:flex-row">
+        <div class="flex flex-col lg:flex-row lg:w-full border-ie " >
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Finance.Invoice.list.Item'|translate}}
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngFor="let item of InvoiceDetail">
+                  {{item?.item?.name}},
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:w-full border-ie ">
+          <div class="flex flex-col flex-1 border-is">
+            <div class="flex flex-row items-center h-12 border-b">
+              <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                {{'Court.Cases.Case-type.Form.comments'|translate}}
+              </div>
+              <div  class="flex items-center flex-1 px-2">
+                <ng-container *ngIf="Invoice">
+                  {{Invoice?.comments }}
+                </ng-container>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="flex-12 items-start p-2 text-gray-500" *ngIf="Invoice?.Last_updated_User">
+      {{'Operations.LastUpdated'|translate}}: {{Invoice?.Last_updated_User}} {{Invoice?.Last_updated| date:'dd/MM/yyyy hh:mm a'}}
+    </div>
+    
+  </div>
+  <ng-container *ngIf="Invoice">
+    <receipt-list [Receipts]="Receipts" [FromFees]="true" [InvoiceID]="Invoice.id" [CaseID]="CaseID"
+      [clientID]="clientID">
+    </receipt-list>
+  </ng-container>
+</div>

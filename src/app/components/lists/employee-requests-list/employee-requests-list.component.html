@@ -1,0 +1,238 @@
+<vt-header>
+  <ion-buttons slot="start" style="height: 45px;">
+    <ion-menu-button></ion-menu-button>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+
+  <ion-title slot="middle">{{'Employee_managment.Services.General_Requests'|translate}}</ion-title>
+
+  <ion-button slot="end" (click)="add()">
+    <ion-icon name="add"></ion-icon>
+    {{'HCM.Requests.New'|translate}}
+  </ion-button>
+</vt-header>
+
+<!--Desktop View start-->
+<div class="flex flex-col flex-auto md:flex-row" *ngIf="app.isDesktop">
+  <div class="flex flex-col w-full max-h-full md:w-1/2 md:border-ie">
+    <div class="relative flex flex-col flex-auto overflow-hidden border shadow" style="max-height: 100%;">
+
+      <!--Segment Buttons start-->
+      <div class="w-full sticky top-0">
+        <ion-segment class="border-b" [(ngModel)]="segment">
+          <ion-segment-button value="0">
+            <ion-badge color="danger" *ngIf="InboxCount > 0">
+              {{InboxCount}}
+            </ion-badge>
+            {{'HCM.Requests.Inbox'|translate}}
+          </ion-segment-button>
+          <ion-segment-button value="1">
+            {{'HCM.Requests.Sent'|translate}}
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <!--Segment Buttons end-->
+
+      <ion-content>
+        <!--Inbox start-->
+        <div *ngIf="segment == 0">
+          <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="RequestsLoading">
+            <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+          </div>
+          <span *ngIf="!RequestsLoading">
+            <div class="p-5 text-gray-500 w-full text-center" *ngIf="Requestslength == 0">
+              {{'HCM.Requests.NoRequests'|translate}}
+            </div>
+
+            <div class="relative" style="text-align: start;">
+              <ion-item *ngFor="let request of Requests; let i = index"
+                [color]="SelectedRequest?.id == request.id ? 'light' : ''" class="cursor-pointer"
+                (click)="selectOneRequest(request.id); InboxSelectedItem = i; request.IsRead = true">
+                <ion-icon name="alert" color="danger" *ngIf="!request.IsRead"></ion-icon>
+                <ion-avatar slot="start">
+                  <img class="w-full h-full"
+                    [src]="getURL(request?.from?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"
+                    #img (ionError)="img.src = 'assets/fillers/profile-temp.png'" />
+                </ion-avatar>
+                <ion-label>
+                  <span class="text-gray-400 text-xs">{{request?.date|date:'short':'+3'}}</span>
+                  <h3>{{request?.from?.first_name}} {{request?.from?.last_name}}</h3>
+                  <p>{{request?.subject}}</p>
+                  <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{request?.body}}</p>
+                </ion-label>
+              </ion-item>
+            </div>
+          </span>
+        </div>
+        <!--Inbox end-->
+
+        <!--Sent start-->
+        <div *ngIf="segment == 1">
+          <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="MyRequestsLoading">
+            <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+          </div>
+          <span *ngIf="!MyRequestsLoading">
+            <div class="p-5 text-gray-500 w-full text-center" *ngIf="MyRequestslength == 0">
+              {{'HCM.Requests.NoMyRequests'|translate}}
+            </div>
+
+            <div class="relative" style="text-align: start;">
+              <ion-item *ngFor="let request of MyRequests; let j = index" class="cursor-pointer"
+                [color]="SentSelectedItem == j ? 'light' : ''"
+                (click)="selectMyRequest(request.id); SentSelectedItem = j;">
+                <ion-avatar slot="start">
+                  <img class="w-full h-full"
+                    [src]="getURL(request?.from?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"
+                    #img (ionError)="img.src = 'assets/fillers/profile-temp.png'" />
+                </ion-avatar>
+                <ion-label>
+                  <span class="text-gray-400 text-xs">{{request?.date|date:'short':'+3'}}</span>
+                  <h3>{{request?.from?.first_name}} {{request?.from?.last_name}}</h3>
+                  <p>{{request?.subject}}</p>
+                  <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{request?.body}}</p>
+                </ion-label>
+              </ion-item>
+            </div>
+          </span>
+        </div>
+        <!--Sent end-->
+
+      </ion-content>
+    </div>
+  </div>
+
+  <!--Details start-->
+  <div class="flex flex-col w-full h-full gap-4 p-2 md:w-1/2 bg-gray-50">
+    <div *ngIf="SelectedRequest">
+      <ion-button clear color="light" (click)="reply()">
+        {{'Employee_managment.General_Requests.Reply'|translate}}
+      </ion-button>
+
+      <!--Message satrt-->
+      <div class="border p-2 bg-white">
+        <span *ngIf="SelectedRequest?.doc_url">
+          <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.Attachment'|translate}}:</ion-label>
+          <ion-chip (click)="download(SelectedRequest?.doc_url)">
+            <ion-icon name="download"></ion-icon>
+            <ion-label>{{SelectedRequest?.doc_url}}</ion-label>
+          </ion-chip>
+          <hr />
+        </span>
+        <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.From'|translate}}:</ion-label>
+        <p>{{SelectedRequest?.from?.first_name}} {{SelectedRequest?.from?.last_name}}</p>
+        <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.To'|translate}}:</ion-label>
+        <p>{{SelectedRequest?.to?.first_name}} {{SelectedRequest?.to?.last_name}}</p>
+        <hr />
+        <br />
+        <ion-label>{{'Employee_managment.General_Requests.Subject'|translate}}:</ion-label>
+        <p>{{SelectedRequest?.subject}}</p>
+        <br />
+        <ion-label>{{'Employee_managment.General_Requests.Message'|translate}}:</ion-label>
+        <p style="white-space: pre-wrap;">{{SelectedRequest?.body}}</p>
+      </div>
+      <!--Message end-->
+      <br />
+      <!--Reply start-->
+      <div class="border p-2 bg-white cursor-pointer" *ngIf="SelectedRequest?.Reply_to_id" (click)="clickReply()">
+        <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.From'|translate}}:</ion-label>
+        <p>{{replyToRequest?.from?.first_name}} {{replyToRequest?.from?.last_name}}</p>
+        <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.To'|translate}}:</ion-label>
+        <p>{{replyToRequest?.to?.first_name}} {{replyToRequest?.to?.last_name}}</p>
+        <hr />
+        <br />
+        <ion-label>{{'Employee_managment.General_Requests.Subject'|translate}}:</ion-label>
+        <p>{{replyToRequest?.subject}}</p>
+        <br />
+        <ion-label>{{'Employee_managment.General_Requests.Message'|translate}}:</ion-label>
+        <p style="white-space: pre-wrap;">{{replyToRequest?.body}}</p>
+      </div>
+      <!--Reply end-->
+    </div>
+  </div>
+  <!--Details end-->
+</div>
+<!--Desktop View end-->
+
+<!--Small Screen View start-->
+<ion-content *ngIf="!app.isDesktop">
+
+  <!--Segment Buttons start-->
+  <div class="w-full sticky top-0">
+    <ion-segment class="border-b" [(ngModel)]="segment">
+      <ion-segment-button value="0">
+        <ion-badge color="danger" *ngIf="InboxCount > 0">
+          {{InboxCount}}
+        </ion-badge>
+        {{'HCM.Requests.Inbox'|translate}}
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        {{'HCM.Requests.Sent'|translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <!--Segment Buttons end-->
+
+  <!--Inbox start-->
+  <div *ngIf="segment == 0">
+    <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="RequestsLoading">
+      <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+    </div>
+    <span *ngIf="!RequestsLoading">
+      <div class="p-5 text-gray-500 w-full text-center" *ngIf="Requestslength == 0">
+        {{'HCM.Requests.NoRequests'|translate}}
+      </div>
+
+      <div class="relative" style="text-align: start;">
+        <ion-item *ngFor="let request of Requests; let i = index"
+          [color]="SelectedRequest?.id == request.id ? 'light' : ''" class="cursor-pointer"
+          (click)="selectOneRequest(request.id); InboxSelectedItem = i; request.IsRead = true">
+          <ion-icon name="alert" color="danger" *ngIf="!request.IsRead"></ion-icon>
+          <ion-avatar slot="start">
+            <img class="w-full h-full"
+              [src]="getURL(request?.from?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"
+              #img (ionError)="img.src = 'assets/fillers/profile-temp.png'" />
+          </ion-avatar>
+          <ion-label>
+            <span class="text-gray-400 text-xs">{{request?.date|date:'short':'+3'}}</span>
+            <h3>{{request?.from?.first_name}} {{request?.from?.last_name}}</h3>
+            <p>{{request?.subject}}</p>
+            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{request?.body}}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </span>
+  </div>
+  <!--Inbox end-->
+
+  <!--Sent start-->
+  <div *ngIf="segment == 1">
+    <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="MyRequestsLoading">
+      <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+    </div>
+    <span *ngIf="!MyRequestsLoading">
+      <div class="p-5 text-gray-500 w-full text-center" *ngIf="MyRequestslength == 0">
+        {{'HCM.Requests.NoMyRequests'|translate}}
+      </div>
+
+      <div class="relative" style="text-align: start;">
+        <ion-item *ngFor="let request of MyRequests; let j = index" class="cursor-pointer"
+          [color]="SentSelectedItem == j ? 'light' : ''" (click)="selectMyRequest(request.id); SentSelectedItem = j;">
+          <ion-avatar slot="start">
+            <img class="w-full h-full"
+              [src]="getURL(request?.from?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"
+              #img (ionError)="img.src = 'assets/fillers/profile-temp.png'" />
+          </ion-avatar>
+          <ion-label>
+            <span class="text-gray-400 text-xs">{{request?.date|date:'short':'+3'}}</span>
+            <h3>{{request?.from?.first_name}} {{request?.from?.last_name}}</h3>
+            <p>{{request?.subject}}</p>
+            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{request?.body}}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </span>
+  </div>
+  <!--Sent end-->
+
+</ion-content>
+<!--Small Screen View end-->

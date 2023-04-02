@@ -1,0 +1,114 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600 overflow-y-auto">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  justify-center w-full p-2 border-b border-step-100 bg-background">
+      <div class="flex-1 items-start">
+        <div class="relative flex flex-1 h-10 border rounded-lg  lg:flex-none lg:w-1/3 bg-toolbar-background ">
+          <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px" y="0px"
+            viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+            width="512px" height="512px">
+            <path
+              d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+          </svg>
+          <input class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none" type="search"
+            name="search" placeholder="        {{'Operations.Search'|translate}} 
+        " [(ngModel)]="searchTerm" (keyup)="applyFilter()" #search>
+        </div>
+      </div>
+
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="add()" *ngIf="('Invoice:UPDATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">>
+        <ion-icon name="add"></ion-icon>
+        {{'HCM.Workforce.leaves.balance.add'|translate}}
+
+      </div>
+    </div>
+  </div>
+  <ng-container>
+    <div class="relative flex flex-1 overflow-auto">
+      <table mat-table [dataSource]="LeaveBalance" matSort
+        class="z-10 w-full overflow-y-auto bg-background text-step-600">
+        <!-- Checkbox Column -->
+
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'HCM.Workforce.leaves.balance.List.ID'|translate}} </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.id}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'HCM.Workforce.leaves.balance.List.Leave_Type'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ lang.selectedLang=='en'?element.type.name_en:element.type.name_ar| titlecase}}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="accual_days">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'HCM.Workforce.leaves.balance.List.accual_days'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.accual_days}} </td>
+        </ng-container>
+        <ng-container matColumnDef="balance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'HCM.Workforce.leaves.balance.List.balance'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.balance}} </td>
+        </ng-container>
+        <ng-container matColumnDef="frequency">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'HCM.Workforce.leaves.balance.List.frequency'|translate}}
+
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.frequency}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <p class="w-full text-center">
+              {{'Employee_managment.Employee-talents.Education.List.Action'|translate}}
+            </p>
+          </th>
+          <td mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="accent" (click)="UpdateBalance(row)"
+              [matTooltip]="'Operations.Edit'|translate">
+              <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+            </button>
+
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true" class="border-b"></tr>
+        <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+          class="border-b cursor-pointer border-step-100 hover:bg-step-50">
+        <tr class="mat-row" *matNoDataRow>
+          <ng-template #NoRoles>
+            <td class="text-2xl text-center mat-cell" colspan="5">There are no roles.
+            </td>
+          </ng-template>
+
+        </tr>
+      </table>
+    </div>
+  </ng-container>
+</div>

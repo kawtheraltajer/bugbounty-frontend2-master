@@ -1,0 +1,2833 @@
+{
+  "ESS": {
+    "Title": "الخدمة الذاتية للموظف"
+  },
+  "Role": {
+    "name": "دور"
+  },
+  "ID": "رقم",
+  "Description": "التعريف",
+  "Login": {
+    "text": "تسجيل الدخول",
+    "forget": "نسيت كلمة المرور؟",
+    "email": "الإيميل",
+    "pass": "كلمة المرور"
+  },
+  "ForgetPassword": {
+    "forgetNote": "أهلا بك مجددا",
+    "Email": "الإيميل",
+    "Forget": "إعادة ضبط",
+    "Cancel": "الغي"
+  },
+  "Dashboard": {
+    "Title": "الواجهة الرئيسية",
+    "NotMain": "الواجهة",
+    "MyTimeLine": "الخط الزمني",
+    "Sessions": "الجلسات",
+    "Cases": "القضايا",
+    "Tasks": "المهام",
+    "Time": "الوقت",
+    "MyTasks": "مهامي",
+    "TasksIAssigned": "مهام قمتُ بتعيينها",
+    "TodaysAppointments": "مواعيد اليوم",
+    "NoAppointments": "ليست لديك أي مواعيد اليوم",
+    "More": "عرض المزيد ... ",
+    "NoSessions": "ليست لديك أي جلسات",
+    "NoTasks": "ليست لديك أي مهام",
+    "NoAssignedtasks": "لم تقم بتعيين أي مهام",
+    "TodaysSessions": "جلسات اليوم: ",
+    "MyCalendar": "التقويم",
+    "MySessions": {
+      "Title": "جلساتي"
+    }
+  } , "AdminDashboard": {
+    "Title": "واجهة الإدارة",
+    "duePayments": "الفواتير مستحقة الدفع",
+    "dailyAppointment": "مواعيد اليوم",
+    "dailyTransactions": "معاملات اليوم",
+    "duepayment": "القضايا",
+    "Tasks": "المهام",
+    "Time": "الوقت",
+    "MyTasks": "مهامي",
+    "TasksIAssigned": "مهام قمتُ بتعيينها",
+    "TodaysAppointments": "مواعيد اليوم",
+    "NoAppointments": "ليست لديك أي مواعيد اليوم",
+    "More": "عرض المزيد ... ",
+    "NoSessions": "ليست لديك أي جلسات",
+    "NoTasks": "ليست لديك أي مهام",
+    "NoAssignedtasks": "لم تقم بتعيين أي مهام",
+    "TodaysSessions": "جلسات اليوم: ",
+    "MyCalendar": "التقويم",
+    "MySessions": {
+      "Title": "جلساتي"
+    }
+  },
+  "Announcement": {
+    "Title": "الإعلانات",
+    "Add": "إضافة إعلان",
+    "Update": "تعديل الإعلان",
+    "Download": "تحميل المستند",
+    "NoAnnouncement": "لا توجد أي إعلانات",
+    "Form": {
+      "Title": "العنوان",
+      "Description": "الوصف",
+      "FromDate": "من تاريخ",
+      "ToDate": "ألى تاريخ",
+      "Image": "صورة",
+      "Document": "مستند",
+      "Update": "تعديل"
+    },
+    "messages": {
+      "title": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "fromDate": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "toDate": {
+        "required": "هذا الحقل مطلوب"
+      }
+    },
+    "Errors": {
+      "confirm_delete": "هل أنت متأكد من حذف هذا الإعلان؟"
+    }
+  },
+  "MyAccount": {
+    "Title": "حسابي",
+    "Profile": {
+      "ChangeImage": "تغيير الصورة",
+      "Profile": "الملف الشخصي",
+      "FirstName": "الاسم الأول",
+      "LastName": "الاسم الثاني",
+      "Email": "البريد الإلكتروني",
+      "Bio": "السيرة الذاتية",
+      "UpdateProfile": "تحديث الملف الشخصي",
+      "Password": "كلمة المرور",
+      "CurrantPassword": "كلمة  المرور الحالية",
+      "NewPassword": "كلمة المرور الحديثة",
+      "ConfirmNewPassword": "تأكيد كلمة المرور الحديثة",
+      "ChangePassword": "تغيير كلمة المرور ",
+      "UpdateRole": "تعديل الدور",
+      "messages": {
+        "ChangeSuccess": "تم تغيير كلمة المرور بنجاح",
+        "DoesntMatch": "كلمة المرور الحديثة وتأكيد كلمة المرور لا يتطابقان",
+        "Fill": "الرجاء ملء الحقول المطلوبة"
+      }
+    }
+  },
+  "Tasks": {
+    "Title": "المهمة",
+    "FollowUp":"الموظفين المتابعين للمهمة",
+    "Plural": "المهام",
+    "Body": "عرض المهمة",
+    "Employee": "الموظف",
+    "Task_Details": "تفاصيل المهمة",
+    "Update": "تعديل المهمة",
+    "Delete_Message": "هل أنت متأكد من حذف هذه المهمة؟",
+    "NoOfTasks": "عدد المهام",
+    "filter": {
+      "assign_by": "معين بواسطة"
+    },
+    "Comment": {
+      "Title": "تعليق",
+      "Plural": "التعليقات"
+    },
+    "Details": {
+      "Updated": "تحديث",
+      "Created": "مكون",
+      "Due": "تسليم المهمة ",
+      "Status": "الحالة"
+    },
+    "AddNewTask": {
+      "AddNewTaskTitle": "إضافة مهمة جديدة",
+      "Title": "العنوان",
+      "AssignEmployee": "تعيين موظف",
+      "DueDate": "تاريخ التسليم"
+    },
+    "AddNewTaskStatus": {
+      "AddNewTaskStatusTitle": "إضافة حالة مهمة جديدة",
+      "ArabicTitle": "العنوان العربي",
+      "EnglishTitle": "العنوان الإنجليزي",
+      "Color": "اللون",
+      "Hidden": "إخفاء",
+      "isChanges": "قابل للتغير"
+    }
+  },
+  "Cases": {
+    "Title": "القضايا"
+  },
+  "Claims": {
+    "Title": "المقبوضات"
+  },
+  "Reports": {
+    "Title": "التقارير"
+  },
+  "Clients": {
+    "Title": "الموكلون"
+  },
+  "Settings": {
+    "Title": "الإعدادات"
+  },
+  "System": {
+    "Title": "النظام",
+    "Users": {
+      "Title": "المستخدم",
+      "Plural": "المستخدمون"
+    },
+    "Groups": {
+      "Title": "مجموعة",
+      "Plural": "المجموعات"
+    },
+    "Roles": {
+      "Title": "الدور",
+      "Plural": "الأدوار"
+    },
+    "Permissions": {
+      "Title": "الإذن",
+      "Plural": "الأذونات",
+      "Add": "اضافة إذن"
+    },
+    "Authorization": {
+      "Title": "صلاحية",
+      "Plural": "الصلاحيات",
+      "Users": {
+        "Add": "اضافة مستخدم",
+        "Fields": {
+          "ID": "الرقم التسلسلي",
+          "Name": "الإسم",
+          "Email": "البريد الإلكتروني",
+          "Active": "فعال",
+          "Locked": "مقفل",
+          "CreatedAt": "مضاف في",
+          "bio": "السيرة الذاتية",
+          "Role": "الدور"
+        },
+        "messages": {
+          "first_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "last_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "Email": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "البريد الإلكتروني غير صالح"
+          },
+          "roleID": {
+            "required": "هذا الحقل مطلوب"
+          }
+        },
+        "Type": {
+          "none": "لا نوع",
+          "emp": "موظف",
+          "cli": "موكل"
+        },
+        "AddUser": {
+          "FisrtName": "الإسم الأول",
+          "LastName": "الإسم الأخير",
+          "Email": "البريد الإلكتروني",
+          "Bio": "السيرة الذاتية",
+          "ProfileImage": "صورة الحساب",
+          "Type": "النوع",
+          "insert_photo": "إضافة صورة",
+          "Image": "صورة",
+          "Role": "الدور"
+        },
+        "Details": {
+          "Title": "تفاصيل المستخدم",
+          "ID": "رقم الموظف ",
+          "FirstName": "الإسم الأول",
+          "LastName": "الإسم الأخير",
+          "Role": "الوظيفة",
+          "Bio": "السيرة الذاتية",
+          "Active": "فعال",
+          "Locked": "مقفل"
+        }
+      },
+      "Permissions": {
+        "Title": "الإذن",
+        "Plural": "الأذونات",
+        "Add": "اضافة إذن",
+        "Fields": {
+          "Name": "الإسم",
+          "Subject": "الموضوع",
+          "Action": "الإجراء",
+          "Description": "الوصف"
+        },
+        "messages": {
+          "name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "description": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "action": {
+            "required": "هذا الحقل مطلوب"
+          }
+        },
+        "AddPermissions": {
+          "Title": "إضافة إذن جديد",
+          "Name": "الإسم",
+          "Subject": "الموضوع",
+          "Description": "الوصف",
+          "Auth_Field": "حقل المصادقة",
+          "Action": "الإجراء",
+          "View_Fields": "العناصر المعروضة"
+        }
+      },
+      "Role": {
+        "AddRoleTitle": "اضافة دور",
+        "AddRolewizerd": "اضافة دور",
+        "Add": "اضافة إذن",
+        "Fields": {
+          "Title": "الإسم",
+          "Description": "الوصف"
+        },
+        "AddRole": {
+          "AddRoleTitle": "إضافة دور جديد",
+          "Name": "الإسم",
+          "Description": "الوصف"
+        },
+        "Details": {
+          "Title": "تفاصيل الوظيفة",
+          "Id": "رقم الوظيفة",
+          "Name": "الإسم",
+          "Description": "الوسف",
+          "permissions": "الأذونات",
+          "Users": "المستخدمين",
+          "Link": "الربط"
+        }
+      },
+      "Groups": {
+        "Title": "مجموعة",
+        "Plural": "المجموعات",
+        "Add": "إضافة مجموعة",
+        "Fields": {
+          "Name": "الإسم",
+          "Description": "الوصف"
+        },
+        "AddGroup": {
+          "Title": "إضافة مجموعة جديدة",
+          "Name": "الإسم",
+          "Description": "الوصف",
+          "Leader": "المسؤؤل",
+          "Members": "الأعضاء"
+        },
+        "Details": {
+          "Title": " تفاصيل المجموعة",
+          "Name": "الاسم",
+          "Description": "الوصف",
+          "Leader": "رئيس المجموعة",
+          "Members": "أعضاء المجموعة",
+          "Cancel": "إلغاء",
+          "Update": "تعديل"
+        }
+      },
+      "Link": {
+        "Title": "ربط",
+        "Type": "نوع",
+        "Permisson": "الأذن",
+        "Role": "دور"
+      },
+      "Simulator": {
+        "Title": "محاكي",
+        "User": "السمتخدم",
+        "Action": "الفعل",
+        "Subject": "الموضوع"
+      }
+    },
+    "Logs": {
+      "Title": "سجل النظام",
+      "Table_name": "اسم الجدول",
+      "Action": "الإجراء",
+      "list": {
+        "Id": "الرقم التسلسلي",
+        "table_name": "اسم الجدول",
+        "action": "اإجراء",
+        "User": "المستخدم",
+        "Date": "التاريخ",
+        "action_name": "اسم الإجراء",
+        "Module": "قسم"
+      }
+    },
+    "Simulator": "المحاكي",
+    "Link": "الربط",
+    "Schedule": {
+      "Title": "المواعيد",
+      "Plural": "الجداول"
+    },
+    "Announcements": "الإعلانات"
+  },
+  "Schedule": {
+    "Title": "المواعيد",
+    "Plural": "الجداول",
+    "Calendar": "التقويم",
+    "Appointment": {
+      "Title": "الموعد",
+      "Plural": "المواعيد",
+      "My": "مواعيدي"
+    },
+    "AppointmentType": {
+      "Title": "نوع الموعد",
+      "Plural": "أنواع المواعيد",
+      "Add": "إضافة نوع",
+      "Update": " تعديل نوع",
+      "Fields": {
+        "TitleEnglish": "العنوان الإنجليزي",
+        "TitleArabic": "العنوان العربي",
+        "Color": "اللون",
+        "Actions": "الإجراءات"
+      },
+      "Errors": {
+        "confirm_delete": "هل أنت متأكد من حذف النوع؟"
+      },
+      "AddType": {
+        "ArabicTitle": "العنوان العربي",
+        "EnglishTitle": "العنوان الانجليزي",
+        "Color": "اللون",
+        "massages": {
+          "title_ar": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "title_en": {
+            "required": "هذا الحقل مطلوب"
+          }
+        },
+        "Errors": {
+          "something_wrong": "حدث خطأ ما. أعد المحاولة لاحقاً",
+          "please_fill": "الرجاء ملء الحقول المطلوبة ببيانات صحيحة"
+        }
+      }
+    },
+    "Booking": {
+      "Title": "الحجز",
+      "Plural": "الحجوزات",
+      "Add": "حجز موعد جديد",
+      "Edit": "تعديل الموعد",
+      "Cancel": "إلغاء الموعد",
+      "Errors": {
+        "failed": "حدث خطأ ما. قم بالتأكد من مدخلاتك."
+      }
+    },
+    "TimeSlot": {
+      "Title": "الفترة زمنية",
+      "add": "إضافة فترة زمنية",
+      "Plural": "الفترات الزمنية",
+      "MonthAndYear": "الشهر والسنة",
+      "Add": "إضافة فترة",
+      "Edit": "تعديل فترة",
+      "EnterReason": "أدخل السبب:",
+      "ٌReason": "السبب",
+      "Example": "مثال: عدم الرد على الهاتف",
+      "Menu": {
+        "Details": "تفاصيل",
+        "Book": "حجز موعد",
+        "Unbook": "إلغاء الموعد",
+        "Approve": "موافقة على الموعد",
+        "UnApprove": "إلغاء الموافقة",
+        "Delete": "حذف"
+      },
+      "Errors": {
+        "Add": "لا يمكن إضافة الفترات الزمنية المحددة",
+        "confirm_delete": "حذف هذه الفترة سيترتب عليه حذف أي موعد محجوز بها. هل أنت متأكد من حذف الفترة الزمنية؟",
+        "Sure": "هل أنت متأكد؟",
+        "SendCompletionEmail": "سوف يتم إرسال بريد إلكتروني مع رابط للتقييم للعميل. هل أنت متأكد من اكتمال الموعد؟"
+      },
+      "Fields": {
+        "Employee": "الموظف",
+        "EmployeeEmail": "إيميل الموظف",
+        "StartTime": "وقت البداية",
+        "EndTime": "وقت النهاية",
+        "Date": "التاريخ",
+        "IsApproved": "موافق عليه",
+        "IsBooked": "محجوز",
+        "CreatedAt": "مضاف في",
+        "Actions": "إجراءات"
+      },
+      "AddTimeSlot": {
+        "Employee": "الموظف",
+        "Recurrence": "تكرار",
+        "Date": "التاريخ",
+        "StartTime": "وقت البدء",
+        "EndTime": "وقت الإنتهاء",
+        "EnterADateRange": "ادخل نطاق التاريخ",
+        "Days": "الأيام",
+        "Hours": "الساعات",
+        "massages": {
+          "startTime": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "endTime": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "date": {
+            "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+          }
+        }
+      }
+    },
+    "Status": {
+      "Pending": "في الإنتظار",
+      "Available": "متاح",
+      "Canceled": "ملغي",
+      "Approved": "موافق عليه"
+    },
+    "AppointmentsTable": {
+      "Title": "الموعد",
+      "Plural": "جدول المواعيد",
+      "details": "تفاصيل الموعد",
+      "Add": "حجز موعد",
+      "List": {
+        "id": "رقم التسلسل",
+        "type": "نوع الموعد",
+        "client_name": "اسم العميل",
+        "client_type": {
+          "client_type": "نوع العميل",
+          "Individual": "فرد",
+          "Company": "شركة"
+        },
+        "client_email": "البريد الإلكتروني",
+        "client_phone": "رقم الهاتف",
+        "date": "التاريخ",
+        "startTime": "وقت البدء",
+        "endTime": "وقت الانتهاء",
+        "employee": "المحامي",
+        "notes": "ملاحظات",
+        "enter_notes": "أدخل ملاحظاتك...",
+        "client_cpr": "الرقم الشخصي",
+        "client_cr": "رقم السجل التجاري",
+        "cprcr": "الرقم الشخصي/التجاري",
+        "case_description": "تفاصيل الموعد",
+        "isApproved": "موافَق عليه",
+        "yes": "نعم",
+        "no": "لا",
+        "status": "الحالة",
+        "completed": "منتهية",
+        "waitingApproval": "قيد الانتظار"
+      },
+      "update": "تعديل الفترة الزمنية",
+      "delete": "هل أنت متأكد من حذف هذا الموعد؟",
+      "complete": "اكتمال الموعد"
+    }
+  },
+  "Appointment": {
+    "Title": "الموعد",
+    "Plural": "المواعيد"
+  },
+  "Type": {
+    "Title": "نوع",
+    "Plural": "أنواع"
+  },
+  "Groups": {
+    "Title": "مجموعة",
+    "Plural": "المجموعات"
+  },
+  "Employee": {
+    "Title": "الموظف",
+    "Plural": "الموظفين"
+  },
+  "Language": {
+    "Title": "اللغة"
+  },
+  "Auth": {
+    "Login": {
+      "Title": "تسجيل الدخول"
+    },
+    "Hide": {
+      "Title": "إخفاء القائمة الجانبية"
+    },
+    "Logout": {
+      "Title": "تسجيل الخروج"
+    }
+  },
+  "Users": {
+    "Title": "المستخدم",
+    "Plural": "المستخدمون"
+  },
+ 
+  "Operations": {
+    "Cancel": "الغي",
+    "Ok": "حسنا",
+    "Actions": "الأوامر",
+    "Add": "إضافة",
+    "Move": "حرك",
+    "Delete": "إحذف",
+    "Update": "تعديل",
+    "Edit": "تحرير",
+    "Open": "افتح",
+    "List": "قائمة",
+    "Select": "اختيار",
+    "New": "جديد",
+    "All": "جميع",
+    "Details": "تفاصيل",
+    "Save": "أحفظ",
+    "Search": "ابحث",
+    "Next": "التالي",
+    "Back": "رجوع",
+    "Current": "الحالي",
+    "Previous": "السابق",
+    "Help": "مساعدة",
+    "Settings": "الإعدادات",
+    "Sorry": "! نأسف",
+    "Yes": "نعم",
+    "No": "لا",
+    "Book": "حجز",
+    "link": "ربط",
+    "Simulate": "المحاكي",
+    "Confirm": "تأكيد",
+    "Mandatory": "إجباري",
+    "EditMode": "وضع التحرير",
+    "SelectEmployee": "إختيار الموظف",
+    "Submit": "تقدم",
+    "Choose": "إختر",
+    "ProceedTo": "تقدم إلى",
+    "Warning": "تحذير",
+    "main": "العنوان الحالي",
+    "add": "إضافة",
+    "Filter": "تصفية",
+    "Apply": "تطبيق",
+    "Errors": "حدث خطأ ما. أعد المحاولة لاحقاً",
+    "Print": "طباعة",
+    "Attention": "تنبيه",
+    "Proceed": "متابعة",
+    "Reset": "إعادة تعيين",
+    "Success": "تم بنجاح",
+    "LastUpdated": "آخر تحديث",
+    "link_inv":"ربط بفاتورة",
+    "add_inv":"إضافة فاتورة",
+    "ClickToUpdate": "انقر لتطبيق التغييرات",
+    "None": "لا يوجد"
+    
+  },
+  "Date": {
+    "Year": {
+      "Title": "السنة",
+      "Plural": "السنوات"
+    },
+    "Month": {
+      "Title": "الشهر"
+    },
+    "Week": {
+      "Title": "الإسبوع"
+    },
+    "Day": {
+      "Title": "اليوم"
+    }
+  },
+  "Months": {
+    "0": "كل الأشهر",
+    "1": "يناير",
+    "2": "فبراير",
+    "3": "مارس",
+    "4": "أبريل",
+    "5": "مايو",
+    "6": "يونيو",
+    "7": "يوليو",
+    "8": "أغسطس",
+    "9": "سبتمبر",
+    "10": "أكتوبر",
+    "11": "نوفمبر",
+    "12": "ديسمبر"
+  },
+  "Days": {
+    "Sunday": "الأحد",
+    "Monday": "الإثنين",
+    "Tuesday": "الثلثاء",
+    "Wednesday": "الأربعاء",
+    "Thursday": "الخميس",
+    "Friday": "الجمعة",
+    "Saturday": "السبت"
+  },
+  "Enum": {
+    "ClientType": {
+      "Title": "نوع العميل",
+      "Company": "شركة",
+      "Individual": "فرد"
+    }
+  },
+  "Form": {
+    "CPR": "الرقم الشخصي",
+    "CR": "رقم السجل",
+    "Name": "الإسم",
+    "CompanyName": "اسم الشركة",
+    "ClientName": "اسم العميل",
+    "Phone": "الموبايل",
+    "Email": "الإيميل",
+    "CaseDescription": "تفاصيل القضية",
+    "Lawyer": "المحامي",
+    "Time": "الوقت",
+    "Status": "الحالة",
+    "Reason": "سبب الإلغاء",
+    "Canceled": "ملغي"
+  },
+  "HCM": {
+    "ESS": {
+      "Title": "الخدمة الذاتية للموظف"
+    },
+    "Title": "الموارد البشرية",
+    "Requests": {
+      "Title": "الطلبات العامة",
+      "NoRequests": "لا توجد طلبات",
+      "NoMyRequests": "لم تقم بإرسال أية طلبات",
+      "Sent": "الطلبات المرسلة",
+      "Inbox": "الطلبات الواردة",
+      "New": "طلب جديد"
+    },
+    "Department": {
+      "Title": "قسم",
+      "Plural": "الأقسام"
+    },
+    "Designation": {
+      "Title": "المنصب",
+      "Plural": "المناصب"
+    },
+    "Appraisal": {
+      "type": {
+        "Add": "إضافة نوع تقيم",
+        "Update": "تعديل نوع تقيم",
+        "list": {
+          "arabic_name": "الإسم باللغة العربية ",
+          "english_name": "الإسم باللغة الإنجليزية",
+          "type":"النوع "
+        },
+        "Errors": {
+          "Update": "لا تستطيع تعديل  النوع ",
+          "confirm_delete": "هل أنت متأكد من حذف  هذا النوع؟",
+          "cant_delete": "لايمكنك حذف هذا النوع لانه مرتبط بمعلومات اخرى"
+        },
+        "messages": {
+          "title_ar": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "title_en": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "typeID":{
+            "required": "هذا الحقل مطلوب"
+
+          }
+      
+        }
+      },
+      "Title": "التقييم",
+      "Plural": "التقييمات",
+      "Details": "تفاصيل التقييم",
+      "AddTemplate": "إضافة قالب",
+      "Add": "إضافة تقييم جديد",
+      "Appraiser": "المقيم",
+      "Appraisee": "المُقيَّم",
+      "SelectAppraiser": "المُقيِّم",
+      "SelectAppraisee": "الموظف المُقيَّم",
+      "Template": "القالب",
+      "Status": {
+        "Title": "الحالة",
+        "CreationPhase": "مرحلة الإنشاء",
+        "EvaluationPhase": "مرحلة النقييم",
+        "ApprovalPhase": "مرحلة المُصادقات",
+        "FeedbackPhase": "مرحلة إبداء الرأي",
+        "Completed": "مُكتملة",
+        "Archived": "مُأرشف"
+      },
+      "Type": "النوع",
+      "Section": {
+        "Title": "قسم",
+        "Plural": "الأقسام",
+        "sectionTitle": "عنوان القسم",
+        "sectionDescription": "تعريف القسم",
+        "Empty": "لا يوجد أقسام في التقييم.",
+        "sectionType": "نوع التقييم",
+        "Add": "إضافة قسم جديد",
+        "Rating": {
+          "Title": "تقييم",
+          "Plural": "التقييمات"
+        },
+        "Type": {
+          "fieldTitle": "نوع القسم",
+          "Title": "النوع",
+          "OutOF100": "من 100",
+          "OutOF5": "من 5",
+          "PassFail": "يجتز / لم يجتز",
+          "Feedback": "إبداء الرأي",
+          "Objective": "أهداف"
+        },
+        "Weightage": "القيمة",
+        "Score": "النتيجة",
+        "TotalScore": "نتيجة القسم الكلية",
+        "TotalWeightage": "قيمة القسم الكلية",
+        "Block": {
+          "Title": "قالب",
+          "Plural": "قوالب",
+          "Add": "إضافة قالب",
+          "TopicDescription": "المادة مع الوصف",
+          "Topic": "المادة",
+          "Description": "وصف المادة",
+          "Question": "السؤال",
+          "Answer": "الجواب",
+          "Objective": {
+            "Title": "الهدف",
+            "Plural": "الأهداف",
+            "Description": "تفاصيل الهدف او مؤشر الأداء",
+            "Comment": "تعليق الموظف",
+            "Target": "تاريخ التسليم",
+            "ComplitionDate": "تاريخ الإنجاز",
+            "ComplitionPercentage": "مستوى الإنجاز",
+            "Score": "النتيجة"
+          }
+        }
+      },
+      "Approval": {
+        "Title": "مصادقة",
+        "Plural": "مصادقات",
+        "Mandatory": "إلزامي",
+        "NotMandatory": "ليس إلزاميا",
+        "Approved": "مُصدق عليه",
+        "NotApproved": "غير مُصدق",
+        "Add": "إضافة مُصادق جديد",
+        "Empty": "لا يوجد مُقيمين."
+      }
+    },
+    "EC": {
+      "Title": "إدارة الموظفين"
+    },
+    "Payroll": {
+      "ProcessforOne":"إضافة لموظف معين",
+      "Title": "الرواتب",
+      "Process": "إضافة",
+      "Details": "تفاصيل الراتب",
+      "add": "إضافة",
+      "Errors": {
+        "already_add": "لقد تم تعين الرواتب الى الشهر والسنه المختار هل تود بتحديث المعلومات؟",
+        "already_add_employee": "لقد تم تعين الرواتب الى الشهر والسنه المختار  لهذا الموظف "
+
+        
+      },
+      "massages": {
+        "payment_status": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "selectedDate": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "status": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "List": {
+        "MonthAndYear": "الشهر والسنة",
+        "Name": "اسم الموظف",
+        "Month": "الشهر",
+        "Year": "السنة",
+        "AllowedLeaves": "أيام الإجازة المدفوعة",
+        "TakenLeaves": "أيام الإجازة المأخوذه",
+        "WorkingDays": "أيام العمل",
+        "NetAmount": "الراتب الإجمالي",
+        "Status": "الحالة",
+        "Action": "إجراءات",
+        "payment_status": "حالة الدفع",
+        "total_allowences": "مبالغ بديلة أخرى",
+        "total_deductions": "مبالغ مستقطعة أخرى",
+        "total_bonuses": " علاوة",
+        "total_allowences_fixed": "المبالغ البديلة الثابتة",
+        "total_deductions_fixed": "المبالغ المستقطعةالثابتة",
+        
+        "total_bonuses_fixed": " علاوة",
+        "total_gross": "المبلغ الاجمالي",
+        "payment_type": "طريقة الدفع"
+      },
+      "payment_type": {
+        "Cash": "نقداً",
+        "BankTransfer": "تحويل بنكي",
+        "Cheque": "شيك"
+      },
+      "payment_status": {
+        "un_paid": "غير مدفوعة",
+        "paid": "مدفوعة"
+      },
+      "status": {
+        "Process": "قيد المعالجة",
+        "Approval": "موافق عليها"
+      }
+    },
+    "Recruitment": {
+      "Title": "التوظيف"
+    },
+    "Employee-managment": {
+      "Title": "إدارة الموظفين"
+    },
+    "Workforce": {
+      "Title": "القوى العاملة",
+      "leaves": {
+        "Errors": {
+          "Update": "لا تستطيع تعديل  الإجازة ",
+          "confirm_delete": "هل أنت متأكد من حذف  الإجازة"
+        },
+        "Dashbourd": "الواجهة الرئيسية",
+        "Title": "الإجازات",
+        "Add": " إضافة إجازة",
+        "Update": " تعديل إجازة",
+        "massages": {
+          "days": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "الرجاء إدخال أرقام فقط "
+          },
+          "Leave_Type": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "Employee": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "documentURL": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "From_Date": {
+            "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط",
+            "date": "الرجاء إدخال تاريخ فقط"
+          },
+          "To_Date": {
+            "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط",
+            "date": "الرجاء إدخال تاريخ فقط"
+          }
+        },
+        "List": {
+          "ID": "الرقم التسليلي",
+          "Name": "الأسم",
+          "Leave_Type": "نوع الإجازة",
+          "From_Date": "من تاريخ",
+          "To_Date": "إلى تاريخ",
+          "Days": "عدد الأيام",
+          "Action": "إجراءات",
+          "Approval": "الحاله",
+          "documentURL": "الملف"
+        },
+        "status": {
+          "Pendding": "قيد الإنتظار",
+          "Approved": "مقبولة",
+          "Reject": "مرفوضة"
+        },
+        "Form": {
+          "Employee": "الموظف",
+          "Leave_Type": "نوع الإجازة",
+          "Days": "عدد الأيام",
+          "From_Date": "من تاريخ",
+          "To_Date": "إلى تاريخ",
+          "Approval": "موافقة",
+          "status": "الحالة"
+        },
+        "leave_Types": {
+          "Errors": {
+            "Update": "لا تستطيع تعديل نوع الإجازة ",
+            "confirm_delete": "هل أنت متأكد من حذف نوع الإجازة"
+          },
+          "update": "تعديل نوع إجازة",
+          "add": "إضافة نوع إجازة",
+          "Title": "انواع الاجازات",
+          "List": {
+            "Action": "إجراءات",
+            "Allowed_per_year": "عدد الأيام المسموحة في السنة",
+            "Name": "اسم الإجازة",
+            "ID": "الرقم التسليلي"
+          },
+          "Form": {
+            "Name_ar": "اسم الإجازة بالعربية",
+            "Name_en": "اسم الإجازة بالانجليزية",
+            "Allowed_per_year": "عدد الأيام المسموحة في السنة",
+            "Allowed_once": "يسمح مرة واحدة",
+            "Paid": "مدفوعة",
+            "paied_details": "تفاصيل الدفع",
+            "Number_of_days": "عدد الأيام",
+            "percentage": "نسبة الدفع"
+          },
+          "massages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "allowed_per_year": {
+              "required": "هذا الحقل مطلوب",
+              "pattern": "الرجاء إدخال أرقام فقط "
+            }
+          }
+        },
+        "holiday": {
+          "Errors": {
+            "Update": "لا تستطيع تعديل  الإجازة ",
+            "confirm_delete": " ?هل أنت متأكد من حذف  الإجازة"
+          },
+          "update": "تعديل  إجازة",
+          "add": " إضافة  إجازة رسمية",
+          "Title": "  الاجازات الرسمية",
+          "List": {
+            "Action": "إجراءات",
+            "Allowed_per_year": "عدد الأيام المسموحة في السنة",
+            "name": "اسم الإجازة",
+            "ID": "الرقم التسليلي",
+            "from_date": "التاريخ",
+            "number_of_days": "عدد الأيام",
+            "to_date": "تنتهي في  "
+          },
+          "Form": {
+            "Name_ar": "اسم الإجازة بالعربية",
+            "Name_en": "اسم الإجازة بالانجليزية",
+            "from_date": "التاريخ",
+            "number_of_days": "عدد الأيام",
+            "to_date": "تنتهي في  ",
+            "year": "السنة  "
+          },
+          "massages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "from_date": {
+              "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط"
+            }
+          }
+        },
+        "balance": {
+          "frequency": {
+            "Yearly": "سنوي",
+            "Monthly": "شهري",
+            "5year": "كل خمس سنوات",
+            "other": "اخرى"
+          },
+          "Errors": {
+            "Update": "لا تستطيع تعديل  الإجازة ",
+            "confirm_delete": " ?هل أنت متأكد من حذف رصيد الإجازة"
+          },
+          "update": "تعديل رصيد إجازة",
+          "add": "إضافة رصيد إجازة",
+          "Title": "  رصيد الإجازات ",
+          "List": {
+            "Action": "إجراءات",
+            "ID": "الرقم التسليلي",
+            "Leave_Type": "نوع الإجازة",
+            "accual_days": "أيام الاستحقاق",
+            "balance": "الأيام المتبقية",
+            "frequency": "التكرار"
+          },
+          "Form": {
+            "Leave_Type": "نوع الإجازة",
+            "accual_days": "أيام الاستحقاق",
+            "balance": "الرصيد",
+            "frequency": "التكرار"
+          },
+          "massages": {
+            "Leave_Type": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "Employee": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "accual_days": {
+              "required": "هذا الحقل مطلوب",
+              "pattern": "الرجاء إدخال أرقام فقط "
+            },
+            "frequency": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "balance": {
+              "required": "هذا الحقل مطلوب",
+              "pattern": "الرجاء إدخال أرقام فقط "
+            }
+          }
+        }
+      }
+    },
+    "Template": {
+      "Title": "قالب",
+      "Plural": "القوالب"
+    }
+  },
+  "EmployeeSelfServices": {
+    "Title": "خدمات الموظف الذاتية",
+    "Services": {
+      "Talents": "المواهب",
+      "Personal_information": "المعلومات الشخصية",
+      "Contracts": "العقود",
+      "Leaves": "الإجازات",
+      "Reports": "التقارير"
+    },
+    "Employee-talents": {
+      "Title": "مواهب الموظف",
+      "Certificates": "الشهادات",
+      "Experiences": "الخبرة",
+      "Education": "التعليم",
+      "List": {
+        "Result": "النتيجة",
+        "Duration": "المدة",
+        "Address": "العنوان",
+        "issure": "اصداء",
+        "issure_date": "تاريخ الإصداار"
+      }
+    },
+    "Employee-contracts": {
+      "Title": "عقود الموظف",
+      "List": {
+        "job_type": "نوع الوظيفة",
+        "payroll_group": "المجموعة",
+        "start_date": "تاريخ البدء",
+        "end_date": "تاريخ الإنتهاء",
+        "Basic_salary": "الراتب الأساسي",
+        "salary": "الراتب"
+      }
+    },
+    "Employee-leaves": {
+      "Title": "إجازات الموظف",
+      "Add": "إضافة إجازة",
+      "List": {
+        "leave_type": "نوع الإ‘جازة",
+        "from_date": "إبتداء من ",
+        "to_date": "إنتهاء في ",
+        "total_days": "مجموع الأيام"
+      }
+    }
+  },
+  "Employee_managment": {
+    "add": "إضافة موظف",
+    "details": "تفاصيل الموظف",
+    "Title": "إدارة الموظفين",
+    "list": {
+      "id": "رقم التسلسل",
+      "first_name": "الاسم الأول",
+      "last_name": "الاسم الأخير",
+      "designation": "المنصب",
+      "Action": "إجراءات"
+    },
+    "Services": {
+      "Talents": "المواهب",
+      "Personal_information": "المعلومات الشخصية",
+      "Contracts": "العقود",
+      "Leaves": "الإجازات",
+      "General_Requests": "طلبات عامة",
+      "Reports": "التقارير",
+      "ReportForm":{
+        "reportType":"نوع التقرير",
+        "MonthAndYear":"الشهر والسنة",
+        "employeeCertificate":"شهادة خبرة",
+        "payslip":"تقرير قسيمة الراتب",
+        "salarycertificate":"شهادة راتب",
+
+        "generate":"إنشاء التقرير "
+
+      }
+
+    },
+    "General_Requests": {
+      "Send_request": "إرسال طلب عام",
+      "Send": "إرسال الطلب",
+      "From": "من",
+      "To": "إلى",
+      "Subject": "الموضوع",
+      "Message": "الرسالة",
+      "Attachment": "مرفق",
+      "Reply": "رد",
+      "Messages": {
+        "Success": "تم إرسال طلبك بنجاح.",
+        "Errors": {
+          "Subject": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "Message": {
+            "required": "هذا الحقل مطلوب"
+          }
+        }
+      }
+    },
+    "Personal_information": {
+      "massages": {
+        "first_name": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "last_name": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "gender": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "nationality": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "passport": {
+          "required": "هذا الحقل مطلوب",
+          "pattern": "الرجاء ادخال أرقام فقط"
+        },
+        "religion": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "birth_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        }
+      },
+      "Update": " تعديل المعلومات الشخصية",
+      "Gender": {
+        "Male": "ذكر",
+        "Female": "أنثى"
+      },
+      "marital_status": {
+        "Single": "أعزب",
+        "Married": "متزوج/ة",
+        "Divorced": "مطلق/ة",
+        "Widowed": "أرمل/ة"
+      },
+      "title": "المعلومات الشخصية",
+      "Form": {
+        "First_Name": "الإسم الأول",
+        "Last_Name": "الإسم الأخير",
+        "Role": "الدور",
+        "Designations": "الوظيفة",
+        "Password": "الرقم السري",
+        "Gender": "الجنس",
+        "marital_status": "الحالة الاجتماعية ",
+        "Nationality": "الجنسية",
+        "national_identity": "الرقم الشخصي",
+        "Religion": "الدين",
+        "passport": "رقم الجواز",
+        "birth_date": "تاريخ الميلاد"
+      }
+    },
+    "Emergency_Contact": {
+      "Errors": {
+        "confirm_delete": "؟هل أنت متأكد من حذف معلومات الطوارئ "
+      },
+      "massages": {
+        "name": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "relation": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "phone": {
+          "required": "هذا الحقل مطلوب",
+          "min": "الحد الأدنى لعدد الأرقام هو 8 ",
+          "max": "الحد الأقصى لعدد الأرقام هو 11",
+          "pattern": "الرجاء إدخال أرقام فقط "
+        },
+        "email": {
+          "required": "هذا الحقل مطلوب",
+          "pattern": "الرجاء ادخال بريد إلكتروني صحيح"
+        }
+      },
+      "add": "   إضافة  ",
+      "update": "تعديل معلومات الطوارئ",
+      "emergency_contacts_relation": {
+        "Husband": "الزوج",
+        "Wife": "الزوجة",
+        "Father": "الأب",
+        "Mother": "الأم",
+        "Brother": "الأخ",
+        "Son": "الإبن",
+        "Uncle": "العم/الخال",
+        "Other": "أخرى"
+      },
+      "title": "معلومات الطوارئ",
+      "Form": {
+        "name": "الإسم ",
+        "Relation": "صلة القرابة",
+        "phone": "الهاتف",
+        "mobile": "الهاتف المحمول",
+        "Email": "البريد الإلكتروني"
+      }
+    },
+    "contact_infroamtion": {
+      "update": " تعديل  معلومات التواصل",
+      "title": "معلومات التواصل",
+      "Form": {
+        "phone": "الهاتف",
+        "Mobile": "الهاتف المحمول",
+        "Email": "البريد الإلكتروني"
+      }
+    },
+    "address": {
+      "Errors": {
+        "confirm_delete": "؟هل أنت متأكد من حذف هذاالعنوان "
+      },
+      "massages": {
+        "line1": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "city": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "country": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "title": "العنواين",
+      "add": "إضافة عنوان ",
+      "update": "تعديل عنوان ",
+      "Form": {
+        "line1": "خط 1",
+        "line2": "خط 2",
+        "city": "المدينة",
+        "Country": "البلد",
+        "isMain": "العنوان الحالي"
+      }
+    },
+    "Employee-talents": {
+      "Title": "مواهب الموظف",
+      "Certificates": {
+        "Errors": {
+          "confirm_delete": "هل أنت متأكد من هذه  الشهادة"
+        },
+        "title": "الشهادات",
+        "Add": "إضافة شهادة",
+        "Update": " تعديل شهادة",
+        "List": {
+          "ID": "الرقم التسلسلي",
+          "title": "العنوان",
+          "issure": "اصداء",
+          "issure_date": "تاريخ الإصداار",
+          "documentURL": "الملف",
+          "Action": "الإجراءات"
+        },
+        "massages": {
+          "title": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "issure": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "issure_date": {
+            "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط"
+          },
+          "documentURL": {
+            "required": "هذا الحقل مطلوب"
+          }
+        }
+      },
+      "Experiences": {
+        "Errors": {
+          "confirm_delete": "هل أنت متأكد من هذه  الخبرة"
+        },
+        "title": "الخبرة",
+        "Add": "إضافة خبرة",
+        "Update": "  تعديل الخبرة",
+        "List": {
+          "ID": "الرقم التسلسلي",
+          "company": "الشركة",
+          "position": "المنصب",
+          "address": "الموقع",
+          "duration": "المدة الزمنية",
+          "documentURL": "الملف",
+          "Action": "الإجراءات",
+          "massages": {
+            "company": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "position": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "address": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "duration": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "documentURL": {
+              "required": "هذا الحقل مطلوب"
+            }
+          }
+        }
+      },
+      "Education": {
+        "Errors": {
+          "confirm_delete": "هل أنت متأكد من التعليم؟"
+        },
+        "title": "التعليم",
+        "Add": "إضافة تعليم",
+        "Update": "  تعديل تعليم",
+        "type": {
+          "University": "جامعة",
+          "SecondarySchool": "ثانوية عامة"
+        },
+        "List": {
+          "ID": "الرقم التسلسلي",
+          "place": "المكان",
+          "result": "النتيجة",
+          "duration": "المدة الزمنية",
+          "type": "نوع الشهادة",
+          "documentURL": "الملف",
+          "Action": "الإجراءات"
+        },
+        "massages": {
+          "place": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "result": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "duration": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "type": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "documentURL": {
+            "required": "هذا الحقل مطلوب"
+          }
+        }
+      },
+      "List": {
+        "Result": "النتيجة",
+        "Duration": "المدة",
+        "Address": "العنوان",
+        "issure": "اصداء",
+        "issure_date": "تاريخ الإصداار"
+      }
+    },
+    "Employee-contracts": {
+      "title": "عقود الموظف",
+      "massages": {
+        "title_ar": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "title_en": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "basic_salary": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "jobType": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "payroll_group": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "startDate": {
+          "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط"
+        },
+        "endDate": {
+          "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط"
+        },
+        "amount": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "calculationType": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "allowances": {
+        "Title": "مبالغ بديلة",
+        "add": "إضافة مبلغ بديل  ",
+        "form": {
+          "title_ar": "العنوان  بالعربية",
+          "title_en": "العنوان  بالإنجليزية",
+          "type": "النوع ",
+          "calculationType": "نوع الحساب ",
+          "amount": "المبلغ  "
+        }
+      },
+      "deductions": {
+        "Title": "المبالغ المستقطعة",
+        "add": "إضافة مبلغ مستقطع",
+        "form": {
+          "title_ar": "العنوان  بالعربية",
+          "title_en": "العنوان  بالإنجليزية",
+          "type": "النوع ",
+          "calculationType": "نوع الحساب ",
+          "amount": "المبلغ  "
+        }
+      },
+      "bonuses": {
+        "Title": "العلاوات",
+        "add": "إضافة علاوة  ",
+        "form": {
+          "title_ar": "العنوان  بالعربية",
+          "title_en": "العنوان  بالإنجليزية",
+          "type": "النوع ",
+          "calculationType": "نوع الحساب ",
+          "amount": "المبلغ  "
+        }
+      },
+      "Errors": {
+        "Create": "لا تستطيع إضافة هذا العقد ",
+        "Add": "لا تستطيع إضافة هذا العقد",
+        "Update": "لا تستطيع تعديل هذا العقد",
+        "confirm_delete": "؟هل أنت متأكد من حذف هذا العقد",
+        "main": "لا يمكنك حذف العقد الرئيسي ، اختر عقد رئيسيًا آخر قبل حذف العقد",
+        "required_filed": "الرجاء ملئ الحقول المطلوبة بالبيانات الصحيحة"
+      },
+      "Title": "عقود الموظف",
+      "details": "تفاصيل العقد",
+      "empty": "تفاصيل العقد",
+      "payroll_group": {
+        "Yearly": "سنوي",
+        "Monthly": "شهري",
+        "Quarterly": "إسبوعي",
+        "Daily": "يومي"
+      },
+      "Add": "إضافة عقد",
+      "form": {
+        "title_ar": "عنوان العقد بالعربية",
+        "title_en": "عنوان القعد بالإنجليزية",
+        "job_type": "نوع الوظيفة",
+        "payroll_group": "المجموعة",
+        "start_date": "تاريخ البدء",
+        "end_date": "تاريخ الإنتهاء",
+        "Basic_salary": "الراتب الأساسي",
+        "salary": "الراتب",
+        "main": "الحالي",
+        "Flat": "قيمة",
+        "Percentage": "نسبة مئوية"
+      },
+      "List": {
+        "ID": "الرقم التسلسلي",
+        "title": "العنوان",
+        "job_type": "نوع الوظيفة",
+        "payroll_group": "المجموعة",
+        "start_date": "تاريخ البدء",
+        "end_date": "تاريخ الإنتهاء",
+        "Basic_salary": "الراتب الأساسي",
+        "salary": "الراتب",
+        "action": "إجراءات"
+      }
+    },
+    "Employee-leaves": {
+      "Title": "إجازات الموظف",
+      "Add": "إضافة إجازة",
+      "List": {
+        "leave_type": "نوع الإ‘جازة",
+        "from_date": "إبتداء من ",
+        "to_date": "إنتهاء في ",
+        "total_days": "مجموع الأيام"
+      }
+    },
+    "Bank_info": {
+      "Title": "المعلومات البنكية",
+      "Add": "إضافة ",
+      "Update": "تعديل المعلومات البنكية ",
+      "List": {
+        "bank_name": "اسم البنك ",
+        "holder_name": "اسم حامل البطاقة  ",
+        "IBAN": " IBAN ",
+        "Account_number": " رقم الحساب "
+       
+      }
+    }
+  },
+  "Court": {
+    "agenda": {
+      "Title": "الأجندة"
+    },
+    "Fees": {
+      "Fees": {
+        "title": "الأتعاب",
+        "discount": "الخصم",
+        "Add": "إضافة دفع ",
+        "Method": "طريقة الدفع",
+        "Form": {
+          "balance": "المبلغ المتبقي",
+          "total": "المجموع",
+          "total_paid": "المبلغ المقبوض",
+          "ID": "الرقم التسلسلي",
+          "received_from": "تم الإستلام من",
+          "Amount": "المبلغ",
+          "Method": "طريقة الدفع",
+          "comment": "ملاحظات",
+          "due_date": "اخر تاريخ لتسليم",
+          "Action": "إجراءات"
+        }
+      },
+      "title": "الأتعاب",
+      "discount": "الخصم",
+      "Add": "إضافة دفع ",
+      "Method": "طريقة الدفع",
+      "Form": {
+        "balance": "المبلغ المتبقي",
+        "total": "المجموع",
+        "total_paid": "المبلغ المقبوض",
+        "ID": "الرقم التسلسلي",
+        "received_from": "تم الإستلام من",
+        "Amount": "المبلغ",
+        "Method": "طريقة الدفع",
+        "comment": "ملاحظات",
+        "due_date": "اخر تاريخ لتسليم",
+        "Action": "إجراءات"
+      }
+    },
+    "Claims": {
+      "title": "الطلبات",
+      "discount": "الخصم",
+      "Add": "إضافة دفع",
+      "details": "التفاصيل",
+      "PrintReceipt": "طباعة الرصيد",
+      "Method": {
+        "Cash": "نقداً",
+        "Cheque": "شيك"
+      },
+      "Errors": {
+        "confirm_delete": "هل أنت متأكد من حذف هذا الدفع؟",
+        "Add": "لا تستطيع إضافة هذه الطلبات",
+        "Update": "لا تستطيع تعديل هذه الطلبات",
+        "AddPayment": "لا تستطيع إضافة هذا الدفع"
+      },
+      "messages": {
+        "total": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "due_date": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "received_from": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "amount": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "method": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "Form": {
+        "balance": "المبلغ المتبقي",
+        "total": "المجموع",
+        "total_paid": "المبلغ المقبوض",
+        "ID": "الرقم التسلسلي",
+        "received_from": "تم الاستلام من",
+        "Amount": "المبلغ",
+        "Method": "طريقة الدفع",
+        "comment": "ملاحظات",
+        "due_date": "آخر تاريخ للتسليم",
+        "Action": "إجراءات"
+      }
+    },
+    "Charge": {
+      "title": "الرسوم",
+      "Add": "إضافة رسوم",
+      "Details": "تفاصيل الرسوم",
+      "massages": {
+        "Charge_name": {
+          "required": "اسم الرسوم مطلوب "
+        },
+        "Amounts": {
+          "required": "مبلغ الرسوم مطلوب"
+        },
+        "Status": {
+          "required": "الحالة مطلوبة"
+        },
+        "CPR": {
+          "pattern": "الرقم الشخصي مكون من 9 أرقام",
+          "required": "الرقم الشخصي للمسلم مطلوب"
+        },
+        "Name": {
+          "required": "اسم المسلم مطلوب"
+        },
+        "date": {
+          "required": "تاريخ الدفع مطلوب"
+        }
+      },
+      "Form": {
+        "reference_no": "الرقم التسلسلي",
+        "Charge_name": "اسم الرسوم",
+        "Amounts": "مبلغ الرسوم",
+        "ID": "الرقم التسلسلي",
+        "Comments": "الملاحظات",
+        "Action": "إجراءات",
+        "Case": "القضية",
+        "Status": {
+          "Status": "الحالة",
+          "Pending": "معلقة",
+          "Paid": "مدفوعة"
+        },
+        "Name": "تم الاستلام من",
+        "CPR": "الرقم الشخصي للمسلم",
+        "date": "تاريخ الدفع",
+        "Update": "تعديل الرسوم"
+      }
+    },
+    "Title": "المحكمة",
+    "Cases": {
+      "document": {
+        "add": " إضافة ملف",
+        "document_type": {
+          "memoir": "المذكرات",
+          "Documents": "المستندات",
+          "Adjudge_attachment": "نسخة الحكم",
+          "Lawsuit_attachment": "نسخة لائحة دعوى",
+          "Client": "الموكل",
+          "CPR": "الهوية",
+          "Advice_form": "استمارة استشارة",
+          "Know_your_client_form": "استمارة اعرف عميلك",
+          "Other": "أخرى",
+          "Consultations": "استشارات ومحاضر اجتماع"
+        },
+        "delete": "هل أنت متأكد من  حذف هذا الملف؟",
+        "Form": {
+          "name": "اسم الملف",
+          "document_type": "تصنيف الملف",
+          "DocumentUrl": "الملف"
+        }
+      },
+      "Appeal": "إستئناف",
+      "Discrimination": "تمييز",
+      "Details": "تفاصيل القضية",
+      "Errors": {
+        "Create": "لا تستطيع إضافة هذه القضية",
+        "Add": "لا تستطيع إضافة هذه القضية",
+        "Update": "لا تستطيع تعديل هذه القضية",
+        "confirm_delete": "هل أنت متأكد من حذف هذه القضية",
+        "required_filed": "الرجاء ملئ الحقول المطلوبة بالبيانات الصحيحة",
+        "opponent_required": "الرجاء ادخال بيانات الخصم"
+      },
+      "RelationType": {
+        "Appeal": "إستئناف",
+        "Discrimination": "تمييز",
+        "Execuation": "تنفيذ",
+        "Similar": "متقابلة",
+        "level 1": "الدرجة 1",
+        "Discriminationـcivil":"تميز مدني",
+        "Discriminationـcommercial":"تميز تجاري"
+
+      },
+      "List": {
+        "From_Date": "من تاريخ",
+        "To_Date": "إلى تاريخ",
+        "ID": "الرقم التسلسلي",
+        "Case_no": "رقم القضية",
+        "File_no": "رقم الملف",
+        "Client": "الموكل",
+        "Opponent": "الخصم",
+        "Court_no": "رقم المحكمة",
+        "Case_status": "حالة القضية",
+        "Case_type": "نوع القضية",
+        "Action": "إجراءات",
+        "Related_Company": "المجموعة",
+        "Remming_days": "الأيام المتبقة"
+      },
+      "Form": {
+        "Level": "الدرجة",
+        "JudgedAt": "تاريخ النطق بالحكم",
+        "Adjudge": "الحكم",
+        "caseRepresentative": {
+          "caseRepresentative": "الصفة",
+          "Challenged": "مطعون ضده",
+          "Plague": "طاعن",
+          "AppealAgainst": "مستأنف ضده\\ها",
+          "Appeallant": "مستأنف",
+          "Respondent": "مدعي عليه",
+          "Prosecutor": "مدعي",
+          "Victim": "مجني عليه",
+          "Accused": "متهم",
+          "OutletAgainst": "منفذ ضده",
+          "Outlet": "منفذ له"
+        },
+        "RelationType": "نوع العلاقة",
+        "Ref_no": "رقم القضية",
+        "File_no": "رقم الملف",
+        "Type": "نوع القضية",
+        "Case_type": "نوع القضية",
+        "Client": "الموكل",
+        "Related_Company": "الجهة",
+        "Representative": "المحامي المكلف",
+        "Court": "المحكمة",
+        "Court_Room": "رقم المحكمة",
+        "Case_status": {
+          "Case_status": "حالة القضية",
+          "InProgress": "جارية",
+          "Judged": "محسومة",
+          "Closed": "شطبت"
+        },
+        "Comment": "التعليق",
+        "CaseNo": "رقم القضية",
+        "full_name": "الإسم الكامل",
+        "CPR": "الرقم الشخصي",
+        "mobile1": "هاتف 1",
+        "mobile2": "هاتف 2",
+        "address": "العنوان",
+        "email": "البريد الإلكتروني",
+        "nationality": "الجنسية",
+        "job_position": "المسمى الوظيفي",
+        "Organization": "جهة العمل",
+        "leaveEmpty": "اترك الحقل فارغا للإنشاء التلقائي",
+        "prevFileNo": "استعمال رقم الملف السابق",
+        "messages": {
+          "internalFile_no": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "clientID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "companyID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "typeID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "courtID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "courtRoomID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "representativeID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "Opponent_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "Opponent_Mobile1": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "Opponent_Mobile2": {
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "Opponent_CPR": {
+            "pattern": "الرقم الشخصي مكون من 9 أرقام"
+          },
+          "Opponent_Email": {
+            "pattern": "البريد الإلكتروني غير صالح"
+          },
+          "Adjudge": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "JudgedAt": {
+            "required": "هذا الحقل مطلوب"
+          }
+        }
+      },
+      "Oponent": "الخصم",
+      "Fees": "الأتعاب",
+      "Documents": "الملفات",
+      "Appointments": "المواعيد",
+      "Sessions": "الجلسات",
+      "Calims": "الطلبات",
+      "Related_cases": "القضايا ذات صلة",
+      "Claims_collection": "تسليم المطالبات",
+      "Task": "المهام",
+      "Charges": "الرسوم",
+      "Case": "القضية",
+      "Title": "القضايا",
+      "Add": " إضافة قضية جديدة",
+      "Empty": "لا يوجد قضايا",
+      "Case-requests": "الطلبات",
+      "ChargeType": {
+        "Title": "أنواع الرسوم",
+        "Add": "إضافة نوع  رسوم",
+        "Update": "تعديل نوع رسوم",
+        "Form": {
+          "Add": "إضافة نوع رسوم جديد",
+          "arabic_name": "الإسم باللغة العربية ",
+          "english_name": "الإسم باللغة الإنجليزية",
+          "Update": "تعديل",
+          "messages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "لا تستطيع إضافة نوع الرسوم هذا",
+          "Update": "لا تستطيع تعديل نوع الرسوم هذا",
+          "confirm_delete": "هل أنت متأكد من حذف نوع الرسوم هذا؟"
+        },
+        "Case_Types_Type": {
+          "Lowful": "شرعي",
+          "Civilian": "مدني",
+          "Criminal": "جنائي",
+          "Excution": "تنفيذ",
+          "Other": "المحاكم الأخرى"
+        }
+      },
+      "Case-type": {
+        "Title": "نوع القضية",
+        "Add": "إضافة نوع قضية جديد",
+        "Update": "تعديل نوع القضية",
+        "Form": {
+          "Add": "إضافة نوع قضية جديد",
+          "arabic_name": "الإسم باللغة العربية ",
+          "english_name": "الإسم باللغة الإنجليزية",
+          "appeal_period": "مدة الاستئناف",
+          "discrimination_period": "مدة التمييز",
+          "comments": "الملاحظات",
+          "type": "الصنف",
+          "Update": "تعديل",
+          "messages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "appeal_period": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "discrimination_period": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "type": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "comments": {
+              "required": "هذا الحقل مطلوب"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "لا تستطيع إضافة نوع القضية هذا",
+          "Update": "لا تستطيع تعديل نوع القضية هذا",
+          "confirm_delete": "هل أنت متأكد من حذف نوع القضية هذا؟"
+        },
+        "Case_Types_Type": {
+          "Lowful": "شرعي",
+          "Civilian": "مدني",
+          "Criminal": "جنائي",
+          "Excution": "تنفيذ",
+          "Other": "المحاكم الأخرى"
+        }
+      },
+      "delay-reson": {
+        "Title": "سبب التأجيل",
+        "Add": "إضافة سبب تأجيل جديد",
+        "Update": "تعديل سبب التأجيل",
+        "Form": {
+          "arabic_name": "الإسم باللغة العربية ",
+          "english_name": "الإسم باللغة الإنجليزية",
+          "type": "الصنف",
+          "Update": "تعديل",
+          "messages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "type": {
+              "required": "هذا الحقل مطلوب"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "لا تستطيع إضافة سبب التأجيل هذا",
+          "Update": "لا تستطيع تعديل سبب التأجيل هذا",
+          "confirm_delete": "هل أنت متأكد من حذف سبب التأجيل هذا؟"
+        },
+        "Delay_Reason_Type": {
+          "Lowful": "شرعي",
+          "Civilian": "مدني",
+          "Criminal": "جنائي",
+          "Excution": "تنفيذ"
+        }
+      },
+      "requests": {
+        "Title": "الطلبات",
+        "Add": "إضافة طلب جديد",
+        "Update": "تعديل الطلب",
+        "Form": {
+          "arabic_name": "الإسم باللغة العربية ",
+          "english_name": "الإسم باللغة الإنجليزية",
+          "type": "الصنف",
+          "Update": "تعديل",
+          "messages": {
+            "name_ar": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "name_en": {
+              "required": "هذا الحقل مطلوب"
+            },
+            "type": {
+              "required": "هذا الحقل مطلوب"
+            }
+          }
+        },
+        "Errors": {
+          "Add": "لا تستطيع إضافةهذا الطلب",
+          "Update": "لا تستطيع تعديل هذا الطلب",
+          "confirm_delete": "هل أنت متأكد من حذف هذا الطلب؟"
+        },
+        "Request_Type": {
+          "Lowful": "شرعي",
+          "Civilian": "مدني",
+          "Criminal": "جنائي",
+          "Excution": "تنفيذ"
+        }
+      },
+      "Case-request": {
+        "Title": "الطلبات",
+      "Add": "إضافة طلب جديد", 
+      "Update": "تعديل الطلب ",  
+ 
+        
+        "Form": {
+          "type": "الصنف",
+          "ID": "الرقم التسلسلي",
+          "Request": "الطلب",
+          "date": "تاريخ الطلب",
+          "comment": "الملاحظات"
+
+        },
+        "Errors": {
+          "confirm_delete": "هل أنت متأكد من حذف هذا الطلب؟"
+        }
+      }
+    },
+    "clients": {
+      "Details": "تفاصيل الموكل",
+      "Title": "الموكلين",
+      "Add": "إضافة موكل",
+      "Errors": {
+        "Add": "لا تستطيع إضافة هذا الموكل",
+        "Update": "لا تستطيع تعديل هذا الموكل",
+        "confirm_delete": "هل أنت متأكد من حذف هذا الموكل",
+        "required_filed": "الرجاء ملئ الحقول المطلوبة بالبيانات الصحيحة"
+      },
+      "Massages": {},
+      "List": {
+        "ID": "الرقم التسلسلي",
+        "WhatsApp_number": "رقم الواتسب",
+        "Mobile": "رقم الهاتف",
+        "CPR": "الرقم الشخصي",
+        "name": "الإسم الكامل",
+        "type": "الصنف",
+        "action": "فعل"
+      },
+      "Form": {
+        "name": "الإسم الكامل",
+        "WhatsApp_contact": "رقم الواتسب",
+        "full_name": "الإسم الكامل",
+        "CPR": "الرقم الشخصي",
+        "mobile1": "هاتف 1",
+        "mobile2": "هاتف 2",
+        "WhatsApp_number": "رقم الواتسب",
+        "address": "العنوان",
+        "email": "البريد الإلكتروني",
+        "nationality": "الجنسية",
+        "job_position": "المسمى الوظيفي",
+        "comments": "الملاحظات",
+        "type": "النوع",
+        "messages": {
+          "got_appointment": "هذا العميل يمتلك موعداً مسبقاً",
+          "use_appointment_data": "أتود استعمال معلومات الموعد؟",
+          "got_opponent": "هذا العميل  مسجل كخصم مسبقاً.",
+          "use_opponent_data": "أتود استعمال معلوماته السابقة؟",
+          "full_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "CPR": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "الرقم الشخصي مكون من 9 ارقام"
+          },
+          "mobile1": {
+            "required": "هذ الحقل مطلوب",
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "mobile2": {
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "whatsApp_phone": {
+            "pattern": "رقم الواتسب مكون من 8 إلى 13 رقم"
+          },
+          "email": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "البريد الإلكتروني غير صالح"
+          }
+        }
+      }
+    },
+    "Companies": {
+      "Title": "الشركات",
+      "Details": "تفاصيل الشركة",
+      "Errors": {
+        "Add": "لا تستطيع إضافة هذه الشركة",
+        "Update": "لا تستطيع تعديل هذه الشركة",
+        "confirm_delete": "هل أنت متأكد من حذف هذه الشركة",
+        "required_filed": "الرجاء ملئ الحقول المطلوبة بالبيانات الصحيحة"
+      },
+      "Add": "إضافة شركة جديدة",
+      "List": {
+        "ID": "الرقم التسلسلي",
+        "WhatsApp_number": "رقم الواتسب",
+        "Mobile": "رقم الهاتف",
+        "CR": "رقم السجل",
+        "name": "إسم الشركة",
+        "type": "الصنف",
+        "Action": "فعل"
+      },
+      "Form": {
+        "name": "إسم الشركة",
+        "WhatsApp_contact": "رقم الواتسب",
+        "CR": "رقم السجل",
+        "mobile1": "هاتف 1",
+        "mobile2": "هاتف 2",
+        "WhatsApp_number": "رقم الواتسب",
+        "email": "البريد الإلكتروني",
+        "comments": "الملاحظات",
+        "type": "النوع",
+        "messages": {
+          "full_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "CR": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "mobile1": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "mobile2": {
+            "pattern": "رقم الهاتف مكون من 8 إلى 13 رقم"
+          },
+          "whatsApp_phone": {
+            "pattern": "رقم الواتسب مكون من 8 إلى 13 رقم"
+          },
+          "email": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "البريد الإلكتروني غير صالح"
+          }
+        }
+      }
+    },
+    "Reports": {
+      "Title": "التقارير",
+      "TableName": "اسم الجدول",
+      "Columns": "الحقول المعروضة",
+      "ColumnNames": {
+        "Case_no": "رقم القضية",
+        "File_no": "رقم الملف",
+        "Client": "الموكل",
+        "Opponent": "الخصم",
+        "Related_Company": "المجموعة",
+        "Court_no": "رقم المحكمة",
+        "Case_status": "حالة القضية",
+        "Case_type": "صنف القضية",
+        "CPR": "الرقم الشخصي",
+        "Name": "الاسم",
+        "Mobile": "رقم الهاتف",
+        "whatsApp_phone": "رقم الواتسب",
+        "CR": "رقم السجل",
+        "Ref_No": "رقم الجلسة",
+        "Status": "الحالة",
+        "Session_Date": "تاريخ الجلسة",
+        "Lawyer_Name": "المحامي المكلف",
+        "Delay_Reason": "سبب التاجيل",
+        "Upcoming_Session": "تاريخ الجلسة القادمة",
+        "id": "الرقم التسلسلي",
+        "client": "الموكل",
+        "CaseNo": "رقم القضية",
+        "total": "المجموع",
+        "total_paid": "المبلغ المقبوض",
+        "balance": "المبلغ المتبقي",
+        "due_date": "آخر تاريخ للتسليم"
+      },
+      "Claims": {
+        "status": {
+          "status": "الحالة",
+          "none": "لا حالة",
+          "pastdue": "تجاوز موعد الاستحقاق",
+          "duetoday": "مستحق اليوم",
+          "paid": "مدفوع"
+        }
+      }
+    },
+    
+    "Session": {
+      "Title": "الجلسات",
+      "Details": " تفاصيل الجلسة ",
+      "GoToCase": "الانتقال إلى القضية",
+      "Add": "إضافة جلسة جديدة ",
+      "confirm_delete": "هل أنت متأكد من حذف هذه الجلسة؟",
+      "Filter":{
+        "ID": "رقم التسلسل",
+        "Ref_No": "رقم الجلسة",
+        "Case": "القضية",
+        "Status": "الحالة",
+        "Session_Date": "تاريخ الجلسة",
+        "next_session_date": "تاريخ الجلسة التالية",
+        "Lawyer_Name": "المحامي المكلف",
+        "Previous_delay_Reason": "سبب التأجيل السابق",
+        "Previous_delay_Reason_Details": "تفاصيل سبب التأجيل السابق",
+        "Delay_Reason": "سبب التاجيل",
+        "Upcoming_Session": "تاريخ الجلسة القادمة",
+        "Action": "إجراءات",
+        "Note":"الملاحظات",
+        "decision":"القرار",
+        "Client":"الموكل",
+        "FileNo":"رقم الملف",
+        "Court_no":"رقم المحكمة",
+        "caseRepresentative":"الصفة",
+        "Opponent":"الخصم"
+
+
+
+
+      },
+      "List": {
+        "ID": "رقم التسلسل",
+        "Ref_No": "رقم الجلسة",
+        "Case": "القضية",
+        "Status": "الحالة",
+        "Session_Date": "تاريخ الجلسة",
+        "next_session_date": "تاريخ الجلسة التالية",
+        "Lawyer_Name": "المحامي المكلف",
+        "Previous_delay_Reason": "سبب التأجيل السابق",
+        "Previous_delay_Reason_Details": "تفاصيل سبب التأجيل السابق",
+        "Delay_Reason": "سبب التاجيل",
+        "Upcoming_Session": "تاريخ الجلسة القادمة",
+        "Action": "إجراءات"
+      },
+      "Form": {
+        "Update": "تعديل الجلسة",
+        "next_session_date": "تاريخ الجلسة التالية",
+        "Ref_No": "رقم الجلسة",
+        "Case": "القضية",
+        "status": {
+          "status": "الحالة",
+          "UPCOMING": "قيد الإنتظار",
+          "DELAYED": "تأجيل",
+          "Canceled":"شطبت",
+          "FINISHED": "محسومة"
+        },
+        "Session_Date": "تاريخ الجلسة",
+        "Lawyer_Name": "المحامي المكلف",
+        "Previous_Session_Date": "تاريخ الجلسة السابقة",
+        "delay_reason": "سبب التأجيل",
+        "delay_details": "تفاصيل التأجيل",
+        "Upcoming_Session": "تاريخ الجلسة القادمة",
+        "Comments": "الملاحظات",
+        "messages": {
+          "caseID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "status": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "date": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "delayrResonID": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "next_session_date": {
+            "required": "هذا الحقل مطلوب"
+          }
+        }
+      }
+    }
+  },
+  "Vacancy": {
+    "Details": "تفاصيل الوظيفة",
+    "Add": " إضافة وظيفة جديدة",
+    "Errors": {
+      "Update": "لا تستطيع تعديل هذه القضية",
+      "confirm_delete": "هل أنت متأكد من حذف هذه الوظيفة"
+    },
+    "head_title": {
+      "Infromation": "معلومات الوظيفة",
+      "Timing": "الأوقات"
+    },
+    "Vacancy_Status": {
+      "Open": "مفتوحة",
+      "Pending": "معلقة",
+      "Closed": "مغلقة",
+      "Cancelled": "ملغية"
+    },
+    "Vacancy_Type": {
+      "FullTime": "دوام كامل",
+      "PartTime": "دوام جزئي",
+      "Intern": "متدرب"
+    },
+    "List": {
+      "ID": "الرقم التسلسلي",
+      "title": "طلب شاغر'",
+      "position": "منصب",
+      "description": "الوصف",
+      "Department": "القسم",
+      "Education_level": "مستوى التعليم",
+      "Number_of_openings": "عدد الشواغر",
+      "start_date": "ابتداء من ",
+      "end_date": "يغلق في ",
+      "location": "الموقع",
+      "Type": "النوع",
+      "Status": "الحالة",
+      "Action": "إجراءات",
+      "Code": "الرمز",
+      "Upload": "رفع صورة الوظيفة"
+    },
+    "title": "طلب شاغر'",
+    "position": "المنصب",
+    "description": "الوصف",
+    "Department": "القسم",
+    "Education_level": "مستوى التعليم",
+    "Number_of_openings": "عدد الشواغر",
+    "start_date": "ابتداء من ",
+    "end_date": "يغلق في ",
+    "location": "الموقع",
+    "Type": "النوع",
+    "Status": "الحالة",
+    "openingAt": "يفتح في ",
+    "closingAt": "يغلق في ",
+    "Application": {
+      "Add": "تقديم طلب جديد ",
+      "Details": "تفاصيل مقدم الطلب",
+      "head_title": {
+        "Summary": "نبذه عن مقدم الطلب",
+        "Education_and_Experinces": "التعليم والخبرة",
+        "Contact": "معلومات التواصل"
+      },
+      "qualification": {
+        "HighSchoolDiploma": "ثانوية عامة",
+        "BachelorsDegree": "درجة باكلريوس",
+        "PHD": "دكتوراه",
+        "Other": "اخرى"
+      },
+      "Application_status": {
+        "Applied": "مقدم",
+        "Shortlisted": "القائمة المختصرة",
+        "Interviewed": "تمت المقابلة",
+        "Offered": "تقديم عرض "
+      }
+    },
+    "Form": {
+      "ID": "الرقم التسلسلي",
+      "applicant_name": "اسم مقدم الطلب ",
+      "Status": "الحالة",
+      "Action": "الإجراءات",
+      "applicant_first_name": "الاسم الأول لمقدم الطلب",
+      "applicant_last_name": "الاسم الأخير لمقدم الطلب",
+      "applicant_email": "البريد الإلكتروني لمقدم الطلب",
+      "applicant_phone": "الهاتف لمقدم الطلب",
+      "Highest_qualification": "أعلى المؤهلات",
+      "applicant_summry": "نبذه عن مقدم الطلب",
+      "is_currently_Employed": "موظف حالي ",
+      "Recent_job_role": "الوظيفة الحالية",
+      "Comments": "التعليق",
+      "Upload_your_document": "رفع المستندات",
+      "apply": "تقديم"
+    },
+    "massages": {
+      "number_of_openings": {
+        "required": "هذا الحقل مطلوب",
+        "pattern": "الرجاء إدخال أرقام فقط "
+      },
+      "position": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الحروف هو 3 ",
+        "max": "الحد الأقصى لعدد الحروف هو 25"
+      },
+      "location": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الحروف هو 3 ",
+        "max": "الحد الأقصى لعدد الحروف هو 25"
+      },
+      "type": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "status": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "openingAt": {
+        "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط",
+        "date": "الرجاء إدخال تاريخ فقط"
+      },
+      "closingAt": {
+        "required": "هذا الحقل مطلوب الرجاء ,إدخال تاريخ فقط",
+        "date": "الرجاء إدخال تاريخ فقط"
+      },
+      "education_level": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الحروف هو 3 ",
+        "max": "الحد الأقصى لعدد الحروف هو 25"
+      },
+      "applicant_first_name": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الحروف هو 3 ",
+        "max": "الحد الأقصى لعدد الحروف هو 25"
+      },
+      "applicant_last_name": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الحروف هو 3 ",
+        "max": "الحد الأقصى لعدد الحروف هو 25"
+      },
+      "applicant_email": {
+        "required": "هذا الحقل مطلوب",
+        "pattern": "الرجاء ادخال بريد إلكتروني صحيح"
+      },
+      "applicant_phone": {
+        "required": "هذا الحقل مطلوب",
+        "min": "الحد الأدنى لعدد الأرقام هو 8 ",
+        "max": "الحد الأقصى لعدد الأرقام هو 11",
+        "pattern": "الرجاء إدخال أرقام فقط "
+      },
+      "highest_qualification": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "documentURL": {
+        "required": "هذا الحقل مطلوب"
+      }
+    }
+  },
+  "Finance": {
+    "Title": "المالية و المحاسبة",
+    "ShowAll": "إظهار الجميع",
+    "Account_Transactions": {
+      "Title": "معاملات الحساب",
+      "list": {
+        "id": "الرقم التسلسلي",
+        "document_no": "رقم المعاملة",
+        "date": "التاريخ",
+        "document_type": "نوع المعاملة",
+        "amount": "المبلغ"
+      }
+    },
+    "Reports": {
+      "Title": "تقارير المحاسبة",
+      "Type": {
+        "Title": "نوع التقرير",
+        "BalanceSheet": "ورقة الموازنة",
+        "CashFlowStatement": "بيان التدفقات النقدية",
+        "ProfitAndLoss": "الربح والخسارة",
+        "VatReport": "تقرير القيمة المضافة"
+      },
+      "list": {
+        "Income": "الدخل",
+        "vat_Income": "القيمة المضافة في الدخل",
+        "vat_Expence": "القيمة المضافة في المصروفات",
+        "Expence": "المصروفات",
+        "Total": "المجموع",
+        "Total_vat": "مجموع القيمة المضافة",
+        "vat_Expence_total": "مجموع القيمة المضافة في المصروفات ",
+        "vat_Income_total": "مجموع القيمة المضافة في الدخل ",
+        "Expence_total": "مجموع المصروفات ",
+        "Income_total": "مجموع الدخل ",
+        "BHD": "د.ب",
+        "no_vat_income": "لايوجد قيمة مضافة في الدخل",
+        "no_vat_expence": "لايوجد قيمة مضافة في المصروفات",
+        "no_income": "لايوجد دخل",
+        "no_expence": "لا يوجد مصروفات"
+      },
+      "DateRange": {
+        "Title": "نطاق التعيين",
+        "Today": "اليوم",
+        "ThisWeek": "هذا الاسبوع",
+        "ThisMonth": "هذا الشهر",
+        "ThisYear": "هذه السنة",
+        "YearToDate": " هذه السنة الى اليوم",
+        "Custom": "تواريخ مختارة"
+      }
+    },
+    "NormalReports": {
+      "Title": "التقارير الاعتيادية"
+    },
+    "Invoice": {
+      "Title": "الفواتير",
+      "Add": "إضافة فاتورة",
+      "Update": "تعديل  الفاتورة",
+
+      "Errors": {
+        "Add_or_link": "هل تود ربط القضية بفاتورة مسبقة او إضافة فاتورة جديدة",
+        "No_Details": "لايوجد عناصر",
+        "Update": "لا تستطيع تعديل الفاتورة ",
+        "confirm_delete": "هل أنت متأكد من حذف  الفاتورة؟"
+      },
+      "Status": {
+        "Status": "الحالة",
+        "Pending": "معلقة",
+        "Approved": "مُصدق عليه",
+        "Paid": "مدفوعة"
+      },
+      "Payment_method": {
+        "Cash": "نقداً",
+        "Cheque": "شيك",
+        "BankTransfer": "تحويل بنكي"
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "status": "الحالة",
+        "Pending_Amount": "المبلغ المتبقي",
+        "Amount": "المبلغ",
+        "print":"طباعة الفاتورة",
+        "over_due_date": "تجاوز وقت الدفع",
+        "invoice_no": "رقم الفاتورة",
+        "invoice_date": "تاريخ الفاتورة",
+        "gross_amount": "المبلغ الإجمالي",
+        "paid_amount": "المبلغ الكلي المدفوع",
+        "vat_paid_amount": " المبلغ المدفوع من الضريبة",
+
+        "tax_amount": "قيمة الضريبة",
+        "net_amount": "  المبلغ الكلي مع الضريبة ",
+        "is_instalment": "تقسيط",
+        "Action": "الإجراءات",
+        "Case_no": "رقم القضية",
+        "Client": "الموكل",
+        "payment_method": "طريقة الدفع",
+        "invoice_status": "الحالة",
+        "Description": "الوصف",
+        "Item": "العنصر",
+        "cheque_date": "تاريخ الشيك",
+        "cheque_number": "رقم الشيك",
+        "drawn_on": "ماخوذ تاريخ",
+        "due_date": "آخر تاريخ للتسليم",
+        "Case": "القضية",
+        "Total": "المجموع",
+        "BHD": "د.ب.",
+        "Type": {
+          "Type": "نوع العميل",
+          "Client": "موكل",
+          "Company": "شركة",
+          "Consultation": "استشارة",
+          "Other": "أخرى"
+        },
+        "Name": "اسم المستلم منه",
+        "Company": "الشركة"
+      },
+      "messages": {
+        "Client": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "Company": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "Recepient": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "invoice_status": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "payment_method": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "cheque_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "due_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "cheque_number": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "drawn_on": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "Item": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "gross_amount": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "Details": {
+        "Title": "تفاصيل الفاتورة",
+        "no-details": "لا يوجد تفاصيل"
+      }
+    },
+    "Supplier": {
+      "Title": " الموردين",
+      "add": "إضافة مورد",
+      "Update": "تعديل المورد",
+      "Errors": {
+        "Update": "لا تستطيع تعديل المورد ",
+        "confirm_delete": "هل أنت متأكد من حذف  المورد؟"
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "Name": "الإسم",
+        "mobile1": "رقم الهاتف",
+        "mobile2": " رقم هاتف آخر",
+        "Email": "البريد الإلكتروني ",
+        "Address": "العنوان",
+        "Comments": "الملاحظات",
+        "Action": "الإجراءات"
+      },
+      "Form": {
+        "messages": {
+          "full_name": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "mobile1": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "الرجاء إدخال أرقام فقط "
+          },
+          "mobile2": {
+            "pattern": "الرجاء إدخال أرقام فقط "
+          },
+          "email": {
+            "pattern": "البريد الإلكتروني غير صالح"
+          }
+        }
+      }
+    },
+    "Tax": {
+      "Title": " الضريبة",
+      "Add": "إضافة الضريبة",
+      "Update": "تعديل الضريبة",
+      "Errors": {
+        "Update": "لا تستطيع تعديل الضريبة ",
+        "confirm_delete": "هل أنت متأكد من حذف  الضريبة؟"
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "Percentage": "النسبة المئوية",
+        "Code": "الرمز",
+        "Action": "الإجراءات"
+      },
+      "Form": {
+        "messages": {
+          "code_en": {
+            "required": "هذا الحقل مطلوب"
+          },
+          "percentage": {
+            "required": "هذا الحقل مطلوب",
+            "pattern": "  الرجاء إدخال أرقام فقط  ,من 1الى100"
+          }
+        }
+      }
+    },
+    "Receipt": {
+      "Title": "الأرصدة",
+      "Add": "إضافة رصيد",
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "status": "الحالة",
+        "Receipt_no": "رقم الرصيد",
+        "Client": "الموكل",
+        "Receipt_Date": "تاريخ الرصيد",
+        "Payment_Method": "طريقة الدفع",
+        "Pending_Amount": "المبلغ المتبقي",
+        "Case_no": "رقم القضية",
+        "Amount": "المبلغ",
+        "description": "الوصف",
+        "cheque_date": "تاريخ الشيك",
+        "cheque_number": "رقم الشيك",
+        "drawn_on": "ماخوذ تاريخ",
+        "Action": "الإجراءات",
+        "Name": "اسم المستلم",
+        "tax_amount": "مبلغ الضريبة"
+      },
+      "Payment_method": {
+        "Cash": "نقداً",
+        "Cheque": "شيك",
+        "BankTransfer": "تحويل بنكي"
+      },
+      "messages": {
+        "Client": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "amount": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "invoice_status": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "payment_method": {
+          "required": "الرجاء إدخال أرقام فقط "
+        },
+        "cheque_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "due_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "cheque_number": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "drawn_on": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "Item": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "gross_amount": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "Errors": {
+        "Update": "لا تستطيع تعديل الرصيد ",
+        "confirm_delete": "هل أنت متأكد من حذف  الرصيد؟",
+        "paid": "لقد اكملت مبلغ الفاتورة   ",
+        "over":"المبلغ المدفوع تجاوز المبلغ المتبقي للفاتورة"
+      },
+      "Details": {
+        "Title": "تفاصيل الرصيد",
+        "no-details": "لايوجد تفاصيل"
+      }
+    },
+    "VatReport": {
+      "Title": "تقرير ضريبة القيمة المضافة",
+      "Plural": "Vat Reports"
+    },
+    "IncomeExpense": {
+      "Title": "تقرير مصروفات الدخل",
+      "Plural": "Income Expense Reports"
+    },
+    "BalalceSheet": {
+      "Title": "Balalce Sheet",
+      "Plural": "Balalce Sheet's"
+    },
+    "Expense": {
+      "Title": "المدفوعات",
+      "Add": "إضافة دفع",
+      "Add_detail": "إضافة عناصر الدفع",
+      "Details": "تفاصيل الدفع",
+      "Update": "تعديل الدفع",
+      "Errors": {
+        "Update": "لا تستطيع تعديل الدفع ",
+        "confirm_delete": "هل أنت متأكد من حذف  الدفع",
+        "Add_item": "الرجاء إضافة عناصر",
+        "No_Details": "لايوجد عناصر"
+      },
+      "Status": {
+        "Status": "الحالة",
+        "Pending": "معلقة",
+        "Approved": "مُصدق عليه",
+        "Paid": "مدفوعة"
+      },
+      "Payment_method": {
+        "Cash": "نقداً",
+        "Cheque": "شيك",
+        "BankTransfer": "تحويل بنكي"
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "expense_no": "رقم الدفع",
+        "expense_date": "تاريخ الدفع",
+        "Supplier": "المورد",
+        "expense_status": "الحالة",
+        "gross_amount": "المبلغ الإجمالي",
+        "tax_amount": "مبلغ الضريبة ",
+        "net_amount": "المبلغ الكلي",
+        "payment_method": "طريقة الدفع",
+        "Description": "الوصف",
+        "Item": "العنصر",
+        "cheque_date": "تاريخ الشيك",
+        "cheque_number": "رقم الشيك",
+        "drawn_on": "ماخوذ تاريخ",
+        "Action": "الإجراءات"
+      },
+      "messages": {
+        "Supplier": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "expense_status": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "payment_method": {
+          "required": "الرجاء إدخال أرقام فقط "
+        },
+        "cheque_date": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "cheque_number": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "drawn_on": {
+          "required": "هذا الحقل مطلوب  , الرجاءإدخال تاريخ فقط"
+        },
+        "Item": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "gross_amount": {
+          "required": "هذا الحقل مطلوب"
+        }
+      }
+    },
+    "Account": {
+      "Title": "الحسابات",
+      "Plural": "الحسابات",
+      "Add": " إضافة حساب",
+      "Update": " تعديل الحساب",
+      "Errors": {
+        "confirm_delete": "هل أنت متأكد من حذف هذا الحساب؟"
+      },
+      "type": {
+        "Assets": "الأصول",
+        "Liability": "الديون",
+        "Equity": "راس المال ",
+        "Income": "الدخل",
+        "Expenes": "المصاريف"
+      },
+      "AccountType": {
+        "Cash": "النقد",
+        "Bank": "مصرف",
+        "Fixed_Assets": "أصول ثابتة",
+        "Stock": "مخزون",
+        "Payment_Clearing": "مقاصة الدفع",
+        "Other_Assets": "أصول أخرى",
+        "Long_Term_Liabililty": "الديون طويلة الأجل",
+        "Credit_Card": "بطاقة ائتمان",
+        "Other_Liabililty": " ديون اخرى:",
+        "Equity": "راس المال ",
+        "Income": "الدخل",
+        "Other_Income": "مصادر دخل آخر",
+        "Expenes": "المصاريف الثابتة",
+        "changed_Expenes": "المصاريف المتغيرة ",
+        "Other_Expenes": "مصاريف اخرى"
+      },
+      "messages": {
+        "name_en": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "name_ar": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "account_code": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "type": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "account_type": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "name": "الإسم",
+        "name_ar": "الإسم بالانجليزي",
+        "name_en": "الإسم بالعربي",
+        "type": "النوع",
+        "account_Type": "نوع الحساب الفرعي",
+        "account_code": "رمز الحساب",
+        "description": "الوصف",
+        "description_en": "الوصف بالانجليزي",
+        "description_ar": "الوصف بالعربية",
+        "Action": "الإجراءات",
+        "taxcode": "الضريبة"
+      }
+    },
+    "Item": {
+      "Title": "العناصر",
+      "Plural": "العناصر",
+      "Add": "إضافة عنصر ",
+      "Update": " تعديل العنصر",
+      "Errors": {
+        "confirm_delete": "هل أنت متأكد من حذف هذا العنصر؟"
+      },
+      "messages": {
+        "name": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "taxcodeID": {
+          "required": "هذا الحقل مطلوب"
+        },
+        "account_TypeID": {
+          "required": "هذا الحقل مطلوب"
+        }
+      },
+      "list": {
+        "ID": "الرقم التسلسلي",
+        "name": "الإسم",
+        "type": "النوع",
+        "account_Type": "نوع الحساب ",
+        "rate": "السعر",
+        "Action": "إجراءات",
+        "taxcode": "الضريبة"
+      }
+    },
+    "AType": {
+      "Title": "الحسابات"
+    },
+    "ACode": {
+      "Title": "رموز الحسابات"
+    },
+    "TX": {
+      "Title": "الضريبة"
+    }
+  }
+}

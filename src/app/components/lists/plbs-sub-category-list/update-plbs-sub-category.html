@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title> Add PLBS Category </ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" (click)="add()">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+        <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+          <mat-form-field>
+            <mat-label> PLBS Category </mat-label>
+            <mat-select formControlName="PLBSID">
+              <mat-option
+                *ngFor="let pLBSCategory of pLBSCategories;let i = index;"
+                [value]="pLBSCategory.id"
+              >
+                {{pLBSCategory.category}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> sub_category </mat-label>
+              <input
+                matInput
+                formControlName="sub_category"
+                placeholder="sub category ..."
+              />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label> sub_cat_order </mat-label>
+              <input
+                matInput
+                formControlName="sub_cat_order"
+                placeholder="sub cat order ..."
+              />
+            </mat-form-field>
+          </div>
+  
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="w-full">
+              <mat-label>Account Code</mat-label>
+              <mat-select formControlName="account_code" multiple>
+                <mat-option
+                  *ngFor="let accountcode of accountCodes"
+                  [value]="accountcode.id"
+                  >{{accountcode.acc_code_en}} {{accountcode.description_en}}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+  

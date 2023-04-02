@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>   {{'HCM.Appraisal.type.Update'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button mat-icon-button color="warn" (click)="delete()">
+            <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+          </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+  
+            <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+           
+                <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>  {{'HCM.Appraisal.type.list.arabic_name'|translate}} </mat-label>
+                    <input matInput type="text" formControlName="title_ar"    >
+                </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.title_ar" >
+                      <div class="text-red-600 text-end"   *ngIf="updateForm.get('title_ar').hasError(validation.type) && (updateForm.get('title_ar').dirty || updateForm.get('title_ar').touched)">
+                      {{ validation.message |translate }}
+                      </div>
+                  </ng-container>
+                </div>
+  
+                <div class="flex flex-row w-full">
+                  <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>  {{'HCM.Appraisal.type.list.english_name'|translate}} </mat-label>
+                    <input matInput type="text" formControlName="title_en"    >
+                </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.title_en" >
+                      <div class="text-red-600 text-end"   *ngIf="updateForm.get('title_en').hasError(validation.type) && (updateForm.get('title_en').dirty || updateForm.get('title_en').touched)">
+                      {{ validation.message |translate }}
+                      </div>
+                  </ng-container>
+                </div>
+  
+     
+  
+                <ion-button (click)="update()">
+                  {{'HCM.Appraisal.type.Update'|translate}}
+                </ion-button>
+  
+            </form>
+        </div>
+    </div>
+  </ion-content>

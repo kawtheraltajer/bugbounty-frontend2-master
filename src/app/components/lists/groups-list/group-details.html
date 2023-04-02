@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+
+            <ion-button color="dark" (click)="updateGroup()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'System.Authorization.Groups.Details.Title'|translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+
+
+<ion-content>
+        <form class="flex flex-col w-full h-full px-4 " [formGroup]="UpdateForm">
+
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>{{'System.Authorization.Groups.Details.Name'|translate}}   </mat-label>
+                    <input matInput type="text" formControlName="group_name">
+                </mat-form-field>
+            </div>
+
+
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'System.Authorization.Groups.Details.Description'|translate}}  </mat-label>
+                    <input matInput type="text" formControlName="group_description">
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-row w-full">
+                <label style="color:gray;font-size: 14px;;font-style: inherit;">{{'System.Authorization.Groups.Details.Leader'|translate}}   </label>
+
+            </div>
+            <div class="grid grid-cols-3  gap-2 h-32 p-6">
+
+                <div class="border border-gray   flex flex-col items-center justify-center rounded-t-3xl rounded-b-3xl	  "
+                    (click)="selectLeader($event)">
+            
+                    <span style="font-size: 12px;; text-align: center;" class="items-center justify-center  ">
+                        {{ data.leader?.user?.first_name |titlecase}}<br>
+                        {{ data.leader?.user?.last_name |titlecase}} 
+
+                    </span>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="flex flex-row w-full">
+                <label style="color:gray;font-size: 14px;;font-style: inherit;">{{'System.Authorization.Groups.Details.Members'|translate}}    </label>
+
+
+            </div>
+            <div class="grid grid-cols-3    gap-2 h-32 p-6 ">
+                <div class="border border-dashed border-gray-400  flex flex-col items-center justify-center hover:bg-gray-100 cursor-pointer rounded-3xl rounded-b-3xl			"
+                    (click)="selectMembers($event)">
+                    <ion-icon name="add-outline"></ion-icon>
+                </div>
+                <div class="border border-gray  flex flex-col items-center justify-center rounded-t-3xl rounded-b-3xl	  "
+                    *ngFor="let members of data.members">
+
+                    <span style="font-size: 12px;; text-align: center;" class="items-center justify-center  ">
+                        {{ members.Employee?.user?.first_name |titlecase}}<br>
+                        {{ members.Employee?.user?.last_name |titlecase}} 
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </form>
+     
+
+
+
+</ion-content>

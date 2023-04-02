@@ -1,0 +1,137 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>      {{'Vacancy.Application.Details'|translate}}  </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content   >
+
+
+    <div class="flex flex-row w-full items-center justify-center  p-10  ">
+        <div class="flex flex-col items-center justify-center w-full p-2">
+            <span style="font-size:18px;font-style:inherit;font-weight:bold " class="uppercase">
+                {{vacancyApplication.applicant_first_name}}{{" "}}{{vacancyApplication.applicant_last_name}}
+            </span>
+       
+
+
+</div>
+
+
+</div>
+<div class="flex flex-row w-full items-start justify-start  p-5 ">
+    <div class="flex flex-col items-start justify-start w-1/2 p-2">
+<span style="font-size:16px;font-weight:bold;" class=" py-2">
+    {{'Vacancy.Application.head_title.Summary'|translate}}:
+</span>
+
+<span style="font-size:14px;">
+    {{vacancyApplication.applicant_summry}}     
+</span>
+    </div>    
+    <div class="flex flex-col items-start justify-start w-1/2 p-2">
+        <span style="font-size:16px;font-weight:bold;" class=" py-2">
+            {{'Vacancy.Application.head_title.Education_and_Experinces'|translate}}:
+          
+        </span>
+        
+           
+        <span style="font-size:14px;"  *ngIf="vacancyApplication.isCurrentlyEmployed">
+            {{'Vacancy.Form.Recent_job_role'|translate}}:
+         {{vacancyApplication.recent_job_role}}
+            </span>
+        <span style="font-size:14px;" >
+            {{'Vacancy.Form.Highest_qualification'|translate}}:
+            {{("Vacancy.Application.qualification."+vacancyApplication?.highest_qualification)|translate}}
+            </span>
+       
+            </div>  
+ 
+
+  
+
+</div>
+
+<div class="flex flex-row w-full items-start justify-start  p-5 ">
+    <div class="flex flex-col items-start justify-start w-1/2 p-2">
+<span style="font-size:16px;font-weight:bold;" class=" py-2">
+    {{'Vacancy.Application.head_title.Contact'|translate}} :
+ 
+</span>
+
+<span style="font-size:14px;"   (click)="download()">
+    <ion-icon name="mail"></ion-icon>
+   {{vacancyApplication.applicant_email}}
+
+    </span>
+    <span style="font-size:14px;">
+        <ion-icon name="call-outline"></ion-icon>
+       {{vacancyApplication.applicant_phone}}
+        </span>
+    </div>     
+  
+    <div class="flex flex-col items-start justify-start w-1/2 p-2">
+     
+           
+        <span style="font-size:16px;font-weight:bold;" >
+        
+            {{'Vacancy.Form.Status'|translate}} :
+             {{("Vacancy.Application.Application_status."+vacancyApplication?.status)|translate}} 
+            </span>
+
+            <a style="font-size:14px; "     class="cursor-pointer hover:bg-step-200 "  (click)="download()"  >
+                {{("Vacancy.download")|translate}} 
+                </a>
+            
+
+            </div>  
+
+  
+
+</div>
+
+
+
+    <div class="w-full p-2 overflow-y-auto border-t-2">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">    
+                <mat-form-field appearance="standard" class="w-full mat-input-disabled">
+                    <mat-label> {{'Vacancy.Form.Status'|translate}}   </mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="Applied">    {{("Vacancy.Application.Application_status.Applied")|translate}}</mat-option>
+                        <mat-option value="Shortlisted">  {{("Vacancy.Application.Application_status.Shortlisted")|translate}}</mat-option>
+                        <mat-option value="Interviewed">  {{("Vacancy.Application.Application_status.Interviewed")|translate}}</mat-option>
+                        <mat-option value="Offered">  {{("Vacancy.Application.Application_status.Offered")|translate}}</mat-option>
+
+
+                  
+                  
+                    </mat-select>
+                  </mat-form-field>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Vacancy.Form.Comments'|translate}} 
+
+                            
+                        </mat-label>
+                        <input matInput  formControlName="comments"  >
+                    </mat-form-field>
+                </div>
+                
+    
+        
+      
+               
+            </form>
+        </div>
+    </div>
+</ion-content>

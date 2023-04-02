@@ -1,0 +1,289 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" style="height: 45px;">
+      <ion-back-button defaultHref="tasks"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
+      <ion-button icon-only clear color="danger" (click)="deleteTask()" *ngIf="('Task:DELETE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-2xl text-center">{{task?.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only clear (click)="drawer.toggle()">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <mat-drawer-container class="relative w-full h-full overflow-auto font-sans rounded-b"
+    [hasBackdrop]="sideHasBackdrop">
+
+    <!-- Main -->
+
+    <!-- !Header -->
+    <!--fisrt row in row  assign employee and details -->
+    <div *ngIf="!isEditMode && task" class="relative flex flex-row w-full h-full">
+      <!-- Right Part -->
+      <div
+        class="relative flex flex-col w-1/2 border-ie   overflow-y-auto transition-all duration-700  bg-backeground transform-gpu ">
+        <!-- Header -->
+        <div
+          class="relative flex flex-row items-center mb-4 justify-between w-full px-4 py-2 text-xl border-b bg-step-50 "
+          style="height: 50px; ;"> 
+          <mat-label>{{'Tasks.Task_Details'|translate}}</mat-label>
+          <ion-buttons slot="end">
+            <ion-button icon-only clear (click)="update()">
+              <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+        <!-- Assigned Employee -->
+        <div class="w-full  p-4 ">
+          <div class="relative flex flex-col items-center justify-center w-full h-16  border cursor-pointer rounded-xl"
+            [class.border-dashed]="!task.employee">
+            <div *ngIf="task.employee" matTooltip="UnAssign Employee" (click)="removeEmp()"
+              class="absolute z-50 bg-white border text-black font-black hover:bg-red-200 cursor-pointer  flex items-center rounded-full justify-center -top-2 -right-2 h-6 w-6 ...">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <ion-item (click)="selectEmp($event)" class="cursor-pointer" lines="none" *ngIf="task.employee">
+              <ion-label>
+                {{ task.employee?.user?.first_name}} -{{ task.employee?.user?.last_name}}
+                {{task.employee?.user?.email}}
+              </ion-label>
+              <ion-avatar slot="start">
+                <img class="w-full h-full" [src]="user.getProfilePicURL(task.employee?.user?.pictureURL)">
+              </ion-avatar>
+            </ion-item>
+            <div (click)="selectEmp($event)" matTooltip="Assign Employee"
+              class="flex items-center justify-center w-full h-full text-3xl hover:bg-gray-100" *ngIf="!task.employee">
+              <ion-icon name="add-outline" title=""></ion-icon>
+            </div>
+          </div>
+        </div>
+        <!-- Task status -->
+        <div
+          class="relative flex flex-row w-full px-1   items-center  justify-center  overflow-y-auto transition-all duration-700  bg-backeground transform-gpu  "
+   >
+
+          <span class="mx-5  items-center justify-center" *ngIf="lang.selectedLang=='en'">
+            {{'Tasks.Details.Status'|translate}} : {{task?.status.name_en}}
+          </span>
+          <span class="mx-5  items-center justify-center" *ngIf="lang.selectedLang=='ar'" >
+            {{'Tasks.Details.Status'|translate}} : {{task?.status.name_ar}}
+          </span>
+          <span class="block w-5 h-5  mt-1" items-center [style.backgroundColor]="task?.status.color"></span>
+        </div>
+        <!-- dates -->
+        <div
+          class="relative flex flex-col w-full px-1   items-center mt-2  overflow-y-auto transition-all duration-700  bg-backeground transform-gpu  ">
+          <div class="flex flex-row items-center w-full h-6 justify-center">
+            <div>
+              <ion-icon name="save-outline" class="w-full" style="font-size: 24px;"></ion-icon>
+            </div>
+            <p class="flex items-center justify-center h-full px-2 ">
+              {{'Tasks.Details.Due'|translate}} : 
+            </p>
+            <p class="flex items-center justify-center px-2">{{task?.dueDate|date : 'dd/MM/YYYY'}}</p>
+          </div>
+          <div class="flex flex-row items-center w-full h-6 justify-center mt-1">
+            <div>
+              <ion-icon name="save-outline" class="w-full" style="font-size: 24px;"></ion-icon>
+            </div>
+            <p class="flex items-center justify-start h-full  " >
+              {{'Tasks.Details.Updated'|translate}}:
+            </p>
+            <p class="flex items-center justify-center px-2">{{task?.updatedAt|date : 'dd/MM/YYYY hh:mm:ss a'}}</p>
+
+          </div>
+          <div class="flex flex-row items-center w-full h-6 justify-center mt-1">
+            <div>
+              <ion-icon name="save-outline" class="w-full" style="font-size: 24px;"></ion-icon>
+            </div>
+            <p class="flex items-center justify-center h-full px-2">
+              {{'Tasks.Details.Created'|translate}} : 
+            </p>
+            <p class="flex items-center justify-center px-2">{{task?.createdAt|date : 'dd/MM/YYYY hh:mm:ss a'}}</p>
+          </div>
+          <span class="text-xs text-gray-400 rounded-lg" *ngIf="task?.createdBy">
+            {{'Tasks.filter.assign_by'|translate}}: {{task?.createdBy?.user?.first_name}} {{task?.createdBy?.user?.last_name}}
+          </span>
+        </div>
+        <br/>
+        <div class="border p-2 m-2 rounded-lg shadow-sm cursor-pointer" *ngIf="task.case" (click)="goToCase()">
+          <span class="text-xl">{{'Court.Cases.Case'|translate}}:</span>
+          <br/>
+          <span class="text-lg">{{task?.case?.CaseNo}}{{"-"}}{{task?.case?.client?.full_name}}</span>
+          <br />
+          <span class="text-sm">{{'Tasks.NoOfTasks'|translate}}: {{NoOfTasks}}</span>
+          <span class="text-sm">{{task?.case?.client?.CPR}}</span>
+
+        </div>
+
+ <div class="border p-2 m-2 rounded-lg shadow-sm cursor-pointer" *ngIf="TaskNotifications" >
+          <ion-item  lines="none" >
+            <ion-label>
+              {{'Tasks.FollowUp'|translate}}
+            </ion-label>
+       
+          </ion-item>
+          <div *ngFor="let taskNotifications of TaskNotifications;let i = index;">
+          <ion-item   lines="none" >
+            <ion-label>
+              {{ taskNotifications?.first_name}} -{{ taskNotifications.last_name}}
+              {{taskNotifications.email}}
+            </ion-label>
+            <ion-avatar slot="start">
+              <img class="w-full h-full" [src]="user.getProfilePicURL(taskNotifications?.pictureURL)">
+            </ion-avatar>
+          </ion-item>
+            </div>
+        </div>
+      </div>
+
+      <!-- Left Part -->
+      <div
+        class="relative flex flex-col w-1/2 overflow-y-auto transition-all duration-700  bg-backeground transform-gpu "
+        *ngIf="!isEditMode">
+        <div class="relative flex flex-col flex-1 transition-all duration-700 tinyPrev transform-gpu "
+          [class]="isEditMode?'translate-y-0':'translate-y-0'">
+          <div class="relative flex flex-row items-center justify-between w-full px-4 py-2 text-xl border-b bg-step-50 "
+            style="height: 50px;">
+            <div class="flex flex-row space-x-1" [class.flex-row-reverse]="dir=='rtl'">
+              <!-- <span>
+                {{'Tasks.Title'|translate}}
+              </span> -->
+              <span>
+                <!--{{'Operations.Details'|translate}}-->
+                {{'Tasks.Body'|translate}}
+
+              </span>
+              <!-- <span class="justify-self-end"> :</span> -->
+            </div>
+            <!--<div>-->
+              <!-- <button (click)="editModeToggle()">isEditMode</button> -->
+              <!--<button mat-icon-button [matTooltip]="'Operations.Edit'|translate"
+                class="items-center justify-center justify-items-center" (click)="editModeToggle()">
+                <ion-icon [name]="isEditMode?'close-outline':'brush-outline'" class="w-full" style="font-size: 24px;">
+                </ion-icon>
+              </button>
+              <button *ngIf="previewData != task?.details?.details" mat-icon-button
+                [matTooltip]="'Operations.Save'|translate" class="items-center justify-center justify-items-center"
+                (click)="saveDetails()">
+                <ion-icon name="save-outline" class="w-full" style="font-size: 24px;"></ion-icon>
+              </button>
+            </div>-->
+          </div>
+          <div class="border p-2 m-2 rounded-lg shadow-sm" *ngIf="task.details">
+            <p style="white-space: pre-wrap;">{{task?.details}}</p>
+          </div>
+          <!--<div class="relative flex flex-1 overflow-y-auto">
+            <editor #editorPreviw [(ngModel)]="previewData" class="border-none" [disabled]="true"
+              apiKey="wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e" [init]="previewConfig" [dir]="dir"
+              [lang]="lang.selectedLang">
+            </editor>
+          </div>-->
+        </div>
+      </div>
+
+
+    </div>
+    <!-- ! Preview -->
+    <div class="relative flex flex-col transition-all duration-700 tinyPrev transform-gpu" *ngIf="isEditMode"
+      [class]="isEditMode?'translate-y-0':'translate-y-0 w-1/2'">
+      <div class="relative flex flex-row items-center justify-between w-full px-4 py-2 text-xl border-b bg-step-50 "
+        style="height: 50px;">
+        <div class="flex flex-row space-x-1" [class.flex-row-reverse]="dir=='rtl'">
+          <!-- <span>
+                {{'Tasks.Title'|translate}}
+              </span> -->
+          <span>
+
+            {{'Tasks.Body'|translate}}
+            <!-- {{'Operations.Details'|translate}}-->
+          </span>
+          <!-- <span class="justify-self-end"> :</span> -->
+        </div>
+        <div>
+          <!-- <button (click)="editModeToggle()">isEditMode</button> -->
+          <button mat-icon-button [matTooltip]="'Operations.Edit'|translate"
+            class="items-center justify-center justify-items-center" (click)="editModeToggle()">
+            <ion-icon [name]="isEditMode?'close-outline':'brush-outline'" class="w-full" style="font-size: 24px;">
+            </ion-icon>
+          </button>
+          <!--<button *ngIf="previewData != task?.details?.details" mat-icon-button
+            [matTooltip]="'Operations.Save'|translate" class="items-center justify-center justify-items-center"
+            (click)="saveDetails()">
+            <ion-icon name="save-outline" class="w-full" style="font-size: 24px;"></ion-icon>
+          </button>-->
+        </div>
+      </div>
+      <!--<div class="relative flex flex-1 overflow-y-auto">
+        <editor #editorPreviw [(ngModel)]="previewData" class="border-none" [disabled]="true"
+          apiKey="wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e" [init]="previewConfig" [dir]="dir"
+          [lang]="lang.selectedLang">
+        </editor>
+      </div>-->
+    </div>
+
+    <!--<div class="flex flex-col w-full transition-all duration-700 border-t transform-gpu"
+      [class]="!isEditMode?'translate-y-full opacity-0 h-0':'translate-y-0 relative h-50Per'">
+      <editor #editorcomp [(ngModel)]="previewData" apiKey=" wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e"
+        [init]="editorConfig" [dir]="dir" [lang]="lang.selectedLang">
+      </editor>
+    </div>-->
+
+
+    <!-- ! Comments -->
+    <mat-drawer class="w-2/3 lg:w-1/3" #drawer [position]="'end'" [mode]="sideMode">
+      <div class="h-full p-4 overflow-y-auto" *ngIf="task">
+        <div *ngFor="let com of task.comments.comments;let i = index;" class="flex flex-col items-center w-full mb-2  overflow-y-auto ">
+          <div class="flex flex-row items-center justify-between w-full h-8 px-1 pb-2">
+            <div class="flex flex-row items-center">
+              <img class="object-cover w-8 h-8 border border-gray-100 rounded-full cursor-pointer mie-2"
+                [matTooltip]="com.userName" [src]="user.getProfilePicURL(com.userIMG)" />
+              <p>
+                {{com.userName}}
+              </p>
+            </div>
+            <div class="flex flex-row items-center">
+              <p class="mie-2">
+                {{com.createdAt|date}}
+              </p>
+              <button [matMenuTriggerFor]="menu"
+                class="flex items-center justify-center w-6 h-6 rounded-full outline-none">
+                <ion-icon class="mis-2" name="ellipsis-horizontal-outline"></ion-icon>
+              </button>
+              <mat-menu #menu="matMenu" style="min-height: unset!important;">
+                <div class="flex items-center w-24 h-8 cursor-pointer text-step-950 hover:text-red-500"
+                  [style]="'direction:'+dir+';'" (click)="deleteComment(i)">
+                  <mat-icon>delete_outline</mat-icon>
+                  <div class="w-full mis-2">{{"Operations.Delete"|translate}}</div>
+                </div>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="w-full p-2 border rounded-lg" style="white-space: pre-line">
+            {{com.body}}
+          </div>
+        </div>
+
+      </div>
+      <!--new comment -->
+      <div class="flex flex-col w-full pb-2 border-t-2 bg-backeground   h-30 sticky bottom-0 ">
+        <mat-form-field appearance="fill">
+          <mat-label *ngIf="lang.selectedLang=='en'">{{('Operations.Add'|translate)+' '+('Operations.New'|translate)+'
+            '+('Tasks.Comment.Title'|translate)}}</mat-label>
+          <mat-label *ngIf="lang.selectedLang=='ar'">{{('Operations.Add'|translate)+'
+            '+('Tasks.Comment.Title'|translate)+'
+            '+('Operations.New'|translate)}} </mat-label>
+          <textarea rows="5" [(ngModel)]='newComment' [mat-autosize]="false" matInput></textarea>
+        </mat-form-field>
+        <div class="flex flex-row p-2 pt-0 pis-4">
+          <button mat-raised-button color="primary" class="items-center justify-center text-center "
+            (click)="addComment();" class="mie-2">{{'Tasks.Comment.Title'|translate}}</button>
+        </div>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</ion-content>

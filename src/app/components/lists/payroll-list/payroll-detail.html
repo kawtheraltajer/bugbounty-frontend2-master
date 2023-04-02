@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>  {{ "HCM.Payroll.Details" | translate }} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="payslipForm">
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>{{ "HCM.Payroll.List.Status" | translate }}</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="Process"> {{ "HCM.Payroll.status.Process" | translate }}</mat-option>
+              <mat-option value="Approval">{{ "HCM.Payroll.status.Approval" | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.status" >
+              <div class="text-red-600 text-end"   *ngIf="payslipForm.get('status').hasError(validation.type) && (payslipForm.get('status').dirty || payslipForm.get('status').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{ "HCM.Payroll.List.payment_status" | translate }}</mat-label>
+            <mat-select formControlName="payment_status">
+              <mat-option value="UnPaid">
+                {{"HCM.Payroll.payment_status.un_paid" | translate}}</mat-option>
+              <mat-option value="Paid">{{
+                "HCM.Payroll.payment_status.paid" | translate
+                }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.payment_status" >
+              <div class="text-red-600 text-end"   *ngIf="payslipForm.get('payment_status').hasError(validation.type) && (payslipForm.get('payment_status').dirty || payslipForm.get('payment_status').touched)">
+              {{ validation.message |translate }}
+              </div>
+          </ng-container>
+      </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>   {{ "HCM.Payroll.List.total_allowences" | translate }} </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="total_allowences"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>  {{ "HCM.Payroll.List.total_deductions" | translate }}  </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="total_deductions"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{ "HCM.Payroll.List.total_bonuses" | translate }} </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="total_bonuses"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label>  {{ "HCM.Payroll.List.total_gross" | translate }}  </mat-label>
+            <input
+            [disabled]="true"
+              matInput
+              type="number"
+              formControlName="total_gross"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> {{ "HCM.Payroll.List.payment_type" | translate }}</mat-label>
+            <mat-select formControlName="payment_type">
+              <mat-option value="Cash">{{ "HCM.Payroll.payment_type.Cash" | translate }}</mat-option>
+              <mat-option value="BankTransfer">{{ "HCM.Payroll.payment_type.BankTransfer" | translate }}</mat-option>
+              <mat-option value="Cheque">{{ "HCM.Payroll.payment_type.Cheque" | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</ion-content>

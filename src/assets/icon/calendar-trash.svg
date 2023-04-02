@@ -1,0 +1,38 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <defs>
+        <style>
+            .cls-1,
+            .cls-2,
+            .cls-3 {
+                fill: none;
+                stroke: currentColor;
+
+                stroke-linejoin: round;
+            }
+
+            .cls-1,
+            .cls-2 {
+                stroke-width: 20px;
+            }
+
+            .cls-2,
+            .cls-3 {
+                stroke-linecap: round;
+            }
+
+            .cls-3 {
+                stroke-width: 15px;
+            }
+        </style>
+    </defs>
+    <title>calendar-icons</title>
+    <rect class="cls-1" x="48" y="80" width="416" height="384" rx="48" />
+    <path class="cls-2" d="M128,48V80M384,48V80m80,80H48" />
+    <path class="cls-3"
+        d="M180.16,222.68,190.7,391.21c.5,9.74,7.58,16.86,16.85,16.86h96.9c9.31,0,16.26-7.12,16.85-16.86l10.54-168.53" />
+    <path class="cls-3" d="M208.51,247.5l9.28,135.75" />
+    <path class="cls-3" d="M233.14,247.5l9.28,135.75" />
+    <path class="cls-3" d="M292.94,383.25l9.28-135.75" />
+    <path class="cls-3" d="M268.31,383.25l9.27-135.75" />
+    <path class="cls-3" d="M163.31,222.68H348.69" />
+</svg>

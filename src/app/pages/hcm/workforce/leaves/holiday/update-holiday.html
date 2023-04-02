@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+          <ion-button color="dark" (click)="dismiss()">
+              <ion-icon name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>{{'HCM.Workforce.leaves.holiday.update'|translate}} 
+      </ion-title>
+      <ion-buttons slot="end">
+          <ion-button color="dark" (click)="add()">
+              <ion-icon name="add"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+
+        <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+          <div class="flex flex-row w-full">
+              <mat-form-field appearance="standard" class="w-full">
+                  <mat-label>   {{'HCM.Workforce.leaves.holiday.Form.Name_ar'|translate}} (*)   </mat-label>
+                  <input matInput type="text" formControlName="name_ar" >
+              </mat-form-field>
+          </div>
+          <ng-container *ngFor="let validation of validation_messages.name_ar" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('name_ar').hasError(validation.type) && (addForm.get('name_ar').dirty || addForm.get('name_ar').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+          <div class="flex flex-row w-full">
+              <mat-form-field appearance="standard" class="w-full">
+                  <mat-label>   {{'HCM.Workforce.leaves.holiday.Form.Name_en'|translate}}    </mat-label>
+                  <input matInput type="text" formControlName="name_en">
+              </mat-form-field>
+          </div>
+
+  
+     
+            <div class="flex flex-row w-full mt-2">
+              <mat-form-field appearance="standard" class="w-full">
+                <mat-label>    {{'HCM.Workforce.leaves.holiday.Form.from_date'|translate}}   (*)    </mat-label>
+                <input matInput  formControlName="from_date"  
+                [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <ng-container *ngFor="let validation of validation_messages.from_date" >
+              <div class="text-red-600 text-end"   *ngIf="addForm.get('from_date').hasError(validation.type) && (addForm.get('from_date').dirty || addForm.get('from_date').touched)">
+                {{ validation.message |translate }}
+              </div>
+            </ng-container>
+  
+       
+      </form>
+      </div>
+
+
+
+  </div>
+</ion-content>

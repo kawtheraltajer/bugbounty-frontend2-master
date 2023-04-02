@@ -1,0 +1,139 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+
+            {{'System.Authorization.Permissions.Title'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="permissionForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Permissions.AddPermissions.Name'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="name" >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.name">
+                        <div class="text-red-600 text-end"
+                            *ngIf="permissionForm.get('name').hasError(validation.type) && (permissionForm.get('name').dirty || permissionForm.get('name').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!--description -->
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'System.Authorization.Permissions.AddPermissions.Description'|translate}} </mat-label>
+                    <input matInput type="text" formControlName="description" placeholder="Ahmed">
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.description">
+                        <div class="text-red-600 text-end"
+                            *ngIf="permissionForm.get('description').hasError(validation.type) && (permissionForm.get('description').dirty || permissionForm.get('description').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Module -->
+                <!-- <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>Module</mat-label>
+                        <mat-select formControlName="module">
+                            <mat-option *ngFor="let value of app.enums['Module']" [value]="value">
+                                {{value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+                <!-- subject -->
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'System.Authorization.Permissions.AddPermissions.Subject'|translate}} </mat-label>
+                    <mat-select formControlName="subject" (selectionChange)="subChanged()">
+                        <mat-option *ngFor="let value of app.enums['Subject']" [value]="value">
+                            {{value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.subject">
+                        <div class="text-red-600 text-end"
+                            *ngIf="permissionForm.get('subject').hasError(validation.type) && (permissionForm.get('subject').dirty || permissionForm.get('subject').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Action -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'System.Authorization.Permissions.AddPermissions.Action'|translate}} </mat-label>
+                        <mat-select formControlName="action">
+                            <mat-option *ngFor="let value of app.enums['Action']" [value]="value">
+                                {{value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.action">
+                        <div class="text-red-600 text-end"
+                            *ngIf="permissionForm.get('action').hasError(validation.type) && (permissionForm.get('action').dirty || permissionForm.get('action').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!-- Auth field -->
+              <!--  <mat-form-field>
+                    <mat-label>: {{'System.Authorization.Permissions.AddPermissions.Auth_Field'|translate}} </mat-label>
+                    <mat-select formControlName="auth_field">
+                        <mat-option value="">
+                            none
+                        </mat-option>
+                        <mat-option
+                            *ngFor="let value of app.auth_fields[permissionForm.value.subject]"
+                            [value]="value">
+                            {{value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+-->
+            </form>
+            <!-- <div class="flex flex-col w-full px-4 py-2 "> -->
+            <!-- View Fields -->
+            <!-- <ng-container *ngIf="view_fields.length >0">
+                    <div class="border-b border-step-200">
+                        <mat-label>  {{'System.Authorization.Permissions.AddPermissions.View_Fields'|translate}}   </mat-label>
+                        <ul class="flex flex-col py-2 ml-4 space-x-2 ">
+                            <li>
+                                <mat-checkbox [checked]="allFieldsSelected" [indeterminate]="someComplete()"
+                                    (change)="setAll($event.checked)">
+                                    All
+                                </mat-checkbox>
+                            </li>
+                            <li *ngFor="let dt of view_fields">
+                                <mat-checkbox [(ngModel)]="dt.selected" [checked]="dt.field == 'id'"
+                                    [disabled]="dt.field == 'id'" (ngModelChange)="updateAllFields()">
+                                    {{dt.field}}
+                                </mat-checkbox>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-container> -->
+            <!-- </div> -->
+        </div>
+    </div>
+</ion-content>

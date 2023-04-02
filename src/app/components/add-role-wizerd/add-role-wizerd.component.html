@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="danger" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+
+        </ion-buttons>
+        <ion-title>{{'System.Authorization.Role.AddRole.AddRoleTitle'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="success" (click)="addRole()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="roleForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>{{'System.Authorization.Role.AddRole.Name'|translate}}</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Admin,Lawyer....">
+                    </mat-form-field>
+                </div>
+                <!-- desc -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>{{'System.Authorization.Role.AddRole.Description'|translate}}</mat-label>
+                        <input matInput placeholder="Role For...." formControlName="description" type="text">
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="grid grid-cols-3 grid-flow-row gap-2 h-64 p-6 border-t">
+        <div class="border border-dashed border-gray-400  flex flex-col items-center justify-center hover:bg-gray-100 cursor-pointer rounded-3xl rounded-b-3xl			"
+            (click)="ParmitiionType()">
+            <ion-icon name="add-outline"></ion-icon>
+        </div>
+        <div class="border border-dashed border-gray-400  flex flex-col items-center justify-center rounded-t-3xl rounded-b-3xl	  "
+            *ngFor="let perm of permissions">{{perm.name}}</div>
+
+    </div>
+
+</ion-content>

@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title> Invoice Deatils</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content *ngIf="(lang.direction|async) as dir">
+    <ng-container *ngIf="!isLoading">
+      <div class="w-full p-5">
+        <div class="border-4 m-3">
+          <div class="flex flex-row">
+            <div class="w-1/2 p-5">
+              <div class="flex flex-row">
+                <span style="font-size: 16px; font-weight: bold" class="p-1">
+                  Al-Qanouni
+                </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 16px; font-weight: bold" class="p-1">
+                  Law Firm
+                </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 16px" class="p-1">
+                  P.O. Box 0000, Manama , Kingdom of Bahrain
+                </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 16px; font-weight: bold" class="p-1">
+                  Email:
+                </span>
+                <span style="font-size: 16px" class="p-1">
+                  admin@vt.com
+                </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 16px; font-weight: bold" class="p-1">
+                  VAT:
+                </span>
+                <span style="font-size: 16px" class="p-1"> 000000000000001 </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 16px; font-weight: bold" class="p-1">
+                  Invoice To:
+                </span>
+                <span style="font-size: 16px" class="p-1">
+                  {{Invoice?.client.full_name}}
+                </span>
+              </div>
+            </div>
+            <div class="w-1/2 p-5">
+              <div class="flex flex-row">
+                <span style="font-size: 14px; font-weight: bold" class="p-1">
+                  Invoice Date:
+                </span>
+                <span style="font-size: 14px" class="p-1">
+                  {{Invoice?.invoice_date|date:"short"}}
+                </span>
+              </div>
+              <div class="flex flex-row">
+                <span style="font-size: 14px; font-weight: bold" class="p-1">
+                  Invoice No:
+                </span>
+                <span style="font-size: 14px" class="p-1">
+                  {{Invoice?.invoice_no}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col w-full p-2">
+            <table class="w-full overflow-y-auto bg-background border-2">
+              <thead>
+                <tr>
+                  <td class="border-2 p-1 text-center">Item</td>
+                  <td class="border-2 p-1 text-center">Gross Amount</td>
+                  <td class="border-2 p-1 text-center">Vat Amount</td>
+                  <td class="border-2 p-1 text-center">Net Amount</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of InvoiceDetail">
+                  <td class="border-2 p-1 text-center">{{item.item.name}}</td>
+                  <td class="border-2 p-1 text-center">{{item.gross_amount}}</td>
+                  <td class="border-2 p-1 text-center">{{item.tax_amount}}</td>
+                  <td class="border-2 p-1 text-center">{{item.net_amount}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="border-2 p-1 text-right">Goss Amount</td>
+                  <td class="border-2 p-1 text-right">
+                    {{Invoice?.gross_amount}}
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="border-2 p-1 text-right">Vat Amount</td>
+                  <td class="border-2 p-1 text-right">{{Invoice?.tax_amount}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="border-2 p-1 text-right">Net Amount</td>
+                  <td class="border-2 p-1 text-right">{{Invoice?.net_amount}}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ion-content>
+  

@@ -1,0 +1,72 @@
+<vt-header>
+  <ion-buttons slot="start">
+    <ion-buttons
+      class="flex items-center justify-center w-8 h-8 rounded-full cursor-pointer hover:bg-red-300 hover:text-black"
+      (click)="close(true)">
+      <ion-icon name="close-outline">
+      </ion-icon>
+    </ion-buttons>
+  </ion-buttons>
+  <ion-title slot="middle" class="flex items-center justify-center">{{"Operations.Select"|translate}}
+    {{isMulti?('Employee.Plural'|translate):('Employee.Title'|translate)}}
+  </ion-title>
+  <ion-buttons slot="end">
+    <ion-button
+      class="flex items-center justify-center w-8 h-8 mr-4 rounded-full cursor-pointer hover:bg-green-300 hover:text-black"
+      (click)="close(false)">
+      <ion-icon name="checkmark-outline">
+      </ion-icon>
+    </ion-button>
+  </ion-buttons>
+</vt-header>
+<ion-content class="h-full max-h-full overflow-auto">
+  <div class="sticky top-0 z-50 p-0 border-b border-step-50 bg-backeground">
+    <ion-searchbar type="text" debounce="100" (ionChange)="getItems($event)">
+    </ion-searchbar>
+  </div>
+  <ion-list class="flex-auto overflow-auto">
+    <ng-container *ngIf="isMulti">
+      <ion-item *ngFor="let item of items;let itemIndex = index;" lines="none" class="border-b cursor-pointer"
+        (click)="selectEmp(item,itemIndex)">
+        <ion-checkbox slot="start" [(ngModel)]="item.selected"></ion-checkbox>
+        <ion-label>
+          {{ item.user.first_name+' '+item.user.last_name |titlecase}} - {{item.user.email}}
+        </ion-label>
+        <ion-avatar slot="end">
+          <ion-img [src]="user.getProfilePicURL(item.user.pictureURL)" #img
+            (ionError)="img.src = 'assets/fillers/profile-temp.png'" class="object-scale-down w-full h-full rounded-lg">
+          </ion-img>
+        </ion-avatar>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="!isMulti">
+      <ion-radio-group [(ngModel)]="selectedEmployee">
+        <ion-item *ngFor="let item of items" lines="none" class="border-b cursor-pointer">
+          <ion-radio   *ngIf="isCustomList" slot="start" [value]="item.Employee"></ion-radio>
+          <ion-radio   *ngIf="!isCustomList" slot="start" [value]="item"></ion-radio>
+
+          <ion-label  *ngIf="isCustomList">
+            {{ item.Employee?.user?.first_name+' '+item.Employee?.user?.last_name |titlecase}} - {{item.Employee?.user?.email}}
+          </ion-label>
+          <ion-label  *ngIf="!isCustomList">
+            {{ item.user?.first_name+' '+item.user?.last_name |titlecase}} - {{item.user?.email}}
+          </ion-label>
+          <ion-avatar slot="end" >
+            <ion-img  *ngIf="isCustomList" [src]="user.getProfilePicURL(item.Employee?.user?.pictureURL)" #img
+              (ionError)="img.src = 'assets/fillers/profile-temp.png'"
+              class="object-scale-down w-full h-full rounded-lg">
+            </ion-img>
+            <ion-img  *ngIf="!isCustomList" [src]="user.getProfilePicURL(item.user?.pictureURL)" #img
+            (ionError)="img.src = 'assets/fillers/profile-temp.png'"
+            class="object-scale-down w-full h-full rounded-lg">
+          </ion-img>
+          </ion-avatar>
+        </ion-item>
+      </ion-radio-group>
+    </ng-container>
+
+    <div class="w-full text-center" *ngIf="items?.length==0">
+      There is no Employee found...
+    </div>
+  </ion-list>
+</ion-content>

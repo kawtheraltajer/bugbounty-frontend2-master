@@ -1,0 +1,21 @@
+
+<vt-page class="flex flex-col flex-auto">
+  <vt-header *ngIf="('Court:READ:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE,LawyerAccess:MANAGE'|permission)">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+    <div slot="middle">{{'Court.Title'|translate}}</div>
+    <ion-buttons slot="end">
+      <!-- <ion-menu-button></ion-menu-button> -->
+    </ion-buttons>
+  </vt-header>
+  <vt-nav [tabs]="tabs" slot="top" [applyTranslate]="true" routePrefix='/court' *ngIf="('Court:READ:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE,LawyerAccess:MANAGE'|permission)">
+  </vt-nav>
+
+  <div slot="content" class="flex flex-col flex-auto">
+    <div class="relative flex flex-auto w-full">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+  </div>
+</vt-page>

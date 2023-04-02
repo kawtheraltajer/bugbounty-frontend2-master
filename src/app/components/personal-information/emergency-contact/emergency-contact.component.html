@@ -1,0 +1,37 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  items-end justify-end w-full p-2 border-b border-step-100 bg-background">
+ 
+
+
+      <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="add()">
+        <ion-icon name="add"></ion-icon>
+        {{'Employee_managment.Emergency_Contact.add'|translate}} 
+
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 grid-flow-row gap-2 h-64 p-6 border-t">
+ 
+    <div class="border border-gray-400  cursor-pointer hover:bg-step-100  flex flex-col items-start justify-start rounded-t-2xl rounded-b-2xl	h-20 p-2 "
+        *ngFor="let emergencyContact of EmergencyContact"  (click)="update(emergencyContact)" >
+      <span style="font-weight: bold;font-weight: 12px;"  >
+        {{emergencyContact.name}}- {{'Employee_managment.Emergency_Contact.Form.Relation'|translate}}:
+        {{("Employee_managment.Emergency_Contact.emergency_contacts_relation."+emergencyContact.relation)|translate}}
+
+    
+
+      </span>
+      <span style="font-weight: 10px;">
+        {{'Employee_managment.Emergency_Contact.Form.mobile'|translate}} :  {{emergencyContact.phone}}
+      </span>
+      <span style="font-weight: 10px;">
+        {{'Employee_managment.Emergency_Contact.Form.Email'|translate}}  : {{emergencyContact.email}}
+        </span>
+      </div>
+
+</div>
+  </div>

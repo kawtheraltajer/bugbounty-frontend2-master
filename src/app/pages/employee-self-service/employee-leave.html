@@ -1,0 +1,143 @@
+<vt-header>
+  <ion-buttons slot="start">
+    <ion-button color="dark" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+  <div slot="middle"> {{'HCM.Workforce.leaves.Title'|translate}} </div>
+  <ion-buttons slot="end">
+    <!-- <ion-menu-button></ion-menu-button> -->
+  </ion-buttons>
+</vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative">
+  <div class="flex flex-col w-full p-5">
+    <span class="flex items-center justify-center w-full p-5">
+      <img class="object-cover w-40 h-40 rounded-full"
+        [src]="getURL(data?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"></span>
+    <div class=" flex-col flex items-center justify-center w-full">
+      <div class="flex-6 flex items-start  h-8  justify-center w-full">
+        <p class="text-xl font-medium	 text-primary-default	">{{ data?.user.first_name }}{{
+          data?.user.last_name}}
+        </p>
+
+
+      </div>
+      <div class="flex-6 flex items-start  h-8  justify-center w-full">
+        <p class="text-l font-medium	 text-primary-default	">
+
+          {{ lang.selectedLang=='en'? data?.designation.title_en:data?.designation.title_ar | titlecase}}
+        </p>
+
+
+
+      </div>
+      <div class="flex-6 flex items-start  h-8  justify-center w-full">
+        <p class="text-l font-medium	 text-primary-default	">
+          {{ lang.selectedLang=='en'? data?.department.name_en:data?.department.name_ar | titlecase}}
+
+        </p>
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+    <div class="flex-1  bg-primary-default text-white  text-center h-10 p-2">
+
+
+      {{'HCM.Workforce.leaves.Title'|translate}}
+
+
+
+
+
+    </div>
+    <div class="  flex items-center justify-center p-5">
+      <div class="flex flex-col items-center justify-center h-20  w-25 p-2 border   rounded-lg border-gray-400  "
+        *ngFor="let leave of LeaveBalance ">
+        <div  class="text-lg font-bold	 text-primary-default	" >
+          {{ lang.selectedLang=='en'? leave.type?.name_en:leave.type?.name_ar| titlecase}}
+
+
+        </div>
+        <div class="text-lg ">{{leave.balance}}</div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="flex flex-col w-300 h-full bg-background text-step-600">
+
+    <div style="display: -webkit-box;display: -webkit-inline-box;">
+
+
+      <div class="relative flex flex-row  items-end justify-end w-30 p-2 border-b border-step-100 bg-background border-gray-300">
+
+
+
+        <div
+          class="  text-sm font-semibold	 text-primary-default border-gray-400	 relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+          (click)="add()">
+          <ion-icon name="add"></ion-icon>
+          {{'HCM.Workforce.leaves.Add'|translate}}
+
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 grid-flow-row gap-2 h-64 p-6 border-t">
+
+      <div class="border border-gray-400  flex flex-col items-start justify-start rounded-t-2xl rounded-b-2xl	h-20 p-2 cursor-pointer hover:bg-step-200  " (click)="update(leave)"
+        *ngFor="let leave of leaves">
+        
+        <span style="font-weight: bold;font-weight: 12px; color:red " *ngIf="leave.status  == 'Approved'">
+     
+          {{ lang.selectedLang=='en'? leave.type?.name_en:leave.type?.name_ar| titlecase}}
+          
+          {{" - " }}           {{ lang.selectedLang=='en'? 'Approval':'مقبولة'| titlecase}}   
+        </span>
+        <span style="font-weight: bold;font-weight: 12px;  " *ngIf="leave.status  == 'Reject'" >
+          {{ lang.selectedLang=='en'? leave.type?.name_en:leave.type?.name_ar| titlecase}}
+           {{" - " }}   {{ lang.selectedLang=='en'? 'Reject':'مرفوضة'| titlecase}}  
+        </span>
+        <span style="font-weight: bold;font-weight: 12px;  " *ngIf="leave.status  == 'Pendding'" >
+          {{ lang.selectedLang=='en'? leave.type?.name_en:leave.type?.name_ar| titlecase}}
+           {{" - " }}   {{ lang.selectedLang=='en'? 'Pendding':'قيد الإنتظار'| titlecase}}  
+        </span>
+
+
+
+        <span class="text-sm font-medium	 text-primary-default	">
+          <ion-icon name="stopwatch-outline"></ion-icon>
+          {{'HCM.Workforce.leaves.Form.From_Date'|translate}}
+          {{leave.from_date|date}}
+          <ion-icon name="stopwatch-outline"></ion-icon>
+          {{'HCM.Workforce.leaves.Form.To_Date'|translate}}
+
+          {{leave.to_date|date}}
+
+        </span>
+
+        <span class="text-sm font-thin	 text-primary-default	">
+          {{'HCM.Workforce.leaves.Form.Days'|translate}}
+
+          {{leave.total_days}}
+        </span>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+</ion-content>

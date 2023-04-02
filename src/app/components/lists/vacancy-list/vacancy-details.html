@@ -1,0 +1,184 @@
+<vt-page class="flex flex-col flex-auto">
+    <vt-header>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <div slot="middle">{{'Vacancy.Details'|translate}}</div>
+        <ion-buttons slot="end">
+            <button mat-icon-button (click)="update()">
+                <mat-icon class="mx-auto" aria-label="Edit" [matTooltip]="'Operations.Edit'|translate">edit</mat-icon>
+            </button>
+        </ion-buttons>
+    </vt-header>
+
+    <div slot="content" class="flex flex-col flex-auto w-full overflow-auto">
+        <div class="flex flex-col flex-auto w-full h-full overflow-hidden text-step-950"
+            *ngIf="(lang.direction|async) as dir">
+
+
+            <div class="grid w-full grid-cols-2 border-b md:grid-cols-4">
+                <div class="flex flex-col flex-1 h-full p-2 text-base border-b md:border-b-0 border-ie ">
+                    <div class="font-bold">{{'Vacancy.position'|translate}}</div>
+                    <div class="px-2 text-sm">{{Vacancy?.position}} - {{Vacancy?.code}}</div>
+                    <div class="font-bold">{{'Vacancy.Number_of_openings'|translate}}</div>
+                    <div class="px-2 text-sm">{{Vacancy?.number_of_openings}}</div>
+                </div>
+                <div class="flex flex-col flex-1 h-full p-2 text-base border-b md:border-b-0 md:border-ie">
+                    <div class="font-bold">{{'Vacancy.head_title.Infromation'|translate}}</div>
+                    <div class="px-2 text-sm">{{'Vacancy.location'|translate}}:{{Vacancy?.location}}</div>
+                    <div class="px-2 text-sm">{{('Vacancy.Type'|translate) + ':' +
+                        (("Vacancy.Vacancy_Type."+Vacancy?.type)|translate)}}</div>
+                    <div class="px-2 text-sm">{{'Vacancy.Education_level'|translate}} :{{Vacancy?.education_level}}
+                    </div>
+                    <div class="px-2 text-sm">{{'Vacancy.Department'|translate}} :{{Vacancy?.department.name_en}}</div>
+                </div>
+
+                <div class="flex flex-col flex-1 h-full p-2 text-base border-ie">
+                    <div class="font-bold">{{'Vacancy.head_title.Timing'|translate}}</div>
+                    <div class="px-2 text-sm">{{'Vacancy.openingAt'|translate}} : {{Vacancy?.openingAt |date}}</div>
+                    <div class="px-2 text-sm">{{'Vacancy.closingAt'|translate}}: {{Vacancy?.closingAt |date}}</div>
+                </div>
+                <div class="flex flex-col flex-1 h-full p-2 text-base">
+                    <div class="font-bold">{{'Vacancy.Status'|translate}}</div>
+                    <div class="px-2 text-sm">{{("Vacancy.Vacancy_Status."+Vacancy?.status)|translate}}</div>
+                </div>
+            </div>
+            <div class="flex flex-col flex-auto w-full overflow-hidden md:flex-row">
+                <div class="flex flex-col w-full h-full md:w-1/2 bg-background text-step-600">
+
+                    <div
+                        class="relative flex flex-row justify-center flex-shrink-0 w-full p-2 border-b h-14 bg-background">
+                        <div class="items-start flex-1 w-1/2">
+                            <div
+                                class="relative flex flex-1 h-10 border rounded-lg lg:flex-none lg:w-1/2 bg-toolbar-background ">
+                                <svg class="absolute left-0 w-10 h-full p-2 fill-current hover:text-step-900 " x="0px"
+                                    y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
+                                    xml:space="preserve" width="512px" height="512px">
+                                    <path
+                                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                </svg>
+                                <input
+                                    class="w-full h-full pl-12 pr-1 text-sm bg-backeground text-step-900 focus:outline-none"
+                                    type="search" name="search" [placeholder]="'Operations.Search'|translate"
+                                    [(ngModel)]="searchTerm" (keyup)="applyFilter()" #search>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer flex-12 bg-toolbar-background hover:bg-step-50 "
+                            (click)="add()">
+                            <ion-icon name="add"></ion-icon>
+                            {{'Vacancy.Application.Add'|translate}}
+                        </div>
+                    </div>
+
+                    <table mat-table [dataSource]="ApplicationList" matSort
+                        class=" flex-auto w-full  overflow-y-auto bg-background text-step-600 ">
+                        <!-- Checkbox Column -->
+
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p   class="flex flex-auto w-full overflow-auto">
+                                    {{'Vacancy.Form.ID'|translate}}
+                                </p>
+                            </th>
+                            <td      mat-cell *matCellDef="let element">
+                                {{element?.id}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="applicant_name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p class="w-full text-center">
+                                    {{'Vacancy.Form.applicant_name'|translate}}
+
+
+                                </p>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element?.applicant_first_name}}{{" "}}{{element?.applicant_last_name}}
+
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="applicant_email">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p class="w-full text-center">
+                                    {{'Vacancy.Form.applicant_email'|translate}}
+                                </p>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element?.applicant_email | titlecase}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="applicant_phone">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p class="w-full text-center">
+                                    {{'Vacancy.Form.applicant_phone'|translate}}
+
+
+                                </p>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element?.applicant_phone | titlecase}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p class="w-full text-center">
+                                    {{'Vacancy.Form.Status'|translate}}
+
+                                </p>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{("Vacancy.Application.Application_status."+element?.status)|translate}} </td>
+
+                        </ng-container>
+                        <ng-container matColumnDef="Action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <p class="w-full text-center">
+                                    {{'Vacancy.Form.Action'|translate}}
+                                </p>
+                            </th>
+                            <td mat-cell *matCellDef="let row; let i=index;">
+                                <button *ngIf="authz.canDo('UPDATE','TimeSlot',row)" mat-icon-button color="accent"
+                                    (click)="details(row)" [matTooltip]="'Operations.Edit'|translate">
+                                    <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+                                </button>
+                                <!--    <button  mat-icon-button color="warn" (click)="delete(row)"
+                        [matTooltip]="'Operations.Delete'|translate" >
+                        <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+                      </button>-->
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true" class="border-b"></tr>
+                        <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"
+                            class="border-b cursor-pointer border-step-100 hover:bg-step-25">
+                        <tr class="mat-row" *matNoDataRow>
+                            <ng-template #NoRoles>
+                                <td class="text-2xl text-center mat-cell" colspan="5">There are no roles.
+                                </td>
+                            </ng-template>
+
+                        </tr>
+                    </table>
+                    <mat-paginator #permissionsTablePaginator [pageSizeOptions]="[5,10,20]"
+                        class="w-full border-t border-b mat-paginator-sticky" showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+                <div
+                    class="flex flex-col items-start justify-start flex-auto w-full overflow-auto md:w-1/2 md:border-is ">
+                    <div class="flex items-center flex-shrink-0 w-full px-4 text-base font-bold border-b h-14 ">
+                        {{'Vacancy.description'|translate}}
+                    </div>
+                    <div class="flex flex-auto w-full overflow-auto">
+                        <editor #editorPreviw *ngIf="Vacancy?.description" [(ngModel)]="Vacancy.description"
+                            class="w-full h-full bg-transparent border-none" [disabled]="true"
+                            apiKey="wdwuqgh3y1ayk79i658e8gulzujl3ti5gnrayrljueomjm0e" [init]="previewConfig "
+                            [dir]="dir">
+                        </editor>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</vt-page>

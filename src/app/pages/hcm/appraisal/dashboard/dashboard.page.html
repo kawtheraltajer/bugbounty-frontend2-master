@@ -1,0 +1,36 @@
+<div class="flex flex-col items-start justify-start flex-auto w-full h-full overflow-y-auto bg-white" *ngIf="!isLoading">
+    <div class="flex flex-col items-center flex-auto w-full">
+        <div *ngFor="let item of byYearStatus;let i =index;" class="flex flex-col w-full">
+            <div class="sticky top-0 flex items-center justify-center p-2 text-4xl border-t border-b bg-step-100">{{item.year}}</div>
+   
+          <div class="flex flex-row items-center justify-center w-full gap-2 mb-2 boreder-b">
+                <div class="flex flex-col items-center justify-center p-2 border rounded">
+                    {{appraisers[item.maxAppraiser].user.first_name + '
+                    '+appraisers[item.maxAppraiser].user.last_name}}</div>
+            </div> 
+            <!-- ! Statuses -->
+            <div class="flex flex-col justify-center w-full gap-2 my-2 md:flex-row">
+                <div class="flex flex-col items-center justify-center p-2 border rounded md:w-16">
+                    <p class="justify-center text-3xl font-semibold text-center text-gray-800 ">
+                        {{item.count}}</p>
+                    <p class="text-lg text-center text-gray-500">All</p>
+                </div>
+                <div class="flex flex-col items-center justify-center p-2 border rounded"
+                    *ngFor="let status of item.statuses">
+                    <div class="justify-center">
+                        <p class="justify-center text-3xl font-semibold text-center text-gray-800 ">
+                            {{status.count}}</p>
+                        <p class="text-lg text-center text-gray-500"> {{status.status}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="w-full md:w-1/2">
+           <!--<apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke" [fill]="chartOptions.fill"
+                [yaxis]="chartOptions.yaxis" [title]="chartOptions.title" [tooltip]="chartOptions.tooltip"
+                [legend]="chartOptions.legend"></apx-chart>--> 
+        </div> 
+    </div>
+</div>

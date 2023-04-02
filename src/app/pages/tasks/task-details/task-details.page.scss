@@ -1,0 +1,33 @@
+.tinyPrev {
+  .tox-tinymce {
+    border: none !important;
+  }
+}
+
+.top-50Per {
+  top: 50%;
+}
+.h-25Per {
+  height: 25%;
+}
+.h-75Per {
+  height: 75%;
+}
+.h-50Per {
+  height: 50%;
+}
+
+editor {
+  width: 100%;
+  height: 100%;
+}
+
+.headerHeight {
+  height: 25%;
+}
+
+@media (max-width: 768px) {
+  .headerHeight {
+    height: 50%;
+  }
+}

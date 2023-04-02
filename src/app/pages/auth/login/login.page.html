@@ -1,0 +1,55 @@
+<div class="h-screen bg-white lg:flex">
+  <div class="flex flex-col w-full h-screen bg-white lg:justify-center lg:items-center lg:w-1/2 lg:bg-primary-default">
+    <div class="w-full p-2 lg:hidden">
+      <img class="w-2/3 h-auto mx-auto sm:1/2 md:1/3" src="../../../../assets/fillers/logo.png" alt="">
+    </div>
+    <div class="w-full px-12 mt-10 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+      <h2
+        class="w-full text-4xl font-semibold text-center text-secondary-default font-display lg:text-center xl:text-5xl xl:text-bold">
+        {{'Login.text'|translate}}</h2>
+      <div class="mt-12">
+        <form autocomplete="off">
+          <div>
+            <div class="text-sm font-bold tracking-wide text-secondary-default">{{'Login.email'|translate}}</div>
+            <ion-input autocomplete="off" name="email" clearInput="true" [(ngModel)]="email"
+              class="w-full py-2 pl-4 text-lg text-black border-b active: lg:text-white focus:outline-none border-secondary-default"
+              type="email" placeholder="admin@vt.com"></ion-input>
+          </div>
+          <div class="mt-8">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-bold tracking-wide text-secondary-default">
+                {{'Login.pass'|translate}}
+              </div>
+              <div>
+                <a [routerLink]="['/forgetpassword']"
+                  class="text-xs font-semibold cursor-pointer text-secondary-default font-display hover:text-secondary-default">
+                  {{'Login.forget'|translate}}
+                </a>
+              </div>
+            </div>
+            <ion-input autocomplete="off" [(ngModel)]="password" name="password"
+              class="w-full py-2 pl-4 text-lg text-black border-b active: lg:text-white focus:outline-none border-secondary-default"
+              type="password" placeholder="Enter your password"></ion-input>
+          </div>
+          <div class="mt-10">
+            <button (click)="login()"
+              class="w-full p-4 tracking-wide text-white rounded-md shadow-lg outline-none bg-secondary-default hover:bg-secondary-tint focus:outline-none">
+              {{'Login.text'|translate}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="absolute bottom-0 flex px-5 cursor-pointer">
+      <div class="text-secondary-default hover:text-secondary-shade" *ngIf="lang.selectedLang !='ar'"
+        (click)="lang.toggleLang()"> عربي </div>
+      <div class="text-secondary-default hover:text-secondary-shade" *ngIf="lang.selectedLang !='en'"
+        (click)="lang.toggleLang()"> English </div>
+    </div>
+  </div>
+  <div class="items-center justify-center hidden h-screen p-5 overflow-hidden bg-white lg:w-1/2 lg:flex">
+    <div class="duration-200 transform cursor-pointer hover:scale-105">
+      <img class="w-full h-auto mx-auto" src="../../../../assets/fillers/logo.png" alt="">
+    </div>
+  </div>
+</div>

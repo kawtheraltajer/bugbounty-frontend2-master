@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Update Account Code </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Acc code en </mat-label>
+            <input
+              matInput
+              formControlName="acc_code_en"
+              placeholder="Acc code en ..."
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Acc code ar </mat-label>
+            <input
+              matInput
+              formControlName="acc_code_ar"
+              placeholder="Acc code ar ..."
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field>
+          <mat-label> Account Type</mat-label>
+          <mat-select formControlName="acc_typeID">
+            <mat-option
+              *ngFor="let accountType of accountTypes"
+              [value]="accountType.id"
+              >{{accountType.acc_type_en +' - '+accountType.acc_type_ar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Description En </mat-label>
+            <input
+              matInput
+              formControlName="description_en"
+              placeholder="Description En ..."
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Description ar </mat-label>
+            <input
+              matInput
+              formControlName="description_ar"
+              placeholder="Description ar ..."
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

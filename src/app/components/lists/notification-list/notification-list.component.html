@@ -1,0 +1,16 @@
+<p  *ngIf="count == 0" class="p-4 h-16 w-56 text-center">
+  No notifications
+</p>
+
+
+<ion-list class=" h-600  max-h-600 w-300 ">
+  <ion-item *ngFor="let notification of notifications" (click)="viewNotificationsPage(notification)" 
+  class="cursor-pointer bg-backeground hover:bg-step-500"
+  [color]="!notification?.is_read ? 'light' : ''">
+    <ion-label>
+      <h4 item-start>{{ lang.selectedLang=='en'? notification?.message_en:notification?.message_ar| titlecase}}</h4>
+      <p style="font-size: 12px;" item-end>{{notification?.date | date:'dd/MM/yyyy HH:mm:ss aa':'+3'}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+

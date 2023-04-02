@@ -1,0 +1,243 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'Finance.Expense.Add'|translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container *ngIf="!isLoading">
+    <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+      <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Expense.list.Supplier'|translate}} <span style="color: red;">*</span> </mat-label>
+              <mat-select formControlName="supplierID">
+                <mat-option *ngFor="let supplier of suppliers;let i = index;" [value]="supplier.id">
+                  {{supplier.full_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Expense.list.expense_status'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <mat-select formControlName="expense_status">
+                <mat-option value="Pending"> {{'Finance.Expense.Status.Pending'|translate}} </mat-option>
+                <mat-option value="Paid"> {{'Finance.Expense.Status.Paid'|translate}}</mat-option>
+                <mat-option value="Approved"> {{'Finance.Expense.Status.Approved'|translate}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="flex flex-row w-full">
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.Supplier">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('supplierID').hasError(validation.type) && (addForm.get('supplierID').dirty || addForm.get('supplierID').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.expense_status">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('expense_status').hasError(validation.type) && (addForm.get('expense_status').dirty || addForm.get('expense_status').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label> {{'Finance.Expense.list.payment_method'|translate}} <span style="color: red;">*</span>
+              </mat-label>
+              <mat-select formControlName="payment_method" (selectionChange)="checkCheque($event)">
+                <mat-option value="Cash"> {{'Finance.Expense.Payment_method.Cash'|translate}} </mat-option>
+                <mat-option value="BankTransfer"> {{'Finance.Expense.Payment_method.BankTransfer'|translate}}
+                </mat-option>
+                <mat-option value="Cheque"> {{'Finance.Expense.Payment_method.Cheque'|translate}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ng-container *ngIf="isCheque">
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label>{{'Finance.Expense.list.cheque_date'|translate}} <span style="color: red;">*</span>
+                </mat-label>
+                <input matInput formControlName="cheque_date" [matDatepicker]="pickerChequeDate" />
+                <mat-datepicker-toggle matSuffix [for]="pickerChequeDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerChequeDate></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+            <mat-form-field appearance="standard" class="px-2 w-1/2">
+              <mat-label>{{'Finance.Expense.list.expense_date'|translate}}</mat-label>
+              <input
+                matInput
+                formControlName="expense_date"
+                [matDatepicker]="picker"/>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+                      <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label>  {{'Court.Cases.Case-type.Form.comments'|translate}}  </mat-label>
+                <input matInput type="text" formControlName="details">
+            </mat-form-field>
+          <div class="flex flex-row w-full">
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.payment_method">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('payment_method').hasError(validation.type) && (addForm.get('payment_method').dirty || addForm.get('payment_method').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.cheque_date">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('cheque_date').hasError(validation.type) && (addForm.get('cheque_date').dirty || addForm.get('cheque_date').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <ng-container *ngIf="isCheque">
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label> {{'Finance.Expense.list.drawn_on'|translate}} <span style="color: red;">*</span>
+                </mat-label>
+                <input matInput formControlName="drawn_on" [matDatepicker]="pickerdrawn_on" />
+                <mat-datepicker-toggle matSuffix [for]="pickerdrawn_on"></mat-datepicker-toggle>
+                <mat-datepicker #pickerdrawn_on></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="isCheque">
+              <mat-form-field appearance="standard" class="px-2 w-1/2">
+                <mat-label> {{'Finance.Expense.list.cheque_number'|translate}} <span style="color: red;">*</span>
+                </mat-label>
+                <input matInput s formControlName="cheque_number" />
+              </mat-form-field>
+            </ng-container>
+          </div>
+          <div class="flex flex-row w-full">
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.drawn_on">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('drawn_on').hasError(validation.type) && (addForm.get('drawn_on').dirty || addForm.get('drawn_on').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div appearance="standard" class="px-2 w-1/2">
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.cheque_number">
+                  <div class="text-red-600 text-end"
+                    *ngIf="addForm.get('cheque_number').hasError(validation.type) && (addForm.get('cheque_number').dirty || addForm.get('cheque_number').touched)">
+                    {{ validation.message |translate }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row w-full mt-8">
+            <table class="w-full overflow-y-auto bg-background border-2">
+              <thead>
+                <tr>
+                  <th class="border-2 p-1"> {{'Finance.Expense.list.Item'|translate}}</th>
+                  <th class="border-2 p-1"> {{'Finance.Expense.list.gross_amount'|translate}}</th>
+                  <th class="border-2 p-1">{{'Finance.Expense.list.tax_amount'|translate}} </th>
+                  <th class="border-2 p-1"> {{'Finance.Expense.list.net_amount'|translate}} </th>
+                  <th class="border-2 p-1"> {{'Finance.Expense.list.Description'|translate}}</th>
+                  <th class="border-2 p-1">
+                    <ion-buttons slot="end">
+                      <ion-button color="dark" (click)="addOrEditDetails(null,0)">
+                        <ion-icon name="add"></ion-icon>
+                      </ion-button>
+                    </ion-buttons>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="expenseDetails.length==0">
+                  <td colspan="6" class="border-2 p-1 text-center">
+                    {{'Finance.Expense.Errors.No_Details'|translate}}
+                  </td>
+                </tr>
+                <tr *ngFor="let detail of expenseDetails ;let i = index">
+                  <td class="border-2 p-1 text-center">{{detail.item_name}}</td>
+                  <td class="border-2 p-1 text-center">
+                    {{detail.gross_amount}}
+                  </td>
+                  <td class="border-2 p-1 text-center">
+                    {{detail.tax_amount}}
+                  </td>
+                  <td class="border-2 p-1 text-center">
+                    {{detail.net_amount}}
+                  </td>
+                  <td class="border-2 p-1 text-center">
+                    {{detail.description}}
+                  </td>
+                  <td class="border-2 p-1 text-center">
+                    <div class="flex flex-row text-center">
+                      <button mat-icon-button color="warn" (click)="delete(i)"
+                        [matTooltip]="'Operations.Delete'|translate">
+                        <mat-icon class="mx-auto" aria-label="Delete">delete</mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="border-2 p-1 text-right">
+                    {{'Finance.Expense.list.gross_amount'|translate}}
+                  </td>
+                  <td class="border-2 p-1 text-right">
+                    <input matInput type="number" formControlName="gross_amount" />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="border-2 p-1 text-right">
+                    {{'Finance.Expense.list.tax_amount'|translate}}
+                  </td>
+                  <td class="border-2 p-1 text-right">
+                    <input matInput type="number" formControlName="tax_amount" />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5" class="border-2 p-1 text-right">
+                    {{'Finance.Expense.list.net_amount'|translate}}
+                  </td>
+                  <td class="border-2 p-1 text-right">
+                    <input matInput type="number" formControlName="net_amount" />
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Update Invoice Detail </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+      <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+        <mat-form-field>
+          <mat-label> Item </mat-label>
+          <mat-select
+            formControlName="itemID"
+            (selectionChange)="updatePrice($event)"
+          >
+            <mat-option *ngFor="let item of items" [value]="item.id"
+              >{{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Gross Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="gross_amount"
+              placeholder="Gross Amount ..."
+              (keyup)="updateTextBox()"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full"     disabled="true">
+            <mat-label> Tax Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              [disabled]="true"
+              formControlName="tax_amount"
+              (keyup)="updateTextBox()"
+              placeholder="Tax Amount ..."
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Net Amount </mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="net_amount"
+              (keyup)="updateTextBox()"
+              placeholder="Net Amount ..."
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex flex-row w-full">
+          <mat-form-field appearance="standard" class="w-full">
+            <mat-label> Description </mat-label>
+            <input
+              matInput
+              formControlName="description"
+              placeholder="description..."
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

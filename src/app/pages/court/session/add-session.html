@@ -1,0 +1,168 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>                {{'Court.Session.Add'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+
+          
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+           
+                <mat-form-field *ngIf="!addFromCases">
+                    <mat-label>   {{'Court.Session.Form.Case'|translate}} <span style="color: red;">*</span>  </mat-label>
+                    <mat-select formControlName="caseID"  >
+             
+                        <mat-option>
+                            <ngx-mat-select-search
+                             (keyup)="filterEmployeelist($event)"
+                             placeholderLabel="ابحث عن قضية  "
+                             [formControl]="CasesFilterCtrl"
+                             noEntriesFoundLabel="لا يوجد"
+                             >
+                            <mat-icon (click)="clearSelectionCases()" class="mx-auto" aria-label="clear"
+                            ngxMatSelectSearchClear>close</mat-icon>
+                            </ngx-mat-select-search>
+                        </mat-option>
+                
+
+                        <mat-option *ngFor="let case of filteredCases" [value]="case.id">
+
+                            {{case?.CaseNo}}{{"-"}}{{case.client?.full_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors" *ngIf="!addFromCases">
+                    <ng-container *ngFor="let validation of validation_messages.caseID" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('caseID').hasError(validation.type) && (addForm.get('caseID').dirty || addForm.get('caseID').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+       
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>  {{'Court.Session.Form.Session_Date'|translate}} <span style="color: red;">*</span>  </mat-label>
+                      <input matInput  formControlName="date" [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.date" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('date').hasError(validation.type) && (addForm.get('date').dirty || addForm.get('date').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <!--<mat-form-field>
+                    <mat-label>    {{'Court.Session.Form.status'|translate}}    </mat-label>
+                <mat-select  formControlName="status">
+        
+                    <mat-option  value="UPCOMING">
+                        UPCOMING-قادمة
+                    </mat-option>
+                    <mat-option  value="DELAYED">
+                        DELAYED-تأخير </mat-option>
+                    <mat-option  value="FINISHED">
+                        FINISHED-منتهية</mat-option>
+              
+                </mat-select>
+                
+            </mat-form-field>-->
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.status" >
+                    <div class="text-red-600 text-end"   *ngIf="addForm.get('status').hasError(validation.type) && (addForm.get('status').dirty || addForm.get('status').touched)">
+                    {{ validation.message |translate }}
+                    </div>
+                </ng-container>
+            </div>
+
+            
+            <!--<mat-form-field>
+                <mat-label>   {{'Court.Session.Form.delay_reason'|translate}}  </mat-label>
+                <mat-select formControlName="delayrResonID">
+                    <mat-option *ngFor="let delayReson of DelayResons" [value]="delayReson.id">{{delayReson.name_ar}}{{"-"}}{{delayReson.name_en}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>-->
+            <mat-form-field>
+                <mat-label>   {{'Court.Session.Form.Lawyer_Name'|translate}}  </mat-label>
+                <mat-select formControlName="representativeID">
+                    <mat-option *ngFor="let Employee of Employees" [value]="Employee.id">{{Employee.user.first_name}}{{" "}}{{Employee.user.last_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!--<div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'Court.Session.Form.delay_details'|translate}} 
+
+                        
+                    </mat-label>
+                    <input matInput type="text" formControlName="delay_details" placeholder="">
+                </mat-form-field>
+            </div>-->
+
+            <mat-form-field>
+                <mat-label>   {{'Court.Session.List.Previous_delay_Reason'|translate}}</mat-label>
+                <mat-select formControlName="Previous_DelayReasonID">
+                    <mat-option>
+                        <ngx-mat-select-search
+                         (keyup)="filterdelayReaon($event)"
+                         placeholderLabel="ابحث عن سبب تأجيل"
+                         [formControl]="ReasonFilterCtrl"
+                         noEntriesFoundLabel="لا يوجد"
+                         >
+                        <mat-icon (click)="clearSelection()" class="mx-auto" aria-label="clear"
+                        ngxMatSelectSearchClear>close</mat-icon>
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option  (click)="AddNewDelayReson(true)" *ngIf="('DelayReson:CREATE:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE'|permission)">
+                        {{'Court.Cases.delay-reson.Add'|translate}} +                    
+                    </mat-option>
+  
+                    <mat-option *ngFor="let delayReson of filteredReason" [value]="delayReson.id">
+                        {{ lang.selectedLang=='en'? delayReson.name_en:delayReson.name_ar| titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'Court.Session.List.Previous_delay_Reason_Details'|translate}}                        
+                    </mat-label>
+                    <textarea matInput rows="3" formControlName="Previous_DelayReason_Details"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'Court.Session.Form.Comments'|translate}} 
+
+                        
+                    </mat-label>
+                    <input matInput type="text" formControlName="comment" placeholder="">
+                </mat-form-field>
+            </div>
+      
+          
+   
+
+       
+            </form>
+        
+        </div>
+    </div>
+</ion-content>

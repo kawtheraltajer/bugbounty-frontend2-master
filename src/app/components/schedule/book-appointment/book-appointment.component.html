@@ -1,0 +1,176 @@
+<ion-header *ngIf="isModal">
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{isEdit?('Schedule.Booking.Edit'|translate):('Schedule.Booking.Add'|translate)}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="bookAppointment()" [matTooltip]="isEdit?'Edit':'Add'">
+        <ion-icon [name]="isEdit? 'sync-outline':'add'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="!isModal && !isFromSite" [class.mt-2]="!isModal"
+    class="flex flex-row items-center w-full h-12 border-t border-b">
+    <div class="w-full text-center">Booking</div>
+  </div>
+  <div class="flex flex-col items-center justify-center w-full p-2 overflow-auto ">
+    <form class="flex flex-col w-full h-full" [formGroup]="bookForm">
+      <!-- cLientType -->
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Client Type | نوع العميل</mat-label>
+        <mat-select formControlName="client_type">
+          <mat-option value="Company">
+            Company | شركة
+          </mat-option>
+          <mat-option value="Individual">
+            Individual | فرد
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Name -->
+      <!-- ! CPR -->
+      <mat-form-field *ngIf="bookForm.value.client_type=='Individual'" appearance="fill" class="w-full mb-2">
+        <mat-label>CPR | الرقم الشخصي</mat-label>
+        <input matInput type="text" formControlName="client_cpr" placeholder="XXXXXXXXX" maxlength="9"
+          (keyup)="checkAppointmentData()">
+        <mat-error *ngIf="bookForm.get('client_cpr').hasError('required')"> Cpr is required | الرقم الشخصي مطلوب
+        </mat-error>
+        <mat-error *ngIf="bookForm.get('client_cpr').hasError('pattern')"> Cpr is contain 9 numbers | الرقم الشخصي يحتوي
+          9 ارقام </mat-error>
+        <!--<mat-error *ngIf="bookForm.get('client_cpr').hasError('maxLength')">  Cpr is contain 9 numbers | الرقم الشخصي يحتوي 9 ارقام </mat-error>-->
+      </mat-form-field>
+      <div *ngIf="checkAppointment" class="text-gray-500 mb-2">
+        {{'Court.clients.Form.messages.got_appointment'|translate}}
+        <span class="cursor-pointer text-blue-600" (click)="getAppointmentData()">
+          {{'Court.clients.Form.messages.use_appointment_data'|translate}}
+        </span>
+      </div>
+
+
+      <!-- ! CR bookForm.value.client_type=='Company' -->
+      <mat-form-field *ngIf="bookForm.value.client_type=='Company'" appearance="fill" class="w-full mb-2">
+        <mat-label>CR Number | رقم السجل التجاري </mat-label>
+        <input matInput type="text" formControlName="client_cr" placeholder="XXXXXXXXX">
+        <mat-error *ngIf="bookForm.get('client_cr').invalid">CR Is Required | حقل السجل التجاري مطلوب</mat-error>
+      </mat-form-field>
+
+      <!-- ! -->
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>
+          {{(bookForm.value.client_type=='Company'?'Company Name | إسم الشركة':'Client Name | إسم العميل')}}
+        </mat-label>
+        <input matInput type="text" formControlName="client_name">
+        <mat-error *ngIf="bookForm.get('client_name').hasError('required')"> client name is required | اسم العميل مطلوب
+        </mat-error>
+
+      </mat-form-field>
+      <div class="flex flex-row w-full gap-2">
+        <mat-form-field appearance="fill" class="w-1/4 mb-2">
+          <mat-label>Phone Country | بلد الرقم</mat-label>
+          <mat-select formControlName="client_phoneCountry">
+            <mat-option *ngFor="let c of countries" [value]="c">
+              {{c.name+' +'+c.code}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full mb-2">
+          <mat-label>Phone | الموبايل</mat-label>
+          <input matInput type="number" formControlName="client_phone">
+          <mat-error *ngIf="bookForm.get('client_phone').hasError('required')">
+            Phone number is required | رقم الموبايل مطلوب
+          </mat-error>
+          <mat-error *ngIf="bookForm.get('client_phone').hasError('countryCode')">
+            Choose Country Code | إختر رقم البلد
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Email | xxالإيميل</mat-label>
+        <input matInput type="email" formControlName="client_email" placeholder="example@company.com">
+        <mat-error *ngIf="bookForm.get('client_email').hasError('required')"> client email is required |البريد
+          الإلكتروني مطلوب </mat-error>
+        <mat-error *ngIf="bookForm.get('client_email').hasError('email')"> invalid email |البريد الإلكتروني غير صالح
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Module -->
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Appointment Type | نوع الموعد</mat-label>
+        <mat-select formControlName="typeID" (selectionChange)="typeChanged($event)">
+          <mat-option *ngFor="let value of appointmentTypes" [value]="value">
+            {{value.title_en+" | "+value.title_ar}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('typeID').hasError('required')"> Appointment Type is required | نوع الموعد مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Lawyer -->
+      <mat-form-field *ngIf="(!selectedType?.isNotary) && (!fromTimeSlot) " appearance="fill" class="w-full">
+        <mat-label>Lawyer | المحامي</mat-label>
+        <mat-select formControlName="lawyer">
+          <mat-option *ngFor="let value of employeesTimeSlots" [value]="value">
+            {{value.user.first_name+' '+value.user.last_name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('lawyer').hasError('required')"> lawyer is required |المحامي مطلوب</mat-error>
+
+      </mat-form-field>
+
+      <!-- Time -->
+      <mat-form-field appearance="fill" class="w-full" *ngIf="!fromTimeSlot">
+        <mat-label>Appointment Time | وقت الموعد</mat-label>
+        <mat-hint *ngIf="!bookForm.value.lawyer">Please,Select a lawyer | الرجاءإختيار المحامي</mat-hint>
+        <mat-select formControlName="timeSlot">
+          <mat-option *ngFor="let ts of bookForm.value.lawyer.timeSlots" [value]="ts">
+            {{(ts.date|date) + ' - '+ (ts.startTime|date:'shortTime':'+3')}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('timeSlot').hasError('required')"> timeSlot is required |الوقت مطلوب</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>ِAppointment Description | تفاصيل الموعد</mat-label>
+        <textarea matInput type="text" formControlName="case_description"></textarea>
+        <mat-error *ngIf="bookForm.get('case_description').hasError('required')"> Description is required |وصف القضية
+          مطلوب </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Upload CPR | الهوية </mat-label>
+
+        <ngx-mat-file-input formControlName="CprUrl"
+          placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} " accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+        </ngx-mat-file-input>
+        <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+
+        <mat-icon matSuffix> </mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Upload Other document | رفع ملفات اخرى </mat-label>
+
+        <ngx-mat-file-input formControlName="OtherUrl"
+          placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} " accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+        </ngx-mat-file-input>
+        <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+
+        <mat-icon matSuffix> </mat-icon>
+      </mat-form-field>
+
+      <div class="mt-4">
+        <button
+          class="flex items-center w-full h-12 text-white rounded-md hover:text-secondary-default bg-primary-default hover:bg-primary-tint"
+          *ngIf="!isModal" (click)="bookAppointment()">
+          <div class="flex-1">Book Appointment</div>
+          <div class="mx-1 text-secondary-default">|</div>
+          <div class="flex-1">حجز الموعد</div>
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

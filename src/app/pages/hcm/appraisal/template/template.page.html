@@ -1,0 +1,479 @@
+<ng-container *ngIf="!isLoading">
+  <mat-drawer-container [dir]="lang.selectedLang == 'ar'?'rtl':'ltr'"
+    [hasBackdrop]="['sm','md','lg'].includes(app.screenSize)">
+
+    <mat-drawer class="relative w-2/3 border-0 md:w-1/2 xl:w-1/3" #drawer position="end"
+      [mode]="['sm','md','lg'].includes(app.screenSize)?'over':'side'" opened="false">
+      <vt-header class="border-is">
+        <div slot="start">
+          <div matRipple (click)="drawer.toggle()"
+            class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+            <ion-icon class="text-2xl" name="close-outline"></ion-icon>
+          </div>
+        </div>
+        <div slot="middle">{{'HCM.Appraisal.Details'|translate}}</div>
+        <div slot="end">
+
+        </div>
+      </vt-header>
+      <div class="flex flex-col flex-auto overflow-y-auto border-is">
+        <!-- ! Admin Tools -->
+        <div class="flex items-center justify-center w-full h-12 p-2 text-2xl border-b bg-step-50">
+          {{'Operations.Actions'|translate}}</div>
+        <div class="flex flex-col items-center justify-center w-full border-b">
+          <div class="flex flex-row items-center w-full py-1 justify-evenly">
+            <!-- <button mat-flat-button color="accent">Submit</button> -->
+            <button mat-flat-button color="accent"
+              (click)="updateAppraisal()">{{'Operations.Update'|translate}}</button>
+            <!-- <button mat-stroked-button color="warn"
+              *ngIf="appraisal.status =='CreationPhase'">{{'Operations.Submit'|translate}}</button> -->
+            <mat-slide-toggle color="primary" [(ngModel)]="isEditMode">
+              {{'Operations.EditMode'|translate}}
+            </mat-slide-toggle>
+          </div>
+        </div>
+        <!-- Approvals -->
+        <div class="flex items-center justify-center w-full h-12 p-2 text-2xl border-t border-b bg-step-50">
+          {{'HCM.Appraisal.Approval.Plural'|translate}}</div>
+        <!-- ! Approvals Data -->
+        <div class="flex flex-col w-full px-2 py-2 overflow-y-auto border-b" style="min-height: 384px;">
+          <!-- ! Approval Add -->
+          <div class="flex flex-col w-full pb-2 mb-3 border-b" *ngIf="isEditMode">
+            <div class="pb-1 mb-2 text-lg border-b">{{'HCM.Appraisal.Approval.Add'|translate}}</div>
+            <div class="flex flex-row">
+              <div (click)="selectApproval($event)" matTooltip="Select Employee"
+                class="flex items-center justify-center w-2/3 h-full text-xl border border-dashed cursor-pointer hover:bg-gray-100"
+                *ngIf="!newApproval.employee">
+                <ion-icon name="add-outline" title=""></ion-icon>
+                <div class="p-2">
+                  {{'Operations.SelectEmployee'|translate}}
+                </div>
+              </div>
+              <div class="w-2/3" *ngIf="newApproval.employee">
+                <div class="flex flex-col items-center justify-center w-full">
+                  <div class="flex items-center justify-center h-full p-1">
+                    <img class="object-cover w-16 h-16 rounded-full"
+                      [src]="app.getProfilePicURL(newApproval.employee.user?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'">
+                  </div>
+                  <div class="flex items-center justify-center w-full h-8 p-1 text-xl border-b">
+                    {{newApproval.employee.user?.first_name + ' ' +newApproval.employee.user?.last_name}}
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col items-center justify-center w-1/3">
+                <div class="flex-1 p-1 border-b">
+                  <mat-checkbox [(ngModel)]="newApproval.isMandatory">
+                    {{'HCM.Appraisal.Approval.Mandatory'|translate}}
+                  </mat-checkbox>
+                </div>
+                <div class="flex-1 p-1">
+                  <button mat-flat-button color="primary" class="justify-center text-center" (click)="addApproval()">
+                    {{'Operations.Add'|translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ! Approval List -->
+          <div class="flex flex-row h-16 mb-2 border rounded-md" *ngFor="let appr of appraisal_template.approvals">
+            <div class="flex items-center justify-center w-16 h-full p-1">
+              <img class="object-cover w-full h-full"
+                [src]="app.getProfilePicURL(appr.by?.user?.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'">
+            </div>
+            <div class="flex flex-col w-full h-full border-is">
+              <!-- ! By Name -->
+              <div class="flex items-center justify-center w-full h-8 p-1 text-xl border-b">
+                {{appr.by?.user?.first_name + ' ' +appr.by?.user?.last_name}}
+              </div>
+              <div class="flex flex-row items-center justify-between w-full h-8 px-2 text-sm">
+                <div class="flex items-center justify-center w-1/2 border-ie">
+                  <span class="w-4 h-4 bg-red-400 rounded-full mie-2" [class.bg-green-400]="appr.isApproved"></span>
+                  {{appr.isApproved? 'Approved':'Not Approved'}}
+                </div>
+                <div class="flex items-center justify-center w-1/2">
+                  <span class="w-4 h-4 bg-red-400 rounded-full mie-2" [class.bg-green-400]="appr.isMandatory"></span>
+                  {{appr.isMandatory? 'Mandatory':'Not Mandatory'}}
+                </div>
+                <!-- <div> - </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row items-center justify-center w-full text-2xl"
+            *ngIf="!appraisal_template.approvals || appraisal_template.approvals.length == 0">
+            {{"HCM.Appraisal.Approval.Empty"|translate}}
+          </div>
+        </div>
+      </div>
+
+    </mat-drawer>
+    <mat-drawer-content>
+      <!-- ! Header -->
+      <vt-header>
+        <div slot="start">
+          <div matRipple (click)="app.routerBack()"
+            class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-step-400">
+            <ion-icon class="text-2xl" name="close-outline"></ion-icon>
+          </div>
+        </div>
+        <div slot="middle"> {{'HCM.Appraisal.Details'|translate}}
+        </div>
+        <div slot="end">
+          <div matRipple (click)="drawer.toggle()"
+            class="flex flex-row items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:text-orange-500">
+            <ion-icon class="text-2xl" name="list-outline"></ion-icon>
+          </div>
+        </div>
+      </vt-header>
+      <div class="relative flex flex-col flex-auto w-full h-full pb-8 overflow-y-auto" cdkScrollable>
+        <!-- ! Appraisal Details -->
+        <div class="relative flex flex-col w-full ">
+          <!-- ! Appraisal Info -->
+          <div class="flex flex-col w-full lg:flex-row">
+            <div class="flex flex-col w-full lg:w-1/2">
+              <div class="flex flex-row items-center h-12">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'HCM.Appraisal.Type'|translate}}</div>
+                <div class="flex items-center flex-1 px-2">
+                  {{appraisal_template.title_ar + ' | '+ appraisal_template.title_en}}
+                </div>
+              </div>
+              <div class="flex flex-row items-center h-12">
+                <div class="flex items-center w-24 h-full p-2 border-ie bg-step-50 pis-2">
+                  {{'HCM.Appraisal.Type'|translate}}</div>
+                <div class="flex items-center flex-1 px-2">
+                  {{appraisal_template.type.title_ar + ' | '+ appraisal_template.type.title_en}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-center w-full h-12 text-3xl border-t border-b bg-step-50 item-center">
+            <div class="flex items-center justify-center">
+              {{'HCM.Appraisal.Section.Plural'|translate}}
+            </div>
+          </div>
+          <!-- ! Sections -->
+          <div class="flex w-full pt-4">
+            <mat-accordion class="w-full px-2" *ngIf="appraisal_template.sections?.length>0 || isEditMode"
+              [multi]="true" cdkDropList [cdkDropListData]="appraisal_template.sections" autoScrollStep="200"
+              (cdkDropListDropped)="dropSection($event)">
+              <mat-expansion-panel class="w-full" hideToggle [expanded]="section.expanded" cdkDrag
+                [cdkDragDisabled]="!isEditMode"
+                *ngFor="let section of appraisal_template.sections;trackBy:identify;let sectionIndex=index;">
+                <mat-expansion-panel-header>
+                  <div class="flex flex-row w-full border border-b bg-step-50"
+                    (keydown.Space)="$event.stopPropagation();" (click)="$event.stopPropagation();">
+                    <!-- start -->
+                    <div class="flex flex-row items-center justify-start h-full">
+                      <div *ngIf="isEditMode" class="flex items-center justify-center h-full px-2 cursor-move border-ie"
+                        cdkDragHandle>
+                        <ion-icon name="apps-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <!-- middle -->
+                    <div *ngIf="isEditMode" [class]="isEditMode?'cursor-default':'bg-step-50 text-2xl'"
+                      class="flex flex-col items-center justify-center flex-auto p-2 lg:flex-row">
+                      <mat-form-field class="w-full h-full min-w-0 px-1 lg:w-1/2">
+                        <mat-label>{{'HCM.Appraisal.Section.sectionTitle'|translate}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="section.title">
+                        <button *ngIf="section.title != ''" matSuffix mat-icon-button aria-label="Clear"
+                          (click)="section.title=''">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <mat-form-field class="w-full h-full min-w-0 px-1 lg:w-1/2">
+                        <mat-label>{{'HCM.Appraisal.Section.Type.fieldTitle'|translate}}</mat-label>
+                        <mat-select [(value)]="section.type">
+                          <mat-option value="OutOF5">{{'HCM.Appraisal.Section.Type.OutOF5'|translate}}</mat-option>
+                          <mat-option value="OutOF100">{{'HCM.Appraisal.Section.Type.OutOF100'|translate}}
+                          </mat-option>
+                          <mat-option value="PassFail">{{'HCM.Appraisal.Section.Type.PassFail'|translate}}
+                          </mat-option>
+                          <mat-option value="Objective">{{'HCM.Appraisal.Section.Type.Objective'|translate}}
+                          </mat-option>
+                          <mat-option value="Feedback">{{'HCM.Appraisal.Section.Type.Feedback'|translate}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <ng-container *ngIf="!isEditMode">
+                      <div (click)="section.expanded = !section.expanded"
+                        class="flex flex-row items-center justify-between flex-1 text-xl h-14">
+                        <div class="flex items-center justify-center w-8 h-full item-center border-ie">
+                          #{{sectionIndex}}
+                        </div>
+                        <div class="items-center justify-start flex-1 p-2">
+                          {{section.title}}
+                        </div>
+                        <!-- <div class="text-xl">-</div>
+                        <div class="items-center justify-end flex-1">
+                          {{('HCM.Appraisal.Section.Type.'+section.type)|translate}}
+                        </div> -->
+                      </div>
+                    </ng-container>
+                    <!-- End -->
+                    <div class="flex flex-col items-center justify-end flex-none h-full lg:flex-row">
+                      <ng-container *ngIf="isEditMode">
+                        <div (click)="addSection(sectionIndex)"
+                          class="flex items-center justify-center h-full px-2 cursor-pointer border-is hover:text-green-500">
+                          <ion-icon class="text-xl" name="add-outline"></ion-icon>
+                        </div>
+                        <div (click)="deleteSection(sectionIndex)"
+                          class="flex items-center justify-center h-full px-2 cursor-pointer border-is hover:text-red-500">
+                          <ion-icon class="text-xl" name="trash-outline"></ion-icon>
+                        </div>
+                      </ng-container>
+                      <div (click)="section.expanded = !section.expanded"
+                        class="flex items-center justify-center h-full px-2 cursor-pointer border-is hover:text-orange-500">
+                        <ion-icon *ngIf="!section.expanded" class="text-xl" name="chevron-down-outline"></ion-icon>
+                        <ion-icon *ngIf="section.expanded" class="text-xl" name="chevron-up-outline"></ion-icon>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel-header>
+                <div class="grid grid-cols-12 gap-1 mb-2 md:mis-8 " cdkDropList
+                  (cdkDropListDropped)="dropBlock($event)">
+                  <!-- ! Edit Section Description -->
+                  <div [class.bg-step-50]="!isEditMode" [class.px-2]="!isEditMode"
+                    class="flex flex-row items-center justify-start p-1 text-justify border border-t-0 col-span-full ">
+                    <ng-container *ngIf="isEditMode">
+                      <div class="flex items-center justify-center w-2/3 h-full p-2 border-ie">
+                        <mat-form-field class="w-full ">
+                          <mat-label>{{"HCM.Appraisal.Section.sectionDescription"|translate}}</mat-label>
+                          <input matInput type="text" [(ngModel)]="section.description">
+                          <button *ngIf="section.description != ''" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="section.description=''">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </mat-form-field>
+                      </div>
+                      <div class="flex flex-row justify-between w-1/3 h-full text-base md:text-xl">
+                        <div class="flex items-center justify-center flex-1 px-2 text-center border-ie">
+                          {{"HCM.Appraisal.Section.TotalWeightage"|translate}}</div>
+                        <div class="flex items-center justify-center w-1/5 md:w-2/5"
+                          [class]="section.total_weightage>100?'text-red-500  underline':''"
+                          [matTooltip]="section.total_weightage>100?'Weightage Cant be more than 100':null">
+                          {{section.total_weightage}}
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="!isEditMode">
+                      {{section.description}}
+                    </ng-container>
+                  </div>
+
+                  <!-- ! OutOF5 / OutOF100 -->
+                  <ng-container *ngIf="section.type == 'OutOF5' ||section.type == 'OutOF100'">
+                    <!-- ! Section Headers -->
+                    <div class="grid w-full grid-cols-12 border-b col-span-full bg-blue-50">
+                      <!-- ! Actions / Topic Description -->
+                      <div class="flex flex-row h-8 col-span-9 border-l border-ie md:col-span-10">
+                        <div *ngIf="isEditMode"
+                          class="flex flex-col items-center justify-center w-16 h-full px-2 border-ie">
+                          {{"Operations.Actions"|translate}}
+                        </div>
+                        <div class="flex flex-row items-center flex-1 px-2">
+                          {{"HCM.Appraisal.Section.Block.TopicDescription"|translate}}</div>
+                      </div>
+                      <!-- ! Rating/Weightage/Score titles-->
+                      <div class="flex items-center justify-center col-span-3 border-ie md:col-span-2">
+                        {{"HCM.Appraisal.Section.Weightage"|translate}}</div>
+                    </div>
+
+                    <!-- ! Section Blocks -->
+                    <div class="bg-white border text-step-800 col-span-full" cdkDrag [cdkDragDisabled]="!isEditMode"
+                      *ngFor="let block of section.blocks;trackBy:identify;let blockIndex=index;let last = last;let first = first;">
+                      <div class="grid w-full grid-cols-12 bg-background ">
+                        <div class="flex flex-row w-full col-span-9 border-ie md:col-span-10">
+                          <div *ngIf="isEditMode"
+                            class="flex flex-col items-center justify-center w-8 px-2 cursor-move border-ie"
+                            cdkDragHandle>
+                            <ion-icon name="apps-outline"></ion-icon>
+                          </div>
+                          <div *ngIf="isEditMode"
+                            class="flex flex-col items-center justify-center w-8 h-full border-ie">
+                            <div (click)="deleteBlock(sectionIndex,blockIndex)"
+                              class="flex items-center justify-center flex-1 w-full border-b cursor-pointer hover:text-red-500">
+                              <ion-icon class="text-xl" name="trash-outline"></ion-icon>
+                            </div>
+                            <div (click)="addBlock(sectionIndex,blockIndex)"
+                              class="flex items-center justify-center flex-1 w-full cursor-pointer hover:text-green-500">
+                              <ion-icon class="text-xl" name="add-outline"></ion-icon>
+                            </div>
+                          </div>
+                          <div *ngIf="!isEditMode" class="flex flex-col flex-1 px-2 ">
+                            <div class="w-full text-lg text-blue-400">{{block.title}}</div>
+                            <div>{{block.description}}</div>
+                          </div>
+                          <!-- ! Desc Edit Mode -->
+                          <div *ngIf="isEditMode" class="flex flex-col flex-1 p-2 ">
+                            <mat-form-field class="w-full mb-4 ">
+                              <mat-label>{{"HCM.Appraisal.Section.Block.Topic"|translate}}</mat-label>
+                              <input matInput type="text" [(ngModel)]="block.title">
+                              <button *ngIf="block.title != ''" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="block.title=''">
+                                <mat-icon>close</mat-icon>
+                              </button>
+                            </mat-form-field>
+                            <mat-form-field class="w-full ">
+                              <mat-label>{{"HCM.Appraisal.Section.Block.Description"|translate}}</mat-label>
+                              <textarea matInput type="text" [(ngModel)]="block.description"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="relative flex items-center justify-center col-span-3 px-2 md:col-span-2 ">
+                          <mat-form-field class="w-full">
+                            <input matInput type="number" [max]="100" [min]="0" [(ngModel)]="block.weightage">
+                            <button *ngIf="block.weightage != 0" matSuffix mat-icon-button aria-label="Clear"
+                              (click)="block.weightage=0">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div *cdkDragPlaceholder
+                        class="flex flex-col items-center justify-center h-8 bg-white border-2 border-dashed col-span-full">
+                      </div>
+                    </div>
+                  </ng-container>
+                  <!-- ! Objective -->
+
+                  <ng-container *ngIf="section.type == 'Objective'">
+                    <!-- ! Section Headers -->
+
+                    <!-- ! Section Blocks -->
+                    <div class="bg-white border border-b-0 gap-y-1 text-step-800 col-span-full" cdkDrag
+                      [cdkDragDisabled]="!isEditMode"
+                      *ngFor="let block of section.blocks;trackBy:identify;let blockIndex=index;let last = last;let first = first;">
+                      <div class="grid w-full grid-cols-12 bg-background ">
+
+                        <ng-container *ngIf="!isEditMode">
+                          <div class="flex flex-col items-center justify-center border-b col-span-full">
+                            <div
+                              class="flex flex-col items-center justify-center w-full h-12 p-1 text-xs border-b md:text-base bg-step-100">
+                              {{"HCM.Appraisal.Section.Block.Objective.Title"|translate}}
+                            </div>
+                            <div class="flex flex-col items-center justify-center flex-auto py-1 text-xl">
+                              {{block|scape:'title'}}
+                            </div>
+                          </div>
+                          <div class="flex flex-col items-center justify-center col-span-5 border-b border-ie">
+                            <div class="flex flex-col items-center justify-center w-full h-12 p-1 border-b bg-step-100">
+                              {{"HCM.Appraisal.Section.Block.Objective.Description"|translate}}
+                            </div>
+                            <div class="flex flex-col items-center justify-center flex-auto py-1">
+                              {{block|scape:'description'}}
+                            </div>
+                          </div>
+                          <div class="flex flex-col items-center justify-center col-span-3 border-b border-ie">
+                            <div class="flex flex-col items-center justify-center w-full h-12 p-1 border-b bg-step-100">
+                              {{"HCM.Appraisal.Section.Weightage"|translate}}
+                            </div>
+                            <div class="flex flex-col items-center justify-center flex-auto py-1">
+                              {{block|scape:'weightage'}}
+                            </div>
+                          </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="isEditMode">
+                          <div class="flex flex-col items-center justify-center border-b col-span-full">
+                            <div class="flex flex-row items-center justify-center w-full h-full border-b bg-step-100">
+                              <div class="flex flex-row h-full">
+                                <div class="flex flex-col items-center justify-center px-2 cursor-move border-ie"
+                                  cdkDragHandle>
+                                  <ion-icon name="apps-outline"></ion-icon>
+                                </div>
+                                <div (click)="deleteBlock(sectionIndex,blockIndex)"
+                                  class="flex items-center justify-center px-2 cursor-pointer border-ie hover:text-red-500">
+                                  <ion-icon class="text-xl" name="trash-outline"></ion-icon>
+                                </div>
+                                <div (click)="addBlock(sectionIndex,blockIndex)"
+                                  class="flex items-center justify-center px-2 cursor-pointer border-ie hover:text-green-500">
+                                  <ion-icon class="text-xl" name="add-outline"></ion-icon>
+                                </div>
+                              </div>
+                              <div class="flex-auto p-2">
+                                <mat-form-field class="w-full lg:w-1/2" *ngIf="isEditMode">
+                                  <mat-label>{{'HCM.Appraisal.Section.Block.Objective.Title'|translate}}</mat-label>
+                                  <input matInput type="text" [(ngModel)]="block.title">
+                                  <button *ngIf="block.title != ''" matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="block.title=''">
+                                    <mat-icon>close</mat-icon>
+                                  </button>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="flex flex-col items-center justify-center col-span-6 border-b border-ie">
+                            <div
+                              class="flex flex-col items-center justify-center w-full h-12 p-1 text-xs border-b md:text-base bg-step-100">
+                              {{"HCM.Appraisal.Section.Block.Objective.Description"|translate}}
+                            </div>
+                            <div class="flex flex-col items-center justify-center flex-auto w-full p-1">
+                              <mat-form-field class="w-full" style="min-height: 4rem;">
+                                <mat-label>{{"HCM.Appraisal.Section.Block.Objective.Description"|translate}}</mat-label>
+                                <textarea matInput type="text" class="text-xs md:text-base"
+                                  [(ngModel)]="block.description"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          <div class="flex flex-col items-center justify-center col-span-3 border-b border-ie">
+                            <div class="flex flex-col items-center justify-center w-full h-12 p-1 border-b bg-step-100">
+                              {{"HCM.Appraisal.Section.Weightage"|translate}}
+                            </div>
+                            <div class="flex flex-col items-center justify-center flex-auto w-full p-1 px-2">
+                              <mat-form-field class="w-full ">
+                                <mat-label>{{"HCM.Appraisal.Section.Weightage"|translate}}</mat-label>
+                                <input matInput type="number" [max]="100" [min]="0" min="0" max="100"
+                                  [(ngModel)]="block.weightage">
+                                <button *ngIf="block.weightage != 0" matSuffix mat-icon-button aria-label="Clear"
+                                  (click)="block.weightage=0">
+                                  <mat-icon>close</mat-icon>
+                                </button>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </ng-container>
+
+                      </div>
+                      <div *cdkDragPlaceholder
+                        class="flex flex-col items-center justify-center h-16 bg-white border-2 border-dashed col-span-full">
+                      </div>
+                    </div>
+                  </ng-container>
+
+
+                  <!-- ! Add New Block -->
+                  <div *ngIf="isEditMode" (click)="addBlock(sectionIndex,section?.blocks?.length)"
+                    class="flex items-center justify-center w-full h-8 p-1 mt-2 text-xl border border-dashed cursor-pointer col-span-full hover:text-green-400 hover:bg-step-50">
+                    <ion-icon class="text-xl" name="add-outline"></ion-icon>
+                    {{"HCM.Appraisal.Section.Block.Add" |translate}}
+                  </div>
+
+                </div>
+                <div *cdkDragPlaceholder
+                  class="flex flex-col items-center justify-center h-16 bg-white border-2 border-dashed col-span-full">
+                </div>
+              </mat-expansion-panel>
+              <!-- ! Add New Section -->
+              <div *ngIf="isEditMode" (click)="addSection(appraisal_template.sections.length)"
+                class="flex items-center justify-center w-full h-12 p-1 mt-2 text-xl border-2 border-dashed cursor-pointer hover:text-green-400 hover:bg-step-50">
+                <ion-icon class="text-xl" name="add-outline"></ion-icon> {{'HCM.Appraisal.Section.Add'|translate}}
+              </div>
+            </mat-accordion>
+            <div class="flex items-center justify-center w-full text-2xl"
+              *ngIf="appraisal_template.sections?.length==0 && !isEditMode">
+              {{"HCM.Appraisal.Section.Empty"|translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+</ng-container>
+<div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+  <mat-spinner class="mx-auto" diameter='24'></mat-spinner>
+</div>
+<!-- <div *ngIf="side" class="w-1/4"></div> -->

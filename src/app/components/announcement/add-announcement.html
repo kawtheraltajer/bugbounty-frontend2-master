@@ -1,0 +1,104 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{'Announcement.Add'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Announcement.Form.Title'|translate}} <span style="color: red;">*</span>
+                        </mat-label>
+                        <input matInput type="text" formControlName="title">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.title">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('title').hasError(validation.type) && (addForm.get('title').dirty || addForm.get('title').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Announcement.Form.Description'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="description">
+                    </mat-form-field>
+                </div>
+
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Announcement.Form.FromDate'|translate}} <span style="color: red;">*</span>
+                        </mat-label>
+                        <input matInput [(ngModel)]="fromDate" formControlName="fromDate" [matDatepicker]="FromPicker">
+                        <mat-datepicker-toggle matSuffix [for]="FromPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #FromPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.fromDate">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('fromDate').hasError(validation.type) && (addForm.get('fromDate').dirty || addForm.get('fromDate').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Announcement.Form.ToDate'|translate}} <span style="color: red;">*</span>
+                        </mat-label>
+                        <input matInput [min]="fromDate" formControlName="toDate" [matDatepicker]="ToPicker">
+                        <mat-datepicker-toggle matSuffix [for]="ToPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #ToPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.toDate">
+                        <div class="text-red-600 text-end"
+                            *ngIf="addForm.get('toDate').hasError(validation.type) && (addForm.get('toDate').dirty || addForm.get('toDate').touched)">
+                            {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+                <mat-form-field class="flex flex-row w-full">
+                    <ngx-mat-file-input formControlName="image"
+                        placeholder="{{'Announcement.Form.Image'|translate}} "
+                        accept=".jpg,.jpeg,.png">
+                    </ngx-mat-file-input>
+                    <mat-hint>.jpg,.jpeg,.png</mat-hint>
+                    <mat-icon matSuffix> </mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="flex flex-row w-full">
+                    <ngx-mat-file-input formControlName="document"
+                        placeholder="{{'Announcement.Form.Document'|translate}} "
+                        accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+                    </ngx-mat-file-input>
+                    <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+                    <mat-icon matSuffix> </mat-icon>
+                </mat-form-field>
+
+            </form>
+        </div>
+    </div>
+</ion-content>

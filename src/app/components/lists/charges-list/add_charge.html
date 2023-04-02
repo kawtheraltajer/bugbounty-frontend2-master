@@ -1,0 +1,164 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>               {{'Court.Charge.Add'|translate}} 
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+
+    
+        <div class="w-full">
+      
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>                  
+                            {{'Court.Charge.Form.reference_no'|translate}} 
+                        </mat-label>
+                        <input matInput type="text" formControlName="reference_no" placeholder="">
+                    </mat-form-field>
+                </div>
+             
+    
+                <mat-form-field *ngIf="!CaseID">
+                    <mat-label>   {{'Court.Session.Form.Case'|translate}}  </mat-label>
+                    <mat-select formControlName="caseId"  #caseID (selectionChange)="getcase($event)" >
+             
+                        <mat-option>
+                            <ngx-mat-select-search
+                             (keyup)="filterEmployeelist($event)"
+                             placeholderLabel="ابحث عن قضية  "
+                             [formControl]="CasesFilterCtrl"
+                             noEntriesFoundLabel="لا يوجد"
+                             >
+                            <mat-icon (click)="clearSelectionCases()" class="mx-auto" aria-label="clear"
+                            ngxMatSelectSearchClear>close</mat-icon>
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option [value]="null"> لا قضية
+                        </mat-option>
+
+                        <mat-option *ngFor="let case of filteredCases" [value]="case.id">
+
+                            {{case?.CaseNo}}{{"-"}}{{case.client?.full_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field  *ngIf="!recipient_name">
+                    <mat-label> {{'Finance.Invoice.list.Name'|translate}} <span style="color: red;">*</span> </mat-label>
+                    <input matInput formControlName="recipient_name"/>
+                  </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label> {{'Court.Charge.Form.Charge_name'|translate}} <span style="color: red;">*</span>
+                    </mat-label>
+                    <mat-select #type formControlName="ChargeTypeID" (selectionChange)="getChargeAmount()">
+                        <mat-option *ngFor="let type of ChargeTypes" [value]="type.id">
+                          {{ lang.selectedLang=='en'? type?.name_en:type?.name_ar| titlecase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+           
+         
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.ChargeTypes" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('ChargeTypes').hasError(validation.type) && (addForm.get('ChargeTypes').dirty || addForm.get('ChargeTypes').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+    
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'Court.Charge.Form.Amounts'|translate}} <span style="color: red;">*</span>
+                        </mat-label>
+                        <input matInput type="number" formControlName="Amounts" [value]="type.value.amount">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.Amounts" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('Amounts').hasError(validation.type) && (addForm.get('Amounts').dirty || addForm.get('Amounts').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <mat-form-field>
+                    <mat-label>    {{'Court.Charge.Form.Status.Status'|translate}}    </mat-label>
+                    <mat-select #Status  formControlName="status">
+            
+                        <mat-option  value="Pending">
+                            {{'Court.Charge.Form.Status.Pending'|translate}}
+                        </mat-option>
+                        <mat-option  value="Paid">
+                            {{'Court.Charge.Form.Status.Paid'|translate}}
+                        </mat-option>
+                
+                    </mat-select>
+                </mat-form-field>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.Status" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('status').hasError(validation.type) && (addForm.get('status').dirty || addForm.get('status').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+     
+          
+
+                <div class="flex flex-row w-full mt-2" *ngIf = "Status.value == 'Paid'">
+                    <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>  {{'Court.Charge.Form.date'|translate}} <span style="color: red;">*</span> </mat-label>
+                      <input matInput  formControlName="date" [matDatepicker]="picker" [min]="min_date" [max]="max_date" >
+                      <mat-datepicker-toggle matSuffix [for]="picker"   ></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.date" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('date').hasError(validation.type) && (addForm.get('date').dirty || addForm.get('date').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+       
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'Court.Charge.Form.Comments'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="Comments" placeholder="">
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.Comments" >
+                        <div class="text-red-600 text-end"   *ngIf="addForm.get('Comments').hasError(validation.type) && (addForm.get('Comments').dirty || addForm.get('Comments').touched)">
+                        {{ validation.message |translate }}
+                        </div>
+                    </ng-container>
+                </div>
+
+      
+
+      
+
+            </form>
+       
+       
+        </div>
+    </div>
+</ion-content>

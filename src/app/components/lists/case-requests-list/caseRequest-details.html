@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>                   {{'Court.Cases.Case-request.Update'|translate}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="addCaseRequest()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+
+    
+        <div class="w-full">
+      
+    
+                <form [formGroup]="addForm">
+                    <div class="flex">
+                      <mat-form-field   class="w-full" >
+                        <mat-label>               {{'Court.Cases.Case-request.Form.Request'|translate}} </mat-label>
+                          <mat-select   formControlName="RequestID">
+                            <mat-option  [value]="request.id" *ngFor="let request of (court.requests | async)">
+                              {{ lang.selectedLang=='en'? request.name_en:request.name_ar| titlecase}}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="flex flex-row w-full">
+                        <mat-form-field appearance="standard" class="w-full">
+                            <mat-label>    {{'Court.Charge.Form.Comments'|translate}}
+                            </mat-label>
+                            <input matInput type="text" formControlName="comments" placeholder="">
+                        </mat-form-field>
+                    </div>
+             
+                  </form>
+            
+
+       
+       
+        </div>
+    </div>
+</ion-content>

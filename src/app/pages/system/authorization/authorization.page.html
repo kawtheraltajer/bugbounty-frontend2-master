@@ -1,0 +1,28 @@
+<div class="relative flex flex-col">
+  <div class="relative border-b border-gray-300">
+    <ion-segment scrollable #segment (ionChange)="segmentChanged($event)" [value]="selectedSegment" class="pb-0">
+      <ion-segment-button  value="users" id="segment-users" *ngIf="('User:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Users.Plural'|translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button  value="permissions" id="segment-permissions" *ngIf="('Permission:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Permissions.Plural'|translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button  value="roles" id="segment-roles" *ngIf="('Role:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Roles.Plural'|translate}}</ion-label>
+      </ion-segment-button>
+     <!-- *ngIf="'Group:MANAGE'|permission"-->
+      <ion-segment-button  value="groups" id="segment-groups" *ngIf="('Group:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE,AdminSupportAccess:MANAGE,SLawyerAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Groups.Plural'|translate}}</ion-label>
+      </ion-segment-button>
+     <!-- <ion-segment-button value="simulator" id="segment-simulator">
+        <ion-label>{{'System.Simulator'|translate}}</ion-label>
+      </ion-segment-button>-->
+      <ion-segment-button value="link" id="segment-link" *ngIf="('Permission:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Link'|translate}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+<div class="relative w-full h-full">
+  <ion-router-outlet></ion-router-outlet>
+</div>

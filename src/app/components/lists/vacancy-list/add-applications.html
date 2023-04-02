@@ -1,0 +1,153 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>          {{'Vacancy.Application.Add'|translate}}  </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">    
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'Vacancy.Form.applicant_first_name'|translate}}(*)  </mat-label>
+                        <input matInput type="text" formControlName="applicant_first_name" > 
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.applicant_first_name" >
+                      <div class="text-red-600 text-end"   *ngIf="addForm.get('applicant_first_name').hasError(validation.type) && (addForm.get('applicant_first_name').dirty || addForm.get('applicant_first_name').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>    {{'Vacancy.Form.applicant_last_name'|translate}}(*)   </mat-label>
+                        <input matInput type="text" formControlName="applicant_last_name"  >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.applicant_last_name">
+                      <div class="text-red-600  text-end" *ngIf="addForm.get('applicant_last_name').hasError(validation.type) && (addForm.get('applicant_last_name').dirty || addForm.get('applicant_last_name').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Vacancy.Form.applicant_email'|translate}} (*) </mat-label>
+                        <input matInput type="email" formControlName="applicant_email"  >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.applicant_email">
+                      <div class="text-red-600  text-end" *ngIf="addForm.get('applicant_email').hasError(validation.type) && (addForm.get('applicant_email').dirty || addForm.get('applicant_email').touched)">
+                        {{ validation.message  |translate}}
+                      </div>
+                    </ng-container>
+                  </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Vacancy.Form.applicant_phone'|translate}} (*)  </mat-label>
+                        <input matInput type="text" formControlName="applicant_phone"  >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.applicant_phone">
+                      <div class="text-red-600  text-end " *ngIf="addForm.get('applicant_phone').hasError(validation.type) && (addForm.get('applicant_phone').dirty || addForm.get('applicant_phone').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+        
+        
+       
+        
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label> {{'Vacancy.Form.Highest_qualification'|translate}} (*)  </mat-label>
+                    <mat-select formControlName="highest_qualification">
+                        <mat-option value="HighSchoolDiploma">  {{("Vacancy.Application.qualification.HighSchoolDiploma")|translate}}  </mat-option>
+                        <mat-option value="BachelorsDegree"> {{("Vacancy.Application.qualification.BachelorsDegree")|translate}}</mat-option>
+                        <mat-option value="PHD"> {{("Vacancy.Application.qualification.PHD")|translate}}</mat-option>
+                        <mat-option value="Other"> {{("Vacancy.Application.qualification.Other")|translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.highest_qualification">
+                      <div class="text-red-600  text-end " *ngIf="addForm.get('highest_qualification').hasError(validation.type) && (addForm.get('highest_qualification').dirty || addForm.get('highest_qualification').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+        
+                  <div class="flex flex-row w-full">
+                    <span style="font-size: 14px;;font-family: bold;">{{'Vacancy.Form.is_currently_Employed'|translate}} :
+                        <mat-slide-toggle [(ngModel)]="isCurrentlyEmployed" 
+                            matTooltip="isCurrentlyEmployed" formControlName="isCurrentlyEmployed">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+                <div class="flex flex-row w-full"   *ngIf="isCurrentlyEmployed">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Vacancy.Form.Recent_job_role'|translate}}
+
+                            
+                        </mat-label>
+                        <input matInput formControlName="recent_job_role"   >
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Vacancy.Form.applicant_summry'|translate}}
+                   
+                        </mat-label>
+                        <input matInput formControlName="applicant_summry"  >
+                    </mat-form-field>
+                </div>
+
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  {{'Vacancy.Form.Comments'|translate}}
+
+                            
+                        </mat-label>
+                        <input matInput formControlName="comments"  >
+                    </mat-form-field>
+                </div>
+                
+                <mat-form-field>
+                    <ngx-mat-file-input formControlName="documentURL" placeholder="{{'Vacancy.Form.Upload_your_document'|translate}} (*)"
+
+                        accept=".doc,.docx,.pdf">
+                      </ngx-mat-file-input>
+                        <mat-hint >.doc,.docx,.pdf</mat-hint>
+
+                    <mat-icon matSuffix>  </mat-icon>
+                </mat-form-field>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.documentURL">
+                    <div class="text-red-600  text-end " *ngIf="addForm.get('documentURL').hasError(validation.type) && (addForm.get('documentURL').dirty || addForm.get('documentURL').touched)">
+                      {{ validation.message |translate }}
+                    </div>
+                  </ng-container>
+                </div>
+      
+               
+            </form>
+        </div>
+    </div>
+</ion-content>

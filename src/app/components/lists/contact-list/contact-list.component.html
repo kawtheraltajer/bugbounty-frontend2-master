@@ -1,0 +1,46 @@
+<div class="flex flex-col w-full h-full bg-background text-step-600">
+
+  <div style="display: -webkit-box;display: -webkit-inline-box;">
+    <div class="relative flex flex-row  items-end justify-end w-full p-2 border-b border-step-100 bg-background">
+ 
+
+
+ 
+    </div>
+  </div>
+  <div class="w-full p-2 overflow-y-auto">
+    <div class="w-full">
+
+        <form class="flex flex-col w-full px-4" [formGroup]="contactForm">
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>   Phone  </mat-label>
+                    <input matInput type="text" formControlName="phone" placeholder="phone ..">
+                </mat-form-field>
+            </div>
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>   Email </mat-label>
+                    <input matInput type="text" formControlName="email" placeholder="email..">
+                </mat-form-field>
+            </div>
+            <div class="flex flex-row w-full">
+                <mat-form-field appearance="standard" class="w-full">
+                    <mat-label>  Mobile </mat-label>
+                    <input matInput type="text" formControlName="mobile" placeholder="mobile..">
+                </mat-form-field>
+            </div>
+  
+        </form>
+
+   
+        <div
+        class="relative flex  flex-12 items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer  bg-toolbar-background hover:bg-step-50 "
+        (click)="update()">
+        <ion-icon name="update"></ion-icon>
+        Update Contact
+
+      </div>
+    </div>
+</div>
+  </div>

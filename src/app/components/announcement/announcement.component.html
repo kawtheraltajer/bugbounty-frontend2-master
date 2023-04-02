@@ -1,0 +1,23 @@
+<div class="relative w-full h-full cursor-pointer" (click)="goToAnnouncement()" *ngIf="currentAnnouncement">
+  <ion-card>
+    <ion-card-content class="absolute z-50 h-full" [ngStyle]="{'background-image': imgURL ? 'linear-gradient(to left, rgba(0,0,0, 0.5), rgba(0,0,0, 0), rgba(0,0,0, 0) 90%)' : 'linear-gradient(to left, rgba(0,0,0, 0.5), rgba(0,0,0, 0.5), rgba(0,0,0, 0.5) 90%)' }"
+    style="width: 100%; text-align: right; right: 0%;">
+      <div class="w-1/2 h-full overflow-hidden float-right">
+        <ion-card-title class="p-1 text-white">{{title}}</ion-card-title>
+        <div class="p-0.5 text-gray-200" *ngIf="description">{{description}}</div>
+        <ion-card-subtitle class="p-0.5" *ngIf="docURL">
+            <span class="cursor-pointer z-50" style="color: #c1d8ff" (click)="download($event, docURL)">
+                <ion-icon name="download"></ion-icon><a>{{'Announcement.Download'|translate}}</a>
+            </span>
+        </ion-card-subtitle>
+      </div>
+    </ion-card-content>
+
+    <div class="relative w-full h-28">
+        <ion-img [src]="imgURL" #img *ngIf="imgURL"
+            class="object-cover overflow-hidden w-full h-28">
+        </ion-img>
+    </div>   
+  </ion-card>
+</div>
+

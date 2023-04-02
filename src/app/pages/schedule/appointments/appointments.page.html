@@ -1,0 +1,235 @@
+<div class="flex flex-col w-full h-full px-2 py-1 overflow-auto lg:px-4 lg:py-2">
+  <div *ngIf="lang.selectedLanguage|async as lng"
+    class="sticky top-0 z-50 flex items-center justify-between px-1 py-1 border rounded-t-lg bg-backeground lg:px-4 lg:py-2"
+    style="height: 7%;min-height: 50px;">
+
+    <div>
+      <span *ngIf="view=='day'" class="font-mono text-lg text-gray-800">{{viewLuxon.setLocale(lng).day}}</span>
+      <span class="text-lg text-gray-800 mis-1">{{viewLuxon.setLocale(lng).monthLong}}</span>
+      <span class="text-lg font-normal text-gray-600 mis-1">{{viewLuxon.setLocale(lng).year}}</span>
+      <span *ngIf="view=='day'" class="font-mono text-lg text-gray-800">{{viewLuxon.setLocale(lng).weekdayLong}}</span>
+    </div>
+
+    <div class="relative flex items-center ">
+      <!-- ! View Menepulation -->
+      <div class="flex items-center border rounded-lg cursor-pointer mie-1 lg:mx-2 hover:text-yellow-400"
+        [matMenuTriggerFor]="menu">
+        <ion-icon class="inline-flex w-6 h-6 p-1 leading-none text-gray-500" name="calendar-outline"></ion-icon>
+        <div class="inline-flex h-6 border-ie"></div>
+        <!-- <span class="mx-2">{{'Date.Month.Title'|translate}}</span> -->
+        <span class="mx-2">
+          {{view == 'month'?('Date.Month.Title'|translate):('Date.Day.Title'|translate)}}
+        </span>
+        <mat-menu #menu="matMenu" class="flex flex-col bg-gray-100">
+          <button mat-menu-item mat-ripple type="button"
+            class="inline-flex items-center p-1 leading-none transition duration-100 ease-in-out cursor-pointer hover:bg-gray-200"
+            (click)="changeView('month');">
+            <span class="mx-2">{{'Date.Month.Title'|translate}}</span>
+          </button>
+          <!-- <button mat-menu-item mat-ripple type="button"
+            class="inline-flex items-center p-1 leading-none transition duration-100 ease-in-out cursor-pointer hover:bg-gray-200"
+            (click)="changeView('week');">
+            <span class="mx-2">{{'Date.Week.Title'|translate}}</span>
+          </button> -->
+          <button mat-menu-item mat-ripple type="button"
+            class="inline-flex items-center p-1 leading-none transition duration-100 ease-in-out cursor-pointer hover:bg-gray-200"
+            (click)="changeView('day');">
+            <span class="mx-2">{{'Date.Day.Title'|translate}}</span>
+          </button>
+        </mat-menu>
+      </div>
+      <!-- ! Date Menepulation -->
+      <div class="flex flex-row items-center border rounded-lg mie-1 lg:mx-2">
+        <button mat-ripple type="button" [matTooltip]="'Operations.Previous'|translate"
+          class="flex items-center leading-none transition duration-100 ease-in-out rounded-lg cursor-pointe"
+          (click)="changeDate('previous')">
+          <ion-icon *ngIf="lang.selectedLang=='en'" class="w-6 h-6 p-1 text-gray-500 fill-current hover:text-yellow-400"
+            name="chevron-back-outline">
+          </ion-icon>
+          <ion-icon *ngIf="lang.selectedLang=='ar'" class="w-6 h-6 p-1 text-gray-500 fill-current hover:text-yellow-400"
+            name="chevron-back-outline">
+          </ion-icon>
+        </button>
+        <div class="flex h-6 border-ie"></div>
+        <button mat-ripple type="button" [matTooltip]="'Operations.Current'|translate"
+          class="flex items-center p-1 leading-none transition duration-100 ease-in-out rounded-lg cursor-pointe"
+          (click)="changeDate('current')">
+          <ion-icon class="flex w-6 h-6 leading-none text-gray-500 fill-current hover:text-yellow-400"
+            name="calendar-clear-outline"></ion-icon>
+        </button>
+        <div class="flex h-6 border-ie"></div>
+        <button mat-ripple type="button" [matTooltip]="'Operations.Next'|translate"
+          class="flex items-center leading-none transition duration-100 ease-in-out rounded-lg cursor-pointe"
+          (click)="changeDate('next')">
+          <ion-icon *ngIf="lang.selectedLang=='ar'" class="w-6 h-6 p-1 text-gray-500 fill-current hover:text-yellow-400"
+            name="chevron-forward-outline">
+          </ion-icon>
+          <ion-icon *ngIf="lang.selectedLang=='en'" class="w-6 h-6 p-1 text-gray-500 fill-current hover:text-yellow-400"
+            name="chevron-forward-outline">
+          </ion-icon>
+        </button>
+      </div>
+      <!-- ! Settings -->
+      <div *ngIf="'TimeSlot:MANAGE'|permission"
+        class="flex items-center border rounded-lg cursor-pointer mie-1 lg:mx-2 "
+        (click)="sideContent='settings';drawer.toggle();">
+        <ion-icon name="construct-outline" class="w-6 h-6 p-1 text-gray-500 fill-current hover:text-yellow-400"
+          [matTooltip]="'Operations.Settings'|translate">
+        </ion-icon>
+      </div>
+      <!-- ! Help -->
+      <div class="flex items-center border rounded-lg mie-1 lg:mx-2" (click)="sideContent='help';drawer.toggle();">
+        <ion-icon name="help-circle-outline"
+          class="w-6 h-6 p-1 text-gray-500 cursor-pointer fill-current hover:text-yellow-400"
+          [matTooltip]="'Operations.Help'|translate">
+        </ion-icon>
+      </div>
+    </div>
+  </div>
+  <mat-drawer-container class="relative w-full h-full overflow-auto font-sans rounded-b"
+    [hasBackdrop]="sideHasBackdrop">
+    <mat-drawer class="w-2/3 lg:w-1/3" #drawer [position]="'end'" [mode]="sideMode">
+
+      <div class="relative flex flex-col w-full h-full overflow-auto border-b border-ie rounded-be">
+        <div class="sticky top-0 flex items-center justify-between w-full h-12 px-2 border-b shadow-md">
+          <p (click)="drawer.toggle()" class="flex items-center justify-center cursor-pointer">
+            <ion-icon class="w-6 h-6 hover:text-yellow-400" name="close-outline"></ion-icon>
+          </p>
+          <div class="flex items-center justify-center w-full text-2xl" *ngIf="sideContent=='help'">Help</div>
+          <div class="flex flex-row items-center justify-between" *ngIf="sideContent=='settings'">
+            <div class="text-white mie-2">
+              <button mat-flat-button color="warn"
+                (click)="settings('reset');drawer.toggle();">{{"Operations.Reset"|translate}}</button>
+            </div>
+            <div class="text-white mie-2">
+              <button mat-flat-button color="primary"
+                (click)="settings('apply');drawer.toggle();">{{"Operations.Apply"|translate}}</button>
+            </div>
+          </div>
+        </div>
+
+        <div [class.hidden]="sideContent != 'settings'" class="flex flex-col w-full h-full p-2 overflow-auto">
+          <ion-item *ngFor="let emp of employees;let empIndex = index;" lines="none"
+            class="flex flex-row items-center w-full border border-b cursor-pointer">
+            <ion-checkbox slot="start" [(ngModel)]="emp.selected"></ion-checkbox>
+            <ion-label>
+              {{ emp.user.first_name+' '+emp.user.last_name |titlecase}} - {{emp.user.email}}
+            </ion-label>
+            <ion-avatar slot="end">
+              <ion-img [src]="user.getProfilePicURL(emp.user.pictureURL)" #img
+                (ionError)="img.src = 'assets/fillers/profile-temp.png'" class="w-full h-full ">
+              </ion-img>
+            </ion-avatar>
+          </ion-item>
+        </div>
+
+        <div class="flex flex-col flex-auto overflow-auto" *ngIf="sideContent == 'help'">
+          <div class="flex justify-center w-full text-xl item-center">Month View</div>
+          <div class="flex flex-row items-center justify-between w-full px-2 border-b item-center">
+            <div>Statuses</div>
+            <div class="flex flex-row justify-between w-2/3 p-2">
+              <div class="flex flex-row items-center">
+                <span class="w-4 h-4 bg-blue-400"></span>
+                <div class="mx-0.5 px-0.5">Available</div>
+              </div>
+              <div class="flex flex-row items-center">
+                <span class="w-4 h-4 bg-orange-500"></span>
+                <div class="mx-0.5 px-0.5">Pending</div>
+              </div>
+              <div class="flex flex-row items-center">
+                <span class="w-4 h-4 bg-green-400"></span>
+                <div class="mx-0.5 px-0.5">Approved</div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-center w-full mb-1 text-xl item-center">Day View</div>
+          <div class="flex flex-col items-center w-full gap-1 py-2">
+            <!-- EmptySlot -->
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex items-center justify-center">Empty Slot</div>
+              <div class="border"
+                style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20"></div>
+            </div>
+            <!-- AddSlot -->
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex items-center justify-center">Add Time Slot</div>
+              <div class="flex items-center justify-center border"
+                style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20">
+                <ion-icon name="add-outline"></ion-icon>
+              </div>
+            </div>
+            <!-- Slot Status -->
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex items-center justify-center">Available Time Slot</div>
+              <div class="flex items-center justify-center border"
+                style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20">
+                <div class="w-full h-full border-l-4 border-blue-500"></div>
+              </div>
+            </div>
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex items-center justify-center">Booked Time Slot</div>
+              <div class="flex items-center justify-center border"
+                style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20">
+                <div class="w-full h-full border-l-4 border-orange-500"></div>
+              </div>
+            </div>
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex items-center justify-center">Approved Time Slot</div>
+              <div class="flex items-center justify-center border"
+                style="width: 160px; min-width: 160px;max-width: 160px;height: 60px;min-height: 60px;z-index:20">
+                <div class="w-full h-full border-l-4 border-green-500"></div>
+              </div>
+            </div>
+
+            <!-- Slot Data-->
+            <div class="flex flex-row justify-between w-full px-2 hover:bg-step-50">
+              <div class="flex flex-col items-center justify-center">
+                <div>
+                  Time Slot Information
+                </div>
+                <div class="pis-2">
+                  <div>1 - client name</div>
+                  <div>2 - client phone</div>
+                  <div>3 - Appointment Type</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-center border"
+                style="width: 160px; min-width: 160px;max-width: 165px;height: 65px;min-height: 60px;z-index:20">
+                <div class="flex flex-row w-full h-full border-l-4 bg-backeground">
+                  <div class="flex flex-col w-5/6 border-dashed border-ie">
+                    <div
+                      class="flex flex-row items-center justify-center flex-1 px-2 text-center border-b border-dashed">
+                      1
+                    </div>
+                    <div class="flex flex-row items-center justify-center flex-1 w-full px-2 border-b border-dashed">
+                      2
+                    </div>
+                    <div class="flex flex-row items-center justify-center flex-1 w-full px-2 ">
+                      3
+                    </div>
+                  </div>
+                  <div class="flex flex-row items-center justify-center w-1/6 px-1 border-dashed hover:bg-gray-200">
+                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="z-40 overflow-auto border border-t-0 rounded-b-lg" style="height: 100%;">
+        <ng-container [ngSwitch]="view" *ngIf="!isLoading">
+          <month-view-scheduler class="w-full h-full " *ngSwitchCase="'month'" [viewEmployees]="viewEmployees"
+            [date]="viewDate">
+          </month-view-scheduler>
+          <day-view-scheduler class="w-full h-full " *ngSwitchCase="'day'" (dataChanged)="changesHappend()"
+            [date]="viewDate" [employees]="viewEmployees" [slots]="appointmentService.timeSlots|async">
+          </day-view-scheduler>
+        </ng-container>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

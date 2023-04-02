@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'Finance.Expense.Details'|translate}}</ion-title>
+<!--
+    <ion-buttons slot="end">
+      <button mat-icon-button (click)="update()">
+        <mat-icon class="mx-auto" aria-label="Edit">edit</mat-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="(lang.direction|async) as dir">
+  <ng-container *ngIf="!isLoading">
+    <div class="w-full p-5">
+      <div class="border-4 m-3">
+        <div class="w-full p-5">
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Expense.list.expense_no'|translate}}
+            </span>
+            <span style="font-size: 14px"> {{Expense?.expense_no}} </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Expense.list.expense_date'|translate}}
+            </span>
+            <span style="font-size: 14px">
+              {{Expense?.expense_date|date:"dd-MM-yyyy hh:mm a"}}
+            </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Expense.list.payment_method'|translate}}
+            </span>
+            <span style="font-size: 14px" class="p-1">
+              {{("Finance.Expense.Payment_method."+Expense?.payment_method)|translate}}
+            </span>
+          </div>
+          <div class="flex flex-row">
+            <span style="font-size: 14px; font-weight: bold" class="p-1">
+              {{'Finance.Expense.list.expense_status'|translate}}
+
+            </span>
+     
+            <span style="font-size: 14px" class="p-1">
+              {{("Finance.Expense.Status."+Expense?.expense_status)|translate}}
+            </span>
+          </div>
+
+          <div class="flex flex-row" *ngIf="Expense?.Last_updated_User">
+            {{'Operations.LastUpdated'|translate}}: {{Expense?.Last_updated_User}} {{Expense?.Last_updated| date:'dd/MM/yyyy
+            hh:mm a'}}
+          </div>
+        </div>
+        <div class="flex flex-row mt-3">
+          <table class="w-full overflow-y-auto bg-background border-2">
+            <thead>
+              <tr>
+                <td class="border-2 p-1 text-center">{{'Finance.Expense.list.Item'|translate}}
+                </td>
+                <td class="border-2 p-1 text-center">{{'Finance.Expense.list.gross_amount'|translate}}</td>
+                <td class="border-2 p-1 text-center"> {{'Finance.Expense.list.tax_amount'|translate}}</td>
+                <td class="border-2 p-1 text-center"> {{'Finance.Expense.list.net_amount'|translate}} </td>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="ExpenseDetail">
+                <tr *ngFor="let item of ExpenseDetail">
+                  <td class="border-2 p-1 text-center">{{item.item.name}}</td>
+                  <td class="border-2 p-1 text-center">{{item.gross_amount}}</td>
+                  <td class="border-2 p-1 text-center">{{item.tax_amount}}</td>
+                  <td class="border-2 p-1 text-center">{{item.net_amount}}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="border-2 p-1 text-right">{{'Finance.Expense.list.gross_amount'|translate}}</td>
+                <td class="border-2 p-1 text-right">{{Expense?.gross_amount}}</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="border-2 p-1 text-right">{{'Finance.Expense.list.tax_amount'|translate}} </td>
+                <td class="border-2 p-1 text-right">{{Expense?.tax_amount}}</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="border-2 p-1 text-right"> {{'Finance.Expense.list.net_amount'|translate}} </td>
+                <td class="border-2 p-1 text-right">{{Expense?.net_amount}}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+  
+    </div>
+  </ng-container>
+</ion-content>

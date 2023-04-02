@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{'System.Title'|translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="relative flex flex-col">
+  <div class="relative border-b border-gray-300">
+    <ion-segment scrollable #segment (ionChange)="segmentChanged($event)" [value]="selectedSegment" class="pb-0">
+      <ion-segment-button value="authorization" id="segment-authorization" routerLink="/system/authorization">
+        <ion-label>{{'System.Authorization.Plural'|translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="logs" id="segment-logs" routerLink="/system/logs" *ngIf="('Log:READ:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+        <ion-label>{{'System.Logs.Title'|translate}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+
+<div class="relative w-full h-full">
+  <ion-router-outlet #routerOutlet></ion-router-outlet>
+</div>

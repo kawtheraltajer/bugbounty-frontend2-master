@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title> {{'Employee_managment.Employee-talents.Experiences.Update'|translate}} </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+            <ion-button color="warn" (click)="Delete()" *ngIf="('Employee:MANAGE,SuperAdminAccess:MANAGE,AdminAccess:MANAGE'|permission)">
+                <mat-icon class="mx-auto" color="warn" aria-label="Delete">delete</mat-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+
+            <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+                <!-- company -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-talents.Experiences.List.company'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="company">
+                    </mat-form-field>
+                </div>
+
+
+
+
+                <!--position-->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-talents.Experiences.List.position'|translate}}
+                        </mat-label>
+                        <input matInput type="text" formControlName="position">
+                    </mat-form-field>
+                </div>
+                <!-- address -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-talents.Experiences.List.address'|translate}}
+
+
+                        </mat-label>
+                        <input matInput formControlName="address">
+                    </mat-form-field>
+                </div>
+                <!-- duration -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Employee_managment.Employee-talents.Experiences.List.duration'|translate}}
+                        </mat-label>
+                        <input matInput formControlName="duration">
+                    </mat-form-field>
+                </div>
+                <!--<mat-form-field>
+                    <ngx-mat-file-input formControlName="documentURL" placeholder="{{'Employee_managment.Employee-talents.Certificates.List.documentURL'|translate}} "
+  
+                        accept=".doc,.docx,.pdf">
+                      </ngx-mat-file-input>
+                        <mat-hint >.doc,.docx,.pdf</mat-hint>
+  
+                    <mat-icon matSuffix>  </mat-icon>
+                </mat-form-field>-->
+        
+
+            </form>
+        </div>
+    </div>
+</ion-content>

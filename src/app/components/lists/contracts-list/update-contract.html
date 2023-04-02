@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>   Update Contract   </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="update()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+         
+            <form class="flex flex-col w-full px-4" [formGroup]="updateForm">
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   Title arabic </mat-label>
+                        <input matInput type="text" formControlName="title_ar" placeholder="....العنوان ">
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   Title English </mat-label>
+                        <input matInput type="text" formControlName="title_en" placeholder="title is ..">
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>   basic_salary  </mat-label>
+                        <input matInput type="number" formControlName="basic_salary" placeholder="basic salary..">
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>  salary  </mat-label>
+                        <input matInput type="number" formControlName="salary" placeholder="salary..">
+                    </mat-form-field>
+                </div>
+           
+
+                <mat-form-field appearance="standard" class="w-full">
+               
+                    <mat-label>jobType</mat-label>
+                    <mat-select formControlName="jobType">
+                        <mat-option value="FullTime">Full Time</mat-option>
+                        <mat-option value="PartTime">Part Time</mat-option>
+                        <mat-option value="Intern">Intern</mat-option>
+
+                  
+                  
+                    </mat-select>
+                  </mat-form-field>
+           
+          
+                
+                <mat-form-field appearance="standard" class="w-full">
+               
+        
+                    <mat-label>Payroll Group</mat-label>
+                    <mat-select formControlName="payroll_group">
+                        <mat-option value="Yearly">Yearly</mat-option>
+                        <mat-option value="Monthly">Monthly</mat-option>
+                        <mat-option value="Quarterly">Quarterly</mat-option>
+                        <mat-option value="Daily">Daily</mat-option>
+
+
+                  
+                  
+                    </mat-select>
+                  </mat-form-field>
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>   startDate </mat-label>
+                      <input matInput  formControlName="startDate" [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>  endDate </mat-label>
+                      <input matInput  formControlName="endDate" [matDatepicker]="picker2">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="flex flex-row w-full">
+                    <span style="font-size: 14px;;font-family: bold;">Currant:
+                        <mat-slide-toggle [(ngModel)]="contract.isCurrent" 
+                            matTooltip="isCurrent" formControlName="isCurrent">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>

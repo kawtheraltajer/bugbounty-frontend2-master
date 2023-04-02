@@ -1,0 +1,168 @@
+<ion-header>
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'Schedule.TimeSlot.Title'|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" [matTooltip]="'Menu'">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content scrollBar *ngIf="timeSlot">
+  <div class="flex flex-col w-full">
+    <!-- ! TimeSlot -->
+    <div class="flex flex-row w-full mt-4 border-t">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.Date'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{timeSlot.date|date}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Form.Status'|translate}}
+        </div>
+        <div class="flex flex-row items-center justify-center flex-1 p-1">
+          <div class="flex items-center">
+            {{(timeSlot.isBooked?(timeSlot.isApproved?'Schedule.Status.Approved':'Schedule.Status.Pending'):'Schedule.Status.Available')|translate}}
+          </div>
+          <div
+            [class]="!timeSlot.isBooked?'bg-blue-300 hover:bg-blue-500':(timeSlot.isApproved?'bg-green-300 hover:bg-green-500':'bg-orange-300 hover:bg-orange-500')"
+            class="flex items-center w-4 h-4 mx-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.Employee'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{(timeSlot.employee.user.first_name | titlecase )+ ' ' + (timeSlot.employee.user.last_name | titlecase)}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.EmployeeEmail'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{timeSlot.employee.user.email}}
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row w-full">
+      <div class="flex flex-col w-1/2 border-b border-ie">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.StartTime'|translate}}
+        </div>
+        <div class="flex-1 p-1 text-center ">
+          {{timeSlot.startTime|date:'shortTime':'+3'}}
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 text-center border-b">
+        <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+          {{'Schedule.TimeSlot.Fields.EndTime'|translate}}
+        </div>
+        <div class="flex-1 p-1">
+          {{timeSlot.endTime|date:'shortTime':'+3'}}
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="timeSlot.appointment">
+      <!-- ! Name / CPR-CR -->
+      <div class="flex flex-row w-full">
+        <div class="flex flex-col w-1/2 border-b border-ie">
+          <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+            {{(timeSlot.appointment.client_type=='Company'?'Form.CompanyName':'Form.ClientName')|translate}}
+          </div>
+          <div class="flex-1 p-1 text-center">
+            {{timeSlot.appointment.client_name}}
+          </div>
+        </div>
+        <div class="flex flex-col w-1/2 text-center border-b">
+          <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+            {{(timeSlot.appointment.client_type=='Company'?'Form.CR':'Form.CPR')|translate}}
+          </div>
+          <div class="flex-1 p-1">
+            {{timeSlot.appointment.client_cpr}}
+          </div>
+        </div>
+
+      </div>
+      <!-- ! Phone / Email -->
+      <div class="flex flex-row w-full">
+        <div class="flex flex-col w-1/2 border-b border-ie">
+          <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+            {{'Form.Phone'|translate}}
+          </div>
+          <div class="flex-1 p-1 text-center " dir="ltr">
+            +{{timeSlot.appointment.client_phone}}
+          </div>
+        </div>
+        <div class="flex flex-col w-1/2 text-center border-b">
+          <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+            {{'Form.Email'|translate}}
+          </div>
+          <div class="flex-1 p-1">
+            {{timeSlot.appointment.client_email}}
+          </div>
+        </div>
+
+      </div>
+      <!-- ! Types  -->
+      <div class="flex flex-row w-full">
+        <div class="flex flex-col w-1/2 border-b border-ie">
+          <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+            {{'Schedule.AppointmentType.Title'|translate}}
+          </div>
+          <div class="flex-1 p-1 text-center ">
+            {{lang.selectedLang == 'ar'? timeSlot.appointment.type.title_ar:timeSlot.appointment.type.title_en}}
+          </div>
+        </div>
+        <div class="flex flex-col w-1/2 text-center border-b">
+          <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+            {{'Enum.ClientType.Title'|translate}}
+          </div>
+          <div class="flex-1 p-1">
+            {{(timeSlot.appointment.client_type=='Company'?('Enum.ClientType.Company'):('Enum.ClientType.Individual'))|translate}}
+          </div>
+        </div>
+      </div>
+      <!-- ! Case Description -->
+      <div class="flex flex-col w-full border-b">
+        <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+          {{'Form.CaseDescription'|translate}}
+        </div>
+        <p class="flex-1 p-1 text-center ">
+          {{timeSlot.appointment.case_description}}
+        </p>
+      </div>
+      <!-- ! Cancelation -->
+      <div class="flex flex-row w-full mt-4 border-t">
+        <div class="flex flex-col w-1/2 border-b border-ie">
+          <div class="flex items-center justify-center w-full h-10 text-center bg-gray-100 border-b">
+            {{'Form.Canceled'|translate}}
+          </div>
+          <div class="flex-1 p-1 text-center ">
+            {{(timeSlot.appointment.canceled?'Operations.Yes':'Operations.No')|translate}}
+          </div>
+        </div>
+        <div class="flex flex-col w-1/2 text-center border-b">
+          <div class="flex items-center justify-center w-full h-10 bg-gray-100 border-b">
+            {{'Form.Reason'|translate}}
+          </div>
+          <div class="flex-1 p-1">
+            {{timeSlot.appointment.cancellation_reson}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>

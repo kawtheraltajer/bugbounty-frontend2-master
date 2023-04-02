@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>     {{'Employee_managment.Employee-talents.Certificates.Add'|translate}}    </ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <!-- Name -->
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label>     {{'Employee_managment.Employee-talents.Certificates.List.title'|translate}}  </mat-label>
+                        <input matInput type="text" formControlName="title" >
+                    </mat-form-field>
+                </div>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.title" >
+                      <div class="text-red-600 text-end"   *ngIf="addForm.get('title').hasError(validation.type) && (addForm.get('title').dirty || addForm.get('title').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+         
+                <div class="flex flex-row w-full mt-2">
+                    <mat-form-field appearance="standard" class="w-full">
+                      <mat-label>  {{'Employee_managment.Employee-talents.Certificates.List.issure_date'|translate}}   </mat-label>
+                      <input matInput  formControlName="issue_date" [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.title" >
+                      <div class="text-red-600 text-end"   *ngIf="addForm.get('issue_date').hasError(validation.type) && (addForm.get('issue_date').dirty || addForm.get('issue_date').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+
+                    <mat-form-field>
+                      <ngx-mat-file-input formControlName="documentURL" placeholder="{{'Employee_managment.Employee-talents.Certificates.List.documentURL'|translate}} "
+    
+                          accept=".doc,.docx,.pdf">
+                        </ngx-mat-file-input>
+                          <mat-hint >.doc,.docx,.pdf</mat-hint>
+    
+                      <mat-icon matSuffix>  </mat-icon>
+                  </mat-form-field>
+          
+          
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.documentURL" >
+                      <div class="text-red-600 text-end"   *ngIf="addForm.get('documentURL').hasError(validation.type) && (addForm.get('documentURL').dirty || addForm.get('documentURL').touched)">
+                        {{ validation.message |translate }}
+                      </div>
+                    </ng-container>
+                  </div>
+            </form>
+        </div>
+    </div>
+</ion-content>

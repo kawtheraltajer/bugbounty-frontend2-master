@@ -1,0 +1,52 @@
+
+
+
+<ion-header>
+  <ion-toolbar class="text-center">
+      <ion-buttons slot="start">
+          <ion-button color="dark" (click)="dismiss()">
+              <ion-icon name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title> {{'Operations.link_inv'|translate}}
+      </ion-title>
+      <ion-buttons slot="end">
+          <ion-button color="dark" (click)="link()">
+              <ion-icon name="add"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-full p-2 overflow-y-auto">
+      <div class="w-full">
+          <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+
+                <mat-form-field appearance="standard">
+                  <mat-label>{{'Finance.Invoice.Title'|translate}}  </mat-label>
+                  <mat-select formControlName="id">
+                    <mat-option>
+                        <ngx-mat-select-search
+                         (keyup)="filterinvoice($event)"
+                        placeholderLabel="ابحث عن فاتورة"
+                         [formControl]="InvoiceFilterCtrl"
+                            noEntriesFoundLabel="لا يوجد">
+                            <mat-icon (click)="clearSelectionInvoice()" class="mx-auto" aria-label="clear"
+                        ngxMatSelectSearchClear>close</mat-icon>
+                        </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let data of InvoiceFilter;let i = index;" [value]="data.id"> {{data.invoice_no}}-{{data?.recipient_name}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+          
+              
+          
+              
+
+
+
+          </form>
+      </div>
+  </div>
+</ion-content>

@@ -1,0 +1,56 @@
+.hoverClock:hover {
+  svg {
+    color: blueviolet !important;
+  }
+}
+
+.tinyPrev {
+  .tox-tinymce {
+    border: none !important;
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.top-50Per {
+  top: 50%;
+}
+.h-25Per {
+  height: 25%;
+}
+.h-75Per {
+  height: 75%;
+}
+.h-50Per {
+  height: 50%;
+}
+
+editor {
+  width: 100%;
+  height: 100%;
+}
+
+.headerHeight {
+  height: 25%;
+}
+
+@media (max-width: 768px) {
+  .headerHeight {
+    height: 50%;
+  }
+}
+
+.tox-edit-area__iframe {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+::ng-deep .tox-edit-area__iframe .mce-content-body {
+  background: transparent !important;
+}
+
+.allBgTransperant * {
+  background: transparent !important;
+}

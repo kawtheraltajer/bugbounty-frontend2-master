@@ -1,0 +1,195 @@
+<vt-header>
+    <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+    <div slot="middle"> {{'Employee_managment.details'|translate}} </div>
+    <ion-buttons slot="end">
+        <ion-button color="warn" (click)="deleteEmployee()">
+            <mat-icon class="mx-auto" color="warn" aria-label="Delete">delete</mat-icon>
+        </ion-button>
+    </ion-buttons>
+</vt-header>
+<ion-content>
+    <ng-container *ngIf="!isLoading && data">
+        <div class="flex flex-col w-full p-5">
+            <span class="flex items-center justify-center w-full p-5">
+                <img class="object-cover w-40 h-40 rounded-full"
+                    [src]="getURL(data?.user.pictureURL)|| 'https://t4.ftcdn.net/jpg/03/32/59/65/360_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'"></span>
+            <div class=" flex-col flex items-center justify-center w-full">
+                <div class="flex-6 flex items-start  h-8  justify-center w-full">
+                    <p class="text-xl font-medium	 	">{{ data?.user.first_name }}{{' '}}{{ data?.user.last_name}}
+                    </p>
+                </div>
+                <div class="flex-6 flex items-start  h-8  justify-center w-full">
+                    <p class="text-l font-medium">
+                        {{ lang.selectedLang=='en'? data?.designation.title_en:data?.designation.title_ar| titlecase}}
+                    </p>
+                    <button (click)="updateDesignation()">
+                        <mat-icon class="mx-auto" color="accent" aria-label="Edit">edit</mat-icon>
+                    </button>
+                </div>
+                <div class="flex-6 flex items-start  h-8  justify-center w-full">
+                    <p class="text-l font-medium		">
+                        {{ lang.selectedLang=='en'? data?.department?.name_en:data?.department?.name_ar| titlecase}}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex flex-col w-full h-full">
+            <div class="flex p-4 border-b ">
+                <div class="flex flex-col w-1/2">
+                </div>
+            </div>
+
+            <span class="flex items-center justify-center w-full">
+            </span>
+
+            <ion-segment class="border-b" [(ngModel)]="segment">
+                <ion-segment-button value="0">
+                    {{'Employee_managment.Personal_information.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="1">
+                  
+                    {{'Employee_managment.Bank_info.Title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="2">
+                    {{'Employee_managment.Emergency_Contact.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="3">
+                    {{'Employee_managment.contact_infroamtion.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="4">
+                    {{'Employee_managment.address.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="5">
+                    {{'Employee_managment.Employee-talents.Title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="6">
+                    {{'Employee_managment.Employee-contracts.title'|translate}}
+                </ion-segment-button>
+                <ion-segment-button value="7">
+                    {{'HCM.Workforce.leaves.Title'|translate}}
+                </ion-segment-button>
+            </ion-segment>
+            <ng-container *ngIf="segment == 0">
+                <personal-informations [EmployeeId]="data.id" [PersonalInformation]="data.personal_information">
+                </personal-informations>
+            </ng-container>
+            <ng-container *ngIf="segment == 1">
+                <div class="w-full">
+    
+                    <form class="flex flex-col w-full px-4" [formGroup]="addform">
+                        <div class="flex flex-row w-full">
+                            <mat-form-field appearance="standard" class="w-full">
+                                <mat-label>    {{'Employee_managment.Bank_info.List.bank_name'|translate}}  </mat-label>
+                                <input matInput type="text" formControlName="bank_name" >
+                            </mat-form-field>
+                        </div>
+              
+                          <div class="flex flex-row w-full">
+                            <mat-form-field appearance="standard" class="w-full">
+                                <mat-label>    {{'Employee_managment.Bank_info.List.holder_name'|translate}}  </mat-label>
+                                <input matInput type="text" formControlName="holder_name" >
+                            </mat-form-field>
+                        </div>
+               
+                          <div class="flex flex-row w-full">
+                            <mat-form-field appearance="standard" class="w-full">
+                                <mat-label>    {{'Employee_managment.Bank_info.List.IBAN'|translate}}  </mat-label>
+                                <input matInput type="text" formControlName="IBAN" >
+                            </mat-form-field>
+                        </div>
+                
+                    </form>
+    
+    
+                    <div
+                    class="relative flex items-center justify-center h-10 p-2 mx-2 border rounded-lg cursor-pointer flex-12  bg-toolbar-background hover:bg-step-50 "
+                    (click)="updateBank_info()">
+                    <ion-icon name="update"></ion-icon>
+                    {{'Employee_managment.Bank_info.Update'|translate}} 
+                  </div>
+    
+                </div>
+            </ng-container>
+            <ng-container *ngIf="segment == 2">
+                <emergency-contact [EmployeeId]="data.id"
+                    [EmergencyContact]="data.personal_information.emergency_contacts"
+                    [personalInformationID]="data.personalInformationID"></emergency-contact>
+            </ng-container>
+            <ng-container *ngIf="segment == 3">
+                <contact [contact]="data.personal_information.contact"
+                    [personalInformationID]="data.personalInformationID" (UpdateContactEvent)="ngOnInit()"></contact>
+            </ng-container>
+            <ng-container *ngIf="segment == 4">
+                <div class="w-full h-full overflow-auto">
+                    <addresses-list [EmployeeId]="data.id" [addresses]="data.personal_information.addresses"
+                        [personalInformationID]="data.personalInformationID"></addresses-list>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="segment == 5">
+                <div class="w-full h-full overflow-auto">
+                    <ion-segment class="border-b" [(ngModel)]="Talint_segment">
+                        <ion-segment-button value="0">
+                            {{'Employee_managment.Employee-talents.Education.title'|translate}}
+                        </ion-segment-button>
+                        <ion-segment-button value="1">
+                            {{'Employee_managment.Employee-talents.Experiences.title'|translate}}
+                        </ion-segment-button>
+                        <ion-segment-button value="2">
+                            {{'Employee_managment.Employee-talents.Certificates.title'|translate}}
+                        </ion-segment-button>
+                    </ion-segment>
+                    <ng-container *ngIf="Talint_segment == 0">
+                        <education-list [employeeID]="id" [isEdit]="true">
+
+                        </education-list>
+                    </ng-container>
+                    <ng-container *ngIf="Talint_segment == 1">
+                        <experience-list [experiences]="data.experiences" [employeeID]="id" [isEdit]="true">
+                        </experience-list>
+                    </ng-container>
+                    <ng-container *ngIf="Talint_segment == 2">
+                        <certificate-list [certificates]="data.certificates" [employeeID]="id" [isEdit]="true">
+                        </certificate-list>
+                    </ng-container>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="segment == 6">
+                <contracts-list [employeeID]="id"></contracts-list>
+            </ng-container>
+            <ng-container *ngIf="segment ==7">
+                <ion-segment class="border-b" [(ngModel)]="leave_segment">
+                    <ion-segment-button value="0">
+                        {{'HCM.Workforce.leaves.Title'|translate}}
+                    </ion-segment-button>
+                    <ion-segment-button value="1">
+
+                        {{'HCM.Workforce.leaves.balance.Title'|translate}}
+                    </ion-segment-button>
+
+                </ion-segment>
+
+
+
+                <ng-container *ngIf="leave_segment == 0">
+                    <employee-leaves [employeeID]="id"></employee-leaves>
+
+                </ng-container>
+                <ng-container *ngIf="leave_segment == 1">
+                    <leave-balance [employeeID]="id"></leave-balance>
+
+
+                </ng-container>
+            </ng-container>
+        </div>
+
+    </ng-container>
+
+
+</ion-content>

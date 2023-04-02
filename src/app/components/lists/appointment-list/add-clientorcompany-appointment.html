@@ -1,0 +1,102 @@
+<ion-header *ngIf="isModal">
+  <ion-toolbar class="text-center">
+    <ion-buttons slot="start">
+      <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{isEdit?('Schedule.Booking.Edit'|translate):('Schedule.Booking.Add'|translate)}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="bookAppointment()" [matTooltip]="isEdit?'Edit':'Add'">
+        <ion-icon [name]="isEdit? 'sync-outline':'add'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="!isModal && !isFromSite" [class.mt-2]="!isModal"
+    class="flex flex-row items-center w-full h-12 border-t border-b">
+    <div class="w-full text-center">Booking</div>
+  </div>
+  <div class="flex flex-col items-center justify-center w-full p-2 overflow-auto ">
+    <form class="flex flex-col w-full h-full" [formGroup]="bookForm">
+
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Appointment Type | نوع الموعد</mat-label>
+        <mat-select formControlName="typeID" (selectionChange)="typeChanged($event)">
+          <mat-option *ngFor="let value of appointmentTypes" [value]="value">
+            {{value.title_en+" | "+value.title_ar}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('typeID').hasError('required')"> Appointment Type is required | نوع الموعد مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Lawyer -->
+      <mat-form-field *ngIf="(!selectedType?.isNotary) && (!fromTimeSlot) " appearance="fill" class="w-full">
+        <mat-label>Lawyer | المحامي</mat-label>
+        <mat-select formControlName="lawyer">
+          <mat-option *ngFor="let value of employeesTimeSlots" [value]="value">
+            {{value.user.first_name+' '+value.user.last_name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('lawyer').hasError('required')"> lawyer is required |المحامي مطلوب</mat-error>
+
+      </mat-form-field>
+
+      <!-- Time -->
+      <mat-form-field appearance="fill" class="w-full" *ngIf="!fromTimeSlot">
+        <mat-label>Appointment Time | وقت الموعد</mat-label>
+        <mat-hint *ngIf="!bookForm.value.lawyer">Please,Select a lawyer | الرجاءإختيار المحامي</mat-hint>
+        <mat-select formControlName="timeSlot">
+          <mat-option *ngFor="let ts of bookForm.value.lawyer.timeSlots" [value]="ts">
+            {{(ts.date|date) + ' - '+ (ts.startTime|date:'shortTime':'+3')}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookForm.get('timeSlot').hasError('required')"> timeSlot is required |الوقت مطلوب</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>ِAppointment Description | تفاصيل الموعد</mat-label>
+        <textarea matInput type="text" formControlName="case_description"></textarea>
+        <mat-error *ngIf="bookForm.get('case_description').hasError('required')"> Description is required |وصف القضية
+          مطلوب </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Upload CPR | الهوية </mat-label>
+
+        <ngx-mat-file-input formControlName="CprUrl"
+          placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} " accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+        </ngx-mat-file-input>
+        <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+
+        <mat-icon matSuffix> </mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mb-2">
+        <mat-label>Upload Other document | رفع ملفات اخرى </mat-label>
+
+        <ngx-mat-file-input formControlName="OtherUrl"
+          placeholder="{{'Court.Cases.document.Form.DocumentUrl'|translate}} " accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+        </ngx-mat-file-input>
+        <mat-hint>.doc,.docx,.pdf,.jpg,.jpeg,.png</mat-hint>
+
+        <mat-icon matSuffix> </mat-icon>
+      </mat-form-field>
+      <div appearance="fill" class="w-full mb-2" *ngIf="clientOrCompany">
+        <mat-checkbox formControlName="terms"  > </mat-checkbox> 
+         <a style="color:blue" class="cursor-pointer" (click)="openTearm()"> أوافق على هذه الشروط والأحكام  | I agree to these Terms and Conditions </a>
+    
+      </div>
+      <div class="mt-4">
+        <button
+          class="flex items-center w-full h-12 text-white rounded-md hover:text-secondary-default bg-primary-default hover:bg-primary-tint"
+          *ngIf="!isModal" (click)="bookAppointment()">
+          <div class="flex-1">Book Appointment</div>
+          <div class="mx-1 text-secondary-default">|</div>
+          <div class="flex-1">حجز الموعد</div>
+        </button>
+      </div>
+    </form>
+  </div>
+</ion-content>

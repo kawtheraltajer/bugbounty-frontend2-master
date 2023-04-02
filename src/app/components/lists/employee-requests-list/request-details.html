@@ -1,0 +1,57 @@
+<vt-header>
+    <ion-buttons slot="start">
+        <ion-button color="dark" (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <div slot="middle"> {{'Employee_managment.Services.General_Requests'|translate}} </div>
+</vt-header>
+
+<ion-content style="--background:#dcedf5;" class="relative p-3">
+    <div class="p-3">
+        <div *ngIf="SelectedRequest">
+            <ion-button clear color="light" (click)="reply()">
+                {{'Employee_managment.General_Requests.Reply'|translate}}
+              </ion-button>
+              <!--Message satrt-->
+              <div class="border p-2 bg-white">
+                <span *ngIf="SelectedRequest?.doc_url">
+                  <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.Attachment'|translate}}:</ion-label>
+                  <ion-chip (click)="download(SelectedRequest?.doc_url)">
+                    <ion-icon name="download"></ion-icon>
+                    <ion-label>{{SelectedRequest?.doc_url}}</ion-label>
+                  </ion-chip>
+                  <hr />
+                </span>
+                <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.From'|translate}}:</ion-label>
+                <p>{{SelectedRequest?.from?.first_name}} {{SelectedRequest?.from?.last_name}}</p>
+                <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.To'|translate}}:</ion-label>
+                <p>{{SelectedRequest?.to?.first_name}} {{SelectedRequest?.to?.last_name}}</p>
+                <hr />
+                <br />
+                <ion-label>{{'Employee_managment.General_Requests.Subject'|translate}}:</ion-label>
+                <p>{{SelectedRequest?.subject}}</p>
+                <br />
+                <ion-label>{{'Employee_managment.General_Requests.Message'|translate}}:</ion-label>
+                <p style="white-space: pre-wrap;">{{SelectedRequest?.body}}</p>
+              </div>
+              <!--Message end-->
+              <br />
+              <!--Reply start-->
+              <div class="border p-2 bg-white" *ngIf="SelectedRequest?.Reply_to_id">
+                <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.From'|translate}}:</ion-label>
+                <p>{{replyToRequest?.from?.first_name}} {{replyToRequest?.from?.last_name}}</p>
+                <ion-label class="text-gray-400">{{'Employee_managment.General_Requests.To'|translate}}:</ion-label>
+                <p>{{replyToRequest?.to?.first_name}} {{replyToRequest?.to?.last_name}}</p>
+                <hr />
+                <br />
+                <ion-label>{{'Employee_managment.General_Requests.Subject'|translate}}:</ion-label>
+                <p>{{replyToRequest?.subject}}</p>
+                <br />
+                <ion-label>{{'Employee_managment.General_Requests.Message'|translate}}:</ion-label>
+                <p style="white-space: pre-wrap;">{{replyToRequest?.body}}</p>
+              </div>
+              <!--Reply end-->
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar class="text-center">
+        <ion-buttons slot="start">
+            <ion-button color="dark" matTooltip="Cancel" (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>     {{'Schedule.AppointmentType.Add'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="add()" [matTooltip]="isEdit?'Edit':'Add'">
+                <ion-icon [name]="isEdit? 'sync-outline':'add'"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="w-full p-2 overflow-y-auto">
+        <div class="w-full">
+
+
+            <form class="flex flex-col w-full px-4" [formGroup]="addForm">
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Schedule.AppointmentType.AddType.ArabicTitle'|translate}}</mat-label>
+                        <input matInput type="text" formControlName="title_ar" placeholder="إستشارة قانونية - عقارات">
+                    </mat-form-field>
+                </div>
+
+                <div class="flex flex-row w-full">
+                    <mat-form-field appearance="standard" class="w-full">
+                        <mat-label> {{'Schedule.AppointmentType.AddType.EnglishTitle'|translate}}</mat-label>
+                        <input matInput type="text" formControlName="title_en" placeholder="Legal advice - Real Estate">
+                    </mat-form-field>
+                </div>
+                <mat-form-field appearance="standard" class="w-full cursor-pointer" (click)="choseColor($event)">
+                    <mat-label> {{'Schedule.AppointmentType.AddType.Color'|translate}}</mat-label>
+                    <input matInput type="text" hidden formControlName="color" placeholder="#eee">
+                    <span class="block w-full h-2" [style.backgroundColor]="addForm.value.color"></span>
+                    <span class="block w-full h-2 mt-1"
+                        [style.backgroundColor]="app.ligthenColor(addForm.value.color)"></span>
+                </mat-form-field>
+
+                <mat-checkbox formControlName="isNotary">
+                    Is Notary
+                </mat-checkbox>
+            </form>
+        </div>
+    </div>
+</ion-content>

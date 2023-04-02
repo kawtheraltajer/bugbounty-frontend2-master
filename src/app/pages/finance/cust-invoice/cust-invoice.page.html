@@ -1,0 +1,17 @@
+<vt-header>
+  <!-- <ion-title>{{'Schedule.Title'|translate}}</ion-title> -->
+  <div slot="middle">My Invoice</div>
+</vt-header>
+
+<ion-content>
+  <ng-container *ngIf="!isLoading">
+<cust-invoice-list [Invoices]="finance.Invoices|async">
+
+</cust-invoice-list>
+  </ng-container>
+  
+
+  <div mat-row class="w-full my-4 text-2xl text-center" *ngIf="isLoading">
+  </div>
+</ion-content>
+
